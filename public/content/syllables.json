@@ -1,0 +1,1034 @@
+{
+  "schemaVersion": 1,
+  "kind": "syllables",
+  "syllables": [
+    {
+      "id": "s-ma",
+      "text": "MA",
+      "textLower": "ma",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-a",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-a"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "audioId": "snd-s-ma",
+      "ipa": "ma"
+    },
+    {
+      "id": "s-maa",
+      "text": "MÁ",
+      "textLower": "má",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-aa"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "audioId": "snd-s-maa",
+      "ipa": "maː"
+    },
+    {
+      "id": "s-me",
+      "text": "ME",
+      "textLower": "me",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-e",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-e"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "minLessonIndex": {
+        "duha": 4,
+        "agata": 5
+      },
+      "audioId": "snd-s-me",
+      "ipa": "mɛ"
+    },
+    {
+      "id": "s-mo",
+      "text": "MO",
+      "textLower": "mo",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-o",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-o"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-s-mo",
+      "ipa": "mo"
+    },
+    {
+      "id": "s-mu",
+      "text": "MU",
+      "textLower": "mu",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-u",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-u"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-s-mu",
+      "ipa": "mu"
+    },
+    {
+      "id": "s-mi",
+      "text": "MI",
+      "textLower": "mi",
+      "kind": "CV",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-i",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-m",
+        "l-i"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "audioId": "snd-s-mi",
+      "ipa": "mɪ"
+    },
+    {
+      "id": "s-la",
+      "text": "LA",
+      "textLower": "la",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-a",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-a"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "minLessonIndex": {
+        "duha": 3,
+        "agata": 4
+      },
+      "audioId": "snd-s-la",
+      "ipa": "la"
+    },
+    {
+      "id": "s-laa",
+      "text": "LÁ",
+      "textLower": "lá",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-aa"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "minLessonIndex": {
+        "duha": 3,
+        "agata": 4
+      },
+      "audioId": "snd-s-laa",
+      "ipa": "laː"
+    },
+    {
+      "id": "s-le",
+      "text": "LE",
+      "textLower": "le",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-e",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-e"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "minLessonIndex": {
+        "duha": 4,
+        "agata": 5
+      },
+      "audioId": "snd-s-le",
+      "ipa": "lɛ"
+    },
+    {
+      "id": "s-lo",
+      "text": "LO",
+      "textLower": "lo",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-o",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-o"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-s-lo",
+      "ipa": "lo"
+    },
+    {
+      "id": "s-lu",
+      "text": "LU",
+      "textLower": "lu",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-u",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-u"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-s-lu",
+      "ipa": "lu"
+    },
+    {
+      "id": "s-li",
+      "text": "LI",
+      "textLower": "li",
+      "kind": "CV",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-i",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-l",
+        "l-i"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "audioId": "snd-s-li",
+      "ipa": "lɪ"
+    },
+    {
+      "id": "s-sa",
+      "text": "SA",
+      "textLower": "sa",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-a",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-a"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-sa",
+      "ipa": "sa"
+    },
+    {
+      "id": "s-saa",
+      "text": "SÁ",
+      "textLower": "sá",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-aa"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-saa",
+      "ipa": "saː"
+    },
+    {
+      "id": "s-se",
+      "text": "SE",
+      "textLower": "se",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-e",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-e"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-se",
+      "ipa": "sɛ"
+    },
+    {
+      "id": "s-so",
+      "text": "SO",
+      "textLower": "so",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-o",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-o"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-s-so",
+      "ipa": "so"
+    },
+    {
+      "id": "s-su",
+      "text": "SU",
+      "textLower": "su",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-u",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-u"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-s-su",
+      "ipa": "su"
+    },
+    {
+      "id": "s-si",
+      "text": "SI",
+      "textLower": "si",
+      "kind": "CV",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-i",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-s",
+        "l-i"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "audioId": "snd-s-si",
+      "ipa": "sɪ"
+    },
+    {
+      "id": "s-pa",
+      "text": "PA",
+      "textLower": "pa",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-a",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-a"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-pa",
+      "ipa": "pa"
+    },
+    {
+      "id": "s-paa",
+      "text": "PÁ",
+      "textLower": "pá",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-aa"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-paa",
+      "ipa": "paː"
+    },
+    {
+      "id": "s-pe",
+      "text": "PE",
+      "textLower": "pe",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-e",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-e"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-pe",
+      "ipa": "pɛ"
+    },
+    {
+      "id": "s-po",
+      "text": "PO",
+      "textLower": "po",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-o",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-o"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-po",
+      "ipa": "po"
+    },
+    {
+      "id": "s-pu",
+      "text": "PU",
+      "textLower": "pu",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-u",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-u"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-s-pu",
+      "ipa": "pu"
+    },
+    {
+      "id": "s-pi",
+      "text": "PI",
+      "textLower": "pi",
+      "kind": "CV",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-i",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-p",
+        "l-i"
+      ],
+      "usableInSyllableTasks": true,
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "audioId": "snd-s-pi",
+      "ipa": "pɪ"
+    },
+    {
+      "id": "s-a",
+      "text": "A",
+      "textLower": "a",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-a",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-a"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-1"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 1
+      },
+      "audioId": "snd-l-a",
+      "ipa": "a"
+    },
+    {
+      "id": "s-aa",
+      "text": "Á",
+      "textLower": "á",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-aa",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-aa"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-2"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 2
+      },
+      "audioId": "snd-l-aa",
+      "ipa": "aː"
+    },
+    {
+      "id": "s-e",
+      "text": "E",
+      "textLower": "e",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-e",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-e"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "minLessonIndex": {
+        "duha": 4,
+        "agata": 5
+      },
+      "audioId": "snd-l-e",
+      "ipa": "ɛ"
+    },
+    {
+      "id": "s-o",
+      "text": "O",
+      "textLower": "o",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-o",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-o"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-l-o",
+      "ipa": "o"
+    },
+    {
+      "id": "s-u",
+      "text": "U",
+      "textLower": "u",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-u",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-u"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-l-u",
+      "ipa": "u"
+    },
+    {
+      "id": "s-i",
+      "text": "I",
+      "textLower": "i",
+      "kind": "V",
+      "consonantLetterId": null,
+      "vowelLetterId": "l-i",
+      "codaLetterId": null,
+      "closed": false,
+      "letterIds": [
+        "l-i"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "audioId": "snd-l-i",
+      "ipa": "ɪ"
+    },
+    {
+      "id": "s-les",
+      "text": "LES",
+      "textLower": "les",
+      "kind": "CVC",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-e",
+      "codaLetterId": "l-s",
+      "closed": true,
+      "letterIds": [
+        "l-l",
+        "l-e",
+        "l-s"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-les",
+      "ipa": "lɛs"
+    },
+    {
+      "id": "s-los",
+      "text": "LOS",
+      "textLower": "los",
+      "kind": "CVC",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-o",
+      "codaLetterId": "l-s",
+      "closed": true,
+      "letterIds": [
+        "l-l",
+        "l-o",
+        "l-s"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-s-los",
+      "ipa": "los"
+    },
+    {
+      "id": "s-laam",
+      "text": "LÁM",
+      "textLower": "lám",
+      "kind": "CVC",
+      "consonantLetterId": "l-l",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": "l-m",
+      "closed": true,
+      "letterIds": [
+        "l-l",
+        "l-aa",
+        "l-m"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "minLessonIndex": {
+        "duha": 3,
+        "agata": 4
+      },
+      "audioId": "snd-s-laam",
+      "ipa": "laːm"
+    },
+    {
+      "id": "s-maam",
+      "text": "MÁM",
+      "textLower": "mám",
+      "kind": "CVC",
+      "consonantLetterId": "l-m",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": "l-m",
+      "closed": true,
+      "letterIds": [
+        "l-m",
+        "l-aa"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "audioId": "snd-s-maam",
+      "ipa": "maːm"
+    },
+    {
+      "id": "s-pel",
+      "text": "PEL",
+      "textLower": "pel",
+      "kind": "CVC",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-e",
+      "codaLetterId": "l-l",
+      "closed": true,
+      "letterIds": [
+        "l-p",
+        "l-e",
+        "l-l"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-pel",
+      "ipa": "pɛl"
+    },
+    {
+      "id": "s-pes",
+      "text": "PES",
+      "textLower": "pes",
+      "kind": "CVC",
+      "consonantLetterId": "l-p",
+      "vowelLetterId": "l-e",
+      "codaLetterId": "l-s",
+      "closed": true,
+      "letterIds": [
+        "l-p",
+        "l-e",
+        "l-s"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "audioId": "snd-s-pes",
+      "ipa": "pɛs"
+    },
+    {
+      "id": "s-sel",
+      "text": "SEL",
+      "textLower": "sel",
+      "kind": "CVC",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-e",
+      "codaLetterId": "l-l",
+      "closed": true,
+      "letterIds": [
+        "l-s",
+        "l-e",
+        "l-l"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-sel",
+      "ipa": "sɛl"
+    },
+    {
+      "id": "s-sem",
+      "text": "SEM",
+      "textLower": "sem",
+      "kind": "CVC",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-e",
+      "codaLetterId": "l-m",
+      "closed": true,
+      "letterIds": [
+        "l-s",
+        "l-e",
+        "l-m"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-sem",
+      "ipa": "sɛm"
+    },
+    {
+      "id": "s-sos",
+      "text": "SOS",
+      "textLower": "sos",
+      "kind": "CVC",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-o",
+      "codaLetterId": "l-s",
+      "closed": true,
+      "letterIds": [
+        "l-s",
+        "l-o"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "audioId": "snd-s-sos",
+      "ipa": "sos"
+    },
+    {
+      "id": "s-sup",
+      "text": "SUP",
+      "textLower": "sup",
+      "kind": "CVC",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-u",
+      "codaLetterId": "l-p",
+      "closed": true,
+      "letterIds": [
+        "l-s",
+        "l-u",
+        "l-p"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "audioId": "snd-s-sup",
+      "ipa": "sup"
+    },
+    {
+      "id": "s-saam",
+      "text": "SÁM",
+      "textLower": "sám",
+      "kind": "CVC",
+      "consonantLetterId": "l-s",
+      "vowelLetterId": "l-aa",
+      "codaLetterId": "l-m",
+      "closed": true,
+      "letterIds": [
+        "l-s",
+        "l-aa",
+        "l-m"
+      ],
+      "usableInSyllableTasks": false,
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "audioId": "snd-s-saam",
+      "ipa": "saːm"
+    }
+  ]
+}

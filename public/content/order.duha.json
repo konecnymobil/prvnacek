@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "kind": "order",
+  "id": "duha",
+  "title": "Živá abeceda – Duhová řada (Nová škola)",
+  "isDefault": true,
+  "verification": {
+    "status": "partly-verified",
+    "verified": "Pořadí M, A, L, E, S, O, P, U, I uvádí nakladatel i prodejci (popis Živé abecedy Duhové řady).",
+    "unverified": "Zda a kde má 7. vydání samostatnou lekci pro Á. Zde je Á zařazeno do lekce A (2. lekce) – jinak by do lekce L nešlo přečíst slovo MÁMA. Rodič může pořadí upravit v nastavení.",
+    "sources": [
+      "https://www.ansa.cz/ziva-abeceda-duhova-rada--detail-23R0000101.aspx",
+      "https://nns.cz/agata/poznavame-abecedu/",
+      "https://nkp.knihovny.cz/Record/nkp.NKC01-003751511"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "duha-1",
+      "index": 1,
+      "letterIds": [
+        "l-m"
+      ],
+      "primaryLetterId": "l-m",
+      "title": "M",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-2",
+      "index": 2,
+      "letterIds": [
+        "l-a",
+        "l-aa"
+      ],
+      "primaryLetterId": "l-a",
+      "title": "A + Á",
+      "verified": false,
+      "verificationNote": "NEOVĚŘENO: zařazení Á do lekce A je předpoklad (7. vydání Duhové řady není online). Ověří Jiří v učebnici dítěte; při jiném pořadí upravit zde nebo v nastavení."
+    },
+    {
+      "id": "duha-3",
+      "index": 3,
+      "letterIds": [
+        "l-l"
+      ],
+      "primaryLetterId": "l-l",
+      "title": "L",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-4",
+      "index": 4,
+      "letterIds": [
+        "l-e"
+      ],
+      "primaryLetterId": "l-e",
+      "title": "E",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-5",
+      "index": 5,
+      "letterIds": [
+        "l-s"
+      ],
+      "primaryLetterId": "l-s",
+      "title": "S",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-6",
+      "index": 6,
+      "letterIds": [
+        "l-o"
+      ],
+      "primaryLetterId": "l-o",
+      "title": "O",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-7",
+      "index": 7,
+      "letterIds": [
+        "l-p"
+      ],
+      "primaryLetterId": "l-p",
+      "title": "P",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-8",
+      "index": 8,
+      "letterIds": [
+        "l-u"
+      ],
+      "primaryLetterId": "l-u",
+      "title": "U",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "duha-9",
+      "index": 9,
+      "letterIds": [
+        "l-i"
+      ],
+      "primaryLetterId": "l-i",
+      "title": "I",
+      "verified": true,
+      "verificationNote": null
+    }
+  ]
+}

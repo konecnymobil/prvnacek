@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "kind": "prompts",
+  "prompts": [
+    {
+      "id": "p-welcome",
+      "category": "general",
+      "activity": null,
+      "text": "Ahoj! Pojď si se mnou hrát s písmenky.",
+      "audioId": "snd-p-welcome"
+    },
+    {
+      "id": "p-listen",
+      "category": "general",
+      "activity": null,
+      "text": "Poslouchej.",
+      "audioId": "snd-p-listen"
+    },
+    {
+      "id": "p-again-button",
+      "category": "general",
+      "activity": null,
+      "text": "Když klepneš na reproduktor, uslyšíš to znovu.",
+      "audioId": "snd-p-again-button"
+    },
+    {
+      "id": "p-a1-intro",
+      "category": "instruction",
+      "activity": "A1",
+      "text": "Tohle je nové písmenko. Klepni na něj a poslouchej, jak zní.",
+      "audioId": "snd-p-a1-intro"
+    },
+    {
+      "id": "p-a1-tap-picture",
+      "category": "instruction",
+      "activity": "A1",
+      "text": "Klepni na obrázek. Slyšíš, jak slovo začíná?",
+      "audioId": "snd-p-a1-tap-picture"
+    },
+    {
+      "id": "p-a2",
+      "category": "instruction",
+      "activity": "A2",
+      "text": "Poslechni si hlásku a najdi její písmenko.",
+      "audioId": "snd-p-a2"
+    },
+    {
+      "id": "p-a3",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Co je na obrázku? Na jaké písmenko to slovo začíná?",
+      "audioId": "snd-p-a3"
+    },
+    {
+      "id": "p-a4",
+      "category": "instruction",
+      "activity": "A4",
+      "text": "Přisuň písmenka k sobě. Uslyšíš slabiku.",
+      "audioId": "snd-p-a4"
+    },
+    {
+      "id": "p-a4-make",
+      "category": "instruction",
+      "activity": "A4",
+      "text": "Slož slabiku, kterou uslyšíš.",
+      "audioId": "snd-p-a4-make"
+    },
+    {
+      "id": "p-a5a",
+      "category": "instruction",
+      "activity": "A5",
+      "text": "Přečti si slabiku. Který obrázek tak začíná?",
+      "audioId": "snd-p-a5a"
+    },
+    {
+      "id": "p-a5b",
+      "category": "instruction",
+      "activity": "A5",
+      "text": "Poslechni si slabiku a najdi ji.",
+      "audioId": "snd-p-a5b"
+    },
+    {
+      "id": "p-a6",
+      "category": "instruction",
+      "activity": "A6",
+      "text": "Přečti si slovo a vyber správný obrázek.",
+      "audioId": "snd-p-a6"
+    },
+    {
+      "id": "p-a7",
+      "category": "instruction",
+      "activity": "A7",
+      "text": "Co je na obrázku? Seřaď slabiky, ať vznikne slovo.",
+      "audioId": "snd-p-a7"
+    },
+    {
+      "id": "p-find-letter",
+      "category": "instruction",
+      "activity": null,
+      "text": "Najdi písmenko.",
+      "audioId": "snd-p-find-letter"
+    },
+    {
+      "id": "p-find-syllable",
+      "category": "instruction",
+      "activity": null,
+      "text": "Najdi slabiku.",
+      "audioId": "snd-p-find-syllable"
+    },
+    {
+      "id": "p-find-picture",
+      "category": "instruction",
+      "activity": null,
+      "text": "Najdi obrázek.",
+      "audioId": "snd-p-find-picture"
+    },
+    {
+      "id": "p-praise-1",
+      "category": "praise",
+      "activity": null,
+      "text": "Výborně!",
+      "audioId": "snd-p-praise-1"
+    },
+    {
+      "id": "p-praise-2",
+      "category": "praise",
+      "activity": null,
+      "text": "Správně!",
+      "audioId": "snd-p-praise-2"
+    },
+    {
+      "id": "p-praise-3",
+      "category": "praise",
+      "activity": null,
+      "text": "Super, to se ti povedlo!",
+      "audioId": "snd-p-praise-3"
+    },
+    {
+      "id": "p-praise-4",
+      "category": "praise",
+      "activity": null,
+      "text": "Paráda!",
+      "audioId": "snd-p-praise-4"
+    },
+    {
+      "id": "p-praise-5",
+      "category": "praise",
+      "activity": null,
+      "text": "To je ono!",
+      "audioId": "snd-p-praise-5"
+    },
+    {
+      "id": "p-praise-6",
+      "category": "praise",
+      "activity": null,
+      "text": "Šikula!",
+      "audioId": "snd-p-praise-6"
+    },
+    {
+      "id": "p-retry-1",
+      "category": "retry",
+      "activity": null,
+      "text": "Zkus to ještě jednou.",
+      "audioId": "snd-p-retry-1"
+    },
+    {
+      "id": "p-retry-2",
+      "category": "retry",
+      "activity": null,
+      "text": "Skoro! Zkus to znovu.",
+      "audioId": "snd-p-retry-2"
+    },
+    {
+      "id": "p-retry-3",
+      "category": "retry",
+      "activity": null,
+      "text": "Nevadí. Podívej se ještě jednou.",
+      "audioId": "snd-p-retry-3"
+    },
+    {
+      "id": "p-show-answer",
+      "category": "retry",
+      "activity": null,
+      "text": "Podívej, tady je to správně.",
+      "audioId": "snd-p-show-answer"
+    },
+    {
+      "id": "p-round-end",
+      "category": "reward",
+      "activity": null,
+      "text": "Hotovo! To bylo skvělé hraní.",
+      "audioId": "snd-p-round-end"
+    },
+    {
+      "id": "p-sticker",
+      "category": "reward",
+      "activity": null,
+      "text": "Máš novou nálepku!",
+      "audioId": "snd-p-sticker"
+    },
+    {
+      "id": "p-break",
+      "category": "general",
+      "activity": null,
+      "text": "Dáme si chvilku pauzu?",
+      "audioId": "snd-p-break"
+    },
+    {
+      "id": "p-test-intro",
+      "category": "test",
+      "activity": null,
+      "text": "Teď je výzva s rodičem. Čti nahlas, co uvidíš.",
+      "audioId": "snd-p-test-intro"
+    },
+    {
+      "id": "p-test-show-letter",
+      "category": "test",
+      "activity": null,
+      "text": "Ukaž písmenko a řekni, jak zní.",
+      "audioId": "snd-p-test-show-letter"
+    },
+    {
+      "id": "p-test-end",
+      "category": "test",
+      "activity": null,
+      "text": "Výzva je hotová. Tady je nálepka za snahu!",
+      "audioId": "snd-p-test-end"
+    },
+    {
+      "id": "p-new-letter",
+      "category": "reward",
+      "activity": null,
+      "text": "Máš nové písmenko!",
+      "audioId": "snd-p-new-letter"
+    },
+    {
+      "id": "p-next-letter",
+      "category": "reward",
+      "activity": null,
+      "text": "Pojď se podívat na další písmenko!",
+      "audioId": "snd-p-next-letter"
+    }
+  ]
+}

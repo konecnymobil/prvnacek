@@ -1,0 +1,109 @@
+/* Prvňáček – design tokens. VYGENEROVÁNO z tokens.json (tools/build-tokens.mjs). Neupravovat ručně. */
+
+@font-face { font-family: 'Andika'; src: url('fonts/Andika-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Andika'; src: url('fonts/Andika-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Andika'; src: url('fonts/Andika-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  /* color */
+  --c-bg: #FFF6E5; /* Pozadí dětské části (krémová, teplá, neoslňuje) */
+  --c-bg-2: #FDE9C2; /* Podklad zásobníku písmen, mapy */
+  --c-surface: #FFFFFF; /* Karty, dlaždice */
+  --c-line: #E9DCC2; /* Okraje karet (dekorativní, ne nositel informace) */
+  --c-key-edge: #E0CBA2; /* Spodní hrana ‚3D‘ tlačítek */
+  --c-ink: #1E2633; /* Hlavní text a písmena */
+  --c-ink-2: #475467; /* Sekundární text */
+  --c-ink-3: #626B79; /* Popisky, metadata (min. 15 px) */
+  --c-primary: #1D58C2; /* Hlavní akce (přehrát, další) */
+  --c-primary-strong: #163F8C; /* Stisknuto / text na primary-soft */
+  --c-primary-soft: #E1EAFE; /* Podklad zvýraznění */
+  --c-accent: #FFC53D; /* Slunečná žlutá – hvězdy, nálepky, dekor (nikdy jako barva textu) */
+  --c-accent-soft: #FFF1C6; /* Podklad odměn */
+  --c-success: #1B7A43; /* Správně, schváleno */
+  --c-success-soft: #DCF5E4; /* Podklad správné odpovědi */
+  --c-success-ink: #125C32; /* Text na success-soft */
+  --c-retry: #A8440B; /* ‚Zkus to znovu‘ – teplá oranžová místo trestající červené */
+  --c-retry-soft: #FFE6D2; /* Podklad při chybě */
+  --c-danger: #B42318; /* Jen rodičovská část: destruktivní akce (zamknout, smazat) */
+  --c-locked: #5D6572; /* Text/ikona zamčené lekce */
+  --c-locked-soft: #E6E8EC; /* Podklad zamčené lekce */
+  --c-practice: #F2B300; /* Stav ‚procvičuje‘ – výplň/dekor; informaci nese vždy i ikona a text (samotná žlutá na bílé nemá kontrast 3:1) */
+  --c-practice-ui: #8F6400; /* Obrys/ikona stavu ‚procvičuje‘ (UI kontrast ≥ 3:1) */
+  --c-practice-soft: #FFF3C2; /* Podklad stavu ‚procvičuje‘ */
+  --c-practice-ink: #6A4D00; /* Text na practice-soft */
+  --c-parent-bg: #F3F5F9; /* Pozadí rodičovské části (chladnější = jiný svět než dětský) */
+  --c-parent-primary: #22406E; /* Hlavní akce v rodičovské části */
+  --c-record: #C0262D; /* Nahrávání (tečka REC) */
+  --c-owl-body: #B8682E; /* Maskot Kulíšek – tělo */
+  --c-owl-dark: #8A4A1E; /* Maskot – křídla, obrys */
+  --c-owl-belly: #F7DDB0; /* Maskot – bříško */
+  --c-owl-beak: #F29A2E; /* Maskot – zobák, nožky */
+  /* font */
+  --font-family-base: 'Andika', 'Andika Six', system-ui, -apple-system, 'Segoe UI', sans-serif; /* Andika 7.000 (SIL Global, OFL 1.1) – lokálně ve fonts/, řezy 400/600/700 */
+  --font-family-letters: 'Andika', 'Andika Six', system-ui, sans-serif; /* Velká tiskací písmena pro čtení */
+  --font-feature-settings: 'cv30' 1; /* Andika cv30 = velké I jako prostá svislá čára (rozhodnutí PM 7. 10. 2026). Platí globálně (html). */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  /* fontSize */
+  --fs-letter-hero: clamp(150px, 30vmin, 360px); /* Položka zkoušky lekce (jedno písmeno/slabika) */
+  --fs-word-hero: clamp(120px, 20vmin, 240px); /* Slovo ve zkoušce a v úloze ‚Slovo a obrázek‘ */
+  --fs-letter-card: clamp(88px, 13vmin, 150px); /* Písmeno na kartě k výběru */
+  --fs-syllable: clamp(80px, 12vmin, 140px); /* Písmena ve slotech při skládání */
+  --fs-map-letter: clamp(34px, 5vmin, 52px); /* Písmena na mapě cesty */
+  --fs-display: 44px;
+  --fs-h1: 32px;
+  --fs-h2: 25px;
+  --fs-h3: 21px;
+  --fs-child-label: 26px; /* Popisky u dětských dlaždic (čte je rodič, dítě se řídí ikonou a hlasem) */
+  --fs-body: 18px; /* Text v rodičovské části */
+  --fs-small: 15px; /* Metadata; minimum pro text */
+  /* lineHeight */
+  --lh-tight: 1.05; /* Velká písmena */
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  /* letterSpacing */
+  --ls-letters: 0.06em; /* Rozestup písmen ve slabice/slově – pomáhá začínajícím čtenářům */
+  /* space */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  /* radius */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-xxl: 44px;
+  --r-pill: 999px;
+  /* shadow */
+  --sh-card: 0 2px 0 rgba(30,38,51,.05), 0 10px 28px rgba(30,38,51,.08);
+  --sh-key: 0 6px 0 #E0CBA2; /* Hmatová ‚klávesa‘ – dítě vidí, že se dá zmáčknout */
+  --sh-key-pressed: 0 2px 0 #E0CBA2;
+  --sh-float: 0 16px 40px rgba(30,38,51,.18);
+  --sh-focus: 0 0 0 4px rgba(29,88,194,.45);
+  /* touch */
+  --touch-child-min: 80px; /* Minimum dotykového cíle pro dítě (plán: ≥ 80 pt) */
+  --touch-child: 112px; /* Běžné dětské tlačítko */
+  --touch-child-xl: 160px; /* Hlavní akce (přehrát) */
+  --touch-parent-min: 48px; /* Minimum pro rodiče (Apple HIG 44 pt + rezerva) */
+  /* motion */
+  --m-fast: 120ms;
+  --m-base: 240ms;
+  --m-slow: 480ms;
+  --m-celebrate: 1200ms;
+  --m-ease-out: cubic-bezier(.2,.8,.2,1);
+  --m-ease-bounce: cubic-bezier(.34,1.56,.64,1);
+}
+
+/* Globálně: Andika cv30 – velké I jako prostá čára */
+html { font-feature-settings: var(--font-feature-settings); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --m-fast: 0ms; --m-base: 0ms; --m-slow: 0ms; --m-celebrate: 0ms; }
+}

@@ -1,0 +1,211 @@
+/* Základní styly aplikace. Hodnoty jen z design tokenů (src/design/tokens.css). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-family-base);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+#root,
+.app {
+  min-height: 100dvh;
+}
+
+.screen {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: calc(var(--sp-5) + env(safe-area-inset-top)) calc(var(--sp-5) + env(safe-area-inset-right))
+    calc(var(--sp-6) + env(safe-area-inset-bottom)) calc(var(--sp-5) + env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--lh-tight);
+}
+h1 {
+  font-size: var(--fs-h1);
+}
+h2 {
+  font-size: var(--fs-h2);
+}
+p {
+  margin: var(--sp-2) 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+.muted {
+  color: var(--c-ink-2);
+}
+.small {
+  font-size: var(--fs-small);
+}
+
+.card {
+  background: var(--c-surface);
+  border: 2px solid var(--c-line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-card);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.kbtn {
+  min-height: var(--touch-child-min);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  color: var(--c-ink);
+  font-size: var(--fs-h3);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--sh-key);
+  border: 2px solid var(--c-key-edge);
+  cursor: pointer;
+  transition: transform var(--m-fast) var(--m-ease-out);
+}
+.kbtn:active {
+  transform: translateY(2px);
+  box-shadow: var(--sh-key-pressed);
+}
+.kbtn:disabled {
+  opacity: 0.45;
+}
+.kbtn:focus-visible,
+.stone:focus-visible,
+.back:focus-visible {
+  outline: none;
+  box-shadow: var(--sh-focus);
+}
+.kbtn-primary {
+  background: var(--c-primary);
+  border-color: var(--c-primary-strong);
+  color: #fff;
+}
+.kbtn-xl {
+  min-height: var(--touch-child-xl);
+  font-size: var(--fs-h2);
+}
+.kbtn-record {
+  background: var(--c-surface);
+  color: var(--c-record);
+  border-color: var(--c-record);
+}
+
+.actions,
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+}
+.actions .kbtn {
+  flex: 1 1 260px;
+}
+
+.back {
+  min-height: var(--touch-parent-min);
+  padding: 0 var(--sp-4);
+  border: 2px solid var(--c-line);
+  border-radius: var(--r-pill);
+  background: var(--c-surface);
+  font-size: var(--fs-body);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--c-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: var(--touch-parent-min);
+}
+
+.lesson-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+.stone {
+  width: var(--touch-child);
+  height: var(--touch-child);
+  border-radius: var(--r-pill);
+  border: 2px solid var(--c-key-edge);
+  background: var(--c-bg-2);
+  font-family: var(--font-family-letters);
+  font-size: var(--fs-map-letter);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--ls-letters);
+  box-shadow: var(--sh-key);
+  cursor: pointer;
+}
+.stone.is-playing {
+  background: var(--c-primary-soft);
+  border-color: var(--c-primary);
+}
+
+.status {
+  min-height: 1.5em;
+  font-weight: var(--font-weight-semibold);
+}
+.notice {
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--c-accent-soft);
+}
+.is-error {
+  color: var(--c-retry);
+}
+.notice.is-error {
+  background: var(--c-retry-soft);
+}
+.rec-dot::before {
+  content: '●';
+  color: var(--c-record);
+  margin-right: var(--sp-2);
+}
+.info {
+  margin: 0;
+  padding-left: var(--sp-5);
+}
+
+a {
+  color: var(--c-primary);
+}

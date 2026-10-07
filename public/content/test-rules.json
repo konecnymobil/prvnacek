@@ -1,0 +1,2990 @@
+{
+  "schemaVersion": 1,
+  "kind": "testRules",
+  "defaults": {
+    "itemsFull": 12,
+    "itemsLetterOnly": 6,
+    "passRatio": 0.8,
+    "maxNewLetterErrors": 1,
+    "baseNewLetterRows": 3,
+    "baseSyllables": 5,
+    "maxWords": 3,
+    "minWordsIfAvailable": 2,
+    "baseReview": 1,
+    "maxReview": 4,
+    "maxNewLetterRows": 5,
+    "minNewLetterItems": 3,
+    "allowRepeatedItems": false,
+    "letterFindLength": 5
+  },
+  "recommendation": {
+    "minRatedTasks": 20,
+    "windowSize": 20,
+    "minSuccessRatio": 0.8,
+    "minDistinctDays": 2,
+    "note": "Jen upozornění pro rodiče (🟢 doporučeno ke zkoušce). Rodič může zkoušku spustit kdykoli. Počítají se hodnocené úlohy procvičování v dané lekci (A1 se nehodnotí). Hodnoty jsou nastavitelné."
+  },
+  "passRule": {
+    "minRatio": 0.8,
+    "maxNewLetterErrors": 1,
+    "text": "Doporučeno schválit, když je správně aspoň 80 % (10/12, u první lekce 5/6) a nejvýš 1 chyba u položek s novým písmenem. Rozhodnutí je vždy na rodiči."
+  },
+  "retake": {
+    "unlimited": true,
+    "recommendedMinGapDays": 1,
+    "text": "Opakovat bez omezení, ideálně další den po procvičení. Chybné položky jdou automaticky do procvičování."
+  },
+  "itemTypes": [
+    {
+      "id": "letterFind",
+      "label": "Najdi a přečti písmeno",
+      "countsAsNewLetter": true,
+      "display": "Řádek 5 tvarů velkých tiskacích písmen; cílové písmeno je v něm 1–2× na náhodném místě, ostatní jsou tvary z pools.shapeDistractors (u Á i dříve probrané A). Každý řádek ve zkoušce jiný.",
+      "correctWhen": "Dítě ukáže všechna cílová písmena v řádku a řekne hlásku (mmm, ne „em“)."
+    },
+    {
+      "id": "letterRow",
+      "label": "Přečti celý řádek písmen",
+      "countsAsNewLetter": true,
+      "display": "Řádek rowLength písmen jen z pools.rowLetterIds; nové písmeno 1–2×, ostatní jsou dříve probraná (řádek je tak zároveň opakováním), žádná dvě stejná vedle sebe. Každý řádek ve zkoušce jiný (distinctRowsAvailable = kolik různých řádků jde sestavit). Dítě čte CELÝ řádek nahlas, rodič poslouchá živě.",
+      "correctWhen": "Dítě přečte zleva doprava všechna písmena v řádku jako hlásky. Jedna chyba kdekoli v řádku = ✗."
+    },
+    {
+      "id": "syllable",
+      "label": "Přečti slabiku",
+      "countsAsNewLetter": true,
+      "display": "Jedna slabika z pools.syllableIds; každá slabika ve zkoušce nejvýš 1× (bez opakování).",
+      "correctWhen": "Dítě slabiku vysloví vcelku (i po tichém hláskování), se správnou délkou samohlásky."
+    },
+    {
+      "id": "word",
+      "label": "Přečti slovo",
+      "countsAsNewLetter": true,
+      "display": "Jedno slovo z pools.wordIds (jen víceslabičná slova), bez opakování. Po hodnocení se ukáže obrázek.",
+      "correctWhen": "Dítě slovo přečte celé a spojí ho (MÁ-MA → máma)."
+    },
+    {
+      "id": "review",
+      "label": "Opakování",
+      "countsAsNewLetter": false,
+      "display": "Počty podle reviewSlots: starší slova (reviewWordIds), starší slabiky (reviewSyllableIds), samostatná starší písmena (reviewLetterIds). Každá položka nejvýš 1×.",
+      "correctWhen": "Stejně jako u příslušného typu."
+    }
+  ],
+  "errorReasons": [
+    {
+      "id": "confused",
+      "label": "zaměnil(a)",
+      "hint": "Přečetlo jiné písmeno/slabiku, např. L místo E, MA místo MÁ."
+    },
+    {
+      "id": "unknown",
+      "label": "nevěděl(a)",
+      "hint": "Nevědělo nebo do zhruba 10 s neodpovědělo."
+    },
+    {
+      "id": "notBlended",
+      "label": "hláskoval(a), nespojil(a)",
+      "hint": "Řeklo M–A, ale nespojilo do „ma“."
+    }
+  ],
+  "compositionAlgorithm": [
+    "1. Nová písmena = letterIds lekce. Když s nimi nejde složit žádná otevřená slabika (žádná souhláska + samohláska), jde o lekci jen s písmenem: 6× letterFind.",
+    "2. Jinak 12 položek: letterRow 3 (dítě čte celý řádek), syllable min(5, počet nových slabik s usableInSyllableTasks), word min(3, počet nových slov s usableInTest – víceslabičná, jen otevřené slabiky; zavřené slabiky a slova se zavřenou slabikou se ve zkoušce M0–M1 nepoužívají), review 1 (od 2. lekce; starší slovo/slabika, jinak starší písmeno).",
+    "3. ŽÁDNÁ POLOŽKA SE V JEDNÉ ZKOUŠCE NEOPAKUJE: slabika, slovo ani písmeno nejvýš 1× (i napříč typy úloh, klíč = text), řádky písmen jsou různé sekvence. Proto počet položek typu ≤ velikost poolu.",
+    "4. Má-li lekce méně než 2 nová slova a existují starší slova, doplní se starší slova do 2 (opakování).",
+    "5. Chybějící položky do 12 se doplní v pořadí: letterRow do 4 → opakování starších slov a slabik (střídavě) do 4 → letterRow do 5 → další starší slova a slabiky → starší samostatná písmena → další různé řádky písmen (kompromis, uveden v compromiseNote).",
+    "6. Položek s novým písmenem (letterFind, letterRow, syllable, word) je vždy aspoň 3.",
+    "7. Pořadí položek: náhodně zamíchat, začít řádkem (letterRow/letterFind) a pokud to jde, nedávat dva stejné typy za sebou. exampleItems = jedna ukázková zkouška (deterministická); aplikace losuje vlastní.",
+    "8. Při vlastním pořadí písmen (nastavení) se postup spustí znovu nad novým pořadím."
+  ],
+  "parentGuideShort": [
+    "Dítě čte nahlas, vy jen hodnotíte ✓ nebo ✗. Nenapovídejte, neukazujte, neopakujte hlásku za něj.",
+    "Řádek písmen čte dítě celý zleva doprava; ✓ jen když jsou správně všechna písmena v řádku.",
+    "U písmene se počítá hláska („mmm“), ne název („em“). Když se samo hned opraví, je to ✓.",
+    "Slabiku nebo slovo smí potichu hláskovat, ale musí je samo spojit („m-a… ma“ = ✓, jen „m-a“ = ✗).",
+    "Délka se počítá: MÁ přečtené jako „ma“ je ✗ (zaměnil(a)).",
+    "Na chybu reagujte klidně: „Dobře, jdeme dál.“ Nikdy „špatně“.",
+    "Když si nevíte rady, dejte ✗. Po zkoušce se ✗ položky samy zařadí do procvičování."
+  ],
+  "blueprints": [
+    {
+      "id": "tb-duha-1",
+      "orderId": "duha",
+      "lessonId": "duha-1",
+      "mode": "letterOnly",
+      "itemCount": 6,
+      "slots": {
+        "letterFind": 6,
+        "letterRow": 0,
+        "syllable": 0,
+        "word": 0,
+        "review": 0
+      },
+      "reviewSlots": {
+        "word": 0,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 5,
+      "distinctRowsAvailable": null,
+      "pools": {
+        "newLetterIds": [
+          "l-m"
+        ],
+        "rowLetterIds": [
+          "l-m"
+        ],
+        "shapeDistractors": [
+          "N",
+          "W",
+          "H",
+          "V",
+          "K"
+        ],
+        "syllableIds": [],
+        "wordIds": [],
+        "reviewLetterIds": [],
+        "reviewSyllableIds": [],
+        "reviewWordIds": []
+      },
+      "passScore": 5,
+      "newLetterItemCount": 6,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "V K H N M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "V M V M K",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "W V M W H",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "K W N M K",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "W M V M V",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "K W M N M",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-2",
+      "orderId": "duha",
+      "lessonId": "duha-2",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 8,
+        "syllable": 2,
+        "word": 1,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 0,
+        "syllable": 0,
+        "letter": 1
+      },
+      "rowLength": 3,
+      "distinctRowsAvailable": 10,
+      "pools": {
+        "newLetterIds": [
+          "l-a",
+          "l-aa"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-ma",
+          "s-maa"
+        ],
+        "wordIds": [
+          "w-maama"
+        ],
+        "reviewLetterIds": [
+          "l-m"
+        ],
+        "reviewSyllableIds": [],
+        "reviewWordIds": []
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": "Málo různých slabik a slov (nové slabiky 2, nová slova 1, starší slabiky/slova 0/0): zkouška má 8 řádků písmen (místo nejvýš 5). Každý řádek je jiný (k dispozici 10 různých řádků), žádná položka se neopakuje.",
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á M A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M A Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A M A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "letter",
+          "refId": "l-m",
+          "text": "M",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M Á A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-maa",
+          "text": "MÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A M Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á M Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M A M",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-3",
+      "orderId": "duha",
+      "lessonId": "duha-3",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 5,
+        "syllable": 2,
+        "word": 2,
+        "review": 3
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 2,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 84,
+      "pools": {
+        "newLetterIds": [
+          "l-l"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-la",
+          "s-laa"
+        ],
+        "wordIds": [
+          "w-lama",
+          "w-malaa"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa"
+        ],
+        "reviewWordIds": [
+          "w-maama"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 9,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A L Á L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-la",
+          "text": "LA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A L A L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-lama",
+          "text": "LAMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M Á L M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-maa",
+          "text": "MÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L M L A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-laa",
+          "text": "LÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M L Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": false
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-4",
+      "orderId": "duha",
+      "lessonId": "duha-4",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 2,
+        "word": 2,
+        "review": 4
+      },
+      "reviewSlots": {
+        "word": 2,
+        "syllable": 2,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 212,
+      "pools": {
+        "newLetterIds": [
+          "l-e"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-me",
+          "s-le"
+        ],
+        "wordIds": [
+          "w-ale",
+          "w-mele"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-la",
+          "s-laa"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 8,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L Á A E",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mele",
+          "text": "MELE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-le",
+          "text": "LE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "E Á M Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-la",
+          "text": "LA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á E Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-ale",
+          "text": "ALE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A E L M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-me",
+          "text": "ME",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-5",
+      "orderId": "duha",
+      "lessonId": "duha-5",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 3,
+        "word": 2,
+        "review": 3
+      },
+      "reviewSlots": {
+        "word": 2,
+        "syllable": 1,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 430,
+      "pools": {
+        "newLetterIds": [
+          "l-s"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-sa",
+          "s-saa",
+          "s-se"
+        ],
+        "wordIds": [
+          "w-sele",
+          "w-sama"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-la",
+          "s-laa",
+          "s-le"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 9,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S E S L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-se",
+          "text": "SE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L S E L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-saa",
+          "text": "SÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S L S L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-sama",
+          "text": "SAMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S A E Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-sa",
+          "text": "SA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-sele",
+          "text": "SELE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-laa",
+          "text": "LÁ",
+          "containsNewLetter": false
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-6",
+      "orderId": "duha",
+      "lessonId": "duha-6",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 3,
+        "word": 3,
+        "review": 2
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 1,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 762,
+      "pools": {
+        "newLetterIds": [
+          "l-o"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mo",
+          "s-lo",
+          "s-so"
+        ],
+        "wordIds": [
+          "w-maso",
+          "w-molo",
+          "w-maalo"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-sa",
+          "s-saa",
+          "s-se"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 10,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "O S O L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-laa",
+          "text": "LÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á L Á O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maso",
+          "text": "MASO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-so",
+          "text": "SO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maalo",
+          "text": "MÁLO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A M E O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-molo",
+          "text": "MOLO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á L E O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-lo",
+          "text": "LO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mo",
+          "text": "MO",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-7",
+      "orderId": "duha",
+      "lessonId": "duha-7",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 1232,
+      "pools": {
+        "newLetterIds": [
+          "l-p"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po"
+        ],
+        "wordIds": [
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A P L A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-paa",
+          "text": "PÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A S P Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pa",
+          "text": "PA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "P Á P O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-po",
+          "text": "PO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mapa",
+          "text": "MAPA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pe",
+          "text": "PE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pole",
+          "text": "POLE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S A P E",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pomalaa",
+          "text": "POMALÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-sama",
+          "text": "SAMA",
+          "containsNewLetter": false
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-8",
+      "orderId": "duha",
+      "lessonId": "duha-8",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 1864,
+      "pools": {
+        "newLetterIds": [
+          "l-u"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mu",
+          "s-lu",
+          "s-su",
+          "s-pu"
+        ],
+        "wordIds": [
+          "w-lupa",
+          "w-mula",
+          "w-puma",
+          "w-pusa",
+          "w-pomalu"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so",
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo",
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "U A L Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mu",
+          "text": "MU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L U O P",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-su",
+          "text": "SU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "U A E P",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-puma",
+          "text": "PUMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M L U O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pomalu",
+          "text": "POMALU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pu",
+          "text": "PU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pusa",
+          "text": "PUSA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-lu",
+          "text": "LU",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-duha-9",
+      "orderId": "duha",
+      "lessonId": "duha-9",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 2682,
+      "pools": {
+        "newLetterIds": [
+          "l-i"
+        ],
+        "rowLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u",
+          "l-i"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mi",
+          "s-li",
+          "s-si",
+          "s-pi"
+        ],
+        "wordIds": [
+          "w-lilie",
+          "w-pila",
+          "w-pilule",
+          "w-silo",
+          "w-mile",
+          "w-milaa",
+          "w-mimo"
+        ],
+        "reviewLetterIds": [
+          "l-m",
+          "l-a",
+          "l-aa",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-mu",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-lu",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so",
+          "s-su",
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po",
+          "s-pu"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo",
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa",
+          "w-lupa",
+          "w-mula",
+          "w-puma",
+          "w-pusa",
+          "w-pomalu"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M S O I",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-lama",
+          "text": "LAMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "U I P L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-milaa",
+          "text": "MILÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M I Á U",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-si",
+          "text": "SI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mile",
+          "text": "MILE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pi",
+          "text": "PI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "P S P I",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pila",
+          "text": "PILA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-li",
+          "text": "LI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mi",
+          "text": "MI",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-1",
+      "orderId": "agata",
+      "lessonId": "agata-1",
+      "mode": "letterOnly",
+      "itemCount": 6,
+      "slots": {
+        "letterFind": 6,
+        "letterRow": 0,
+        "syllable": 0,
+        "word": 0,
+        "review": 0
+      },
+      "reviewSlots": {
+        "word": 0,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 5,
+      "distinctRowsAvailable": null,
+      "pools": {
+        "newLetterIds": [
+          "l-a"
+        ],
+        "rowLetterIds": [
+          "l-a"
+        ],
+        "shapeDistractors": [
+          "V",
+          "H",
+          "K",
+          "X",
+          "N"
+        ],
+        "syllableIds": [],
+        "wordIds": [],
+        "reviewLetterIds": [],
+        "reviewSyllableIds": [],
+        "reviewWordIds": []
+      },
+      "passScore": 5,
+      "newLetterItemCount": 6,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A H V K H",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "K A X V N",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "X H K A V",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "V X A K A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "H V A X A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "N K A X H",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-2",
+      "orderId": "agata",
+      "lessonId": "agata-2",
+      "mode": "letterOnly",
+      "itemCount": 6,
+      "slots": {
+        "letterFind": 6,
+        "letterRow": 0,
+        "syllable": 0,
+        "word": 0,
+        "review": 0
+      },
+      "reviewSlots": {
+        "word": 0,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 5,
+      "distinctRowsAvailable": null,
+      "pools": {
+        "newLetterIds": [
+          "l-aa"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa"
+        ],
+        "shapeDistractors": [
+          "A",
+          "V",
+          "H",
+          "K",
+          "N"
+        ],
+        "syllableIds": [],
+        "wordIds": [],
+        "reviewLetterIds": [
+          "l-a"
+        ],
+        "reviewSyllableIds": [],
+        "reviewWordIds": []
+      },
+      "passScore": 5,
+      "newLetterItemCount": 6,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á A V Á H",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "K V K Á A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "N Á V K H",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "K Á A Á A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A V K Á A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterFind",
+          "reviewKind": null,
+          "refId": null,
+          "text": "N Á N Á H",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-3",
+      "orderId": "agata",
+      "lessonId": "agata-3",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 7,
+        "syllable": 2,
+        "word": 1,
+        "review": 2
+      },
+      "reviewSlots": {
+        "word": 0,
+        "syllable": 0,
+        "letter": 2
+      },
+      "rowLength": 3,
+      "distinctRowsAvailable": 10,
+      "pools": {
+        "newLetterIds": [
+          "l-m"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-ma",
+          "s-maa"
+        ],
+        "wordIds": [
+          "w-maama"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa"
+        ],
+        "reviewSyllableIds": [],
+        "reviewWordIds": []
+      },
+      "passScore": 10,
+      "newLetterItemCount": 10,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": "Málo různých slabik a slov (nové slabiky 2, nová slova 1, starší slabiky/slova 0/0): zkouška má 7 řádků písmen (místo nejvýš 5). Každý řádek je jiný (k dispozici 10 různých řádků), žádná položka se neopakuje.",
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M A M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-maa",
+          "text": "MÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "letter",
+          "refId": "l-aa",
+          "text": "Á",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A M A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "letter",
+          "refId": "l-a",
+          "text": "A",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á M Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á M A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A M Á",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-4",
+      "orderId": "agata",
+      "lessonId": "agata-4",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 5,
+        "syllable": 2,
+        "word": 2,
+        "review": 3
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 2,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 84,
+      "pools": {
+        "newLetterIds": [
+          "l-l"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-la",
+          "s-laa"
+        ],
+        "wordIds": [
+          "w-lama",
+          "w-malaa"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa"
+        ],
+        "reviewWordIds": [
+          "w-maama"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 9,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L A L M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á A L M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-lama",
+          "text": "LAMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A L Á A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-laa",
+          "text": "LÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L Á M A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-maa",
+          "text": "MÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-la",
+          "text": "LA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M L M Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": false
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-5",
+      "orderId": "agata",
+      "lessonId": "agata-5",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 2,
+        "word": 2,
+        "review": 4
+      },
+      "reviewSlots": {
+        "word": 2,
+        "syllable": 2,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 212,
+      "pools": {
+        "newLetterIds": [
+          "l-e"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-me",
+          "s-le"
+        ],
+        "wordIds": [
+          "w-ale",
+          "w-mele"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-la",
+          "s-laa"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 8,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "L A L E",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-lama",
+          "text": "LAMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-ale",
+          "text": "ALE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M A L E",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-laa",
+          "text": "LÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A E A Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-le",
+          "text": "LE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A L E Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mele",
+          "text": "MELE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-me",
+          "text": "ME",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-6",
+      "orderId": "agata",
+      "lessonId": "agata-6",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 3,
+        "word": 2,
+        "review": 3
+      },
+      "reviewSlots": {
+        "word": 2,
+        "syllable": 1,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 430,
+      "pools": {
+        "newLetterIds": [
+          "l-s"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-sa",
+          "s-saa",
+          "s-se"
+        ],
+        "wordIds": [
+          "w-sele",
+          "w-sama"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-la",
+          "s-laa",
+          "s-le"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 9,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "E S A L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-sa",
+          "text": "SA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á S E A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-sele",
+          "text": "SELE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-ma",
+          "text": "MA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á S A L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-sama",
+          "text": "SAMA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maama",
+          "text": "MÁMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-se",
+          "text": "SE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-malaa",
+          "text": "MALÁ",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-saa",
+          "text": "SÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S A S Á",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-7",
+      "orderId": "agata",
+      "lessonId": "agata-7",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 3,
+        "word": 3,
+        "review": 2
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 1,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 762,
+      "pools": {
+        "newLetterIds": [
+          "l-o"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mo",
+          "s-lo",
+          "s-so"
+        ],
+        "wordIds": [
+          "w-maso",
+          "w-molo",
+          "w-maalo"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-sa",
+          "s-saa",
+          "s-se"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 10,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A S A O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-sama",
+          "text": "SAMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á A O A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maso",
+          "text": "MASO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "O E L Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mo",
+          "text": "MO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "O L M S",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-lo",
+          "text": "LO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "syllable",
+          "refId": "s-le",
+          "text": "LE",
+          "containsNewLetter": false
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-maalo",
+          "text": "MÁLO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-so",
+          "text": "SO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-molo",
+          "text": "MOLO",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-8",
+      "orderId": "agata",
+      "lessonId": "agata-8",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 1232,
+      "pools": {
+        "newLetterIds": [
+          "l-p"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po"
+        ],
+        "wordIds": [
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "P Á M L",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mapa",
+          "text": "MAPA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "Á L P A",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pa",
+          "text": "PA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "O A P Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pomalaa",
+          "text": "POMALÁ",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S L P S",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-po",
+          "text": "PO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-lama",
+          "text": "LAMA",
+          "containsNewLetter": false
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pe",
+          "text": "PE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pase",
+          "text": "PASE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-paa",
+          "text": "PÁ",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-9",
+      "orderId": "agata",
+      "lessonId": "agata-9",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 1864,
+      "pools": {
+        "newLetterIds": [
+          "l-u"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mu",
+          "s-lu",
+          "s-su",
+          "s-pu"
+        ],
+        "wordIds": [
+          "w-lupa",
+          "w-mula",
+          "w-puma",
+          "w-pusa",
+          "w-pomalu"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so",
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo",
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A U L Á",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mu",
+          "text": "MU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mula",
+          "text": "MULA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "U L E U",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pusa",
+          "text": "PUSA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "U S Á M",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-pase",
+          "text": "PASE",
+          "containsNewLetter": false
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "E M L U",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-su",
+          "text": "SU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-lupa",
+          "text": "LUPA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pu",
+          "text": "PU",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-lu",
+          "text": "LU",
+          "containsNewLetter": true
+        }
+      ]
+    },
+    {
+      "id": "tb-agata-10",
+      "orderId": "agata",
+      "lessonId": "agata-10",
+      "mode": "full",
+      "itemCount": 12,
+      "slots": {
+        "letterFind": 0,
+        "letterRow": 4,
+        "syllable": 4,
+        "word": 3,
+        "review": 1
+      },
+      "reviewSlots": {
+        "word": 1,
+        "syllable": 0,
+        "letter": 0
+      },
+      "rowLength": 4,
+      "distinctRowsAvailable": 2682,
+      "pools": {
+        "newLetterIds": [
+          "l-i"
+        ],
+        "rowLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u",
+          "l-i"
+        ],
+        "shapeDistractors": [],
+        "syllableIds": [
+          "s-mi",
+          "s-li",
+          "s-si",
+          "s-pi"
+        ],
+        "wordIds": [
+          "w-lilie",
+          "w-pila",
+          "w-pilule",
+          "w-silo",
+          "w-mile",
+          "w-milaa",
+          "w-mimo"
+        ],
+        "reviewLetterIds": [
+          "l-a",
+          "l-aa",
+          "l-m",
+          "l-l",
+          "l-e",
+          "l-s",
+          "l-o",
+          "l-p",
+          "l-u"
+        ],
+        "reviewSyllableIds": [
+          "s-ma",
+          "s-maa",
+          "s-me",
+          "s-mo",
+          "s-mu",
+          "s-la",
+          "s-laa",
+          "s-le",
+          "s-lo",
+          "s-lu",
+          "s-sa",
+          "s-saa",
+          "s-se",
+          "s-so",
+          "s-su",
+          "s-pa",
+          "s-paa",
+          "s-pe",
+          "s-po",
+          "s-pu"
+        ],
+        "reviewWordIds": [
+          "w-maama",
+          "w-lama",
+          "w-malaa",
+          "w-ale",
+          "w-mele",
+          "w-sele",
+          "w-sama",
+          "w-maso",
+          "w-molo",
+          "w-maalo",
+          "w-mapa",
+          "w-pole",
+          "w-pase",
+          "w-pomalaa",
+          "w-lupa",
+          "w-mula",
+          "w-puma",
+          "w-pusa",
+          "w-pomalu"
+        ]
+      },
+      "passScore": 10,
+      "newLetterItemCount": 11,
+      "maxNewLetterErrors": 1,
+      "compromiseNote": null,
+      "exampleItems": [
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "I P M P",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-pi",
+          "text": "PI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "review",
+          "reviewKind": "word",
+          "refId": "w-maso",
+          "text": "MASO",
+          "containsNewLetter": false
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-mimo",
+          "text": "MIMO",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-si",
+          "text": "SI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-lilie",
+          "text": "LILIE",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "M I O U",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-li",
+          "text": "LI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "word",
+          "reviewKind": null,
+          "refId": "w-pila",
+          "text": "PILA",
+          "containsNewLetter": true
+        },
+        {
+          "type": "syllable",
+          "reviewKind": null,
+          "refId": "s-mi",
+          "text": "MI",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "A E I O",
+          "containsNewLetter": true
+        },
+        {
+          "type": "letterRow",
+          "reviewKind": null,
+          "refId": null,
+          "text": "S O A I",
+          "containsNewLetter": true
+        }
+      ]
+    }
+  ]
+}
