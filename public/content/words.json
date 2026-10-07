@@ -1,0 +1,1803 @@
+{
+  "schemaVersion": 1,
+  "kind": "words",
+  "words": [
+    {
+      "id": "w-maama",
+      "text": "MÁMA",
+      "textLower": "máma",
+      "syllableIds": [
+        "s-maa",
+        "s-ma"
+      ],
+      "syllablesText": [
+        "MÁ",
+        "MA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-aa",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "maminka",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-maama",
+      "audioId": "snd-w-maama",
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "ipa": "ˈmaː.ma",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-maa",
+      "text": "MÁ",
+      "textLower": "má",
+      "syllableIds": [
+        "s-maa"
+      ],
+      "syllablesText": [
+        "MÁ"
+      ],
+      "syllableCount": 1,
+      "letterCount": 2,
+      "letterIds": [
+        "l-m",
+        "l-aa"
+      ],
+      "partOfSpeech": "verb",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "má (Máma má…) – sloveso mít",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-maa",
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "ipa": "maː",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-lama",
+      "text": "LAMA",
+      "textLower": "lama",
+      "syllableIds": [
+        "s-la",
+        "s-ma"
+      ],
+      "syllablesText": [
+        "LA",
+        "MA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-l",
+        "l-a",
+        "l-m"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "lama – zvíře",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-lama",
+      "audioId": "snd-w-lama",
+      "minLessonId": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "minLessonIndex": {
+        "duha": 3,
+        "agata": 4
+      },
+      "ipa": "ˈla.ma",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-malaa",
+      "text": "MALÁ",
+      "textLower": "malá",
+      "syllableIds": [
+        "s-ma",
+        "s-laa"
+      ],
+      "syllablesText": [
+        "MA",
+        "LÁ"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-a",
+        "l-l",
+        "l-aa"
+      ],
+      "partOfSpeech": "adj",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "malá (opak velká)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-malaa",
+      "minLessonId": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "minLessonIndex": {
+        "duha": 3,
+        "agata": 4
+      },
+      "ipa": "ˈma.laː",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-ale",
+      "text": "ALE",
+      "textLower": "ale",
+      "syllableIds": [
+        "s-a",
+        "s-le"
+      ],
+      "syllablesText": [
+        "A",
+        "LE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 3,
+      "letterIds": [
+        "l-a",
+        "l-l",
+        "l-e"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "ale – spojka",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-ale",
+      "minLessonId": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "minLessonIndex": {
+        "duha": 4,
+        "agata": 5
+      },
+      "ipa": "ˈa.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-mele",
+      "text": "MELE",
+      "textLower": "mele",
+      "syllableIds": [
+        "s-me",
+        "s-le"
+      ],
+      "syllablesText": [
+        "ME",
+        "LE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-e",
+        "l-l"
+      ],
+      "partOfSpeech": "verb",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "medium",
+      "gloss": "mele (mlýnek mele kávu)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-mele",
+      "minLessonId": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "minLessonIndex": {
+        "duha": 4,
+        "agata": 5
+      },
+      "ipa": "ˈmɛ.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-sele",
+      "text": "SELE",
+      "textLower": "sele",
+      "syllableIds": [
+        "s-se",
+        "s-le"
+      ],
+      "syllablesText": [
+        "SE",
+        "LE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-s",
+        "l-e",
+        "l-l"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "sele – malé prasátko",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-sele",
+      "audioId": "snd-w-sele",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "ˈsɛ.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-sama",
+      "text": "SAMA",
+      "textLower": "sama",
+      "syllableIds": [
+        "s-sa",
+        "s-ma"
+      ],
+      "syllablesText": [
+        "SA",
+        "MA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-s",
+        "l-a",
+        "l-m"
+      ],
+      "partOfSpeech": "adj",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "medium",
+      "gloss": "sama (bez nikoho)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-sama",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "ˈsa.ma",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-se",
+      "text": "SE",
+      "textLower": "se",
+      "syllableIds": [
+        "s-se"
+      ],
+      "syllablesText": [
+        "SE"
+      ],
+      "syllableCount": 1,
+      "letterCount": 2,
+      "letterIds": [
+        "l-s",
+        "l-e"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "se (myje se)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-se",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "sɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-maso",
+      "text": "MASO",
+      "textLower": "maso",
+      "syllableIds": [
+        "s-ma",
+        "s-so"
+      ],
+      "syllablesText": [
+        "MA",
+        "SO"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-a",
+        "l-s",
+        "l-o"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "maso (kus masa, řízek)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-maso",
+      "audioId": "snd-w-maso",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "ˈma.so",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-molo",
+      "text": "MOLO",
+      "textLower": "molo",
+      "syllableIds": [
+        "s-mo",
+        "s-lo"
+      ],
+      "syllablesText": [
+        "MO",
+        "LO"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-o",
+        "l-l"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "molo – dřevěná lávka do vody",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-molo",
+      "audioId": "snd-w-molo",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "ˈmo.lo",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-maalo",
+      "text": "MÁLO",
+      "textLower": "málo",
+      "syllableIds": [
+        "s-maa",
+        "s-lo"
+      ],
+      "syllablesText": [
+        "MÁ",
+        "LO"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-aa",
+        "l-l",
+        "l-o"
+      ],
+      "partOfSpeech": "adv",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "málo (opak hodně)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-maalo",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "ˈmaː.lo",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-mapa",
+      "text": "MAPA",
+      "textLower": "mapa",
+      "syllableIds": [
+        "s-ma",
+        "s-pa"
+      ],
+      "syllablesText": [
+        "MA",
+        "PA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-a",
+        "l-p"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "mapa",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-mapa",
+      "audioId": "snd-w-mapa",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "ˈma.pa",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pole",
+      "text": "POLE",
+      "textLower": "pole",
+      "syllableIds": [
+        "s-po",
+        "s-le"
+      ],
+      "syllablesText": [
+        "PO",
+        "LE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-p",
+        "l-o",
+        "l-l",
+        "l-e"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "pole s obilím",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-pole",
+      "audioId": "snd-w-pole",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "ˈpo.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pase",
+      "text": "PASE",
+      "textLower": "pase",
+      "syllableIds": [
+        "s-pa",
+        "s-se"
+      ],
+      "syllablesText": [
+        "PA",
+        "SE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-p",
+        "l-a",
+        "l-s",
+        "l-e"
+      ],
+      "partOfSpeech": "verb",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "medium",
+      "gloss": "pase (kráva se pase)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-pase",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "ˈpa.sɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-po",
+      "text": "PO",
+      "textLower": "po",
+      "syllableIds": [
+        "s-po"
+      ],
+      "syllablesText": [
+        "PO"
+      ],
+      "syllableCount": 1,
+      "letterCount": 2,
+      "letterIds": [
+        "l-p",
+        "l-o"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "po – předložka (po obědě)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-po",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "po",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pomalaa",
+      "text": "POMALÁ",
+      "textLower": "pomalá",
+      "syllableIds": [
+        "s-po",
+        "s-ma",
+        "s-laa"
+      ],
+      "syllablesText": [
+        "PO",
+        "MA",
+        "LÁ"
+      ],
+      "syllableCount": 3,
+      "letterCount": 6,
+      "letterIds": [
+        "l-p",
+        "l-o",
+        "l-m",
+        "l-a",
+        "l-l",
+        "l-aa"
+      ],
+      "partOfSpeech": "adj",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "pomalá (opak rychlá)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-pomalaa",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "ˈpo.ma.laː",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-lupa",
+      "text": "LUPA",
+      "textLower": "lupa",
+      "syllableIds": [
+        "s-lu",
+        "s-pa"
+      ],
+      "syllablesText": [
+        "LU",
+        "PA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-l",
+        "l-u",
+        "l-p",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "lupa – zvětšovací sklo",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-lupa",
+      "audioId": "snd-w-lupa",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "ˈlu.pa",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-mula",
+      "text": "MULA",
+      "textLower": "mula",
+      "syllableIds": [
+        "s-mu",
+        "s-la"
+      ],
+      "syllablesText": [
+        "MU",
+        "LA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-u",
+        "l-l",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "mula – zvíře podobné koni",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-mula",
+      "audioId": "snd-w-mula",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "ˈmu.la",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-puma",
+      "text": "PUMA",
+      "textLower": "puma",
+      "syllableIds": [
+        "s-pu",
+        "s-ma"
+      ],
+      "syllablesText": [
+        "PU",
+        "MA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-p",
+        "l-u",
+        "l-m",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "puma – velká kočkovitá šelma",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-puma",
+      "audioId": "snd-w-puma",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "ˈpu.ma",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pusa",
+      "text": "PUSA",
+      "textLower": "pusa",
+      "syllableIds": [
+        "s-pu",
+        "s-sa"
+      ],
+      "syllablesText": [
+        "PU",
+        "SA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-p",
+        "l-u",
+        "l-s",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "pusa (ústa)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-pusa",
+      "audioId": "snd-w-pusa",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "ˈpu.sa",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pomalu",
+      "text": "POMALU",
+      "textLower": "pomalu",
+      "syllableIds": [
+        "s-po",
+        "s-ma",
+        "s-lu"
+      ],
+      "syllablesText": [
+        "PO",
+        "MA",
+        "LU"
+      ],
+      "syllableCount": 3,
+      "letterCount": 6,
+      "letterIds": [
+        "l-p",
+        "l-o",
+        "l-m",
+        "l-a",
+        "l-l",
+        "l-u"
+      ],
+      "partOfSpeech": "adv",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "pomalu (opak rychle)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-pomalu",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "ˈpo.ma.lu",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-lilie",
+      "text": "LILIE",
+      "textLower": "lilie",
+      "syllableIds": [
+        "s-li",
+        "s-li",
+        "s-e"
+      ],
+      "syllablesText": [
+        "LI",
+        "LI",
+        "E"
+      ],
+      "syllableCount": 3,
+      "letterCount": 5,
+      "letterIds": [
+        "l-l",
+        "l-i",
+        "l-e"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "lilie – květina",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-lilie",
+      "audioId": "snd-w-lilie",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈlɪ.lɪ.jɛ",
+      "pronunciationNote": "Mezi I a E se přirozeně vysloví slabé j: [lilije]. Dítě to při čtení udělá samo."
+    },
+    {
+      "id": "w-pila",
+      "text": "PILA",
+      "textLower": "pila",
+      "syllableIds": [
+        "s-pi",
+        "s-la"
+      ],
+      "syllablesText": [
+        "PI",
+        "LA"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-p",
+        "l-i",
+        "l-l",
+        "l-a"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "pila – nářadí",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-pila",
+      "audioId": "snd-w-pila",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈpɪ.la",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pilule",
+      "text": "PILULE",
+      "textLower": "pilule",
+      "syllableIds": [
+        "s-pi",
+        "s-lu",
+        "s-le"
+      ],
+      "syllablesText": [
+        "PI",
+        "LU",
+        "LE"
+      ],
+      "syllableCount": 3,
+      "letterCount": 6,
+      "letterIds": [
+        "l-p",
+        "l-i",
+        "l-l",
+        "l-u",
+        "l-e"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "pilule – prášek, tabletka",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-pilule",
+      "audioId": "snd-w-pilule",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈpɪ.lu.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-silo",
+      "text": "SILO",
+      "textLower": "silo",
+      "syllableIds": [
+        "s-si",
+        "s-lo"
+      ],
+      "syllablesText": [
+        "SI",
+        "LO"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-s",
+        "l-i",
+        "l-l",
+        "l-o"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "low",
+      "gloss": "silo – vysoká věž na obilí u farmy",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": true,
+      "usableInTest": true,
+      "imageId": "img-w-silo",
+      "audioId": "snd-w-silo",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈsɪ.lo",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-mile",
+      "text": "MILE",
+      "textLower": "mile",
+      "syllableIds": [
+        "s-mi",
+        "s-le"
+      ],
+      "syllablesText": [
+        "MI",
+        "LE"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-i",
+        "l-l",
+        "l-e"
+      ],
+      "partOfSpeech": "adv",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "medium",
+      "gloss": "mile (mile se usmála)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-mile",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈmɪ.lɛ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-milaa",
+      "text": "MILÁ",
+      "textLower": "milá",
+      "syllableIds": [
+        "s-mi",
+        "s-laa"
+      ],
+      "syllablesText": [
+        "MI",
+        "LÁ"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-i",
+        "l-l",
+        "l-aa"
+      ],
+      "partOfSpeech": "adj",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "milá (hodná)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-milaa",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈmɪ.laː",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-mimo",
+      "text": "MIMO",
+      "textLower": "mimo",
+      "syllableIds": [
+        "s-mi",
+        "s-mo"
+      ],
+      "syllablesText": [
+        "MI",
+        "MO"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-m",
+        "l-i",
+        "l-o"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "medium",
+      "gloss": "mimo (venku, mimo dům)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": true,
+      "imageId": null,
+      "audioId": "snd-w-mimo",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "ˈmɪ.mo",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-si",
+      "text": "SI",
+      "textLower": "si",
+      "syllableIds": [
+        "s-si"
+      ],
+      "syllablesText": [
+        "SI"
+      ],
+      "syllableCount": 1,
+      "letterCount": 2,
+      "letterIds": [
+        "l-s",
+        "l-i"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "si (hraje si)",
+      "closedFinalSyllable": false,
+      "difficulty": 1,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-si",
+      "minLessonId": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "minLessonIndex": {
+        "duha": 9,
+        "agata": 10
+      },
+      "ipa": "sɪ",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-maam",
+      "text": "MÁM",
+      "textLower": "mám",
+      "syllableIds": [
+        "s-maam"
+      ],
+      "syllablesText": [
+        "MÁM"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-m",
+        "l-aa"
+      ],
+      "partOfSpeech": "verb",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "mám (já mám)",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-maam",
+      "minLessonId": {
+        "duha": "duha-2",
+        "agata": "agata-3"
+      },
+      "minLessonIndex": {
+        "duha": 2,
+        "agata": 3
+      },
+      "ipa": "maːm",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-les",
+      "text": "LES",
+      "textLower": "les",
+      "syllableIds": [
+        "s-les"
+      ],
+      "syllablesText": [
+        "LES"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-l",
+        "l-e",
+        "l-s"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "les se stromy",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-les",
+      "audioId": "snd-w-les",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "lɛs",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-salaam",
+      "text": "SALÁM",
+      "textLower": "salám",
+      "syllableIds": [
+        "s-sa",
+        "s-laam"
+      ],
+      "syllablesText": [
+        "SA",
+        "LÁM"
+      ],
+      "syllableCount": 2,
+      "letterCount": 5,
+      "letterIds": [
+        "l-s",
+        "l-a",
+        "l-l",
+        "l-aa",
+        "l-m"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "salám",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-salaam",
+      "audioId": "snd-w-salaam",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "ˈsa.laːm",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-sem",
+      "text": "SEM",
+      "textLower": "sem",
+      "syllableIds": [
+        "s-sem"
+      ],
+      "syllablesText": [
+        "SEM"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-s",
+        "l-e",
+        "l-m"
+      ],
+      "partOfSpeech": "function",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "sem (pojď sem)",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-sem",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "sɛm",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-saam",
+      "text": "SÁM",
+      "textLower": "sám",
+      "syllableIds": [
+        "s-saam"
+      ],
+      "syllablesText": [
+        "SÁM"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-s",
+        "l-aa",
+        "l-m"
+      ],
+      "partOfSpeech": "adj",
+      "picturable": false,
+      "concrete": false,
+      "familiarity": "high",
+      "gloss": "sám (bez nikoho)",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-saam",
+      "minLessonId": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "minLessonIndex": {
+        "duha": 5,
+        "agata": 6
+      },
+      "ipa": "saːm",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-los",
+      "text": "LOS",
+      "textLower": "los",
+      "syllableIds": [
+        "s-los"
+      ],
+      "syllablesText": [
+        "LOS"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-l",
+        "l-o",
+        "l-s"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "los – velký jelen s lopatovitým parožím",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-los",
+      "audioId": "snd-w-los",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "los",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-losos",
+      "text": "LOSOS",
+      "textLower": "losos",
+      "syllableIds": [
+        "s-lo",
+        "s-sos"
+      ],
+      "syllablesText": [
+        "LO",
+        "SOS"
+      ],
+      "syllableCount": 2,
+      "letterCount": 5,
+      "letterIds": [
+        "l-l",
+        "l-o",
+        "l-s"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "losos – ryba",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-losos",
+      "audioId": "snd-w-losos",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "ˈlo.sos",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-osel",
+      "text": "OSEL",
+      "textLower": "osel",
+      "syllableIds": [
+        "s-o",
+        "s-sel"
+      ],
+      "syllablesText": [
+        "O",
+        "SEL"
+      ],
+      "syllableCount": 2,
+      "letterCount": 4,
+      "letterIds": [
+        "l-o",
+        "l-s",
+        "l-e",
+        "l-l"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "osel",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-osel",
+      "audioId": "snd-w-osel",
+      "minLessonId": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "minLessonIndex": {
+        "duha": 6,
+        "agata": 7
+      },
+      "ipa": "ˈo.sɛl",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-pes",
+      "text": "PES",
+      "textLower": "pes",
+      "syllableIds": [
+        "s-pes"
+      ],
+      "syllablesText": [
+        "PES"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-p",
+        "l-e",
+        "l-s"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "high",
+      "gloss": "pes",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-pes",
+      "audioId": "snd-w-pes",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "pɛs",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-popel",
+      "text": "POPEL",
+      "textLower": "popel",
+      "syllableIds": [
+        "s-po",
+        "s-pel"
+      ],
+      "syllablesText": [
+        "PO",
+        "PEL"
+      ],
+      "syllableCount": 2,
+      "letterCount": 5,
+      "letterIds": [
+        "l-p",
+        "l-o",
+        "l-e",
+        "l-l"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": false,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "popel z ohně (konkrétní, ale špatně nakreslitelné)",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": false,
+      "usableInTest": false,
+      "imageId": null,
+      "audioId": "snd-w-popel",
+      "minLessonId": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "minLessonIndex": {
+        "duha": 7,
+        "agata": 8
+      },
+      "ipa": "ˈpo.pɛl",
+      "pronunciationNote": null
+    },
+    {
+      "id": "w-sup",
+      "text": "SUP",
+      "textLower": "sup",
+      "syllableIds": [
+        "s-sup"
+      ],
+      "syllablesText": [
+        "SUP"
+      ],
+      "syllableCount": 1,
+      "letterCount": 3,
+      "letterIds": [
+        "l-s",
+        "l-u",
+        "l-p"
+      ],
+      "partOfSpeech": "noun",
+      "picturable": true,
+      "concrete": true,
+      "familiarity": "medium",
+      "gloss": "sup – velký dravý pták",
+      "closedFinalSyllable": true,
+      "difficulty": 2,
+      "usableInPictureTasks": true,
+      "usableInTest": false,
+      "imageId": "img-w-sup",
+      "audioId": "snd-w-sup",
+      "minLessonId": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "minLessonIndex": {
+        "duha": 8,
+        "agata": 9
+      },
+      "ipa": "sup",
+      "pronunciationNote": null
+    }
+  ],
+  "rejected": [
+    {
+      "text": "LÁMA",
+      "reason": "nespisovný tvar (spisovně „láme“)"
+    },
+    {
+      "text": "MAMA",
+      "reason": "hovorové; používáme MÁMA"
+    },
+    {
+      "text": "OSA",
+      "reason": "abstraktní, pro prvňáka nejasný význam"
+    },
+    {
+      "text": "SUMA",
+      "reason": "abstraktní"
+    },
+    {
+      "text": "ESO",
+      "reason": "nejednoznačné (hrací karta × „je to eso“)"
+    },
+    {
+      "text": "POLO",
+      "reason": "nejednoznačné (tričko × sport)"
+    },
+    {
+      "text": "MISE",
+      "reason": "abstraktní"
+    },
+    {
+      "text": "PESO",
+      "reason": "cizí měna, neznámé"
+    },
+    {
+      "text": "SUMO",
+      "reason": "cizí, málo známé"
+    },
+    {
+      "text": "ALOE",
+      "reason": "málo známé"
+    },
+    {
+      "text": "POMELO",
+      "reason": "málo známé ovoce"
+    },
+    {
+      "text": "EMU",
+      "reason": "jako slovo ke čtení málo známé (zůstává jako obrázkové slovo k E)"
+    },
+    {
+      "text": "PAPÁ",
+      "reason": "dětská řeč, nespisovné"
+    },
+    {
+      "text": "MIMI",
+      "reason": "hovorové"
+    },
+    {
+      "text": "OPILÁ",
+      "reason": "nevhodné pro děti"
+    },
+    {
+      "text": "MAMLAS",
+      "reason": "nadávka"
+    },
+    {
+      "text": "EMA, ELA, OLA, PEPA, MILA, LEO",
+      "reason": "vlastní jména – ve v1 jen obecná slova"
+    },
+    {
+      "text": "MÍSA, LÍPA, SÍLA, PÍSEK",
+      "reason": "obsahují Í/K – Í není ve v1 samostatně probírané"
+    },
+    {
+      "text": "MALÉ",
+      "reason": "obsahuje É – není ve v1 probírané"
+    },
+    {
+      "text": "SÓLO",
+      "reason": "obsahuje Ó"
+    },
+    {
+      "text": "MÁSLO, SLEPÁ, PLUS, MOPS",
+      "reason": "souhlásková skupina"
+    },
+    {
+      "text": "SAMOPAL",
+      "reason": "zbraň – nevhodné"
+    },
+    {
+      "text": "PÁS",
+      "reason": "nejednoznačné (opasek × pás u kalhot × přechod)"
+    },
+    {
+      "text": "MOL",
+      "reason": "obrázek snadno zaměnitelný s motýlem"
+    },
+    {
+      "text": "POSEL, LIS, OPAL",
+      "reason": "abstraktní nebo málo známé"
+    },
+    {
+      "text": "SOPEL",
+      "reason": "nevhodné"
+    },
+    {
+      "text": "MÁMU, MAPU, PUSU, LUPU, PILU",
+      "reason": "tvary 4. pádu – odloženo na čtení vět (v2)"
+    }
+  ]
+}

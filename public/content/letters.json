@@ -1,0 +1,904 @@
+{
+  "schemaVersion": 1,
+  "kind": "letters",
+  "letters": [
+    {
+      "id": "l-m",
+      "upper": "M",
+      "lower": "m",
+      "kind": "consonant",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "m",
+        "ipaSustained": "mː",
+        "sustainable": true,
+        "schoolSound": "mmm",
+        "letterNameToAvoid": "em",
+        "articulation": "znělá nosovka, retná – rty jsou zavřené a zvuk jde nosem; dá se protáhnout",
+        "hintForChild": "Zavři pusu a bzuč: mmm."
+      },
+      "lessonByOrder": {
+        "duha": "duha-1",
+        "agata": "agata-3"
+      },
+      "visualConfusables": [
+        "N",
+        "W"
+      ],
+      "auditoryConfusables": [
+        "N"
+      ],
+      "shapeDistractors": [
+        "N",
+        "W",
+        "H",
+        "V",
+        "K"
+      ],
+      "audioId": "snd-l-m"
+    },
+    {
+      "id": "l-a",
+      "upper": "A",
+      "lower": "a",
+      "kind": "vowel",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "a",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "a (krátce)",
+        "letterNameToAvoid": "á",
+        "articulation": "krátká samohláska, pusa je široce otevřená; ve škole se říká krátce",
+        "hintForChild": "Otevři pusu a řekni krátce: a."
+      },
+      "lessonByOrder": {
+        "duha": "duha-2",
+        "agata": "agata-1"
+      },
+      "visualConfusables": [
+        "Á",
+        "V",
+        "H"
+      ],
+      "auditoryConfusables": [
+        "Á",
+        "E"
+      ],
+      "shapeDistractors": [
+        "V",
+        "H",
+        "K",
+        "X",
+        "N"
+      ],
+      "audioId": "snd-l-a"
+    },
+    {
+      "id": "l-aa",
+      "upper": "Á",
+      "lower": "á",
+      "kind": "vowel",
+      "isLong": true,
+      "baseLetterId": "l-a",
+      "sound": {
+        "ipa": "aː",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "á (dlouze)",
+        "letterNameToAvoid": "dlouhé á",
+        "articulation": "dlouhá samohláska; čárka nahoře znamená, že se hláska protáhne",
+        "hintForChild": "Otevři pusu a protáhni: á."
+      },
+      "lessonByOrder": {
+        "duha": "duha-2",
+        "agata": "agata-2"
+      },
+      "visualConfusables": [
+        "A"
+      ],
+      "auditoryConfusables": [
+        "A"
+      ],
+      "shapeDistractors": [
+        "A",
+        "V",
+        "H",
+        "K",
+        "N"
+      ],
+      "audioId": "snd-l-aa"
+    },
+    {
+      "id": "l-l",
+      "upper": "L",
+      "lower": "l",
+      "kind": "consonant",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "l",
+        "ipaSustained": "lː",
+        "sustainable": true,
+        "schoolSound": "lll",
+        "letterNameToAvoid": "el",
+        "articulation": "znělá boková souhláska, špička jazyka je nahoře za zuby; dá se protáhnout",
+        "hintForChild": "Dej špičku jazyka nahoru za zuby: lll."
+      },
+      "lessonByOrder": {
+        "duha": "duha-3",
+        "agata": "agata-4"
+      },
+      "visualConfusables": [
+        "I",
+        "E"
+      ],
+      "auditoryConfusables": [],
+      "shapeDistractors": [
+        "J",
+        "T",
+        "I",
+        "F",
+        "H"
+      ],
+      "audioId": "snd-l-l"
+    },
+    {
+      "id": "l-e",
+      "upper": "E",
+      "lower": "e",
+      "kind": "vowel",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "ɛ",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "e (krátce)",
+        "letterNameToAvoid": "é",
+        "articulation": "krátká samohláska, pusa pootevřená, koutky lehce do stran",
+        "hintForChild": "Řekni krátce: e."
+      },
+      "lessonByOrder": {
+        "duha": "duha-4",
+        "agata": "agata-5"
+      },
+      "visualConfusables": [
+        "F",
+        "L"
+      ],
+      "auditoryConfusables": [
+        "I",
+        "A"
+      ],
+      "shapeDistractors": [
+        "F",
+        "H",
+        "B",
+        "K",
+        "T"
+      ],
+      "audioId": "snd-l-e"
+    },
+    {
+      "id": "l-s",
+      "upper": "S",
+      "lower": "s",
+      "kind": "consonant",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "s",
+        "ipaSustained": "sː",
+        "sustainable": true,
+        "schoolSound": "sss",
+        "letterNameToAvoid": "es",
+        "articulation": "neznělá sykavka, zuby u sebe, vzduch syčí; dá se protáhnout",
+        "hintForChild": "Syč jako had: sss."
+      },
+      "lessonByOrder": {
+        "duha": "duha-5",
+        "agata": "agata-6"
+      },
+      "visualConfusables": [
+        "Z"
+      ],
+      "auditoryConfusables": [
+        "Š",
+        "Z"
+      ],
+      "shapeDistractors": [
+        "Z",
+        "G",
+        "C",
+        "B",
+        "Š"
+      ],
+      "audioId": "snd-l-s"
+    },
+    {
+      "id": "l-o",
+      "upper": "O",
+      "lower": "o",
+      "kind": "vowel",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "o",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "o (krátce)",
+        "letterNameToAvoid": "ó",
+        "articulation": "krátká samohláska, pusa do kolečka",
+        "hintForChild": "Udělej z pusy kolečko: o."
+      },
+      "lessonByOrder": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "visualConfusables": [
+        "U",
+        "Q",
+        "C"
+      ],
+      "auditoryConfusables": [
+        "U",
+        "A"
+      ],
+      "shapeDistractors": [
+        "C",
+        "Q",
+        "G",
+        "D",
+        "Ů"
+      ],
+      "audioId": "snd-l-o"
+    },
+    {
+      "id": "l-p",
+      "upper": "P",
+      "lower": "p",
+      "kind": "consonant",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "p",
+        "ipaSustained": null,
+        "sustainable": false,
+        "schoolSound": "p (krátce, bez samohlásky)",
+        "letterNameToAvoid": "pé",
+        "articulation": "neznělá retná ražená souhláska – krátké „bouchnutí“ rty; protáhnout se nedá",
+        "hintForChild": "Krátce bouchni rty: p! Neříkej „pé“."
+      },
+      "lessonByOrder": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "visualConfusables": [
+        "R",
+        "B"
+      ],
+      "auditoryConfusables": [
+        "B"
+      ],
+      "shapeDistractors": [
+        "R",
+        "B",
+        "F",
+        "D",
+        "K"
+      ],
+      "audioId": "snd-l-p"
+    },
+    {
+      "id": "l-u",
+      "upper": "U",
+      "lower": "u",
+      "kind": "vowel",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "u",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "u (krátce)",
+        "letterNameToAvoid": "ú",
+        "articulation": "krátká samohláska, rty do čumáčku",
+        "hintForChild": "Udělej čumáček: u."
+      },
+      "lessonByOrder": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "visualConfusables": [
+        "O",
+        "V",
+        "J"
+      ],
+      "auditoryConfusables": [
+        "O"
+      ],
+      "shapeDistractors": [
+        "V",
+        "J",
+        "N",
+        "H",
+        "Y"
+      ],
+      "audioId": "snd-l-u"
+    },
+    {
+      "id": "l-i",
+      "upper": "I",
+      "lower": "i",
+      "kind": "vowel",
+      "isLong": false,
+      "baseLetterId": null,
+      "sound": {
+        "ipa": "ɪ",
+        "ipaSustained": null,
+        "sustainable": true,
+        "schoolSound": "i (krátce)",
+        "letterNameToAvoid": "í",
+        "articulation": "krátká samohláska, koutky do úsměvu",
+        "hintForChild": "Usměj se a řekni krátce: i."
+      },
+      "lessonByOrder": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "visualConfusables": [
+        "L",
+        "T"
+      ],
+      "auditoryConfusables": [
+        "E"
+      ],
+      "shapeDistractors": [
+        "T",
+        "J",
+        "H",
+        "F",
+        "Y"
+      ],
+      "audioId": "snd-l-i"
+    }
+  ],
+  "pictureWords": [
+    {
+      "id": "pw-mys",
+      "letterId": "l-m",
+      "rank": 1,
+      "text": "MYŠ",
+      "textLower": "myš",
+      "gloss": "myš",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-mys",
+      "audioId": "snd-pw-mys"
+    },
+    {
+      "id": "pw-miic",
+      "letterId": "l-m",
+      "rank": 2,
+      "text": "MÍČ",
+      "textLower": "míč",
+      "gloss": "míč",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-miic",
+      "audioId": "snd-pw-miic"
+    },
+    {
+      "id": "pw-mrkev",
+      "letterId": "l-m",
+      "rank": 3,
+      "text": "MRKEV",
+      "textLower": "mrkev",
+      "gloss": "mrkev",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-mrkev",
+      "audioId": "snd-pw-mrkev"
+    },
+    {
+      "id": "pw-medved",
+      "letterId": "l-m",
+      "rank": 4,
+      "text": "MEDVĚD",
+      "textLower": "medvěd",
+      "gloss": "medvěd",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-medved",
+      "audioId": "snd-pw-medved"
+    },
+    {
+      "id": "pw-ananas",
+      "letterId": "l-a",
+      "rank": 1,
+      "text": "ANANAS",
+      "textLower": "ananas",
+      "gloss": "ananas (ovoce)",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ananas",
+      "audioId": "snd-pw-ananas"
+    },
+    {
+      "id": "pw-andel",
+      "letterId": "l-a",
+      "rank": 2,
+      "text": "ANDĚL",
+      "textLower": "anděl",
+      "gloss": "anděl (vánoční)",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-andel",
+      "audioId": "snd-pw-andel"
+    },
+    {
+      "id": "pw-akvaarium",
+      "letterId": "l-a",
+      "rank": 3,
+      "text": "AKVÁRIUM",
+      "textLower": "akvárium",
+      "gloss": "akvárium s rybičkou",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-akvaarium",
+      "audioId": "snd-pw-akvaarium"
+    },
+    {
+      "id": "pw-anteena",
+      "letterId": "l-a",
+      "rank": 4,
+      "text": "ANTÉNA",
+      "textLower": "anténa",
+      "gloss": "anténa na střeše",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-anteena",
+      "audioId": "snd-pw-anteena"
+    },
+    {
+      "id": "pw-kraava",
+      "letterId": "l-aa",
+      "rank": 1,
+      "text": "KRÁVA",
+      "textLower": "kráva",
+      "gloss": "kráva – dlouhé á uprostřed",
+      "familiarity": "high",
+      "initialSound": false,
+      "soundPosition": "medial",
+      "imageId": "img-pw-kraava",
+      "audioId": "snd-pw-kraava"
+    },
+    {
+      "id": "pw-zaaba",
+      "letterId": "l-aa",
+      "rank": 2,
+      "text": "ŽÁBA",
+      "textLower": "žába",
+      "gloss": "žába – dlouhé á uprostřed",
+      "familiarity": "high",
+      "initialSound": false,
+      "soundPosition": "medial",
+      "imageId": "img-pw-zaaba",
+      "audioId": "snd-pw-zaaba"
+    },
+    {
+      "id": "pw-vlaacek",
+      "letterId": "l-aa",
+      "rank": 3,
+      "text": "VLÁČEK",
+      "textLower": "vláček",
+      "gloss": "vláček – dlouhé á uprostřed",
+      "familiarity": "high",
+      "initialSound": false,
+      "soundPosition": "medial",
+      "imageId": "img-pw-vlaacek",
+      "audioId": "snd-pw-vlaacek"
+    },
+    {
+      "id": "pw-lev",
+      "letterId": "l-l",
+      "rank": 1,
+      "text": "LEV",
+      "textLower": "lev",
+      "gloss": "lev",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-lev",
+      "audioId": "snd-pw-lev"
+    },
+    {
+      "id": "pw-lod",
+      "letterId": "l-l",
+      "rank": 2,
+      "text": "LOĎ",
+      "textLower": "loď",
+      "gloss": "loď",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-lod",
+      "audioId": "snd-pw-lod"
+    },
+    {
+      "id": "pw-lziice",
+      "letterId": "l-l",
+      "rank": 3,
+      "text": "LŽÍCE",
+      "textLower": "lžíce",
+      "gloss": "lžíce",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-lziice",
+      "audioId": "snd-pw-lziice"
+    },
+    {
+      "id": "pw-lavicka",
+      "letterId": "l-l",
+      "rank": 4,
+      "text": "LAVIČKA",
+      "textLower": "lavička",
+      "gloss": "lavička v parku",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-lavicka",
+      "audioId": "snd-pw-lavicka"
+    },
+    {
+      "id": "pw-eskalaator",
+      "letterId": "l-e",
+      "rank": 1,
+      "text": "ESKALÁTOR",
+      "textLower": "eskalátor",
+      "gloss": "eskalátor (pohyblivé schody)",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-eskalaator",
+      "audioId": "snd-pw-eskalaator"
+    },
+    {
+      "id": "pw-elf",
+      "letterId": "l-e",
+      "rank": 2,
+      "text": "ELF",
+      "textLower": "elf",
+      "gloss": "elf, vánoční skřítek",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-elf",
+      "audioId": "snd-pw-elf"
+    },
+    {
+      "id": "pw-emu",
+      "letterId": "l-e",
+      "rank": 3,
+      "text": "EMU",
+      "textLower": "emu",
+      "gloss": "pštros emu",
+      "familiarity": "low",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-emu",
+      "audioId": "snd-pw-emu"
+    },
+    {
+      "id": "pw-sova",
+      "letterId": "l-s",
+      "rank": 1,
+      "text": "SOVA",
+      "textLower": "sova",
+      "gloss": "sova",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-sova",
+      "audioId": "snd-pw-sova"
+    },
+    {
+      "id": "pw-slon",
+      "letterId": "l-s",
+      "rank": 2,
+      "text": "SLON",
+      "textLower": "slon",
+      "gloss": "slon",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-slon",
+      "audioId": "snd-pw-slon"
+    },
+    {
+      "id": "pw-syyr",
+      "letterId": "l-s",
+      "rank": 3,
+      "text": "SÝR",
+      "textLower": "sýr",
+      "gloss": "sýr",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-syyr",
+      "audioId": "snd-pw-syyr"
+    },
+    {
+      "id": "pw-slunce",
+      "letterId": "l-s",
+      "rank": 4,
+      "text": "SLUNCE",
+      "textLower": "slunce",
+      "gloss": "slunce",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-slunce",
+      "audioId": "snd-pw-slunce"
+    },
+    {
+      "id": "pw-oko",
+      "letterId": "l-o",
+      "rank": 1,
+      "text": "OKO",
+      "textLower": "oko",
+      "gloss": "oko",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-oko",
+      "audioId": "snd-pw-oko"
+    },
+    {
+      "id": "pw-okno",
+      "letterId": "l-o",
+      "rank": 2,
+      "text": "OKNO",
+      "textLower": "okno",
+      "gloss": "okno",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-okno",
+      "audioId": "snd-pw-okno"
+    },
+    {
+      "id": "pw-ovce",
+      "letterId": "l-o",
+      "rank": 3,
+      "text": "OVCE",
+      "textLower": "ovce",
+      "gloss": "ovce",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ovce",
+      "audioId": "snd-pw-ovce"
+    },
+    {
+      "id": "pw-opice",
+      "letterId": "l-o",
+      "rank": 4,
+      "text": "OPICE",
+      "textLower": "opice",
+      "gloss": "opice",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-opice",
+      "audioId": "snd-pw-opice"
+    },
+    {
+      "id": "pw-ptaak",
+      "letterId": "l-p",
+      "rank": 1,
+      "text": "PTÁK",
+      "textLower": "pták",
+      "gloss": "pták",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ptaak",
+      "audioId": "snd-pw-ptaak"
+    },
+    {
+      "id": "pw-pavouk",
+      "letterId": "l-p",
+      "rank": 2,
+      "text": "PAVOUK",
+      "textLower": "pavouk",
+      "gloss": "pavouk",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-pavouk",
+      "audioId": "snd-pw-pavouk"
+    },
+    {
+      "id": "pw-paprika",
+      "letterId": "l-p",
+      "rank": 3,
+      "text": "PAPRIKA",
+      "textLower": "paprika",
+      "gloss": "paprika",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-paprika",
+      "audioId": "snd-pw-paprika"
+    },
+    {
+      "id": "pw-pomeranc",
+      "letterId": "l-p",
+      "rank": 4,
+      "text": "POMERANČ",
+      "textLower": "pomeranč",
+      "gloss": "pomeranč",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-pomeranc",
+      "audioId": "snd-pw-pomeranc"
+    },
+    {
+      "id": "pw-ucho",
+      "letterId": "l-u",
+      "rank": 1,
+      "text": "UCHO",
+      "textLower": "ucho",
+      "gloss": "ucho",
+      "familiarity": "high",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ucho",
+      "audioId": "snd-pw-ucho"
+    },
+    {
+      "id": "pw-ulita",
+      "letterId": "l-u",
+      "rank": 2,
+      "text": "ULITA",
+      "textLower": "ulita",
+      "gloss": "ulita šneka",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ulita",
+      "audioId": "snd-pw-ulita"
+    },
+    {
+      "id": "pw-ubrus",
+      "letterId": "l-u",
+      "rank": 3,
+      "text": "UBRUS",
+      "textLower": "ubrus",
+      "gloss": "ubrus na stole",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-ubrus",
+      "audioId": "snd-pw-ubrus"
+    },
+    {
+      "id": "pw-umyvadlo",
+      "letterId": "l-u",
+      "rank": 4,
+      "text": "UMYVADLO",
+      "textLower": "umyvadlo",
+      "gloss": "umyvadlo",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-umyvadlo",
+      "audioId": "snd-pw-umyvadlo"
+    },
+    {
+      "id": "pw-igluu",
+      "letterId": "l-i",
+      "rank": 1,
+      "text": "IGLÚ",
+      "textLower": "iglú",
+      "gloss": "iglú (sněhový domek)",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-igluu",
+      "audioId": "snd-pw-igluu"
+    },
+    {
+      "id": "pw-izolepa",
+      "letterId": "l-i",
+      "rank": 2,
+      "text": "IZOLEPA",
+      "textLower": "izolepa",
+      "gloss": "izolepa (lepicí páska)",
+      "familiarity": "medium",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-izolepa",
+      "audioId": "snd-pw-izolepa"
+    },
+    {
+      "id": "pw-inkoust",
+      "letterId": "l-i",
+      "rank": 3,
+      "text": "INKOUST",
+      "textLower": "inkoust",
+      "gloss": "lahvička inkoustu",
+      "familiarity": "low",
+      "initialSound": true,
+      "soundPosition": "initial",
+      "imageId": "img-pw-inkoust",
+      "audioId": "snd-pw-inkoust"
+    }
+  ],
+  "avoidedPictureWords": [
+    {
+      "text": "AUTO",
+      "letter": "A",
+      "reason": "začíná dvojhláskou AU [a͡ʊ], ne čistým krátkým a"
+    },
+    {
+      "text": "OUŠKO",
+      "letter": "O",
+      "reason": "začíná dvojhláskou OU"
+    },
+    {
+      "text": "ÚL",
+      "letter": "U",
+      "reason": "začíná dlouhým ú, ne krátkým u"
+    },
+    {
+      "text": "INDIÁN",
+      "letter": "I",
+      "reason": "stereotypní zobrazení – nevhodné"
+    },
+    {
+      "text": "EURO",
+      "letter": "E",
+      "reason": "začíná dvojhláskou EU"
+    },
+    {
+      "text": "LIST",
+      "letter": "L",
+      "reason": "nejednoznačné (list stromu × list papíru)"
+    },
+    {
+      "text": "PUSA",
+      "letter": "P",
+      "reason": "je mezi slovy ke čtení – obrázková slova k písmenu se s nimi nemají plést"
+    },
+    {
+      "text": "PES",
+      "letter": "P",
+      "reason": "je mezi slovy ke čtení (zavřená slabika) – nahrazeno slovem PTÁK"
+    },
+    {
+      "text": "ERB, ETIKETA, ENCIAN, EXKAVÁTOR",
+      "letter": "E",
+      "reason": "zvažováno jako náhrada za EMU – pro prvňáka méně známé nebo hůř nakreslitelné"
+    },
+    {
+      "text": "IGELITKA, INSTALATÉR, INJEKCE, IBIŠEK",
+      "letter": "I",
+      "reason": "zvažováno – hovorové / potřebuje kontext / strašidelné / málo známé"
+    }
+  ]
+}

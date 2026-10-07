@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "kind": "manifest",
+  "contentVersion": "2026-10-07.5",
+  "defaultOrderId": "duha",
+  "files": [
+    {
+      "path": "order.duha.json",
+      "kind": "order",
+      "schema": "schema/order.schema.json"
+    },
+    {
+      "path": "order.agata.json",
+      "kind": "order",
+      "schema": "schema/order.schema.json"
+    },
+    {
+      "path": "letters.json",
+      "kind": "letters",
+      "schema": "schema/letters.schema.json"
+    },
+    {
+      "path": "syllables.json",
+      "kind": "syllables",
+      "schema": "schema/syllables.schema.json"
+    },
+    {
+      "path": "words.json",
+      "kind": "words",
+      "schema": "schema/words.schema.json"
+    },
+    {
+      "path": "prompts.json",
+      "kind": "prompts",
+      "schema": "schema/prompts.schema.json"
+    },
+    {
+      "path": "image-briefs.json",
+      "kind": "imageBriefs",
+      "schema": "schema/image-briefs.schema.json"
+    },
+    {
+      "path": "audio-script.json",
+      "kind": "audioScript",
+      "schema": "schema/audio-script.schema.json"
+    },
+    {
+      "path": "audio-selection.json",
+      "kind": "audioSelection",
+      "schema": "schema/audio-selection.schema.json"
+    },
+    {
+      "path": "test-rules.json",
+      "kind": "testRules",
+      "schema": "schema/test-rules.schema.json"
+    }
+  ]
+}

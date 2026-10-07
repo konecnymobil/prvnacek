@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "kind": "order",
+  "id": "agata",
+  "title": "Čteme a píšeme s Agátou (Nová škola)",
+  "isDefault": false,
+  "verification": {
+    "status": "verified",
+    "verified": "Obsah ukázky Živé abecedy (Agáta) a časový plán v metodickém průvodci (s. 14): A (1. týden), Á (2. týden), M, L, E, S, O, P, U, I. Á je samostatná lekce.",
+    "unverified": "",
+    "sources": [
+      "https://nns.cz/agata/wp-content/uploads/1A-01-%C5%BDiv%C3%A1-abeceda-%C4%8Cteme-a-p%C3%AD%C5%A1eme-s-Ag%C3%A1tou-uk%C3%A1zka-zmen%C5%A1eno.pdf",
+      "https://nns.cz/agata/wp-content/uploads/1A-06-Metodick%C3%BD-pr%C5%AFvodce-%C4%8Cteme-a-p%C3%AD%C5%A1eme-s-Ag%C3%A1tou_web.pdf"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "agata-1",
+      "index": 1,
+      "letterIds": [
+        "l-a"
+      ],
+      "primaryLetterId": "l-a",
+      "title": "A",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-2",
+      "index": 2,
+      "letterIds": [
+        "l-aa"
+      ],
+      "primaryLetterId": "l-aa",
+      "title": "Á",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-3",
+      "index": 3,
+      "letterIds": [
+        "l-m"
+      ],
+      "primaryLetterId": "l-m",
+      "title": "M",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-4",
+      "index": 4,
+      "letterIds": [
+        "l-l"
+      ],
+      "primaryLetterId": "l-l",
+      "title": "L",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-5",
+      "index": 5,
+      "letterIds": [
+        "l-e"
+      ],
+      "primaryLetterId": "l-e",
+      "title": "E",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-6",
+      "index": 6,
+      "letterIds": [
+        "l-s"
+      ],
+      "primaryLetterId": "l-s",
+      "title": "S",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-7",
+      "index": 7,
+      "letterIds": [
+        "l-o"
+      ],
+      "primaryLetterId": "l-o",
+      "title": "O",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-8",
+      "index": 8,
+      "letterIds": [
+        "l-p"
+      ],
+      "primaryLetterId": "l-p",
+      "title": "P",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-9",
+      "index": 9,
+      "letterIds": [
+        "l-u"
+      ],
+      "primaryLetterId": "l-u",
+      "title": "U",
+      "verified": true,
+      "verificationNote": null
+    },
+    {
+      "id": "agata-10",
+      "index": 10,
+      "letterIds": [
+        "l-i"
+      ],
+      "primaryLetterId": "l-i",
+      "title": "I",
+      "verified": true,
+      "verificationNote": null
+    }
+  ]
+}
