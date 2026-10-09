@@ -28,6 +28,7 @@ export default function SoundTest({ content, persisted, go }: { content: Content
   const [elapsed, setElapsed] = useState(0);
   const [take, setTake] = useState<Blob | null>(null);
   const [takePlaying, setTakePlaying] = useState(false);
+  const [save, setSave] = useState<{ kind: 'idle' | 'saving' | 'saved' } | { kind: 'error'; msg: string }>({ kind: 'idle' });
   const [hasOwn, setHasOwn] = useState(false);
   const [online, setOnline] = useState(navigator.onLine);
   const recRef = useRef<ActiveRecording | null>(null);
@@ -66,6 +67,7 @@ export default function SoundTest({ content, persisted, go }: { content: Content
   const onRecord = async () => {
     setMicError(null);
     setTake(null);
+    setSave({ kind: 'idle' });
     stopAudio();
     unlockAudio(); // ať jde nahrávka později přehrát
     setMic('starting');
@@ -98,15 +100,35 @@ export default function SoundTest({ content, persisted, go }: { content: Content
     if (!take) return;
     unlockAudio();
     setTakePlaying(true);
+    setMicError(null);
     playBlob(take)
       .catch((e: unknown) => setMicError(`Nahrávku se nepodařilo přehrát: ${e instanceof Error ? e.message : String(e)}`))
       .finally(() => setTakePlaying(false));
   };
 
   const onSaveTake = async () => {
-    if (!take) return;
-    await saveRecording(audioId, take);
+    if (!take || save.kind === 'saving') return;
+    unlockAudio();
+    setSave({ kind: 'saving' });
+    try {
+      await saveRecording(audioId, take);
+    } catch {
+      setSave({ kind: 'error', msg: 'Nahrávku se nepodařilo uložit do iPadu. Zkus to znovu; když to nepomůže, uvolni místo v úložišti nebo vypni soukromé prohlížení.' });
+      return;
+    }
     setHasOwn(true);
+    setSave({ kind: 'saved' });
+    // hned přehrát uloženou verzi, ať je jasné, že se uložila správně
+    try {
+      const rec = await getRecording(audioId);
+      if (!rec) throw new Error('chybí');
+      setTakePlaying(true);
+      await playBlob(rec.blob);
+    } catch {
+      setSave({ kind: 'error', msg: 'Nahrávka je uložená, ale nepodařilo se ji přehrát. Zkontroluj hlasitost a přepínač ztlumení a klepni na Přehrát ukázku.' });
+    } finally {
+      setTakePlaying(false);
+    }
   };
 
   const onRestoreTts = async () => {
@@ -166,9 +188,14 @@ export default function SoundTest({ content, persisted, go }: { content: Content
                 <p className="status small">
                   Nahráno: {(take.size / 1024).toFixed(0)} kB, formát {take.type || 'neznámý'}.
                 </p>
-                <button className="kbtn" onClick={onSaveTake}>
-                  💾 Použít nahrávku místo ukázky
+                <button className="kbtn" onClick={onSaveTake} disabled={save.kind === 'saving'} data-testid="save-take">
+                  {save.kind === 'saving' ? 'Ukládám…' : '💾 Použít nahrávku místo ukázky'}
                 </button>
+                <p className="status small" aria-live="polite" data-testid="save-status">
+                  {save.kind === 'saving' && 'Ukládám…'}
+                  {save.kind === 'saved' && 'Uloženo ✓ Teď hraje uložená nahrávka.'}
+                  {save.kind === 'error' && <span className="is-error" role="alert">{save.msg}</span>}
+                </p>
               </>
             )}
             {hasOwn && (

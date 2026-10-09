@@ -47,6 +47,8 @@ function audioEl(): HTMLAudioElement {
 
 /** Zavolat synchronně v obsluze klepnutí (playAudio to dělá samo). */
 export function unlockAudio(): void {
+  const c = audioCtx();
+  if (c && c.state !== 'running') c.resume().catch(() => {});
   if (unlocked) return;
   const a = audioEl();
   a.src = silentWavUrl();
@@ -55,6 +57,12 @@ export function unlockAudio(): void {
 
 export function stopAudio(): void {
   playToken++;
+  try {
+    currentSrc?.stop();
+  } catch {
+    // už skončil
+  }
+  currentFinish?.();
   if (el) {
     el.pause();
     el.removeAttribute('src');
@@ -90,23 +98,113 @@ export async function playAudio(audioId: AudioId): Promise<AudioSource> {
   return source;
 }
 
-/** Přehraje Blob (např. právě pořízenou nahrávku). */
-export async function playBlob(blob: Blob, token = ++playToken): Promise<void> {
+/** Sdílený AudioContext (Web Audio je na iOS po nahrávání spolehlivější než <audio> s Blob URL). */
+let ctx: AudioContext | null = null;
+let currentSrc: AudioBufferSourceNode | null = null;
+let currentFinish: (() => void) | null = null;
+
+function audioCtx(): AudioContext | null {
+  if (ctx) return ctx;
+  const C = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!C) return null;
+  try {
+    ctx = new C();
+  } catch {
+    ctx = null;
+  }
+  return ctx;
+}
+
+/** iOS: po getUserMedia zůstává relace „play-and-record“ (tichý/slabý zvuk) → přepnout na „playback“. */
+function preferPlaybackSession(): void {
+  try {
+    const nav = navigator as Navigator & { audioSession?: { type: string } };
+    if (nav.audioSession) nav.audioSession.type = 'playback';
+  } catch {
+    // není podporováno
+  }
+}
+
+async function playViaWebAudio(blob: Blob, token: number): Promise<void> {
+  const c = audioCtx();
+  if (!c) throw new Error('Web Audio není k dispozici.');
+  preferPlaybackSession();
+  if (c.state !== 'running') await c.resume();
+  const data = await blob.arrayBuffer();
+  // starší Safari umí jen callback variantu decodeAudioData
+  const buffer = await new Promise<AudioBuffer>((resolve, reject) => {
+    const r = c.decodeAudioData(data, resolve, reject);
+    if (r && typeof r.then === 'function') r.then(resolve, reject);
+  });
+  if (token !== playToken) return;
+  await new Promise<void>((resolve) => {
+    const src = c.createBufferSource();
+    src.buffer = buffer;
+    src.connect(c.destination);
+    let timer = 0;
+    const finish = () => {
+      window.clearTimeout(timer);
+      src.onended = null;
+      if (currentSrc === src) currentSrc = null;
+      if (currentFinish === finish) currentFinish = null;
+      resolve();
+    };
+    currentSrc = src;
+    currentFinish = finish;
+    src.onended = finish;
+    timer = window.setTimeout(finish, buffer.duration * 1000 + 1500); // pojistka
+    src.start(0);
+  });
+}
+
+async function playViaElement(blob: Blob, token: number): Promise<void> {
   const a = audioEl();
   a.pause();
   if (currentUrl) URL.revokeObjectURL(currentUrl);
   currentUrl = URL.createObjectURL(blob);
   a.src = currentUrl;
+  preferPlaybackSession();
   await new Promise<void>((resolve, reject) => {
+    let timer = 0;
+    const cleanup = () => {
+      window.clearTimeout(timer);
+      a.removeEventListener('ended', done);
+      a.removeEventListener('error', fail);
+      a.removeEventListener('loadedmetadata', arm);
+    };
     const done = () => { cleanup(); resolve(); };
     const fail = () => { cleanup(); reject(new Error('Zvuk se nepodařilo přehrát.')); };
-    const cleanup = () => { a.removeEventListener('ended', done); a.removeEventListener('error', fail); };
+    const arm = () => {
+      window.clearTimeout(timer);
+      const d = Number.isFinite(a.duration) ? a.duration : 30;
+      timer = window.setTimeout(done, d * 1000 + 2000);
+    };
+    timer = window.setTimeout(done, 30_000);
     a.addEventListener('ended', done);
     a.addEventListener('error', fail);
+    a.addEventListener('loadedmetadata', arm);
     a.play().catch((e: unknown) => {
       cleanup();
       if (token !== playToken) resolve();
       else reject(e instanceof Error ? e : new Error(String(e)));
     });
   });
+}
+
+/**
+ * Přehraje Blob (např. právě pořízenou nahrávku). Primárně přes Web Audio, při selhání
+ * (dekódování, kontext) záložně přes <audio>. Vždy skončí (ended / chyba / časová pojistka).
+ */
+export async function playBlob(blob: Blob, token = ++playToken): Promise<void> {
+  try {
+    await playViaWebAudio(blob, token);
+    return;
+  } catch {
+    if (token !== playToken) return;
+  }
+  try {
+    await playViaElement(blob, token);
+  } catch (e) {
+    throw new Error(`${e instanceof Error ? e.message : String(e)} Zkontroluj hlasitost a přepínač ztlumení.`);
+  }
 }
