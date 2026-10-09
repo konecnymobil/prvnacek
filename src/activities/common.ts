@@ -1,6 +1,6 @@
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
-import { playAudio } from '../audio/player';
+import { playAudio, stopAudio } from '../audio/player';
 import { addAttempt, getAttempts, getLessonState, setLessonStatus } from '../storage/db';
 import radost from '../assets/mascot/kulisek-radost.svg';
 import povzbuzeni from '../assets/mascot/kulisek-povzbuzeni.svg';
@@ -37,10 +37,17 @@ export async function say(audioIds: string[]): Promise<void> {
     if (run !== sayRun) return;
     try {
       await playAudio(id);
+      if (run !== sayRun) return;
     } catch {
       /* zvuk nikdy neblokuje hru */
     }
   }
+}
+
+/** Okamžitě utne zvuk a zruší rozehranou sekvenci (přechod na další úlohu, odchod z obrazovky). */
+export function stopSay(): void {
+  sayRun++;
+  stopAudio();
 }
 
 export function promptAudio(content: Content, id: string): string[] {

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
 import Mascot from '../activities/Mascot';
-import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say } from '../activities/common';
+import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say, stopSay } from '../activities/common';
 
 /** Slabiky použitelné ve slabikových úlohách (jen usableInSyllableTasks), složené z probraných písmen. */
 export function lessonSyllables(content: Content, lesson: Lesson): Syllable[] {
@@ -34,6 +34,8 @@ export default function SyllableActivity({ content, lesson, back }: Props) {
   const [correctCount, setCorrectCount] = useState(0);
   const [failed, setFailed] = useState(false);
   const busy = useRef(false);
+
+  useEffect(() => () => stopSay(), []);
 
   useEffect(() => {
     void say([...promptAudio(content, 'p-a4-make'), target.audioId]);
@@ -78,6 +80,7 @@ export default function SyllableActivity({ content, lesson, back }: Props) {
   };
 
   const next = () => {
+    stopSay();
     if (n + 1 >= ROUND_SIZE) {
       setN(ROUND_SIZE);
       void say(promptAudio(content, 'p-round-end'));
