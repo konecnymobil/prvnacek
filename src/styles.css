@@ -236,3 +236,20 @@ a {
 .slots { display: flex; gap: var(--sp-4); }
 .slot { border-style: dashed; background: var(--c-bg-2); }
 .slot.is-filled { border-style: solid; background: var(--c-surface); }
+
+/* rodičovská část */
+.plist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
+.plist li { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
+.plist .kbtn { margin-left: auto; }
+.ptable { width: 100%; border-collapse: collapse; }
+.ptable th, .ptable td { text-align: left; padding: var(--sp-2) var(--sp-3); border-bottom: 1px solid var(--c-line); }
+.big { font-size: var(--fs-h2); font-weight: var(--font-weight-bold); }
+.gate-hold.is-holding { transform: scale(0.97); background: var(--c-success-soft); color: var(--c-ink); }
+.test-text { font-size: var(--fs-letter-hero); font-weight: var(--font-weight-bold); text-align: center; margin: var(--sp-3) 0; letter-spacing: 0.1em; }
+.test-run .rate-ok, .test-run .rate-bad { min-width: 200px; min-height: 120px; font-size: var(--fs-letter-hero); }
+.rate-ok { color: var(--c-success-ink); border-color: var(--c-success-ink); }
+.rate-bad { color: var(--c-retry); border-color: var(--c-retry); }
+.sound-grid { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.tile-wide { min-width: 140px; font-size: var(--fs-h3); }
+.sound-grid .tile { position: relative; }
+.own-dot { position: absolute; top: 4px; right: 8px; font-size: var(--fs-small); color: var(--c-record); }

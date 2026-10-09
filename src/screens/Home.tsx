@@ -15,7 +15,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
     <main className="screen home">
       <header className="topbar">
         <h1>Prvňáček</h1>
-        <p className="muted">Verze M1 – první aktivity</p>
+        <p className="muted">Verze M1 – aktivity a rodičovská část</p>
       </header>
 
       {error && (
@@ -54,6 +54,9 @@ export default function Home({ content, error, go, openLesson }: Props) {
       <nav className="actions">
         <button className="kbtn kbtn-primary" onClick={() => go('soundTest')}>
           🔊 Test zvuku a mikrofonu
+        </button>
+        <button className="kbtn" onClick={() => go('parentGate')} data-testid="open-parent">
+          🔒 Pro rodiče
         </button>
         <button className="kbtn" onClick={() => go('about')}>
           ℹ️ O aplikaci
