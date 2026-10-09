@@ -1,30 +1,21 @@
-import { useState } from 'react';
 import type { Content } from '../content/load';
-import { playAudio } from '../audio/player';
 import type { Screen } from '../App';
 
 interface Props {
   content: Content | null;
   error: string | null;
   go: (s: Screen) => void;
+  openLesson: (lessonId: string) => void;
 }
 
-export default function Home({ content, error, go }: Props) {
-  const [playing, setPlaying] = useState<string | null>(null);
+export default function Home({ content, error, go, openLesson }: Props) {
   const order = content ? content.orders[content.defaultOrderId] : null;
-
-  const play = (lessonId: string, audioId: string) => {
-    setPlaying(lessonId);
-    playAudio(audioId)
-      .catch(() => {})
-      .finally(() => setPlaying((p) => (p === lessonId ? null : p)));
-  };
 
   return (
     <main className="screen home">
       <header className="topbar">
         <h1>Prvňáček</h1>
-        <p className="muted">Verze M0 – základ aplikace</p>
+        <p className="muted">Verze M1 – první aktivity</p>
       </header>
 
       {error && (
@@ -37,15 +28,15 @@ export default function Home({ content, error, go }: Props) {
       {content && order && (
         <section className="card" data-testid="content-info">
           <h2>{order.title}</h2>
-          <p className="muted">Klepni na písmeno a poslechni si hlásku.</p>
+          <p className="muted">Vyber lekci a pojď hrát.</p>
           <div className="lesson-row" data-testid="lesson-row">
             {order.lessons.map((l) => {
               const letter = content.letterById.get(l.primaryLetterId)!;
               return (
                 <button
                   key={l.id}
-                  className={`stone${playing === l.id ? ' is-playing' : ''}`}
-                  onClick={() => play(l.id, letter.audioId)}
+                  className="stone"
+                  onClick={() => openLesson(l.id)}
                   aria-label={`Lekce ${l.index}: ${l.title}`}
                 >
                   {letter.upper}
