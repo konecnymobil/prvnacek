@@ -10,3 +10,5 @@ Obrázky Twemoji (CC BY 4.0) v milníku M0 nejsou. Při jejich převzetí doplni
 a text do obrazovky „O aplikaci“ (viz `design/handoff/HANDOFF.md` v pracovní složce Pastelky).
 
 Zvuky v `public/audio/tts/` jsou vygenerované syntetickým hlasem Microsoft Azure (`cs-CZ-VlastaNeural`) z vlastních textů projektu.
+
+Maskot Kulíšek (`src/assets/mascot/kulisek-{radost,povzbuzeni,premysli}.svg`) je vlastní dílo projektu (autorka Pastelka), bez atribuce. Twemoji se v M1 část 1 nepoužívá.

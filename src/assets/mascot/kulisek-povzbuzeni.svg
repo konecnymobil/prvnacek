@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -20 260 290" role="img" aria-label="Kulíšek povzbuzuje"><title>Kulíšek povzbuzuje</title>
+<ellipse cx="120" cy="258" rx="74" ry="9" fill="#1E2633" opacity=".08"/>
+<g transform="rotate(32 178 44)"><rect x="170" y="-6" width="17" height="74" rx="2" fill="#FFC53D"/><rect x="170" y="-6" width="5.5" height="74" fill="#F2A900"/><rect x="170" y="-16" width="17" height="12" rx="3" fill="#F49AC1"/><rect x="170" y="-6" width="17" height="6" fill="#C9CED6"/><path d="M170 68 L187 68 L178.5 90 Z" fill="#F3D2A2"/><path d="M175.2 81.5 L181.8 81.5 L178.5 90 Z" fill="#1E2633"/></g>
+<path d="M62 74 L50 26 Q74 38 92 54 Z" fill="#8A4A1E"/><path d="M178 74 L190 26 Q166 38 148 54 Z" fill="#8A4A1E"/>
+<ellipse cx="40" cy="168" rx="22" ry="52" transform="rotate(14 40 168)" fill="#8A4A1E"/><ellipse cx="210" cy="96" rx="22" ry="52" transform="rotate(40 210 96)" fill="#8A4A1E"/>
+<ellipse cx="120" cy="150" rx="90" ry="100" fill="#B8682E"/>
+<ellipse cx="120" cy="190" rx="60" ry="56" fill="#F7DDB0"/>
+<g fill="none" stroke="#E2B87C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M98 176 l6 6 l6 -6"/><path d="M130 176 l6 6 l6 -6"/><path d="M114 198 l6 6 l6 -6"/><path d="M98 218 l6 6 l6 -6"/><path d="M130 218 l6 6 l6 -6"/></g>
+<circle cx="86" cy="118" r="39" fill="#FBE9CC"/><circle cx="154" cy="118" r="39" fill="#FBE9CC"/>
+
+<circle cx="86" cy="118" r="27" fill="#fff"/><circle cx="88" cy="121" r="14" fill="#1E2633"/><circle cx="93" cy="116" r="5" fill="#fff"/><circle cx="154" cy="118" r="27" fill="#fff"/><circle cx="152" cy="121" r="14" fill="#1E2633"/><circle cx="157" cy="116" r="5" fill="#fff"/>
+
+<ellipse cx="66" cy="156" rx="11" ry="7" fill="#F29C9C" opacity=".7"/><ellipse cx="174" cy="156" rx="11" ry="7" fill="#F29C9C" opacity=".7"/>
+<path d="M107 141 Q120 134 133 141 L120 163 Z" fill="#F29A2E" stroke="#C9741A" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="96" cy="246" rx="17" ry="9" fill="#F29A2E"/><ellipse cx="144" cy="246" rx="17" ry="9" fill="#F29A2E"/>
+<path d="M236 142 Q237.44 148.56 244 150 Q237.44 151.44 236 158 Q234.56 151.44 228 150 Q234.56 148.56 236 142Z" fill="#FFC53D"/>
+</svg>

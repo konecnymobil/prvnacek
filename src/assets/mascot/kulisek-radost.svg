@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -20 260 290" role="img" aria-label="Kulíšek se raduje"><title>Kulíšek se raduje</title>
+<ellipse cx="120" cy="258" rx="74" ry="9" fill="#1E2633" opacity=".08"/>
+<g transform="rotate(32 178 44)"><rect x="170" y="-6" width="17" height="74" rx="2" fill="#FFC53D"/><rect x="170" y="-6" width="5.5" height="74" fill="#F2A900"/><rect x="170" y="-16" width="17" height="12" rx="3" fill="#F49AC1"/><rect x="170" y="-6" width="17" height="6" fill="#C9CED6"/><path d="M170 68 L187 68 L178.5 90 Z" fill="#F3D2A2"/><path d="M175.2 81.5 L181.8 81.5 L178.5 90 Z" fill="#1E2633"/></g>
+<path d="M62 74 L50 26 Q74 38 92 54 Z" fill="#8A4A1E"/><path d="M178 74 L190 26 Q166 38 148 54 Z" fill="#8A4A1E"/>
+<ellipse cx="34" cy="104" rx="22" ry="52" transform="rotate(-38 34 104)" fill="#8A4A1E"/><ellipse cx="206" cy="104" rx="22" ry="52" transform="rotate(38 206 104)" fill="#8A4A1E"/>
+<ellipse cx="120" cy="150" rx="90" ry="100" fill="#B8682E"/>
+<ellipse cx="120" cy="190" rx="60" ry="56" fill="#F7DDB0"/>
+<g fill="none" stroke="#E2B87C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M98 176 l6 6 l6 -6"/><path d="M130 176 l6 6 l6 -6"/><path d="M114 198 l6 6 l6 -6"/><path d="M98 218 l6 6 l6 -6"/><path d="M130 218 l6 6 l6 -6"/></g>
+<circle cx="86" cy="118" r="39" fill="#FBE9CC"/><circle cx="154" cy="118" r="39" fill="#FBE9CC"/>
+
+<path d="M66 124 Q86 100 106 124" fill="none" stroke="#1E2633" stroke-width="8" stroke-linecap="round"/><path d="M134 124 Q154 100 174 124" fill="none" stroke="#1E2633" stroke-width="8" stroke-linecap="round"/>
+
+<ellipse cx="66" cy="156" rx="11" ry="7" fill="#F29C9C" opacity=".7"/><ellipse cx="174" cy="156" rx="11" ry="7" fill="#F29C9C" opacity=".7"/>
+<path d="M110 150 Q120 172 130 150 Z" fill="#C2413A"/><path d="M106 140 Q120 132 134 140 L120 154 Z" fill="#F29A2E" stroke="#C9741A" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="96" cy="246" rx="17" ry="9" fill="#F29A2E"/><ellipse cx="144" cy="246" rx="17" ry="9" fill="#F29A2E"/>
+<path d="M18 28 Q20.16 37.84 30 40 Q20.16 42.16 18 52 Q15.84 42.16 6 40 Q15.84 37.84 18 28Z" fill="#FFC53D"/><path d="M222 140 Q223.8 148.2 232 150 Q223.8 151.8 222 160 Q220.2 151.8 212 150 Q220.2 148.2 222 140Z" fill="#FFC53D"/><path d="M10 152 Q11.44 158.56 18 160 Q11.44 161.44 10 168 Q8.56 161.44 2 160 Q8.56 158.56 10 152Z" fill="#FFC53D"/><path d="M214 -3 Q215.26 2.74 221 4 Q215.26 5.26 214 11 Q212.74 5.26 207 4 Q212.74 2.74 214 -3Z" fill="#FFC53D"/>
+</svg>
