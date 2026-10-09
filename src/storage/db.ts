@@ -116,6 +116,44 @@ export async function setLessonStatus(
   return state;
 }
 
+/** Schválení rodičem. Schváleno se nikdy nesnižuje; odemkne další lekci (zamčená → procvičuje). */
+export async function approveLesson(orderId: OrderId, lessonId: LessonId, nextLessonId: LessonId | null, by: 'test' | 'manual'): Promise<void> {
+  const cur = await getLessonState(orderId, lessonId);
+  if (cur?.status !== 'approved') await setLessonStatus(orderId, lessonId, 'approved', by);
+  if (nextLessonId) {
+    const nx = await getLessonState(orderId, nextLessonId);
+    if (!nx || nx.status === 'locked') await setLessonStatus(orderId, nextLessonId, 'practicing');
+  }
+}
+
+export async function getAllLessonStates(): Promise<LessonState[]> {
+  return (await getDb()).getAll('lessonStates');
+}
+
+export async function getAllAttempts(): Promise<Attempt[]> {
+  return (await getDb()).getAll('attempts');
+}
+
+export interface TestResultRecord {
+  at: number;
+  lessonId: LessonId;
+  score: number;
+  total: number;
+  newLetterErrors: number;
+  recommendApprove: boolean;
+  errors: { text: string; type: string; reason: string | null }[];
+}
+
+export async function saveTestResult(orderId: OrderId, r: TestResultRecord): Promise<void> {
+  const key = `tests:${orderId}:${r.lessonId}`;
+  const list = (await getSetting<TestResultRecord[]>(key)) ?? [];
+  await setSetting(key, [...list, r]);
+}
+
+export async function getTestResults(orderId: OrderId, lessonId: LessonId): Promise<TestResultRecord[]> {
+  return (await getSetting<TestResultRecord[]>(`tests:${orderId}:${lessonId}`)) ?? [];
+}
+
 // ---------- vlastní nahrávky rodiče ----------
 export async function saveRecording(audioId: AudioId, blob: Blob): Promise<void> {
   const data = await blob.arrayBuffer();
