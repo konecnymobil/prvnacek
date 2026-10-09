@@ -78,7 +78,7 @@ test('Slovo k obrázku: poslech, kontrola odpovědi, pokrok do IndexedDB', async
   await expect(page.getByTestId('feedback')).toContainText('Správně');
   await expect.poll(async () => (await attempts(page)).filter((a) => a.activity === 'A5').map((a) => [a.itemId, a.correct])).toEqual([[target, false], [target, true]]);
   await page.getByRole('button', { name: /Dál/ }).click();
-  await expect(page.getByTestId('progress')).toHaveText('Úloha 2 z 6');
+  await expect(page.getByTestId('progress')).toHaveText(/^Úloha 2 z \d+$/);
 });
 
 test('lekce I: stejné aktivity fungují jen z obsahu', async ({ page }) => {

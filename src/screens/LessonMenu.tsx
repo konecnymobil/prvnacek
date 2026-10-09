@@ -25,6 +25,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
   const hasSyllables = lessonSyllables(content, lesson).length > 0;
   const hasRead = allUsableSyllables(content, lesson).length >= 3;
   const hasWords = lessonPictureWords(content, lesson).length >= 2;
+  const hasReadWords = lessonPictureWords(content, lesson).length >= 3;
   const [status, setStatus] = useState<LessonStatus | null>(null);
 
   useEffect(() => {
@@ -51,6 +52,9 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         </button>
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('wordActivity')} disabled={!hasWords} data-testid="open-words">
           🖼 Slovo k obrázku
+        </button>
+        <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('readWord')} disabled={!hasReadWords} data-testid="open-readword">
+          📚 Čti slovo
         </button>
         {!hasWords && <p className="small muted">Obrázky ke slovům přijdou s dalšími lekcemi.</p>}
         {!hasSyllables && <p className="small muted">Slabiky se odemknou s další lekcí.</p>}
