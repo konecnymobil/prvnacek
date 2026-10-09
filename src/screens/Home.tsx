@@ -1,5 +1,7 @@
 import type { Content } from '../content/load';
+import { useEffect, useState } from 'react';
 import type { Screen } from '../App';
+import { getLessonStatesMap, isLessonUnlocked, type LessonState } from '../storage/db';
 
 interface Props {
   content: Content | null;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 export default function Home({ content, error, go, openLesson }: Props) {
+  const [states, setStates] = useState<Record<string, LessonState | undefined>>({});
+  const [hint, setHint] = useState<string | null>(null);
+  useEffect(() => { getLessonStatesMap().then(setStates, () => {}); }, [content]);
   const order = content ? content.orders[content.defaultOrderId] : null;
 
   return (
@@ -32,18 +37,22 @@ export default function Home({ content, error, go, openLesson }: Props) {
           <div className="lesson-row" data-testid="lesson-row">
             {order.lessons.map((l) => {
               const letter = content.letterById.get(l.primaryLetterId)!;
+              const open = isLessonUnlocked(order.lessons, l.id, states);
               return (
                 <button
                   key={l.id}
-                  className="stone"
-                  onClick={() => openLesson(l.id)}
-                  aria-label={`Lekce ${l.index}: ${l.title}`}
+                  className={`stone${open ? '' : ' is-locked'}`}
+                  data-locked={open ? 'false' : 'true'}
+                  aria-disabled={!open}
+                  onClick={() => (open ? openLesson(l.id) : setHint(`Lekce ${l.title} se otevře, až ji s rodičem dokončíš. Zatím si zahraj ty předchozí.`))}
+                  aria-label={`Lekce ${l.index}: ${l.title}${open ? '' : ' (zamčeno)'}`}
                 >
                   {letter.upper}
                 </button>
               );
             })}
           </div>
+          {hint && <p className="notice" role="status" data-testid="lock-hint">🔒 {hint}</p>}
           <p className="small muted" data-testid="content-version">
             Obsah {content.version} · {content.letters.length} písmen · {content.taskSyllables.length} slabik do úloh · {content.words.length} slov ·{' '}
             {content.prompts.length} pokynů

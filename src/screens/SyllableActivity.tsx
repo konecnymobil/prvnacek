@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
 import Mascot from '../activities/Mascot';
-import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say, stopSay } from '../activities/common';
+import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, pickPriority, usePriorityIds } from '../activities/common';
 
 /** Slabiky použitelné ve slabikových úlohách (jen usableInSyllableTasks), složené z probraných písmen. */
 export function lessonSyllables(content: Content, lesson: Lesson): Syllable[] {
@@ -19,13 +19,25 @@ interface Props {
 }
 
 /** A4 – „Skládání slabiky“: přisuň souhlásku a samohlásku, ať vznikne slabika, kterou dítě slyší. */
-export default function SyllableActivity({ content, lesson, back }: Props) {
-  const candidates = useMemo(() => lessonSyllables(content, lesson), [content, lesson]);
+export default function SyllableActivity(props: Props) {
+  const priority = usePriorityIds(props.content, props.lesson);
+  if (!priority) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
+  return <SyllableRound {...props} priority={priority} />;
+}
+
+function SyllableRound({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
+  const candidates = useMemo(() => {
+    const base = lessonSyllables(content, lesson);
+    // slabiky, které se ve zkoušce nepovedly, se vrací do procvičování (jen z probraných písmen)
+    const known = new Set(learnedLetters(content, lesson).map((l) => l.id));
+    const extra = content.taskSyllables.filter((s) => priority.has(s.id) && !base.some((b) => b.id === s.id) && s.letterIds.every((id) => known.has(id)));
+    return [...base, ...extra];
+  }, [content, lesson, priority]);
   const letters = useMemo(() => learnedLetters(content, lesson), [content, lesson]);
   const consonants = useMemo(() => letters.filter((l) => l.kind === 'consonant'), [letters]);
   const vowels = useMemo(() => letters.filter((l) => l.kind === 'vowel'), [letters]);
   const [n, setN] = useState(0);
-  const [target, setTarget] = useState<Syllable>(() => pick(candidates));
+  const [target, setTarget] = useState<Syllable>(() => pickPriority(candidates, priority, true));
   const [slots, setSlots] = useState<(Letter | null)[]>([null, null]);
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [solved, setSolved] = useState(false);
@@ -88,7 +100,7 @@ export default function SyllableActivity({ content, lesson, back }: Props) {
     }
     const others = candidates.filter((s) => s.id !== target.id);
     setN(n + 1);
-    setTarget(pick(others.length ? others : candidates));
+    setTarget(pickPriority(others.length ? others : candidates, priority, false));
     setSlots([null, null]);
     setSolved(false);
     setFailed(false);

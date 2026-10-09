@@ -10,11 +10,12 @@ import SyllableActivity from './screens/SyllableActivity';
 import ParentGate from './screens/ParentGate';
 import ParentHome from './screens/ParentHome';
 import ParentTest from './screens/ParentTest';
+import WordActivity from './screens/WordActivity';
 import Sounds from './screens/Sounds';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'wordActivity' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
@@ -37,6 +38,7 @@ export default function App() {
       {lesson && content && screen === 'lesson' && <LessonMenu content={content} lesson={lesson} go={setScreen} />}
       {lesson && content && screen === 'letterActivity' && <LetterActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {lesson && content && screen === 'syllableActivity' && <SyllableActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
+      {lesson && content && screen === 'wordActivity' && <WordActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {screen === 'parentGate' && <ParentGate go={setScreen} onPass={() => setScreen('parent')} />}
       {content && screen === 'parent' && <ParentHome content={content} go={setScreen} startTest={(id) => { setLessonId(id); setScreen('parentTest'); }} />}
       {lesson && content && screen === 'parentTest' && <ParentTest content={content} lesson={lesson} go={setScreen} />}

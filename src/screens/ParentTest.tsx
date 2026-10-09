@@ -56,7 +56,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
     try {
       await saveTestResult(orderId, {
         at: Date.now(), lessonId: lesson.id, ...evalRes,
-        errors: results.flatMap((r, i) => (r.correct ? [] : [{ text: items[i].text, type: items[i].type, reason: r.reason }])),
+        errors: results.flatMap((r, i) => (r.correct ? [] : [{ text: items[i].text, type: items[i].type, reason: r.reason, refId: items[i].refId, reviewKind: items[i].reviewKind }])),
       });
       setSaved(true);
     } catch {
