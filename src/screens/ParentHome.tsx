@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Screen } from '../App';
-import { getAllAttempts, getAllLessonStates, getTestResults, type Attempt, type LessonState, type LessonStatus, type TestResultRecord } from '../storage/db';
+import { isLessonUnlocked, unlockLesson, getAllAttempts, getAllLessonStates, getTestResults, type Attempt, type LessonState, type LessonStatus, type TestResultRecord } from '../storage/db';
 
 const STATUS: Record<LessonStatus, string> = {
   locked: 'zamčeno',
@@ -23,7 +23,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
   const [tests, setTests] = useState<Record<string, TestResultRecord | undefined>>({});
   const [err, setErr] = useState<string | null>(null);
 
-  useEffect(() => {
+  const load = () => {
     (async () => {
       setAttempts(await getAllAttempts());
       const st: Record<string, LessonState> = {};
@@ -33,7 +33,8 @@ export default function ParentHome({ content, go, startTest }: Props) {
       for (const l of order.lessons) t[l.id] = (await getTestResults(content.defaultOrderId, l.id)).at(-1);
       setTests(t);
     })().catch(() => setErr('Pokrok se nepodařilo načíst z úložiště iPadu.'));
-  }, [content, order]);
+  };
+  useEffect(load, [content, order]);
 
   const rows = order.lessons.flatMap((l) => l.letterIds.map((id) => ({ lesson: l, letter: content.letterById.get(id)! })));
 
@@ -57,8 +58,11 @@ export default function ParentHome({ content, go, startTest }: Props) {
             return (
               <li key={l.id} data-lesson={l.id} data-status={st ?? 'none'}>
                 <strong>Lekce {l.index}: {l.title}</strong>
-                <span className="muted"> – {st ? STATUS[st] : 'zatím nezačato'}</span>
+                <span className="muted"> – {!isLessonUnlocked(order.lessons, l.id, states) ? '🔒 zamčeno (odemkne se schválením předchozí lekce)' : st ? STATUS[st] : 'zatím nezačato'}</span>
                 {last && <span className="small muted"> · poslední zkouška {last.score}/{last.total}</span>}
+                {!isLessonUnlocked(order.lessons, l.id, states) && (
+                  <button className="kbtn" data-testid={`unlock-${l.id}`} onClick={() => unlockLesson(content.defaultOrderId, l.id).then(load, () => setErr('Odemknutí se nepodařilo uložit.'))}>🔓 Odemknout lekci</button>
+                )}
                 <button className="kbtn" onClick={() => startTest(l.id)} data-testid={`start-test-${l.id}`}>Spustit zkoušku</button>
               </li>
             );

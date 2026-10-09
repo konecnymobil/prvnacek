@@ -141,7 +141,7 @@ export interface TestResultRecord {
   total: number;
   newLetterErrors: number;
   recommendApprove: boolean;
-  errors: { text: string; type: string; reason: string | null }[];
+  errors: { text: string; type: string; reason: string | null; refId?: string | null; reviewKind?: string | null }[];
 }
 
 export async function saveTestResult(orderId: OrderId, r: TestResultRecord): Promise<void> {
@@ -192,4 +192,26 @@ export async function requestPersistentStorage(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+// ---------- zamykání lekcí ----------
+/** Lekce je otevřená, když je první, když rodič schválil předchozí, nebo když ji rodič odemkl ručně (stav není „locked“). */
+export function isLessonUnlocked(lessons: { id: LessonId }[], lessonId: LessonId, states: Record<LessonId, LessonState | undefined>): boolean {
+  const i = lessons.findIndex((l) => l.id === lessonId);
+  if (i <= 0) return true;
+  const own = states[lessonId]?.status;
+  if (own && own !== 'locked') return true;
+  return states[lessons[i - 1].id]?.status === 'approved';
+}
+
+export async function getLessonStatesMap(): Promise<Record<LessonId, LessonState | undefined>> {
+  const m: Record<LessonId, LessonState | undefined> = {};
+  for (const s of await getAllLessonStates()) m[s.lessonId] = s;
+  return m;
+}
+
+/** Ruční odemknutí rodičem (zamčená → procvičuje se). */
+export async function unlockLesson(orderId: OrderId, lessonId: LessonId): Promise<void> {
+  const cur = await getLessonState(orderId, lessonId);
+  if (!cur || cur.status === 'locked') await setLessonStatus(orderId, lessonId, 'practicing');
 }

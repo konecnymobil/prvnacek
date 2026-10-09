@@ -3,6 +3,7 @@ import type { Content } from '../content/load';
 import type { Lesson } from '../content/types';
 import type { Screen } from '../App';
 import { say } from '../activities/common';
+import { lessonPictureWords } from './WordActivity';
 import { lessonSyllables } from './SyllableActivity';
 import { getLessonState, type LessonStatus } from '../storage/db';
 
@@ -22,6 +23,7 @@ interface Props {
 export default function LessonMenu({ content, lesson, go }: Props) {
   const letter = content.letterById.get(lesson.primaryLetterId)!;
   const hasSyllables = lessonSyllables(content, lesson).length > 0;
+  const hasWords = lessonPictureWords(content, lesson).length >= 2;
   const [status, setStatus] = useState<LessonStatus | null>(null);
 
   useEffect(() => {
@@ -43,6 +45,10 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('syllableActivity')} disabled={!hasSyllables}>
           🧩 Slož slabiku
         </button>
+        <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('wordActivity')} disabled={!hasWords} data-testid="open-words">
+          🖼 Slovo k obrázku
+        </button>
+        {!hasWords && <p className="small muted">Obrázky ke slovům přijdou s dalšími lekcemi.</p>}
         {!hasSyllables && <p className="small muted">Slabiky se odemknou s další lekcí.</p>}
       </nav>
     </main>

@@ -2,17 +2,20 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import Mascot from '../activities/Mascot';
-import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle } from '../activities/common';
+import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle, pickPriority, usePriorityIds } from '../activities/common';
 
 interface Task {
   target: Letter;
   choices: Letter[];
 }
 
-function makeTask(content: Content, lesson: Lesson, prev: string | null): Task {
+function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
   const learned = learnedLetters(content, lesson);
   const targets = lesson.letterIds.map((id) => content.letterById.get(id)!).filter((l) => l.id !== prev || lesson.letterIds.length === 1);
-  const target = pick(targets.length ? targets : learned);
+  // k písmenům lekce se přidají písmena, která dítěti ve zkoušce nešla (i z dřívějších lekcí)
+  const extra = learned.filter((l) => priority.has(l.id) && !targets.some((t) => t.id === l.id) && l.id !== prev);
+  const all = targets.length ? [...targets, ...extra] : learned;
+  const target = pickPriority(all, priority, first);
   // Á a A si dítě zatím nespletlo záměrně: krátké a dlouhé nedáváme vedle sebe jako nabídku.
   const confusable = (l: Letter) => l.baseLetterId === target.id || target.baseLetterId === l.id;
   let pool = learned.filter((l) => l.id !== target.id && !confusable(l));
@@ -33,9 +36,15 @@ interface Props {
 }
 
 /** A2 – „Poslechni si hlásku a najdi písmeno“. */
-export default function LetterActivity({ content, lesson, back }: Props) {
+export default function LetterActivity(props: Props) {
+  const priority = usePriorityIds(props.content, props.lesson);
+  if (!priority) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
+  return <LetterRound {...props} priority={priority} />;
+}
+
+function LetterRound({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
   const [n, setN] = useState(0);
-  const [task, setTask] = useState<Task>(() => makeTask(content, lesson, null));
+  const [task, setTask] = useState<Task>(() => makeTask(content, lesson, null, priority, true));
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [solved, setSolved] = useState(false);
   const [wrong, setWrong] = useState<string[]>([]);
@@ -86,7 +95,7 @@ export default function LetterActivity({ content, lesson, back }: Props) {
       return;
     }
     setN(n + 1);
-    setTask(makeTask(content, lesson, task.target.id));
+    setTask(makeTask(content, lesson, task.target.id, priority, false));
     setSolved(false);
     setWrong([]);
     setMood('premysli');

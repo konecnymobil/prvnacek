@@ -1,9 +1,10 @@
 import { expect, test, type Page } from '@playwright/test';
+import { unlockAll } from './helpers';
 
 test.use({ serviceWorkers: 'block' });
 
 async function openLesson(page: Page, letter: string) {
-  await page.goto('./');
+  await unlockAll(page);
   await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: new RegExp(`^${letter}$`) }).click();
   await expect(page.getByTestId('lesson-menu')).toBeVisible();
 }
@@ -59,7 +60,7 @@ test('A2: špatná odpověď povzbudí a nic netrestá, správná pochválí; po
     ['A2', 'l-e', false],
     ['A2', 'l-e', true],
   ]);
-  expect(await lessonStatus(page)).toEqual(['practicing']);
+  expect((await lessonStatus(page)).every((s) => s === 'practicing')).toBe(true);
   expect(page.url()).toBe(url); // URL se nemění
 });
 

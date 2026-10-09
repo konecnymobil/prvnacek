@@ -6,9 +6,10 @@
 
 Reserved Font Names „Andika“ a „SIL“: písmo se nesmí upravovat (subset, převod) pod tímto názvem.
 
-Obrázky Twemoji (CC BY 4.0) v milníku M0 nejsou. Při jejich převzetí doplnit sem záznam, `LICENSE-GRAPHICS.txt`
-a text do obrazovky „O aplikaci“ (viz `design/handoff/HANDOFF.md` v pracovní složce Pastelky).
+| Obrázky **Twemoji v17.0.3** (6 SVG: 1f999 LAMA, 1f969 MASO, 1f50d LUPA, 1fa9a PILA, 1f5fa MAPA, 1facf OSEL) | `src/assets/img/*.svg` | © 2014–2021 Twitter, Inc.; © 2022–dosud Jason Sofonia, Justine De Caires a přispěvatelé (https://github.com/jdecked/twemoji) | CC BY 4.0 – https://creativecommons.org/licenses/by/4.0/ (`LICENSE-GRAPHICS.txt`, v aplikaci `licenses/LICENSE-GRAPHICS.txt`) | žádné |
+
+Vlastní obrázky slov `sele.svg`, `mama.svg`, `pole.svg` (autorka Pastelka) jsou pod licencí projektu. Atribuce Twemoji je také na obrazovce „O aplikaci“.
 
 Zvuky v `public/audio/tts/` jsou vygenerované syntetickým hlasem Microsoft Azure (`cs-CZ-VlastaNeural`) z vlastních textů projektu.
 
-Maskot Kulíšek (`src/assets/mascot/kulisek-{radost,povzbuzeni,premysli}.svg`) je vlastní dílo projektu (autorka Pastelka), bez atribuce. Twemoji se v M1 část 1 nepoužívá.
+Maskot Kulíšek (`src/assets/mascot/kulisek-{radost,povzbuzeni,premysli}.svg`) je vlastní dílo projektu (autorka Pastelka), bez atribuce.
