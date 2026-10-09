@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import BackupPanel from './BackupPanel';
 import type { Content } from '../content/load';
 import type { Screen } from '../App';
 import { isLessonUnlocked, unlockLesson, getAllAttempts, getAllLessonStates, getTestResults, type Attempt, type LessonState, type LessonStatus, type TestResultRecord } from '../storage/db';
@@ -37,6 +38,20 @@ export default function ParentHome({ content, go, startTest }: Props) {
   useEffect(load, [content, order]);
 
   const rows = order.lessons.flatMap((l) => l.letterIds.map((id) => ({ lesson: l, letter: content.letterById.get(id)! })));
+  const letterIdsOf = (a: Attempt): string[] =>
+    a.activity === 'A2' ? [a.itemId] : a.activity === 'A4' ? (content.syllableById.get(a.itemId)?.letterIds ?? []) : a.activity === 'A5' ? (content.wordById.get(a.itemId)?.letterIds ?? []) : [];
+  /** Záměna písmene: A2 = zvolené písmeno; A4 = písmeno zvolené slabiky, které v cílové není. */
+  const confusedWith = (a: Attempt, letterId: string): string | null => {
+    if (a.correct || !a.chosenId) return null;
+    if (a.activity === 'A2') return a.chosenId;
+    if (a.activity === 'A4') {
+      const t = content.syllableById.get(a.itemId)?.letterIds ?? [];
+      const c = content.syllableById.get(a.chosenId)?.letterIds ?? [];
+      if (c.includes(letterId)) return null;
+      return c.find((x) => !t.includes(x)) ?? null;
+    }
+    return null;
+  };
 
   return (
     <main className="screen parent" data-testid="parent-home">
@@ -72,21 +87,24 @@ export default function ParentHome({ content, go, startTest }: Props) {
 
       <section className="card">
         <h2>Pokrok po písmenech</h2>
-        <p className="small muted">Správně / pokusů v aktivitě „Najdi písmeno“ a nejčastější záměna.</p>
+        <p className="small muted">Správně / pokusů v aktivitách „Najdi písmeno“, „Slož slabiku“ a „Slovo k obrázku“ (slabiky a slova se počítají každému písmenu, které obsahují) a nejčastější záměna.</p>
         <table className="ptable" data-testid="letter-progress">
-          <thead><tr><th>Písmeno</th><th>Lekce</th><th>Správně</th><th>Mate se s</th></tr></thead>
+          <thead><tr><th>Písmeno</th><th>Lekce</th><th>Najdi písmeno</th><th>Slabiky</th><th>Slova</th><th>Celkem</th><th>Mate se s</th></tr></thead>
           <tbody>
             {rows.map(({ lesson, letter }) => {
-              const mine = attempts.filter((a) => a.itemId === letter.id && a.activity === 'A2');
-              const ok = mine.filter((a) => a.correct).length;
+              const mine = attempts.filter((a) => letterIdsOf(a).includes(letter.id));
+              const fmt = (act: string) => { const m = mine.filter((a) => a.activity === act); return m.length ? `${m.filter((a) => a.correct).length} / ${m.length}` : '–'; };
               const conf = new Map<string, number>();
-              for (const a of mine) if (!a.correct && a.chosenId) conf.set(a.chosenId, (conf.get(a.chosenId) ?? 0) + 1);
+              for (const a of mine) { const c = confusedWith(a, letter.id); if (c) conf.set(c, (conf.get(c) ?? 0) + 1); }
               const top = [...conf.entries()].sort((x, y) => y[1] - x[1])[0];
               return (
                 <tr key={letter.id} data-letter={letter.id}>
                   <td className="big">{letter.upper}{letter.lower}</td>
                   <td>{lesson.index}</td>
-                  <td>{mine.length ? `${ok} / ${mine.length}` : '–'}</td>
+                  <td data-col="A2">{fmt('A2')}</td>
+                  <td data-col="A4">{fmt('A4')}</td>
+                  <td data-col="A5">{fmt('A5')}</td>
+                  <td data-col="all">{mine.length ? `${mine.filter((a) => a.correct).length} / ${mine.length}` : '–'}</td>
                   <td>{top ? (content.letterById.get(top[0])?.upper ?? top[0]) : '–'}</td>
                 </tr>
               );
@@ -94,6 +112,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
           </tbody>
         </table>
       </section>
+      <BackupPanel onRestored={load} />
     </main>
   );
 }
