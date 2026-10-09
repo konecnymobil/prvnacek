@@ -57,6 +57,11 @@ export function unlockAudio(): void {
 
 export function stopAudio(): void {
   playToken++;
+  haltCurrent();
+}
+
+/** Zastaví právě hrající zvuk (Web Audio i <audio>), token nemění. */
+function haltCurrent(): void {
   try {
     currentSrc?.stop();
   } catch {
@@ -90,8 +95,9 @@ export async function resolveAudio(audioId: AudioId): Promise<{ blob: Blob; sour
 
 /** Přehraje zvuk. Volat přímo z obsluhy klepnutí. Resolves po skončení přehrávání. */
 export async function playAudio(audioId: AudioId): Promise<AudioSource> {
+  stopAudio(); // nový zvuk vždy utne předchozí (a zneplatní čekající přehrávání)
   unlockAudio(); // synchronně, ještě v rámci gesta
-  const token = ++playToken;
+  const token = playToken;
   const { blob, source } = await resolveAudio(audioId);
   if (token !== playToken) return source; // mezitím spuštěn jiný zvuk
   await playBlob(blob, token);
@@ -137,6 +143,7 @@ async function playViaWebAudio(blob: Blob, token: number): Promise<void> {
     if (r && typeof r.then === 'function') r.then(resolve, reject);
   });
   if (token !== playToken) return;
+  haltCurrent();
   await new Promise<void>((resolve) => {
     const src = c.createBufferSource();
     src.buffer = buffer;
@@ -158,6 +165,8 @@ async function playViaWebAudio(blob: Blob, token: number): Promise<void> {
 }
 
 async function playViaElement(blob: Blob, token: number): Promise<void> {
+  if (token !== playToken) return;
+  haltCurrent();
   const a = audioEl();
   a.pause();
   if (currentUrl) URL.revokeObjectURL(currentUrl);
@@ -195,7 +204,11 @@ async function playViaElement(blob: Blob, token: number): Promise<void> {
  * Přehraje Blob (např. právě pořízenou nahrávku). Primárně přes Web Audio, při selhání
  * (dekódování, kontext) záložně přes <audio>. Vždy skončí (ended / chyba / časová pojistka).
  */
-export async function playBlob(blob: Blob, token = ++playToken): Promise<void> {
+export async function playBlob(blob: Blob, token?: number): Promise<void> {
+  if (token === undefined) {
+    stopAudio();
+    token = playToken;
+  }
   try {
     await playViaWebAudio(blob, token);
     return;

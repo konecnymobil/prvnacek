@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import Mascot from '../activities/Mascot';
-import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say, shuffle } from '../activities/common';
+import { ROUND_SIZE, learnedLetters, pick, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle } from '../activities/common';
 
 interface Task {
   target: Letter;
@@ -46,6 +46,8 @@ export default function LetterActivity({ content, lesson, back }: Props) {
 
   const hear = useCallback(() => void say([task.target.audioId]), [task]);
 
+  useEffect(() => () => stopSay(), []);
+
   useEffect(() => {
     void say([...promptAudio(content, 'p-a2'), task.target.audioId]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,6 +79,7 @@ export default function LetterActivity({ content, lesson, back }: Props) {
   };
 
   const next = () => {
+    stopSay();
     if (n + 1 >= ROUND_SIZE) {
       setN(ROUND_SIZE);
       void say(promptAudio(content, 'p-round-end'));
