@@ -7,6 +7,7 @@ import About from './screens/About';
 import LessonMenu from './screens/LessonMenu';
 import LetterActivity from './screens/LetterActivity';
 import ReadSyllable from './screens/ReadSyllable';
+import ReadWord from './screens/ReadWord';
 import SyllableActivity from './screens/SyllableActivity';
 import ParentGate from './screens/ParentGate';
 import ParentHome from './screens/ParentHome';
@@ -16,7 +17,7 @@ import Sounds from './screens/Sounds';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'wordActivity' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'wordActivity' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
@@ -40,6 +41,7 @@ export default function App() {
       {lesson && content && screen === 'letterActivity' && <LetterActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {lesson && content && screen === 'syllableActivity' && <SyllableActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {lesson && content && screen === 'readSyllable' && <ReadSyllable content={content} lesson={lesson} back={() => setScreen('lesson')} />}
+      {lesson && content && screen === 'readWord' && <ReadWord content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {lesson && content && screen === 'wordActivity' && <WordActivity content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {screen === 'parentGate' && <ParentGate go={setScreen} onPass={() => setScreen('parent')} />}
       {content && screen === 'parent' && <ParentHome content={content} go={setScreen} startTest={(id) => { setLessonId(id); setScreen('parentTest'); }} />}

@@ -3,7 +3,8 @@ import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
 import { wordImageUrl } from '../content/images';
-import { ROUND_SIZE, learnedLetters, pickPriority, promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
+import { learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, usePriorityIds } from '../activities/common';
+import { buildWordQueue, pickChoices } from '../activities/wordQueue';
 
 /** Slova s obrázkem složená jen z probraných písmen. */
 export function lessonPictureWords(content: Content, lesson: Lesson): Word[] {
@@ -19,21 +20,17 @@ export default function WordActivity(props: Props) {
   return <WordRound {...props} priority={priority} />;
 }
 
-function makeTask(all: Word[], lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean) {
-  // přednost mají slova s novým písmenem lekce a slova ze zkoušky
-  const fresh = all.filter((w) => w.letterIds.some((id) => lesson.letterIds.includes(id)));
-  const pool = (fresh.length ? fresh : all).filter((w) => w.id !== prev);
-  const withPri = [...pool, ...all.filter((w) => priority.has(w.id) && !pool.includes(w) && w.id !== prev)];
-  const target = pickPriority(withPri.length ? withPri : all, priority, first);
-  const others = shuffle(all.filter((w) => w.id !== target.id)).slice(0, 2);
-  return { target, choices: shuffle([target, ...others]) };
-}
-
 /** A5 – „Přiřaď slovo k obrázku“: dítě slyší slovo a klepne na správný obrázek. */
 function WordRound({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
   const all = useMemo(() => lessonPictureWords(content, lesson), [content, lesson]);
+  const [queue, setQueue] = useState<Word[]>(() => buildWordQueue(all, lesson, priority));
   const [n, setN] = useState(0);
-  const [task, setTask] = useState(() => makeTask(all, lesson, null, priority, true));
+  const target = queue[Math.min(n, queue.length - 1)];
+  const choices = useMemo(() => pickChoices(all, target), [all, target, n]); // eslint-disable-line react-hooks/exhaustive-deps
+  const task = { target, choices };
+  const total = queue.length;
+  const [requeued, setRequeued] = useState<string[]>([]);
+  const [roundKey, setRoundKey] = useState(0);
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [solved, setSolved] = useState(false);
   const [wrong, setWrong] = useState<string[]>([]);
@@ -46,7 +43,7 @@ function WordRound({ content, lesson, back, priority }: Props & { priority: Set<
   useEffect(() => {
     void say([...promptAudio(content, 'p-find-picture'), task.target.audioId]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [task]);
+  }, [n, roundKey]);
 
   const choose = async (w: Word) => {
     if (solved || busy.current || wrong.includes(w.id)) return;
@@ -67,21 +64,28 @@ function WordRound({ content, lesson, back, priority }: Props & { priority: Set<
       void say([task.target.audioId, ...randomPrompt(content, 'p-praise-')]);
     } else {
       setWrong((x) => [...x, w.id]);
+      // chybné slovo se na konci kola zopakuje (jednou)
+      if (!requeued.includes(task.target.id)) { setRequeued((r) => [...r, task.target.id]); setQueue((q) => [...q, task.target]); }
       setMood('povzbuzeni');
       setMessage('Skoro! Poslechni si to ještě jednou a zkus to znovu.');
       void say([...randomPrompt(content, 'p-retry-'), task.target.audioId]);
     }
   };
 
+  const again = () => {
+    stopSay();
+    setQueue(buildWordQueue(all, lesson, priority)); setN(0); setRequeued([]); setCorrectCount(0);
+    setSolved(false); setWrong([]); setMood('premysli'); setMessage('Poslechni si slovo a najdi obrázek.'); setRoundKey((k) => k + 1);
+  };
+
   const next = () => {
     stopSay();
-    if (n + 1 >= ROUND_SIZE) {
-      setN(ROUND_SIZE);
+    if (n + 1 >= total) {
+      setN(total);
       void say(promptAudio(content, 'p-round-end'));
       return;
     }
     setN(n + 1);
-    setTask(makeTask(all, lesson, task.target.id, priority, false));
     setSolved(false);
     setWrong([]);
     setMood('premysli');
@@ -97,22 +101,22 @@ function WordRound({ content, lesson, back, priority }: Props & { priority: Set<
     );
   }
 
-  if (n >= ROUND_SIZE) {
+  if (n >= total) {
     return (
       <main className="screen activity" data-testid="round-end">
         <Mascot mood="radost" />
         <h1>Hotovo! To bylo skvělé hraní.</h1>
-        <p className="muted">Napoprvé správně: {correctCount} z {ROUND_SIZE}</p>
-        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button></div>
+        <p className="muted">Napoprvé správně: {correctCount} z {total - requeued.length}</p>
+        <div className="actions"><button className="kbtn kbtn-xl" data-testid="again" onClick={again}>Hrát znovu</button><button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button></div>
       </main>
     );
   }
 
   return (
-    <main className="screen activity" data-testid="word-activity" data-target={task.target.id}>
+    <main className="screen activity" data-testid="word-activity" data-total={total} data-target={task.target.id}>
       <header className="topbar row">
         <button className="kbtn" onClick={back}>Zpět</button>
-        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
+        <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
       </header>
       <div className="stage">
         <Mascot mood={mood} />
