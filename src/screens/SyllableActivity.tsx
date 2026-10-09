@@ -12,6 +12,12 @@ export function lessonSyllables(content: Content, lesson: Lesson): Syllable[] {
   return fresh.length ? fresh : all;
 }
 
+/** Všechny otevřené slabiky použitelné ve slabikových úlohách z probraných písmen (pro volbu a distraktory). */
+export function allUsableSyllables(content: Content, lesson: Lesson): Syllable[] {
+  const known = new Set(learnedLetters(content, lesson).map((l) => l.id));
+  return content.taskSyllables.filter((s) => s.letterIds.every((id) => known.has(id)));
+}
+
 interface Props {
   content: Content;
   lesson: Lesson;
