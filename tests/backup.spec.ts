@@ -27,6 +27,8 @@ async function seed(page: Page) {
     att('A4', 's-ma', 's-ma', true);
     att('A4', 's-ma', 's-la', false);
     att('A5', 'w-maama', 'w-maama', true);
+    att('A6', 's-ma', 's-ma', true);
+    att('A6', 's-ma', 's-maa', false);
     tx.objectStore('recordings').put({ audioId: 'snd-l-m', data: new Uint8Array([1, 2, 3, 250, 251]).buffer, mimeType: 'audio/mpeg', createdAt: 1 });
     tx.objectStore('settings').put([{ at: 1, lessonId: 'duha-1', score: 5, total: 6 }], 'tests:duha:duha-1');
     await new Promise((r) => { tx.oncomplete = r; });
@@ -64,7 +66,8 @@ test('tabulka počítá A2, A4 slabiky i A5 slova', async ({ page }) => {
   await expect(row.locator('[data-col="A2"]')).toHaveText('0 / 1');
   await expect(row.locator('[data-col="A4"]')).toHaveText('1 / 2');
   await expect(row.locator('[data-col="A5"]')).toHaveText('1 / 1');
-  await expect(row.locator('[data-col="all"]')).toHaveText('2 / 4');
+  await expect(row.locator('[data-col="A6"]')).toHaveText('1 / 2');
+  await expect(row.locator('[data-col="all"]')).toHaveText('3 / 6');
 });
 
 test('záloha: export → smazání → import včetně nahrávky, s potvrzením', async ({ page }, info) => {
@@ -81,7 +84,7 @@ test('záloha: export → smazání → import včetně nahrávky, s potvrzením
   expect((await counts(page)).attempts).toBe(0);
 
   await page.getByTestId('backup-file').setInputFiles(path);
-  await expect(page.getByTestId('import-confirm')).toContainText('4 pokusů');
+  await expect(page.getByTestId('import-confirm')).toContainText('6 pokusů');
   await expect(page.getByTestId('import-confirm')).toContainText('1 nahrávek');
   expect((await counts(page)).attempts).toBe(0); // dokud nepotvrdím, nic se nepřepíše
   await page.getByTestId('import-confirm-yes').click();
@@ -106,7 +109,7 @@ test('import: zrušení a neplatné soubory', async ({ page }, info) => {
   await page.getByTestId('backup-file').setInputFiles(bad);
   await page.getByTestId('import-confirm-no').click();
   await expect(page.getByTestId('import-confirm')).toHaveCount(0);
-  expect((await counts(page)).attempts).toBe(4);
+  expect((await counts(page)).attempts).toBe(6);
 });
 
 for (const persisted of [false, true]) {
