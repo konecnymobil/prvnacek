@@ -65,7 +65,7 @@ export function randomPrompt(content: Content, prefix: string): string[] {
 export async function recordAttempt(
   content: Content,
   lesson: Lesson,
-  activity: 'A2' | 'A4' | 'A5' | 'A6' | 'A7',
+  activity: 'A2' | 'A4' | 'A5' | 'A6' | 'A7' | 'A5c',
   itemId: string,
   chosenId: string | null,
   correct: boolean,

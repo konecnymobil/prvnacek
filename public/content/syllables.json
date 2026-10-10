@@ -25,7 +25,12 @@
         "agata": 3
       },
       "audioId": "snd-s-ma",
-      "ipa": "ma"
+      "ipa": "ma",
+      "forms": {
+        "upperPrint": "MA",
+        "lowerPrint": "ma",
+        "cursive": "ma"
+      }
     },
     {
       "id": "s-maa",
@@ -50,7 +55,12 @@
         "agata": 3
       },
       "audioId": "snd-s-maa",
-      "ipa": "maː"
+      "ipa": "maː",
+      "forms": {
+        "upperPrint": "MÁ",
+        "lowerPrint": "má",
+        "cursive": "má"
+      }
     },
     {
       "id": "s-me",
@@ -75,7 +85,12 @@
         "agata": 5
       },
       "audioId": "snd-s-me",
-      "ipa": "mɛ"
+      "ipa": "mɛ",
+      "forms": {
+        "upperPrint": "ME",
+        "lowerPrint": "me",
+        "cursive": "me"
+      }
     },
     {
       "id": "s-mo",
@@ -100,7 +115,12 @@
         "agata": 7
       },
       "audioId": "snd-s-mo",
-      "ipa": "mo"
+      "ipa": "mo",
+      "forms": {
+        "upperPrint": "MO",
+        "lowerPrint": "mo",
+        "cursive": "mo"
+      }
     },
     {
       "id": "s-mu",
@@ -125,7 +145,12 @@
         "agata": 9
       },
       "audioId": "snd-s-mu",
-      "ipa": "mu"
+      "ipa": "mu",
+      "forms": {
+        "upperPrint": "MU",
+        "lowerPrint": "mu",
+        "cursive": "mu"
+      }
     },
     {
       "id": "s-mi",
@@ -150,7 +175,12 @@
         "agata": 10
       },
       "audioId": "snd-s-mi",
-      "ipa": "mɪ"
+      "ipa": "mɪ",
+      "forms": {
+        "upperPrint": "MI",
+        "lowerPrint": "mi",
+        "cursive": "mi"
+      }
     },
     {
       "id": "s-la",
@@ -175,7 +205,12 @@
         "agata": 4
       },
       "audioId": "snd-s-la",
-      "ipa": "la"
+      "ipa": "la",
+      "forms": {
+        "upperPrint": "LA",
+        "lowerPrint": "la",
+        "cursive": "la"
+      }
     },
     {
       "id": "s-laa",
@@ -200,7 +235,12 @@
         "agata": 4
       },
       "audioId": "snd-s-laa",
-      "ipa": "laː"
+      "ipa": "laː",
+      "forms": {
+        "upperPrint": "LÁ",
+        "lowerPrint": "lá",
+        "cursive": "lá"
+      }
     },
     {
       "id": "s-le",
@@ -225,7 +265,12 @@
         "agata": 5
       },
       "audioId": "snd-s-le",
-      "ipa": "lɛ"
+      "ipa": "lɛ",
+      "forms": {
+        "upperPrint": "LE",
+        "lowerPrint": "le",
+        "cursive": "le"
+      }
     },
     {
       "id": "s-lo",
@@ -250,7 +295,12 @@
         "agata": 7
       },
       "audioId": "snd-s-lo",
-      "ipa": "lo"
+      "ipa": "lo",
+      "forms": {
+        "upperPrint": "LO",
+        "lowerPrint": "lo",
+        "cursive": "lo"
+      }
     },
     {
       "id": "s-lu",
@@ -275,7 +325,12 @@
         "agata": 9
       },
       "audioId": "snd-s-lu",
-      "ipa": "lu"
+      "ipa": "lu",
+      "forms": {
+        "upperPrint": "LU",
+        "lowerPrint": "lu",
+        "cursive": "lu"
+      }
     },
     {
       "id": "s-li",
@@ -300,7 +355,12 @@
         "agata": 10
       },
       "audioId": "snd-s-li",
-      "ipa": "lɪ"
+      "ipa": "lɪ",
+      "forms": {
+        "upperPrint": "LI",
+        "lowerPrint": "li",
+        "cursive": "li"
+      }
     },
     {
       "id": "s-sa",
@@ -325,7 +385,12 @@
         "agata": 6
       },
       "audioId": "snd-s-sa",
-      "ipa": "sa"
+      "ipa": "sa",
+      "forms": {
+        "upperPrint": "SA",
+        "lowerPrint": "sa",
+        "cursive": "sa"
+      }
     },
     {
       "id": "s-saa",
@@ -350,7 +415,12 @@
         "agata": 6
       },
       "audioId": "snd-s-saa",
-      "ipa": "saː"
+      "ipa": "saː",
+      "forms": {
+        "upperPrint": "SÁ",
+        "lowerPrint": "sá",
+        "cursive": "sá"
+      }
     },
     {
       "id": "s-se",
@@ -375,7 +445,12 @@
         "agata": 6
       },
       "audioId": "snd-s-se",
-      "ipa": "sɛ"
+      "ipa": "sɛ",
+      "forms": {
+        "upperPrint": "SE",
+        "lowerPrint": "se",
+        "cursive": "se"
+      }
     },
     {
       "id": "s-so",
@@ -400,7 +475,12 @@
         "agata": 7
       },
       "audioId": "snd-s-so",
-      "ipa": "so"
+      "ipa": "so",
+      "forms": {
+        "upperPrint": "SO",
+        "lowerPrint": "so",
+        "cursive": "so"
+      }
     },
     {
       "id": "s-su",
@@ -425,7 +505,12 @@
         "agata": 9
       },
       "audioId": "snd-s-su",
-      "ipa": "su"
+      "ipa": "su",
+      "forms": {
+        "upperPrint": "SU",
+        "lowerPrint": "su",
+        "cursive": "su"
+      }
     },
     {
       "id": "s-si",
@@ -450,7 +535,12 @@
         "agata": 10
       },
       "audioId": "snd-s-si",
-      "ipa": "sɪ"
+      "ipa": "sɪ",
+      "forms": {
+        "upperPrint": "SI",
+        "lowerPrint": "si",
+        "cursive": "si"
+      }
     },
     {
       "id": "s-pa",
@@ -475,7 +565,12 @@
         "agata": 8
       },
       "audioId": "snd-s-pa",
-      "ipa": "pa"
+      "ipa": "pa",
+      "forms": {
+        "upperPrint": "PA",
+        "lowerPrint": "pa",
+        "cursive": "pa"
+      }
     },
     {
       "id": "s-paa",
@@ -500,7 +595,12 @@
         "agata": 8
       },
       "audioId": "snd-s-paa",
-      "ipa": "paː"
+      "ipa": "paː",
+      "forms": {
+        "upperPrint": "PÁ",
+        "lowerPrint": "pá",
+        "cursive": "pá"
+      }
     },
     {
       "id": "s-pe",
@@ -525,7 +625,12 @@
         "agata": 8
       },
       "audioId": "snd-s-pe",
-      "ipa": "pɛ"
+      "ipa": "pɛ",
+      "forms": {
+        "upperPrint": "PE",
+        "lowerPrint": "pe",
+        "cursive": "pe"
+      }
     },
     {
       "id": "s-po",
@@ -550,7 +655,12 @@
         "agata": 8
       },
       "audioId": "snd-s-po",
-      "ipa": "po"
+      "ipa": "po",
+      "forms": {
+        "upperPrint": "PO",
+        "lowerPrint": "po",
+        "cursive": "po"
+      }
     },
     {
       "id": "s-pu",
@@ -575,7 +685,12 @@
         "agata": 9
       },
       "audioId": "snd-s-pu",
-      "ipa": "pu"
+      "ipa": "pu",
+      "forms": {
+        "upperPrint": "PU",
+        "lowerPrint": "pu",
+        "cursive": "pu"
+      }
     },
     {
       "id": "s-pi",
@@ -600,7 +715,12 @@
         "agata": 10
       },
       "audioId": "snd-s-pi",
-      "ipa": "pɪ"
+      "ipa": "pɪ",
+      "forms": {
+        "upperPrint": "PI",
+        "lowerPrint": "pi",
+        "cursive": "pi"
+      }
     },
     {
       "id": "s-a",
@@ -624,7 +744,12 @@
         "agata": 1
       },
       "audioId": "snd-l-a",
-      "ipa": "a"
+      "ipa": "a",
+      "forms": {
+        "upperPrint": "A",
+        "lowerPrint": "a",
+        "cursive": "a"
+      }
     },
     {
       "id": "s-aa",
@@ -648,7 +773,12 @@
         "agata": 2
       },
       "audioId": "snd-l-aa",
-      "ipa": "aː"
+      "ipa": "aː",
+      "forms": {
+        "upperPrint": "Á",
+        "lowerPrint": "á",
+        "cursive": "á"
+      }
     },
     {
       "id": "s-e",
@@ -672,7 +802,12 @@
         "agata": 5
       },
       "audioId": "snd-l-e",
-      "ipa": "ɛ"
+      "ipa": "ɛ",
+      "forms": {
+        "upperPrint": "E",
+        "lowerPrint": "e",
+        "cursive": "e"
+      }
     },
     {
       "id": "s-o",
@@ -696,7 +831,12 @@
         "agata": 7
       },
       "audioId": "snd-l-o",
-      "ipa": "o"
+      "ipa": "o",
+      "forms": {
+        "upperPrint": "O",
+        "lowerPrint": "o",
+        "cursive": "o"
+      }
     },
     {
       "id": "s-u",
@@ -720,7 +860,12 @@
         "agata": 9
       },
       "audioId": "snd-l-u",
-      "ipa": "u"
+      "ipa": "u",
+      "forms": {
+        "upperPrint": "U",
+        "lowerPrint": "u",
+        "cursive": "u"
+      }
     },
     {
       "id": "s-i",
@@ -744,7 +889,12 @@
         "agata": 10
       },
       "audioId": "snd-l-i",
-      "ipa": "ɪ"
+      "ipa": "ɪ",
+      "forms": {
+        "upperPrint": "I",
+        "lowerPrint": "i",
+        "cursive": "i"
+      }
     },
     {
       "id": "s-les",
@@ -770,7 +920,12 @@
         "agata": 6
       },
       "audioId": "snd-s-les",
-      "ipa": "lɛs"
+      "ipa": "lɛs",
+      "forms": {
+        "upperPrint": "LES",
+        "lowerPrint": "les",
+        "cursive": "les"
+      }
     },
     {
       "id": "s-los",
@@ -796,7 +951,12 @@
         "agata": 7
       },
       "audioId": "snd-s-los",
-      "ipa": "los"
+      "ipa": "los",
+      "forms": {
+        "upperPrint": "LOS",
+        "lowerPrint": "los",
+        "cursive": "los"
+      }
     },
     {
       "id": "s-laam",
@@ -822,7 +982,12 @@
         "agata": 4
       },
       "audioId": "snd-s-laam",
-      "ipa": "laːm"
+      "ipa": "laːm",
+      "forms": {
+        "upperPrint": "LÁM",
+        "lowerPrint": "lám",
+        "cursive": "lám"
+      }
     },
     {
       "id": "s-maam",
@@ -847,7 +1012,12 @@
         "agata": 3
       },
       "audioId": "snd-s-maam",
-      "ipa": "maːm"
+      "ipa": "maːm",
+      "forms": {
+        "upperPrint": "MÁM",
+        "lowerPrint": "mám",
+        "cursive": "mám"
+      }
     },
     {
       "id": "s-pel",
@@ -873,7 +1043,12 @@
         "agata": 8
       },
       "audioId": "snd-s-pel",
-      "ipa": "pɛl"
+      "ipa": "pɛl",
+      "forms": {
+        "upperPrint": "PEL",
+        "lowerPrint": "pel",
+        "cursive": "pel"
+      }
     },
     {
       "id": "s-pes",
@@ -899,7 +1074,12 @@
         "agata": 8
       },
       "audioId": "snd-s-pes",
-      "ipa": "pɛs"
+      "ipa": "pɛs",
+      "forms": {
+        "upperPrint": "PES",
+        "lowerPrint": "pes",
+        "cursive": "pes"
+      }
     },
     {
       "id": "s-sel",
@@ -925,7 +1105,12 @@
         "agata": 6
       },
       "audioId": "snd-s-sel",
-      "ipa": "sɛl"
+      "ipa": "sɛl",
+      "forms": {
+        "upperPrint": "SEL",
+        "lowerPrint": "sel",
+        "cursive": "sel"
+      }
     },
     {
       "id": "s-sem",
@@ -951,7 +1136,12 @@
         "agata": 6
       },
       "audioId": "snd-s-sem",
-      "ipa": "sɛm"
+      "ipa": "sɛm",
+      "forms": {
+        "upperPrint": "SEM",
+        "lowerPrint": "sem",
+        "cursive": "sem"
+      }
     },
     {
       "id": "s-sos",
@@ -976,7 +1166,12 @@
         "agata": 7
       },
       "audioId": "snd-s-sos",
-      "ipa": "sos"
+      "ipa": "sos",
+      "forms": {
+        "upperPrint": "SOS",
+        "lowerPrint": "sos",
+        "cursive": "sos"
+      }
     },
     {
       "id": "s-sup",
@@ -1002,7 +1197,12 @@
         "agata": 9
       },
       "audioId": "snd-s-sup",
-      "ipa": "sup"
+      "ipa": "sup",
+      "forms": {
+        "upperPrint": "SUP",
+        "lowerPrint": "sup",
+        "cursive": "sup"
+      }
     },
     {
       "id": "s-saam",
@@ -1028,7 +1228,12 @@
         "agata": 6
       },
       "audioId": "snd-s-saam",
-      "ipa": "saːm"
+      "ipa": "saːm",
+      "forms": {
+        "upperPrint": "SÁM",
+        "lowerPrint": "sám",
+        "cursive": "sám"
+      }
     }
   ]
 }

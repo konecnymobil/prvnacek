@@ -272,3 +272,19 @@ a {
 .word-arcs .syll-arc { display: inline-flex; flex-direction: column; align-items: center; }
 .word-arcs .syll-arc svg { width: 100%; height: .22em; }
 .word-arcs .syll-arc path { stroke: var(--c-success); stroke-width: 6; fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+
+/* Slož slovo (A8) */
+.compose-board { display: flex; align-items: center; justify-content: center; gap: var(--sp-5); flex-wrap: wrap; }
+.compose-slots { display: flex; gap: var(--sp-3); }
+.compose-slot { display: inline-flex; align-items: center; justify-content: center; min-width: 130px; min-height: 130px; background: var(--c-surface-2, #f4f1ea); border-style: dashed; cursor: default; }
+.compose-slot.is-next { border-color: var(--c-key-edge); }
+.compose-slot.is-right { border-style: solid; }
+.compose-pic { width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; }
+.compose-pic img { width: 130px; height: 130px; }
+.compose-q { font-size: 64px; opacity: .3; }
+.compose-card { touch-action: none; user-select: none; -webkit-user-select: none; min-width: 130px; min-height: 130px; }
+.compose-card.is-used { opacity: .25; }
+.compose-card.is-hint { border-color: var(--c-success); box-shadow: 0 0 0 4px var(--c-success-soft); }
+.compose-card.is-shake { animation: compose-shake .4s; }
+.compose-card.is-dragging { opacity: .9; }
+@keyframes compose-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }

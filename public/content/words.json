@@ -41,7 +41,14 @@
         "agata": 3
       },
       "ipa": "ˈmaː.ma",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MÁMA",
+        "lowerPrint": "máma",
+        "cursive": "máma"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-maa",
@@ -79,7 +86,14 @@
         "agata": 3
       },
       "ipa": "maː",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MÁ",
+        "lowerPrint": "má",
+        "cursive": "má"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-lama",
@@ -120,7 +134,14 @@
         "agata": 4
       },
       "ipa": "ˈla.ma",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "LAMA",
+        "lowerPrint": "lama",
+        "cursive": "lama"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-malaa",
@@ -162,7 +183,14 @@
         "agata": 4
       },
       "ipa": "ˈma.laː",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MALÁ",
+        "lowerPrint": "malá",
+        "cursive": "malá"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-ale",
@@ -203,7 +231,18 @@
         "agata": 5
       },
       "ipa": "ˈa.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "ALE",
+        "lowerPrint": "ale",
+        "cursive": "ale"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-la",
+        "s-laa",
+        "s-ma"
+      ]
     },
     {
       "id": "w-mele",
@@ -244,7 +283,18 @@
         "agata": 5
       },
       "ipa": "ˈmɛ.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MELE",
+        "lowerPrint": "mele",
+        "cursive": "mele"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-la",
+        "s-maa",
+        "s-ma"
+      ]
     },
     {
       "id": "w-sele",
@@ -285,7 +335,18 @@
         "agata": 6
       },
       "ipa": "ˈsɛ.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SELE",
+        "lowerPrint": "sele",
+        "cursive": "sele"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-sa",
+        "s-saa",
+        "s-la"
+      ]
     },
     {
       "id": "w-sama",
@@ -326,7 +387,18 @@
         "agata": 6
       },
       "ipa": "ˈsa.ma",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SAMA",
+        "lowerPrint": "sama",
+        "cursive": "sama"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-se",
+        "s-me",
+        "s-laa"
+      ]
     },
     {
       "id": "w-se",
@@ -364,7 +436,14 @@
         "agata": 6
       },
       "ipa": "sɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SE",
+        "lowerPrint": "se",
+        "cursive": "se"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-maso",
@@ -406,7 +485,18 @@
         "agata": 7
       },
       "ipa": "ˈma.so",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MASO",
+        "lowerPrint": "maso",
+        "cursive": "maso"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-la",
+        "s-lo",
+        "s-se"
+      ]
     },
     {
       "id": "w-molo",
@@ -447,7 +537,18 @@
         "agata": 7
       },
       "ipa": "ˈmo.lo",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MOLO",
+        "lowerPrint": "molo",
+        "cursive": "molo"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-laa",
+        "s-me",
+        "s-la"
+      ]
     },
     {
       "id": "w-maalo",
@@ -489,7 +590,18 @@
         "agata": 7
       },
       "ipa": "ˈmaː.lo",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MÁLO",
+        "lowerPrint": "málo",
+        "cursive": "málo"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-le",
+        "s-la",
+        "s-saa"
+      ]
     },
     {
       "id": "w-mapa",
@@ -530,7 +642,18 @@
         "agata": 8
       },
       "ipa": "ˈma.pa",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MAPA",
+        "lowerPrint": "mapa",
+        "cursive": "mapa"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-po",
+        "s-pe",
+        "s-la"
+      ]
     },
     {
       "id": "w-pole",
@@ -572,7 +695,18 @@
         "agata": 8
       },
       "ipa": "ˈpo.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "POLE",
+        "lowerPrint": "pole",
+        "cursive": "pole"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-pe",
+        "s-laa",
+        "s-la"
+      ]
     },
     {
       "id": "w-pase",
@@ -614,7 +748,18 @@
         "agata": 8
       },
       "ipa": "ˈpa.sɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PASE",
+        "lowerPrint": "pase",
+        "cursive": "pase"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-la",
+        "s-me",
+        "s-le"
+      ]
     },
     {
       "id": "w-po",
@@ -652,7 +797,14 @@
         "agata": 8
       },
       "ipa": "po",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PO",
+        "lowerPrint": "po",
+        "cursive": "po"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-pomalaa",
@@ -698,7 +850,18 @@
         "agata": 8
       },
       "ipa": "ˈpo.ma.laː",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "POMALÁ",
+        "lowerPrint": "pomalá",
+        "cursive": "pomalá"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-paa",
+        "s-so",
+        "s-pa"
+      ]
     },
     {
       "id": "w-lupa",
@@ -740,7 +903,18 @@
         "agata": 9
       },
       "ipa": "ˈlu.pa",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "LUPA",
+        "lowerPrint": "lupa",
+        "cursive": "lupa"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-su",
+        "s-la",
+        "s-laa"
+      ]
     },
     {
       "id": "w-mula",
@@ -782,7 +956,18 @@
         "agata": 9
       },
       "ipa": "ˈmu.la",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MULA",
+        "lowerPrint": "mula",
+        "cursive": "mula"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-sa",
+        "s-su",
+        "s-me"
+      ]
     },
     {
       "id": "w-puma",
@@ -824,7 +1009,18 @@
         "agata": 9
       },
       "ipa": "ˈpu.ma",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PUMA",
+        "lowerPrint": "puma",
+        "cursive": "puma"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-paa",
+        "s-pa",
+        "s-mo"
+      ]
     },
     {
       "id": "w-pusa",
@@ -866,7 +1062,18 @@
         "agata": 9
       },
       "ipa": "ˈpu.sa",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PUSA",
+        "lowerPrint": "pusa",
+        "cursive": "pusa"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-pa",
+        "s-so",
+        "s-lu"
+      ]
     },
     {
       "id": "w-pomalu",
@@ -912,7 +1119,18 @@
         "agata": 9
       },
       "ipa": "ˈpo.ma.lu",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "POMALU",
+        "lowerPrint": "pomalu",
+        "cursive": "pomalu"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-me",
+        "s-so",
+        "s-mu"
+      ]
     },
     {
       "id": "w-lilie",
@@ -955,7 +1173,18 @@
         "agata": 10
       },
       "ipa": "ˈlɪ.lɪ.jɛ",
-      "pronunciationNote": "Mezi I a E se přirozeně vysloví slabé j: [lilije]. Dítě to při čtení udělá samo."
+      "pronunciationNote": "Mezi I a E se přirozeně vysloví slabé j: [lilije]. Dítě to při čtení udělá samo.",
+      "forms": {
+        "upperPrint": "LILIE",
+        "lowerPrint": "lilie",
+        "cursive": "lilie"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-si",
+        "s-lo",
+        "s-mi"
+      ]
     },
     {
       "id": "w-pila",
@@ -997,7 +1226,18 @@
         "agata": 10
       },
       "ipa": "ˈpɪ.la",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PILA",
+        "lowerPrint": "pila",
+        "cursive": "pila"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-pa",
+        "s-si",
+        "s-li"
+      ]
     },
     {
       "id": "w-pilule",
@@ -1042,7 +1282,18 @@
         "agata": 10
       },
       "ipa": "ˈpɪ.lu.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PILULE",
+        "lowerPrint": "pilule",
+        "cursive": "pilule"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-li",
+        "s-la",
+        "s-si"
+      ]
     },
     {
       "id": "w-silo",
@@ -1084,7 +1335,18 @@
         "agata": 10
       },
       "ipa": "ˈsɪ.lo",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SILO",
+        "lowerPrint": "silo",
+        "cursive": "silo"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-sa",
+        "s-laa",
+        "s-po"
+      ]
     },
     {
       "id": "w-mile",
@@ -1126,7 +1388,18 @@
         "agata": 10
       },
       "ipa": "ˈmɪ.lɛ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MILE",
+        "lowerPrint": "mile",
+        "cursive": "mile"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-ma",
+        "s-li",
+        "s-mu"
+      ]
     },
     {
       "id": "w-milaa",
@@ -1168,7 +1441,18 @@
         "agata": 10
       },
       "ipa": "ˈmɪ.laː",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MILÁ",
+        "lowerPrint": "milá",
+        "cursive": "milá"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-lu",
+        "s-mu",
+        "s-pi"
+      ]
     },
     {
       "id": "w-mimo",
@@ -1209,7 +1493,18 @@
         "agata": 10
       },
       "ipa": "ˈmɪ.mo",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MIMO",
+        "lowerPrint": "mimo",
+        "cursive": "mimo"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-po",
+        "s-so",
+        "s-mu"
+      ]
     },
     {
       "id": "w-si",
@@ -1247,7 +1542,14 @@
         "agata": 10
       },
       "ipa": "sɪ",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SI",
+        "lowerPrint": "si",
+        "cursive": "si"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-maam",
@@ -1285,7 +1587,14 @@
         "agata": 3
       },
       "ipa": "maːm",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "MÁM",
+        "lowerPrint": "mám",
+        "cursive": "mám"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-les",
@@ -1324,7 +1633,14 @@
         "agata": 6
       },
       "ipa": "lɛs",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "LES",
+        "lowerPrint": "les",
+        "cursive": "les"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-salaam",
@@ -1367,7 +1683,18 @@
         "agata": 6
       },
       "ipa": "ˈsa.laːm",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SALÁM",
+        "lowerPrint": "salám",
+        "cursive": "salám"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-se",
+        "s-le",
+        "s-la"
+      ]
     },
     {
       "id": "w-sem",
@@ -1406,7 +1733,14 @@
         "agata": 6
       },
       "ipa": "sɛm",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SEM",
+        "lowerPrint": "sem",
+        "cursive": "sem"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-saam",
@@ -1445,7 +1779,14 @@
         "agata": 6
       },
       "ipa": "saːm",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SÁM",
+        "lowerPrint": "sám",
+        "cursive": "sám"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-los",
@@ -1484,7 +1825,14 @@
         "agata": 7
       },
       "ipa": "los",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "LOS",
+        "lowerPrint": "los",
+        "cursive": "los"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-losos",
@@ -1525,7 +1873,18 @@
         "agata": 7
       },
       "ipa": "ˈlo.sos",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "LOSOS",
+        "lowerPrint": "losos",
+        "cursive": "losos"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-mo",
+        "s-so",
+        "s-sa"
+      ]
     },
     {
       "id": "w-osel",
@@ -1567,7 +1926,18 @@
         "agata": 7
       },
       "ipa": "ˈo.sɛl",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "OSEL",
+        "lowerPrint": "osel",
+        "cursive": "osel"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-se",
+        "s-so",
+        "s-sa"
+      ]
     },
     {
       "id": "w-pes",
@@ -1606,7 +1976,14 @@
         "agata": 8
       },
       "ipa": "pɛs",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "PES",
+        "lowerPrint": "pes",
+        "cursive": "pes"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     },
     {
       "id": "w-popel",
@@ -1648,7 +2025,18 @@
         "agata": 8
       },
       "ipa": "ˈpo.pɛl",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "POPEL",
+        "lowerPrint": "popel",
+        "cursive": "popel"
+      },
+      "usableInComposeTask": true,
+      "distractorSyllableIds": [
+        "s-lo",
+        "s-pe",
+        "s-so"
+      ]
     },
     {
       "id": "w-sup",
@@ -1687,7 +2075,14 @@
         "agata": 9
       },
       "ipa": "sup",
-      "pronunciationNote": null
+      "pronunciationNote": null,
+      "forms": {
+        "upperPrint": "SUP",
+        "lowerPrint": "sup",
+        "cursive": "sup"
+      },
+      "usableInComposeTask": false,
+      "distractorSyllableIds": []
     }
   ],
   "rejected": [

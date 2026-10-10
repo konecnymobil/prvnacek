@@ -39,7 +39,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
 
   const rows = order.lessons.flatMap((l) => l.letterIds.map((id) => ({ lesson: l, letter: content.letterById.get(id)! })));
   const letterIdsOf = (a: Attempt): string[] =>
-    a.activity === 'A2' ? [a.itemId] : (a.activity === 'A4' || a.activity === 'A6') ? (content.syllableById.get(a.itemId)?.letterIds ?? []) : (a.activity === 'A5' || a.activity === 'A7') ? (content.wordById.get(a.itemId)?.letterIds ?? []) : [];
+    a.activity === 'A2' ? [a.itemId] : (a.activity === 'A4' || a.activity === 'A6') ? (content.syllableById.get(a.itemId)?.letterIds ?? []) : (a.activity === 'A5' || a.activity === 'A7' || a.activity === 'A5c') ? (content.wordById.get(a.itemId)?.letterIds ?? []) : [];
   /** Záměna písmene: A2 = zvolené písmeno; A4 = písmeno zvolené slabiky, které v cílové není. */
   const confusedWith = (a: Attempt, letterId: string): string | null => {
     if (a.correct || !a.chosenId) return null;
@@ -87,13 +87,13 @@ export default function ParentHome({ content, go, startTest }: Props) {
 
       <section className="card">
         <h2>Pokrok po písmenech</h2>
-        <p className="small muted">Správně / pokusů v aktivitách „Najdi písmeno“, „Slož slabiku“, „Čti slabiku“, „Slovo k obrázku“ a „Čti slovo“ (slabiky a slova se počítají každému písmenu, které obsahují) a nejčastější záměna.</p>
+        <p className="small muted">Správně / pokusů v aktivitách „Najdi písmeno“, „Slož slabiku“, „Čti slabiku“, „Slož slovo“ (včetně dřívějšího „Slovo k obrázku“) a „Čti slovo“ (slabiky a slova se počítají každému písmenu, které obsahují) a nejčastější záměna.</p>
         <table className="ptable" data-testid="letter-progress">
-          <thead><tr><th>Písmeno</th><th>Lekce</th><th>Najdi písmeno</th><th>Slabiky</th><th>Čti slabiku</th><th>Slova k obrázku</th><th>Čti slovo</th><th>Celkem</th><th>Mate se s</th></tr></thead>
+          <thead><tr><th>Písmeno</th><th>Lekce</th><th>Najdi písmeno</th><th>Slabiky</th><th>Čti slabiku</th><th>Slož slovo</th><th>Čti slovo</th><th>Celkem</th><th>Mate se s</th></tr></thead>
           <tbody>
             {rows.map(({ lesson, letter }) => {
               const mine = attempts.filter((a) => letterIdsOf(a).includes(letter.id));
-              const fmt = (act: string) => { const m = mine.filter((a) => a.activity === act); return m.length ? `${m.filter((a) => a.correct).length} / ${m.length}` : '–'; };
+              const fmt = (act: string) => { const m = mine.filter((a) => (act === 'A5' ? a.activity === 'A5' || a.activity === 'A5c' : a.activity === act)); return m.length ? `${m.filter((a) => a.correct).length} / ${m.length}` : '–'; };
               const conf = new Map<string, number>();
               for (const a of mine) { const c = confusedWith(a, letter.id); if (c) conf.set(c, (conf.get(c) ?? 0) + 1); }
               const top = [...conf.entries()].sort((x, y) => y[1] - x[1])[0];
