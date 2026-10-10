@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Syllable } from '../content/types';
-import { GlyphText } from '../components/Glyphs';
+import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
 import { ROUND_SIZE, randomPrompt, promptAudio, recordAttempt, say, stopSay, pickPriority, usePriorityIds, shuffle } from '../activities/common';
 import { allUsableSyllables, lessonSyllables } from './SyllableActivity';
@@ -9,10 +9,10 @@ import { allUsableSyllables, lessonSyllables } from './SyllableActivity';
 interface Props { content: Content; lesson: Lesson; back: () => void }
 
 /** Oblouček pod slabikou – tvar z design/js/app.js (P.arcSvg). */
-export function SyllableArc({ text }: { text: string }) {
+export function SyllableArc({ text, form }: { text: string; form?: FormKey }) {
   return (
     <span className="syll-arc" data-testid="syllable-arc">
-      <span className="syll-text"><GlyphText text={text} /></span>
+      <span className="syll-text"><GlyphText text={text} form={form} /></span>
       <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
     </span>
   );
@@ -54,6 +54,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const [correctCount, setCorrectCount] = useState(0);
   const [saveError, setSaveError] = useState(false);
   const busy = useRef(false);
+  const form = useTaskForm(task);
 
   useEffect(() => () => stopSay(), []);
   // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
@@ -108,7 +109,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
       </header>
       <div className="stage"><Mascot mood={mood} /></div>
-      <div className="read-syll" data-testid="read-syllable"><SyllableArc text={task.target.text} /></div>
+      <div className="read-syll" data-testid="read-syllable"><SyllableArc text={task.target.text} form={form} /></div>
       <p className={`feedback ${mood}`} role="status" data-testid="feedback">{message}</p>
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       {step === 'read' && (

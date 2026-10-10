@@ -1,4 +1,4 @@
-import { GlyphText } from '../components/Glyphs';
+import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
@@ -11,12 +11,12 @@ import { lessonPictureWords } from './WordActivity';
 interface Props { content: Content; lesson: Lesson; back: () => void }
 
 /** Slovo velkým písmem, pod každou slabikou oblouček (tvar z design/js/app.js, stejný jako u „Čti slabiku“). */
-export function WordArcs({ word }: { word: Word }) {
+export function WordArcs({ word, form }: { word: Word; form?: FormKey }) {
   return (
     <span className="word-arcs" data-testid="word-arcs">
       {word.syllablesText.map((t, i) => (
         <span className="syll-arc" key={i} data-testid="word-syll">
-          <span className="syll-text"><GlyphText text={t} /></span>
+          <span className="syll-text"><GlyphText text={t} form={form} /></span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
         </span>
       ))}
@@ -47,6 +47,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const [correctCount, setCorrectCount] = useState(0);
   const [saveError, setSaveError] = useState(false);
   const busy = useRef(false);
+  const form = useTaskForm(target);
 
   useEffect(() => () => stopSay(), []);
   // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
@@ -104,7 +105,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
       </header>
       <div className="stage"><Mascot mood={mood} /></div>
-      <div className="read-syll read-word" data-testid="read-word"><WordArcs word={target} /></div>
+      <div className="read-syll read-word" data-testid="read-word"><WordArcs word={target} form={form} /></div>
       <p className={`feedback ${mood}`} role="status" data-testid="feedback">{message}</p>
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       {step === 'read' && (

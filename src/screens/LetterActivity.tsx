@@ -1,4 +1,4 @@
-import Glyphs from '../components/Glyphs';
+import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
@@ -12,7 +12,10 @@ interface Task {
 
 function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
   const learned = learnedLetters(content, lesson);
-  const targets = lesson.letterIds.map((id) => content.letterById.get(id)!).filter((l) => l.id !== prev || lesson.letterIds.length === 1);
+  let targets = lesson.letterIds.map((id) => content.letterById.get(id)!).filter((l) => l.id !== prev);
+  // lekce s jediným písmenem: po něm následuje dříve probrané písmeno, ať se stejné nevolá dvakrát za sebou
+  if (!targets.length) targets = learned.filter((l) => l.id !== prev);
+  if (!targets.length) targets = lesson.letterIds.map((id) => content.letterById.get(id)!);
   // k písmenům lekce se přidají písmena, která dítěti ve zkoušce nešla (i z dřívějších lekcí)
   const extra = learned.filter((l) => priority.has(l.id) && !targets.some((t) => t.id === l.id) && l.id !== prev);
   const all = targets.length ? [...targets, ...extra] : learned;
@@ -53,6 +56,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
   const [saveError, setSaveError] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const busy = useRef(false);
+  const form = useTaskForm(task);
 
   const hear = useCallback(() => void say([task.target.audioId]), [task]);
 
@@ -137,7 +141,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
             aria-label={`Písmeno ${l.upper}`}
             onClick={() => void choose(l)}
           >
-            <Glyphs forms={l.forms} />
+            <Glyphs forms={l.forms} form={form} />
           </button>
         ))}
       </div>
