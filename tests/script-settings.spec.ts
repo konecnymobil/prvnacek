@@ -146,3 +146,8 @@ test('reset: zrušení po prvním kroku nic nesmaže; záloha obsahuje nastaven�
   await expect(page.getByTestId('reset-step1')).toHaveCount(0);
   expect(await idb<number>(page, 'count', 'attempts')).toBe(1);
 });
+
+test('náhled psacího tvaru v Nastavení ukazuje velké psací písmeno', async ({ page }) => {
+  await openParent(page);
+  await expect(form(page, 'cursive').locator('.glyph[data-script="cursive"]')).toHaveText('Ma la');
+});

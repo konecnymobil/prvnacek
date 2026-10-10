@@ -74,7 +74,7 @@ export interface ScriptsDeclaration { defaultMode: ScriptFormId; forms: ScriptFo
 export type ScriptModeId = ScriptFormId | "all"; // all = všechny povolené tvary najednou (Aa + psací)
 export interface AppScriptSettings { mode: ScriptModeId; available: Record<ScriptFormId, boolean> }
 /** Text pro zobrazení; cursive = malými písmeny pro psací font. Nedostupná forma → upperPrint. */
-export type Forms = Record<ScriptFormId, string>;
+export type Forms = Record<ScriptFormId, string> & { cursiveUpper?: string };
 /** Povolené tvary v pořadí velké, malé, psací (pro režim „all“). */
 export function formsList(f: Forms, s: AppScriptSettings): [ScriptFormId, string][] {
   const o = (["upperPrint", "lowerPrint", "cursive"] as ScriptFormId[]).filter((x) => s.available[x]).map((x) => [x, f[x]] as [ScriptFormId, string]);

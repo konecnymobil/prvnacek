@@ -3,7 +3,7 @@ import { ALL_LABEL, SCRIPT_FORMS, SCRIPT_LABEL, modeLabel, normalizeScriptConfig
 import { buildBackup, downloadBackup, resetProgress } from '../storage/backup';
 import type { Forms, ScriptFormId } from '../content/types';
 
-const SAMPLE: Forms = { upperPrint: 'MA LA', lowerPrint: 'ma la', cursive: 'ma la' };
+const SAMPLE: Forms = { upperPrint: 'MA LA', lowerPrint: 'ma la', cursive: 'Ma la' }; // psací: velké M + malé (Playwrite má velká psací písmena)
 
 /** Nastavení → Písmo: rodič zapíná/vypíná tvary (aspoň jeden zůstane) a volí výchozí. */
 export function ScriptSettingsPanel() {
