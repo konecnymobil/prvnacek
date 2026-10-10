@@ -14,12 +14,17 @@ import ParentHome from './screens/ParentHome';
 import ParentTest from './screens/ParentTest';
 import ComposeWord from './screens/ComposeWord';
 import Sounds from './screens/Sounds';
+import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
 export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
 
 export default function App() {
+  return <ScriptProvider><AppInner /></ScriptProvider>;
+}
+
+function AppInner() {
   const [screen, setScreen] = useState<Screen>('home');
   const [lessonId, setLessonId] = useState<string | null>(null);
   const [content, setContent] = useState<Content | null>(null);
@@ -27,7 +32,7 @@ export default function App() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
 
   useEffect(() => {
-    loadContent().then(setContent, (e: unknown) => setError(e instanceof Error ? e.message : String(e)));
+    loadContent().then((c) => { indexContent(c); setContent(c); }, (e: unknown) => setError(e instanceof Error ? e.message : String(e)));
     requestPersistentStorage().then(setPersisted);
   }, []);
 

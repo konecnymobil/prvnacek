@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import BackupPanel from './BackupPanel';
+import { ScriptSettingsPanel, ResetPanel } from './SettingsPanels';
+import { useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import type { Screen } from '../App';
 import { isLessonUnlocked, unlockLesson, getAllAttempts, getAllLessonStates, getTestResults, type Attempt, type LessonState, type LessonStatus, type TestResultRecord } from '../storage/db';
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export default function ParentHome({ content, go, startTest }: Props) {
+  const script = useScript();
   const order = content.orders[content.defaultOrderId];
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [states, setStates] = useState<Record<string, LessonState>>({});
@@ -114,7 +117,10 @@ export default function ParentHome({ content, go, startTest }: Props) {
           </tbody>
         </table>
       </section>
-      <BackupPanel onRestored={load} />
+      <h2 className="section-title">Nastavení</h2>
+      <ScriptSettingsPanel />
+      <BackupPanel onRestored={() => { load(); void script.reload(); }} />
+      <ResetPanel onDone={() => { load(); void script.reload(); }} />
     </main>
   );
 }

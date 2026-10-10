@@ -1,3 +1,4 @@
+import Glyphs from '../components/Glyphs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
@@ -136,7 +137,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
             aria-label={`Písmeno ${l.upper}`}
             onClick={() => void choose(l)}
           >
-            {l.upper}
+            <Glyphs forms={l.forms} />
           </button>
         ))}
       </div>

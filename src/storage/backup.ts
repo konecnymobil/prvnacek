@@ -107,3 +107,15 @@ export async function downloadBackup(b: BackupFile): Promise<'download' | 'share
   setTimeout(() => URL.revokeObjectURL(url), 60000);
   return 'download';
 }
+
+/** Čistý začátek: smaže pokrok (pokusy), stavy/zamykání lekcí a výsledky zkoušek (settings „tests:*“).
+ *  NEMAŽE vlastní nahrávky rodiče ani ostatní nastavení (např. tvary písma). Jedna transakce. */
+export async function resetProgress(): Promise<void> {
+  const db = await getDb();
+  const tx = db.transaction(['attempts', 'lessonStates', 'settings'], 'readwrite');
+  tx.objectStore('attempts').clear();
+  tx.objectStore('lessonStates').clear();
+  const keys = await tx.objectStore('settings').getAllKeys();
+  for (const k of keys) if (String(k).startsWith('tests:')) tx.objectStore('settings').delete(k);
+  await tx.done;
+}

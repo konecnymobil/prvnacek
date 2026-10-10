@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Syllable } from '../content/types';
+import { GlyphText } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
 import { ROUND_SIZE, randomPrompt, promptAudio, recordAttempt, say, stopSay, pickPriority, usePriorityIds, shuffle } from '../activities/common';
 import { allUsableSyllables, lessonSyllables } from './SyllableActivity';
@@ -11,7 +12,7 @@ interface Props { content: Content; lesson: Lesson; back: () => void }
 export function SyllableArc({ text }: { text: string }) {
   return (
     <span className="syll-arc" data-testid="syllable-arc">
-      <span className="syll-text">{text}</span>
+      <span className="syll-text"><GlyphText text={text} /></span>
       <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
     </span>
   );

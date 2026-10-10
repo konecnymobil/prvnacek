@@ -3,6 +3,7 @@
 @font-face { font-family: 'Andika'; src: url('fonts/Andika-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Andika'; src: url('fonts/Andika-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Andika'; src: url('fonts/Andika-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Playwrite CZ'; src: url('fonts/PlaywriteCZ-wght.woff2') format('woff2'); font-weight: 100 400; font-style: normal; font-display: swap; }   /* psací písmo, OFL 1.1 */
 
 :root {
   /* color */
@@ -45,6 +46,8 @@
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-family-script: 'Playwrite CZ', 'Andika', cursive; /* Psací písmo (Playwrite CZ, OFL 1.1) – školní předloha; jen varianta „psací“ */
+  --font-weight-script: 400; /* Playwrite CZ má osu 100–400; pro děti 400 (nejsilnější) */
   /* fontSize */
   --fs-letter-hero: clamp(150px, 30vmin, 360px); /* Položka zkoušky lekce (jedno písmeno/slabika) */
   --fs-word-hero: clamp(120px, 20vmin, 240px); /* Slovo ve zkoušce a v úloze ‚Slovo a obrázek‘ */
@@ -58,10 +61,12 @@
   --fs-child-label: 26px; /* Popisky u dětských dlaždic (čte je rodič, dítě se řídí ikonou a hlasem) */
   --fs-body: 18px; /* Text v rodičovské části */
   --fs-small: 15px; /* Metadata; minimum pro text */
+  --fs-script-scale: 1.05; /* Násobek velikosti písma při variantě „psací“ (Playwrite má menší x-výšku než Andika) */
   /* lineHeight */
   --lh-tight: 1.05; /* Velká písmena */
   --lh-snug: 1.25;
   --lh-normal: 1.5;
+  --lh-script: 1.6; /* Řádkování psacího písma (velké horní a dolní délky) */
   /* letterSpacing */
   --ls-letters: 0.06em; /* Rozestup písmen ve slabice/slově – pomáhá začínajícím čtenářům */
   /* space */

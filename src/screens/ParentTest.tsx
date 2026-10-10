@@ -1,3 +1,4 @@
+import { GlyphText } from '../components/Glyphs';
 import { useMemo, useState } from 'react';
 import type { Content } from '../content/load';
 import type { ErrorReasonId, Lesson, TestItem } from '../content/types';
@@ -138,7 +139,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
         <>
           <section className="card test-item">
             <p className="small muted">{typeInfo?.label}{reviewKindLabel ? ` (${reviewKindLabel})` : ''}</p>
-            <p className="test-text" data-testid="test-text" data-type={item.type}>{item.text}</p>
+            <p className="test-text" data-testid="test-text" data-type={item.type}><GlyphText text={item.text} /></p>
             <p className="small muted">{typeInfo?.correctWhen}</p>
           </section>
           {askReason ? (

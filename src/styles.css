@@ -288,3 +288,28 @@ a {
 .compose-card.is-shake { animation: compose-shake .4s; }
 .compose-card.is-dragging { opacity: .9; }
 @keyframes compose-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+/* ---------- Design v0.3: tvar písma ---------- */
+.glyph[data-script="cursive"] { font-family: var(--font-family-script); font-weight: var(--font-weight-script); font-feature-settings: normal; font-size: calc(1em * var(--fs-script-scale)); line-height: var(--lh-script); letter-spacing: 0; text-transform: none; }
+.pismo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); }
+.pismo-opt { min-height: 132px; border-radius: var(--r-lg); background: #fff; border: 3px solid #D5DAE3; display: grid; place-items: center; align-content: center; gap: 4px; padding: 10px; color: var(--c-ink); font: inherit; cursor: pointer; }
+.pismo-opt .sample { font-size: 52px; line-height: 1.2; font-weight: 600; }
+.pismo-opt .lab { font-size: 17px; font-weight: 600; }
+.pismo-opt .check { height: 22px; font-size: 15px; color: var(--c-parent-primary, #1D58C2); font-weight: 600; }
+.pismo-opt[aria-pressed="true"] { border-color: var(--c-parent-primary, #1D58C2); background: #EAF1FF; box-shadow: 0 0 0 3px var(--c-parent-primary, #1D58C2) inset; }
+.pismo-opt[aria-pressed="false"] { opacity: .6; background: #F3F5F9; }
+.pismo-def { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.pismo-def .kbtn[aria-pressed="true"] { border-color: var(--c-parent-primary, #1D58C2); background: #EAF1FF; }
+.section-title { margin: var(--sp-5) 0 var(--sp-2); }
+@media (max-width: 760px), (orientation: portrait) { .pismo-grid { grid-template-columns: 1fr; } }
+
+/* Slož slovo – vzhled podle k-slozeni-slova.html: velká přerušovaná okýnka, spodní lišta se slabikami, po složení se okýnka spojí */
+.compose-board { gap: var(--sp-6, 32px); }
+.compose-slots { gap: 10px; padding: var(--sp-3); transition: gap .35s cubic-bezier(.34, 1.56, .64, 1); }
+.compose-slot { min-width: clamp(150px, 22vmin, 240px); min-height: clamp(150px, 22vmin, 240px); border: 5px dashed #D4C19B; background: rgba(255, 255, 255, .55); border-radius: var(--r-xxl, 32px); font-size: var(--fs-syllable, clamp(56px, 10vmin, 110px)); }
+.compose-slot.is-next { border-color: var(--c-primary, #1D58C2); background: var(--c-primary-soft, #EAF1FF); }
+.compose-slot.is-right { border-style: solid; border-color: var(--c-success, #2E9E5B); background: #fff; }
+[data-done="true"] .compose-slots { gap: 0; }
+[data-done="true"] .compose-slot { border-color: transparent; background: transparent; min-width: 0; padding: 0 .08em; }
+.compose-cards { background: var(--c-bg-2, #F6EBD3); border-radius: var(--r-xxl, 32px); padding: var(--sp-4) var(--sp-5); gap: clamp(16px, 2.6vmin, 32px); justify-content: center; }
+.compose-card { font-size: clamp(56px, 9vmin, 100px); }

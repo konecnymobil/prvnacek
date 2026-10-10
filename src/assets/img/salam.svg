@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" role="img" aria-label="salam"><title>SALÁM (salám) – Prvňáček, vlastní ilustrace</title>
-<g transform="rotate(-25 18 18)"><rect x="1" y="11" width="29" height="14" rx="7" fill="#B8453A"/><path d="M5 12.500h22" stroke="#fff" stroke-opacity=".25" stroke-width="1.800" stroke-linecap="round"/><g fill="#F6C6C0"><circle cx="9" cy="16" r="1.400"/><circle cx="14" cy="20.500" r="1.400"/><circle cx="19" cy="15.500" r="1.400"/><circle cx="23" cy="20" r="1.400"/></g><ellipse cx="30" cy="18" rx="3.500" ry="7" fill="#D9695B"/><g fill="#F6C6C0"><circle cx="29" cy="15.500" r="1.100"/><circle cx="31" cy="20" r="1.100"/></g><path d="M0 18h-2" stroke="#E1E8ED" stroke-width="1.400" stroke-linecap="round"/><rect x="-.500" y="14" width="3" height="8" rx="1.500" fill="#E1E8ED"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" role="img" aria-label="salám"><title>SALÁM (salám) – Prvňáček, vlastní ilustrace</title>
+<g transform="rotate(-12 18 15)">
+<path d="M33 13c1.500-5 .5-8-2.500-8.500" fill="none" stroke="#C1904F" stroke-width="1.500" stroke-linecap="round"/>
+<path d="M28 9c4 .5 6 3.200 6 7s-2 6.500-6 7z" fill="#7A2E27"/><rect x="31.500" y="13" width="2" height="6" rx="1" fill="#E7C58A"/>
+<rect x="9" y="8" width="22" height="16" rx="4" fill="#9B3A30"/>
+<path d="M13 10h15" stroke="#fff" stroke-opacity=".28" stroke-width="1.800" stroke-linecap="round"/>
+<g stroke="#E7C58A" stroke-width="1.600" stroke-linecap="round"><path d="M19 8.200v15.600M25 8.200v15.600"/></g>
+<ellipse cx="8" cy="16" rx="5.500" ry="8.200" fill="#C4443B"/>
+<ellipse cx="8" cy="16" rx="4.300" ry="6.900" fill="#E8736B"/>
+<g fill="#FBE3DA"><circle cx="6.200" cy="12.200" r="1.200"/><circle cx="9.400" cy="14.500" r="1.200"/><circle cx="6.600" cy="17.200" r="1.200"/><circle cx="9.200" cy="20" r="1.100"/><circle cx="7.600" cy="9.800" r=".8"/></g>
+</g>
+<circle cx="24.500" cy="28" r="6.300" fill="#9B3A30"/><circle cx="24.500" cy="28" r="5" fill="#E8736B"/>
+<g fill="#FBE3DA"><circle cx="22.500" cy="26.200" r="1.100"/><circle cx="26.500" cy="26.800" r="1.100"/><circle cx="24" cy="29.500" r="1.100"/><circle cx="27.200" cy="30.200" r=".8"/><circle cx="21.800" cy="30" r=".8"/></g>
 </svg>

@@ -1,3 +1,4 @@
+import Glyphs from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
@@ -139,7 +140,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const tray = (list: Letter[]) =>
     shuffleStable(list).map((l) => (
       <button key={l.id} className="tile tile-sm" data-letter={l.id} aria-label={`Písmeno ${l.upper}`} onClick={() => void place(l)}>
-        {l.upper}
+        <Glyphs forms={l.forms} />
       </button>
     ));
 
@@ -158,7 +159,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
       <div className="slots" data-testid="slots">
         {slots.map((s, i) => (
           <button key={i} className={`slot${s ? ' is-filled' : ''}${solved ? ' is-right' : ''}`} data-slot={i} aria-label={s ? `Vrátit ${s.upper}` : 'Prázdné místo'} onClick={() => clear(i)}>
-            {s?.upper ?? ''}
+            {s ? <Glyphs forms={s.forms} /> : ''}
           </button>
         ))}
       </div>
