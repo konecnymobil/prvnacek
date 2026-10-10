@@ -35,7 +35,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
   }, [content, lesson]);
 
   return (
-    <main className="screen activity" data-testid="lesson-menu">
+    <main className="screen activity lesson-menu" data-testid="lesson-menu">
       <header className="topbar row">
         <button className="kbtn" onClick={() => go('home')}>Zpět</button>
         <h1>Lekce {lesson.index}: {lesson.title}</h1>

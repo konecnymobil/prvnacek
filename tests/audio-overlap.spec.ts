@@ -40,7 +40,7 @@ test('rychlé klepání: nikdy nehraje víc než jeden zvuk najednou', async ({ 
     };
   });
   await page.goto('./');
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^M$/ }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^M$/ }) }).click();
   await page.getByRole('button', { name: /Najdi písmeno/ }).click();
   const act = page.getByTestId('letter-activity');
   for (let i = 0; i < 3; i++) {

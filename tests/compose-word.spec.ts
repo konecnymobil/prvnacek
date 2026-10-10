@@ -11,7 +11,7 @@ const attempts = (page: Page) =>
 
 const start = async (page: Page) => {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^I$/ }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^I$/ }) }).click();
   await page.getByTestId('open-compose').click();
   const act = page.getByTestId('compose-activity');
   await expect(act).toBeVisible();

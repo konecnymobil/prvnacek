@@ -47,6 +47,8 @@
         "lowerPrint": "máma",
         "cursive": "máma"
       },
+      "firstSyllableId": "s-maa",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": []
     },
@@ -92,6 +94,8 @@
         "lowerPrint": "má",
         "cursive": "má"
       },
+      "firstSyllableId": "s-maa",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -140,6 +144,8 @@
         "lowerPrint": "lama",
         "cursive": "lama"
       },
+      "firstSyllableId": "s-la",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": []
     },
@@ -189,6 +195,8 @@
         "lowerPrint": "malá",
         "cursive": "malá"
       },
+      "firstSyllableId": "s-ma",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": []
     },
@@ -237,6 +245,8 @@
         "lowerPrint": "ale",
         "cursive": "ale"
       },
+      "firstSyllableId": "s-a",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-la",
@@ -289,6 +299,8 @@
         "lowerPrint": "mele",
         "cursive": "mele"
       },
+      "firstSyllableId": "s-me",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-la",
@@ -341,6 +353,8 @@
         "lowerPrint": "sele",
         "cursive": "sele"
       },
+      "firstSyllableId": "s-se",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-sa",
@@ -393,6 +407,8 @@
         "lowerPrint": "sama",
         "cursive": "sama"
       },
+      "firstSyllableId": "s-sa",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-se",
@@ -442,6 +458,8 @@
         "lowerPrint": "se",
         "cursive": "se"
       },
+      "firstSyllableId": "s-se",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -491,6 +509,8 @@
         "lowerPrint": "maso",
         "cursive": "maso"
       },
+      "firstSyllableId": "s-ma",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-la",
@@ -543,6 +563,8 @@
         "lowerPrint": "molo",
         "cursive": "molo"
       },
+      "firstSyllableId": "s-mo",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-laa",
@@ -596,6 +618,8 @@
         "lowerPrint": "málo",
         "cursive": "málo"
       },
+      "firstSyllableId": "s-maa",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-le",
@@ -648,6 +672,8 @@
         "lowerPrint": "mapa",
         "cursive": "mapa"
       },
+      "firstSyllableId": "s-ma",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-po",
@@ -701,6 +727,8 @@
         "lowerPrint": "pole",
         "cursive": "pole"
       },
+      "firstSyllableId": "s-po",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-pe",
@@ -754,6 +782,8 @@
         "lowerPrint": "pase",
         "cursive": "pase"
       },
+      "firstSyllableId": "s-pa",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-la",
@@ -803,6 +833,8 @@
         "lowerPrint": "po",
         "cursive": "po"
       },
+      "firstSyllableId": "s-po",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -856,6 +888,8 @@
         "lowerPrint": "pomalá",
         "cursive": "pomalá"
       },
+      "firstSyllableId": "s-po",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-paa",
@@ -909,6 +943,8 @@
         "lowerPrint": "lupa",
         "cursive": "lupa"
       },
+      "firstSyllableId": "s-lu",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-su",
@@ -962,6 +998,8 @@
         "lowerPrint": "mula",
         "cursive": "mula"
       },
+      "firstSyllableId": "s-mu",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-sa",
@@ -1015,6 +1053,8 @@
         "lowerPrint": "puma",
         "cursive": "puma"
       },
+      "firstSyllableId": "s-pu",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-paa",
@@ -1068,6 +1108,8 @@
         "lowerPrint": "pusa",
         "cursive": "pusa"
       },
+      "firstSyllableId": "s-pu",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-pa",
@@ -1125,6 +1167,8 @@
         "lowerPrint": "pomalu",
         "cursive": "pomalu"
       },
+      "firstSyllableId": "s-po",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-me",
@@ -1179,6 +1223,8 @@
         "lowerPrint": "lilie",
         "cursive": "lilie"
       },
+      "firstSyllableId": "s-li",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-si",
@@ -1232,6 +1278,8 @@
         "lowerPrint": "pila",
         "cursive": "pila"
       },
+      "firstSyllableId": "s-pi",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-pa",
@@ -1288,6 +1336,8 @@
         "lowerPrint": "pilule",
         "cursive": "pilule"
       },
+      "firstSyllableId": "s-pi",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-li",
@@ -1341,6 +1391,8 @@
         "lowerPrint": "silo",
         "cursive": "silo"
       },
+      "firstSyllableId": "s-si",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-sa",
@@ -1394,6 +1446,8 @@
         "lowerPrint": "mile",
         "cursive": "mile"
       },
+      "firstSyllableId": "s-mi",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-ma",
@@ -1447,6 +1501,8 @@
         "lowerPrint": "milá",
         "cursive": "milá"
       },
+      "firstSyllableId": "s-mi",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-lu",
@@ -1499,6 +1555,8 @@
         "lowerPrint": "mimo",
         "cursive": "mimo"
       },
+      "firstSyllableId": "s-mi",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-po",
@@ -1548,6 +1606,8 @@
         "lowerPrint": "si",
         "cursive": "si"
       },
+      "firstSyllableId": "s-si",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1593,6 +1653,8 @@
         "lowerPrint": "mám",
         "cursive": "mám"
       },
+      "firstSyllableId": "s-maam",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1639,6 +1701,8 @@
         "lowerPrint": "les",
         "cursive": "les"
       },
+      "firstSyllableId": "s-les",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1689,6 +1753,8 @@
         "lowerPrint": "salám",
         "cursive": "salám"
       },
+      "firstSyllableId": "s-sa",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-se",
@@ -1739,6 +1805,8 @@
         "lowerPrint": "sem",
         "cursive": "sem"
       },
+      "firstSyllableId": "s-sem",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1785,6 +1853,8 @@
         "lowerPrint": "sám",
         "cursive": "sám"
       },
+      "firstSyllableId": "s-saam",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1831,6 +1901,8 @@
         "lowerPrint": "los",
         "cursive": "los"
       },
+      "firstSyllableId": "s-los",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -1879,6 +1951,8 @@
         "lowerPrint": "losos",
         "cursive": "losos"
       },
+      "firstSyllableId": "s-lo",
+      "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-mo",
@@ -1932,6 +2006,8 @@
         "lowerPrint": "osel",
         "cursive": "osel"
       },
+      "firstSyllableId": "s-o",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-se",
@@ -1982,6 +2058,8 @@
         "lowerPrint": "pes",
         "cursive": "pes"
       },
+      "firstSyllableId": "s-pes",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     },
@@ -2031,6 +2109,8 @@
         "lowerPrint": "popel",
         "cursive": "popel"
       },
+      "firstSyllableId": "s-po",
+      "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-lo",
@@ -2081,6 +2161,8 @@
         "lowerPrint": "sup",
         "cursive": "sup"
       },
+      "firstSyllableId": "s-sup",
+      "usableInMemoryGame": false,
       "usableInComposeTask": false,
       "distractorSyllableIds": []
     }

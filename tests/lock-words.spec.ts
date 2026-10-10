@@ -3,7 +3,7 @@ import { unlockAll } from './helpers';
 
 test.use({ serviceWorkers: 'block' });
 
-const tile = (page: Page, letter: string) => page.getByTestId('lesson-row').getByRole('button').filter({ hasText: new RegExp(`^${letter}$`) });
+const tile = (page: Page, letter: string) => page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: new RegExp(`^${letter}$`) }) });
 
 async function passGate(page: Page) {
   await page.getByTestId('open-parent').click();

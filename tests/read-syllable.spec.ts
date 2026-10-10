@@ -5,7 +5,7 @@ test.use({ serviceWorkers: 'block' });
 
 async function openRead(page: Page, letter: string) {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: new RegExp(`^${letter}$`) }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: new RegExp(`^${letter}$`) }) }).click();
   await page.getByTestId('open-read').click();
   await expect(page.getByTestId('read-activity')).toBeVisible();
 }
@@ -47,7 +47,7 @@ test('A6: slabika s obloučkem, špatně povzbudí, správně pochválí, zapí�
 
 test('A6: nabídka je zamčená v lekci M (málo slabik)', async ({ page }) => {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^M$/ }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^M$/ }) }).click();
   await expect(page.getByTestId('open-read')).toBeDisabled();
 });
 

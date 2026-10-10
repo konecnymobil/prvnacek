@@ -7,7 +7,7 @@ test('Čti slabiku a Čti slovo: pokyn zazní na začátku úlohy, nové obrázk
   const urls: string[] = [];
   page.on('request', (r) => { if (r.url().endsWith('.mp3')) urls.push(r.url()); });
   await unlockAll(page);
-  const row = page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^I$/ });
+  const row = page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^I$/ }) });
   await row.click();
   await page.getByTestId('open-read').click();
   await expect(page.getByTestId('read-activity')).toBeVisible();
