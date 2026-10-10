@@ -1,4 +1,4 @@
-import Glyphs, { modeLabel, useScript } from '../components/Glyphs';
+import Glyphs, { variantLabel, useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { useEffect, useState } from 'react';
 import type { Screen } from '../App';
@@ -25,7 +25,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
         <h1>Prvňáček</h1>
         <p className="muted">Verze M1 – aktivity a rodičovská část</p>
         {script.modeList.length > 1 && (
-          <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${modeLabel(script.settings.mode)}`}>Aa Písmo</button>
+          <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${variantLabel(script.variant)}`}>Aa Písmo</button>
         )}
       </header>
 

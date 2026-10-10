@@ -29,18 +29,26 @@ const idb = <T,>(page: Page, fn: string, arg?: unknown) => page.evaluate(async (
   return out;
 }, [fn, arg] as const) as Promise<T>;
 
-test('písmo: aspoň jeden tvar zůstane, přepínač dítěte se skryje při jediném povoleném', async ({ page }) => {
+const VARS = ['lower', 'upper', 'cursive', 'cursiveUpper', 'printBoth', 'cursiveBoth', 'all'];
+const putScript = (page: Page, v: unknown) => page.evaluate(async (val) => {
+  const db: IDBDatabase = await new Promise((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => res(r.result); });
+  const tx = db.transaction('settings', 'readwrite'); tx.objectStore('settings').put(val, 'script');
+  await new Promise((r) => { tx.oncomplete = r; }); db.close();
+}, v);
+
+test('písmo: 7 variant, výchozí „Vše“, aspoň jedna zůstane, přepínač dítěte se skryje při jediné povolené', async ({ page }) => {
   await openParent(page);
-  await expect(form(page, 'cursive')).toHaveAttribute('aria-pressed', 'true');
-  await form(page, 'lowerPrint').click();
-  await form(page, 'cursive').click();
-  await expect(form(page, 'upperPrint')).toHaveAttribute('aria-pressed', 'true');
-  await form(page, 'upperPrint').click(); // poslední – nesmí jít vypnout
-  await expect(form(page, 'upperPrint')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByTestId('script-msg')).toContainText('Aspoň jeden');
+  await expect(page.locator('[data-testid="script-settings"] [data-form]')).toHaveCount(7);
+  await expect(page.locator('[data-testid="script-settings"] [data-def="all"]')).toHaveAttribute('aria-pressed', 'true');
+  for (const v of VARS) if (v !== 'upper') await form(page, v).click();
+  await expect(form(page, 'upper')).toHaveAttribute('aria-pressed', 'true');
+  await form(page, 'upper').click(); // poslední – nesmí jít vypnout
+  await expect(form(page, 'upper')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('script-msg')).toContainText('Aspoň jedna');
   await home(page);
   await expect(page.getByTestId('script-switch')).toHaveCount(0);
-  // zapnu zpět psací → přepínač je vidět
+  const stone = page.getByTestId('lesson-row').getByRole('button').first();
+  await expect(stone).toHaveText('M'); // výchozí se opravil na jedinou povolenou
   await page.getByTestId('open-parent').click();
   await page.getByTestId('gate-hold').hover();
   await page.mouse.down(); await page.waitForTimeout(3300); await page.mouse.up();
@@ -52,32 +60,72 @@ test('písmo: aspoň jeden tvar zůstane, přepínač dítěte se skryje při je
   await expect(page.getByTestId('script-switch')).toBeVisible();
 });
 
-test('písmo: dítě přepíná tvary, vykreslí se malé tiskací a psací (Playwrite CZ), uloží se do IndexedDB', async ({ page }) => {
+test('písmo: dítě cyklí jen povolené varianty, vykreslí velké psací a kombinace, uloží do IndexedDB', async ({ page }) => {
   await page.goto('./');
   const stone = page.getByTestId('lesson-row').getByRole('button').first();
-  await expect(stone.locator('.glyph-all')).toHaveCount(1); // výchozí = všechny tvary
-  await page.getByTestId('script-switch').click(); // → velké tiskací
-  await expect(stone).toHaveText('M');
-  await page.getByTestId('script-switch').click(); // → malé tiskací
-  await expect(stone).toHaveText('m');
-  await page.getByTestId('script-switch').click(); // → psací: samostatné písmeno velké psací (cursiveUpper)
-  await expect(stone).toHaveText('M'); // velké psací písmeno (jiný glyf než tiskací)
-  await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'cursive');
+  await expect(stone.locator('.glyph-all')).toHaveCount(1); // výchozí = vše
+  const expected: [string, string][] = [['m', 'lowerPrint'], ['M', 'upperPrint'], ['m', 'cursive'], ['M', 'cursiveUpper']];
+  for (const [t, k] of expected) {
+    await page.getByTestId('script-switch').click();
+    await expect(stone).toHaveText(t);
+    await expect(stone.locator('.glyph')).toHaveAttribute('data-script', k);
+  }
   expect(await stone.locator('.glyph').evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Playwrite CZ');
-  expect(await page.evaluate(() => document.documentElement.dataset.pismo)).toBe('psaci');
-  const saved = await idb<{ current: string }>(page, 'get', 'script');
-  expect(saved.current).toBe('cursive');
+  await page.getByTestId('script-switch').click(); // tiskací malé + velké
+  await expect(stone.locator('.glyph-all .glyph')).toHaveText(['M', 'm']);
+  await page.getByTestId('script-switch').click(); // psací malé + velké
+  await expect(stone.locator('.glyph-all .glyph[data-script="cursiveUpper"]')).toHaveText('M');
+  await expect(stone.locator('.glyph-all .glyph[data-script="cursive"]')).toHaveText('m');
+  expect(await page.evaluate(() => document.documentElement.dataset.pismo)).toBe('cursiveBoth');
+  expect(((await idb<{ current: string }>(page, 'get', 'script'))).current).toBe('cursiveBoth');
+  await page.reload();
+  await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph-all')).toHaveAttribute('data-variant', 'cursiveBoth');
+});
+
+test('písmo: cyklus přeskočí zakázané varianty', async ({ page }) => {
+  await page.goto('./');
+  await putScript(page, { allowed: { lower: true, upper: false, cursive: false, cursiveUpper: true, printBoth: false, cursiveBoth: false, all: false }, def: 'lower', current: null });
+  await page.reload();
+  const stone = page.getByTestId('lesson-row').getByRole('button').first();
+  await expect(stone).toHaveText('m');
+  await page.getByTestId('script-switch').click();
+  await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'cursiveUpper');
+  await page.getByTestId('script-switch').click();
+  await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'lowerPrint');
+});
+
+test('migrace starého nastavení (tvary + def) a poškozená hodnota', async ({ page }) => {
+  await page.goto('./');
+  await putScript(page, { allowed: { upperPrint: true, lowerPrint: false, cursive: true }, def: 'upperPrint', current: 'cursive' });
+  await page.reload();
+  const stone = page.getByTestId('lesson-row').getByRole('button').first();
+  await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'cursive'); // starý current zachován
+  await passGate(page);
+  const on = async (v: string) => (await form(page, v).getAttribute('aria-pressed')) === 'true';
+  expect(await on('upper')).toBe(true); expect(await on('lower')).toBe(false); expect(await on('cursive')).toBe(true);
+  expect(await on('printBoth')).toBe(false); expect(await on('all')).toBe(true);
+  await expect(page.locator('[data-testid="script-settings"] [data-def="upper"]')).toHaveAttribute('aria-pressed', 'true');
+  await home(page);
+  await putScript(page, { allowed: 'x', def: 42, current: 'zzz' });
+  await page.reload();
+  await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph-all')).toHaveAttribute('data-variant', 'all');
+});
+
+test('import staré zálohy převede nastavení písma na nový model', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.getByTestId('lesson-row')).toBeVisible();
+  await seed(page); // staré nastavení: bez velkých tiskacích, def cursive
   await page.reload();
   await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph')).toHaveAttribute('data-script', 'cursive');
-  // psací tvar i v aktivitě (Á = velké psací písmeno bez rozbití) a ve slabikách
-  await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').first().click();
-  await expect(page.getByTestId('lesson-menu').locator('.glyph[data-script="cursive"]').first()).toHaveText('M');
+  await passGate(page);
+  expect(await form(page, 'upper').getAttribute('aria-pressed')).toBe('false');
+  expect(await form(page, 'lower').getAttribute('aria-pressed')).toBe('true');
+  await expect(page.locator('[data-testid="script-settings"] [data-def="cursive"]')).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('písmo: výchozí tvar v nastavení rodiče platí hned a zkouška používá stejný tvar', async ({ page }) => {
   await openParent(page);
-  await page.locator('[data-testid="script-settings"] [data-def="lowerPrint"]').click();
+  await page.locator('[data-testid="script-settings"] [data-def="lower"]').click();
   await page.getByTestId('start-test-duha-1').click();
   await page.getByTestId('test-start').click();
   await expect(page.getByTestId('test-run')).toBeVisible();
@@ -147,7 +195,9 @@ test('reset: zrušení po prvním kroku nic nesmaže; záloha obsahuje nastaven�
   expect(await idb<number>(page, 'count', 'attempts')).toBe(1);
 });
 
-test('náhled psacího tvaru v Nastavení ukazuje velké psací písmeno', async ({ page }) => {
+test('náhled v Nastavení ukazuje příklad každé varianty', async ({ page }) => {
   await openParent(page);
-  await expect(form(page, 'cursive').locator('.glyph[data-script="cursive"]')).toHaveText('Ma la');
+  await expect(form(page, 'cursiveUpper').locator('.glyph[data-script="cursiveUpper"]')).toHaveText('Ma la');
+  await expect(form(page, 'all').locator('.glyph')).toHaveText(['MA LA', 'ma la', 'Ma la', 'ma la']);
+  await expect(form(page, 'upper').locator('.glyph')).toHaveText('MA LA');
 });
