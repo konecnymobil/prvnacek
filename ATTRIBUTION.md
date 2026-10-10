@@ -3,6 +3,7 @@
 | Dílo | Soubory | Autor | Licence | Úpravy |
 |---|---|---|---|---|
 | Písmo **Andika 7.000** (řezy 400, 600, 700) | `src/design/fonts/Andika-{Regular,SemiBold,Bold}.woff2` | © SIL Global | SIL Open Font License 1.1 – `src/design/fonts/OFL.txt` (v nasazené aplikaci `licenses/OFL.txt`), historie `FONTLOG.txt` | žádné (původní WOFF2; Vite jen přidá hash do názvu souboru) |
+| Písmo **Playwrite CZ** (variabilní, používá se jen řez 400) | `src/design/fonts/PlaywriteCZ-wght.woff2` | © 2023 The Playwrite Project Authors (TypeTogether: V. Burian, J. Scaglione), https://github.com/TypeTogether/Playwrite | SIL Open Font License 1.1, bez Reserved Font Name – `src/design/fonts/OFL-PlaywriteCZ.txt` (v aplikaci `licenses/OFL-PlaywriteCZ.txt`) | žádné (soubor beze změny; v CSS se používá jen `font-weight: 400`) |
 
 Reserved Font Names „Andika“ a „SIL“: písmo se nesmí upravovat (subset, převod) pod tímto názvem.
 

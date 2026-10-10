@@ -1,3 +1,4 @@
+import { GlyphText } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
@@ -15,7 +16,7 @@ export function WordArcs({ word }: { word: Word }) {
     <span className="word-arcs" data-testid="word-arcs">
       {word.syllablesText.map((t, i) => (
         <span className="syll-arc" key={i} data-testid="word-syll">
-          <span className="syll-text">{t}</span>
+          <span className="syll-text"><GlyphText text={t} /></span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
         </span>
       ))}

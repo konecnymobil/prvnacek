@@ -1,3 +1,4 @@
+import Glyphs from '../components/Glyphs';
 import { useEffect, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson } from '../content/types';
@@ -40,7 +41,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         <h1>Lekce {lesson.index}: {lesson.title}</h1>
       </header>
       <button className="tile tile-hero" onClick={() => void say([letter.audioId])} aria-label={`Poslechnout hlásku ${letter.upper}`}>
-        {letter.upper}
+        <Glyphs forms={letter.forms} />
       </button>
       {status && <p className="muted" data-testid="lesson-status">{STATUS[status]}</p>}
       <nav className="actions">

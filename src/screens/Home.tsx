@@ -1,3 +1,4 @@
+import Glyphs, { SCRIPT_LABEL, useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { useEffect, useState } from 'react';
 import type { Screen } from '../App';
@@ -14,6 +15,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
   const [states, setStates] = useState<Record<string, LessonState | undefined>>({});
   const [hint, setHint] = useState<string | null>(null);
   useEffect(() => { getLessonStatesMap().then(setStates, () => {}); }, [content]);
+  const script = useScript();
   const order = content ? content.orders[content.defaultOrderId] : null;
 
   return (
@@ -21,6 +23,9 @@ export default function Home({ content, error, go, openLesson }: Props) {
       <header className="topbar">
         <h1>Prvňáček</h1>
         <p className="muted">Verze M1 – aktivity a rodičovská část</p>
+        {script.allowedList.length > 1 && (
+          <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${SCRIPT_LABEL[script.settings.mode]}`}>Aa Písmo</button>
+        )}
       </header>
 
       {error && (
@@ -47,7 +52,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
                   onClick={() => (open ? openLesson(l.id) : setHint(`Lekce ${l.title} se otevře, až ji s rodičem dokončíš. Zatím si zahraj ty předchozí.`))}
                   aria-label={`Lekce ${l.index}: ${l.title}${open ? '' : ' (zamčeno)'}`}
                 >
-                  {letter.upper}
+                  <Glyphs forms={letter.forms} />
                 </button>
               );
             })}
