@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Glyphs from '../components/Glyphs';
+import Glyphs, { useTaskForm } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
 import type { Content } from '../content/load';
 import { promptAudio, randomPrompt, say, stopSay } from '../activities/common';
@@ -31,6 +31,7 @@ export default function Review({ content, back }: { content: Content; back: () =
   }, [content]);
 
   const it = items?.[n];
+  const form = useTaskForm(n);
   useEffect(() => {
     if (it) void say([...promptAudio(content, PROMPT[it.kind]), itemAudio(content, it)]);
   }, [content, it]);
@@ -90,7 +91,7 @@ export default function Review({ content, back }: { content: Content; back: () =
       <div className="choices" data-testid="choices">
         {item.choiceIds.map((id) => (
           <button key={id} className={`tile${(solved || wrong.length >= 2) && id === item.id ? ' is-right' : ''}${wrong.includes(id) ? ' is-tried' : ''}`} data-choice={id} onClick={() => void choose(id)}>
-            <Glyphs forms={itemForms(content, id, item.kind)} />
+            <Glyphs forms={itemForms(content, id, item.kind)} form={form} />
           </button>
         ))}
       </div>

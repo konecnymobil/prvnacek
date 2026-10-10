@@ -1,4 +1,4 @@
-import Glyphs from '../components/Glyphs';
+import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
@@ -53,6 +53,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const [correctCount, setCorrectCount] = useState(0);
   const [failed, setFailed] = useState(false);
   const busy = useRef(false);
+  const form = useTaskForm(target);
 
   useEffect(() => () => stopSay(), []);
 
@@ -140,7 +141,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const tray = (list: Letter[]) =>
     shuffleStable(list).map((l) => (
       <button key={l.id} className="tile tile-sm" data-letter={l.id} aria-label={`Písmeno ${l.upper}`} onClick={() => void place(l)}>
-        <Glyphs forms={l.forms} />
+        <Glyphs forms={l.forms} form={form} />
       </button>
     ));
 
@@ -159,7 +160,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
       <div className="slots" data-testid="slots">
         {slots.map((s, i) => (
           <button key={i} className={`slot${s ? ' is-filled' : ''}${solved ? ' is-right' : ''}`} data-slot={i} aria-label={s ? `Vrátit ${s.upper}` : 'Prázdné místo'} onClick={() => clear(i)}>
-            {s ? <Glyphs forms={s.forms} /> : ''}
+            {s ? <Glyphs forms={s.forms} form={form} /> : ''}
           </button>
         ))}
       </div>

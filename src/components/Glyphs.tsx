@@ -100,23 +100,46 @@ const formOf = (f: Forms, k: FormKey) => (k === 'cursiveUpper' ? f.cursiveUpper 
 
 const cls = (c?: string) => `glyph${c ? ` ${c}` : ''}`;
 /** Jediné místo vykreslení: jedna forma = jeden glyf, kombinace = glyfy vedle sebe (zalamují se). */
-function renderForms(f: Forms, id: VariantId, className?: string) {
-  const keys = variantById(id).forms;
+function renderForms(f: Forms, id: VariantId, className?: string, form?: FormKey) {
+  const keys = form ? [form] : variantById(id).forms;
   if (keys.length === 1) return <span className={cls(className)} data-script={keys[0]}>{formOf(f, keys[0])}</span>;
   return <span className={cls(`glyph-all${className ? ` ${className}` : ''}`)} data-script={id} data-variant={id}>{keys.map((k) => <span key={k} className="glyph" data-script={k}>{formOf(f, k)}</span>)}</span>;
 }
 
-export default function Glyphs({ forms, className }: { forms: Forms; className?: string }) {
+export default function Glyphs({ forms, className, form }: { forms: Forms; className?: string; form?: FormKey }) {
   const { variant } = useScript();
-  return renderForms(forms, variant, className);
+  return renderForms(forms, variant, className, form);
 }
 
 /** Text zadaný velkými písmeny (slabika, slovo, řada písmen „A M L“) ve zvolené variantě. */
-export function GlyphText({ text, className }: { text: string; className?: string }) {
+export function GlyphText({ text, className, form }: { text: string; className?: string; form?: FormKey }) {
   const { variant } = useScript();
   const toks = text.split(' ');
-  const keys = variantById(variant).forms;
+  const keys = form ? [form] : variantById(variant).forms;
   if (keys.length === 1) return <span className={cls(className)} data-script={keys[0]}>{toks.map((t) => formOf(index.get(t) ?? plain(t), keys[0])).join(' ')}</span>;
   return <span className={cls(className)} data-variant={variant}>{toks.map((t, i) => <span key={i}>{i ? ' ' : ''}{renderForms(index.get(t) ?? plain(t), variant)}</span>)}</span>;
 }
 export const usesCursive = (id: VariantId) => variantById(id).forms.some(isCursiveKey);
+
+/** Úlohy s výběrem: v jedné úloze jedna forma pro všechny karty, mezi úlohami se mění.
+ *  Pytlík: zamíchané formy povolené varianty, nová úloha nikdy nezíská tutéž formu jako předchozí (u jediné formy beze změny). */
+let bag: FormKey[] = [];
+let lastForm: FormKey | null = null;
+export function resetTaskForms() { bag = []; lastForm = null; }
+export function pickTaskForm(variant: VariantId, last: FormKey | null = lastForm): FormKey {
+  const forms = variantById(variant).forms;
+  if (forms.length === 1) { lastForm = forms[0]; return forms[0]; }
+  bag = bag.filter((f) => forms.includes(f));
+  if (!bag.length) bag = [...forms].sort(() => Math.random() - 0.5);
+  let i = bag.findIndex((f) => f !== last);
+  if (i < 0) { bag = [...forms].sort(() => Math.random() - 0.5); i = bag.findIndex((f) => f !== last); }
+  const f = bag.splice(i, 1)[0];
+  lastForm = f;
+  return f;
+}
+/** Forma pro aktuální úlohu; nový `taskKey` (nová úloha) = nová forma. */
+export function useTaskForm(taskKey: unknown): FormKey {
+  const { variant } = useScript();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => pickTaskForm(variant), [taskKey, variant]);
+}

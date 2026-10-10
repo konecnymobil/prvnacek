@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Mascot from '../activities/Mascot';
-import Glyphs from '../components/Glyphs';
+import Glyphs, { useTaskForm } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { wordImageUrl } from '../content/images';
 import { say, stopSay } from '../activities/common';
@@ -36,6 +36,7 @@ export default function Pexeso({ content, back }: { content: Content; back: () =
 
 function Game({ content, cands, pairs, back, again }: { content: Content; cands: ReturnType<typeof pexesoCandidates>; pairs: number; back: () => void; again: () => void }) {
   const [round, setRound] = useState(0);
+  const form = useTaskForm(round);
   const [cards, setCards] = useState<PexCard[]>(() => buildCards(pickPairs(cands, pairs)));
   const [open, setOpen] = useState<string[]>([]);
   const [found, setFound] = useState<string[]>([]);
@@ -107,7 +108,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
           return (
             <button key={c.key} className={`pex-card${isOpen ? ' is-open' : ''}${isFound ? ' is-matched' : ''}`} data-card={c.key} data-word={c.wordId} data-face={c.face}
               data-state={isFound ? 'matched' : isOpen ? 'open' : 'back'} aria-label={isOpen ? (c.face === 'picture' ? w.text : w.syllablesText[0]) : 'Zakrytá karta'} aria-pressed={isOpen} onClick={() => tap(c)}>
-              {isOpen ? (c.face === 'picture' ? (img ? <img src={img} alt={w.text} draggable={false} /> : <span>{w.text}</span>) : <Glyphs forms={content.syllableById.get(w.firstSyllableId)!.forms} />) : <span aria-hidden="true">?</span>}
+              {isOpen ? (c.face === 'picture' ? (img ? <img src={img} alt={w.text} draggable={false} /> : <span>{w.text}</span>) : <Glyphs forms={content.syllableById.get(w.firstSyllableId)!.forms} form={form} />) : <span aria-hidden="true">?</span>}
             </button>
           );
         })}
