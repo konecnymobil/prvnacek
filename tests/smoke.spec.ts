@@ -16,7 +16,7 @@ test('aplikace se načte bez chyb', async ({ page }) => {
 test('obsah se načte z JSON (pořadí Duhová řada)', async ({ page }) => {
   await page.goto('./');
   const row = page.getByTestId('lesson-row');
-  await expect(row.getByRole('button')).toHaveText(['M', 'A', 'L', 'E', 'S', 'O', 'P', 'U', 'I']);
+  await expect(row.getByRole('button').locator('[data-script="upperPrint"]')).toHaveText(['M', 'A', 'L', 'E', 'S', 'O', 'P', 'U', 'I']);
   await expect(page.getByTestId('content-version')).toContainText(/Obsah \d{4}-\d{2}-\d{2}\.\d+/);
   await expect(page.getByTestId('content-error')).toHaveCount(0);
 });

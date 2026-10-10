@@ -55,11 +55,13 @@ test('písmo: aspoň jeden tvar zůstane, přepínač dítěte se skryje při je
 test('písmo: dítě přepíná tvary, vykreslí se malé tiskací a psací (Playwrite CZ), uloží se do IndexedDB', async ({ page }) => {
   await page.goto('./');
   const stone = page.getByTestId('lesson-row').getByRole('button').first();
-  await expect(stone).toHaveText('M'); // výchozí = velké tiskací
+  await expect(stone.locator('.glyph-all')).toHaveCount(1); // výchozí = všechny tvary
+  await page.getByTestId('script-switch').click(); // → velké tiskací
+  await expect(stone).toHaveText('M');
   await page.getByTestId('script-switch').click(); // → malé tiskací
   await expect(stone).toHaveText('m');
-  await page.getByTestId('script-switch').click(); // → psací
-  await expect(stone).toHaveText('m');
+  await page.getByTestId('script-switch').click(); // → psací: samostatné písmeno velké psací (cursiveUpper)
+  await expect(stone).toHaveText('M'); // velké psací písmeno (jiný glyf než tiskací)
   await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'cursive');
   expect(await stone.locator('.glyph').evaluate((e) => getComputedStyle(e).fontFamily)).toContain('Playwrite CZ');
   expect(await page.evaluate(() => document.documentElement.dataset.pismo)).toBe('psaci');
@@ -69,8 +71,8 @@ test('písmo: dítě přepíná tvary, vykreslí se malé tiskací a psací (Pla
   await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph')).toHaveAttribute('data-script', 'cursive');
   // psací tvar i v aktivitě (Á = velké psací písmeno bez rozbití) a ve slabikách
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^m$/ }).first().click();
-  await expect(page.getByTestId('lesson-menu').locator('.glyph[data-script="cursive"]').first()).toHaveText('m');
+  await page.getByTestId('lesson-row').getByRole('button').first().click();
+  await expect(page.getByTestId('lesson-menu').locator('.glyph[data-script="cursive"]').first()).toHaveText('M');
 });
 
 test('písmo: výchozí tvar v nastavení rodiče platí hned a zkouška používá stejný tvar', async ({ page }) => {

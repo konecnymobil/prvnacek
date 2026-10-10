@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SCRIPT_FORMS, SCRIPT_LABEL, normalizeScriptConfig, useScript } from '../components/Glyphs';
+import { ALL_LABEL, SCRIPT_FORMS, SCRIPT_LABEL, modeLabel, normalizeScriptConfig, useScript } from '../components/Glyphs';
 import { buildBackup, downloadBackup, resetProgress } from '../storage/backup';
 import type { Forms, ScriptFormId } from '../content/types';
 
@@ -31,8 +31,8 @@ export function ScriptSettingsPanel() {
       </div>
       <h3>Výchozí tvar</h3>
       <div className="seg pismo-def" role="group" aria-label="Výchozí tvar písma">
-        {SCRIPT_FORMS.filter((f) => cfg.allowed[f]).map((f) => (
-          <button key={f} className="kbtn" data-def={f} aria-pressed={cfg.def === f} onClick={() => void save({ ...cfg, def: f, current: null })}>{SCRIPT_LABEL[f]}{cfg.def === f ? ' ✓' : ''}</button>
+        {(SCRIPT_FORMS.filter((f) => cfg.allowed[f]).length > 1 ? (['all', ...SCRIPT_FORMS.filter((f) => cfg.allowed[f])] as const) : SCRIPT_FORMS.filter((f) => cfg.allowed[f])).map((f) => (
+          <button key={f} className="kbtn" data-def={f} aria-pressed={cfg.def === f} onClick={() => void save({ ...cfg, def: f, current: null })}>{f === 'all' ? ALL_LABEL + ' (Aa + psací)' : modeLabel(f)}{cfg.def === f ? ' ✓' : ''}</button>
         ))}
       </div>
       <p className="small muted" role="status" data-testid="script-msg">{msg}</p>

@@ -71,10 +71,17 @@ export interface ScriptFormDecl {
 }
 export interface ScriptsDeclaration { defaultMode: ScriptFormId; forms: ScriptFormDecl[]; note: string }
 /** Nastavení aplikace (rodičovská sekce, mimo data): aktivní forma a dostupnost fontů. */
-export interface AppScriptSettings { mode: ScriptFormId; available: Record<ScriptFormId, boolean> }
+export type ScriptModeId = ScriptFormId | "all"; // all = všechny povolené tvary najednou (Aa + psací)
+export interface AppScriptSettings { mode: ScriptModeId; available: Record<ScriptFormId, boolean> }
 /** Text pro zobrazení; cursive = malými písmeny pro psací font. Nedostupná forma → upperPrint. */
 export type Forms = Record<ScriptFormId, string>;
+/** Povolené tvary v pořadí velké, malé, psací (pro režim „all“). */
+export function formsList(f: Forms, s: AppScriptSettings): [ScriptFormId, string][] {
+  const o = (["upperPrint", "lowerPrint", "cursive"] as ScriptFormId[]).filter((x) => s.available[x]).map((x) => [x, f[x]] as [ScriptFormId, string]);
+  return o.length ? o : [["upperPrint", f.upperPrint]];
+}
 export function formText(f: Forms, s: AppScriptSettings): string {
+  if (s.mode === "all") return formsList(f, s).map(([, t]) => t).join(" ");
   return s.available[s.mode] ? f[s.mode] : f.upperPrint;
 }
 
@@ -156,6 +163,9 @@ export interface Word {
   forms: Forms;
   /** „Slož slovo“ (A5c): jen víceslabičná slova. */
   usableInComposeTask: boolean;
+  firstSyllableId: SyllableId; // = syllableIds[0]
+  /** Pexeso (obrázek ↔ první slabika); zatím se nepoužívá. */
+  usableInMemoryGame: boolean;
   /** Chybné slabiky k poskládání: otevřené CV s usableInSyllableTasks, probrané v lekci slova, nikdy ne správné,
    *  ne lišící se jen délkou, nedávají jiné slovo. 0–3 (u nejranějších slov 0). */
   distractorSyllableIds: SyllableId[];

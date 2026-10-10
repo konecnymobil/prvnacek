@@ -11,7 +11,7 @@ const attempts = (page: Page) =>
 
 const open = async (page: Page, testId: string) => {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^I$/ }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^I$/ }) }).click();
   await page.getByTestId(testId).click();
 };
 
@@ -41,6 +41,6 @@ test('A7 Čti slovo: slovo s obloučky, výběr obrázku, zápis A7, zvuk až po
 
 test('nabídka: Čti slovo je v lekci M zamčená (málo slov s obrázkem)', async ({ page }) => {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^M$/ }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^M$/ }) }).click();
   await expect(page.getByTestId('open-readword')).toBeDisabled();
 });

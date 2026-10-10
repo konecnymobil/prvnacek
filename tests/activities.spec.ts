@@ -5,7 +5,7 @@ test.use({ serviceWorkers: 'block' });
 
 async function openLesson(page: Page, letter: string) {
   await unlockAll(page);
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: new RegExp(`^${letter}$`) }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: new RegExp(`^${letter}$`) }) }).click();
   await expect(page.getByTestId('lesson-menu')).toBeVisible();
 }
 
@@ -111,5 +111,5 @@ test('A4: slabiky jsou zamčené v lekci M, v lekci A se skládá MA/MÁ', async
 });
 
 async function openLessonByIndex(page: Page, letter: string) {
-  await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: new RegExp(`^${letter}$`) }).click();
+  await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: new RegExp(`^${letter}$`) }) }).click();
 }
