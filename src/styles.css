@@ -332,3 +332,18 @@ a {
 .lesson-menu .actions .kbtn { flex: 1 1 280px; min-height: clamp(52px, 9dvh, var(--touch-child-xl)); font-size: clamp(18px, 3dvh, var(--fs-h2)); padding-block: var(--sp-2); }
 .lesson-menu .actions p { flex: 1 1 100%; margin: 0; }
 .lesson-menu > p { margin: 0; }
+
+/* Pexeso */
+.pex { height: 100dvh; display: flex; flex-direction: column; }
+.pex-grid { flex: 1; min-height: 0; display: grid; gap: var(--sp-2, 8px); grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr); padding: var(--sp-2, 8px); }
+.pex-grid[data-cards="6"] { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); }
+@media (orientation: portrait) {
+  .pex-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); }
+  .pex-grid[data-cards="6"] { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
+}
+.pex-card { min-width: 88px; min-height: 88px; border-radius: 16px; border: 3px solid currentColor; background: var(--color-surface, #fff); font-size: clamp(1.6rem, 6vmin, 3.2rem); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 4px; transition: transform .25s; }
+.pex-card:not(.is-open) { background: var(--color-primary, #4a7bd0); color: #fff; }
+.pex-card.is-matched { border-color: #2e8b57; }
+.pex-card img { max-width: 80%; max-height: 80%; object-fit: contain; }
+.pex-stars { font-size: 3rem; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .pex-card { transition: none; } }

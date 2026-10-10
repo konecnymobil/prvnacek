@@ -116,6 +116,6 @@ export async function resetProgress(): Promise<void> {
   tx.objectStore('attempts').clear();
   tx.objectStore('lessonStates').clear();
   const keys = await tx.objectStore('settings').getAllKeys();
-  for (const k of keys) if (String(k).startsWith('tests:')) tx.objectStore('settings').delete(k);
+  for (const k of keys) if ((String(k).startsWith('tests:') || String(k).startsWith('pexeso:'))) tx.objectStore('settings').delete(k);
   await tx.done;
 }
