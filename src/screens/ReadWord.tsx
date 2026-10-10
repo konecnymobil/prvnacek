@@ -48,6 +48,8 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const busy = useRef(false);
 
   useEffect(() => () => stopSay(), []);
+  // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
+  useEffect(() => { if (step === 'read' && n < total) void say(promptAudio(content, 'p-read-word')); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choose = async (w: Word) => {
     if (solved || busy.current || wrong.includes(w.id)) return;

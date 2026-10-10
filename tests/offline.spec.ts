@@ -27,10 +27,12 @@ test('offline: service worker uloží aplikaci, obsah, písmo a všechny zvuky',
     '/prvnacek/content/letters.json',
     '/prvnacek/content/words.json',
     '/prvnacek/audio/tts/snd-p-welcome.mp3',
+    '/prvnacek/audio/tts/snd-p-read-word.mp3',
+    '/prvnacek/audio/tts/snd-p-read-syllable.mp3',
     '/prvnacek/icons/apple-touch-icon.png',
   ]) {
     expect(result, path).toContain(path);
   }
-  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(157);
+  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(159);
   expect(result.filter((p) => /\/assets\/Andika-.*\.woff2$/.test(p)).length).toBe(3);
 });
