@@ -24,7 +24,8 @@
       "primaryLetterId": "l-m",
       "title": "M",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": []
     },
     {
       "id": "duha-2",
@@ -36,7 +37,10 @@
       "primaryLetterId": "l-a",
       "title": "A + Á",
       "verified": false,
-      "verificationNote": "NEOVĚŘENO: zařazení Á do lekce A je předpoklad (7. vydání Duhové řady není online). Ověří Jiří v učebnici dítěte; při jiném pořadí upravit zde nebo v nastavení."
+      "verificationNote": "NEOVĚŘENO: zařazení Á do lekce A je předpoklad (7. vydání Duhové řady není online). Ověří Jiří v učebnici dítěte; při jiném pořadí upravit zde nebo v nastavení.",
+      "composeNewWordIds": [
+        "w-maama"
+      ]
     },
     {
       "id": "duha-3",
@@ -47,7 +51,11 @@
       "primaryLetterId": "l-l",
       "title": "L",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lama",
+        "w-malaa"
+      ]
     },
     {
       "id": "duha-4",
@@ -58,7 +66,11 @@
       "primaryLetterId": "l-e",
       "title": "E",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-ale",
+        "w-mele"
+      ]
     },
     {
       "id": "duha-5",
@@ -69,7 +81,11 @@
       "primaryLetterId": "l-s",
       "title": "S",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-sele",
+        "w-sama"
+      ]
     },
     {
       "id": "duha-6",
@@ -80,7 +96,12 @@
       "primaryLetterId": "l-o",
       "title": "O",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-maso",
+        "w-molo",
+        "w-maalo"
+      ]
     },
     {
       "id": "duha-7",
@@ -91,7 +112,13 @@
       "primaryLetterId": "l-p",
       "title": "P",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-mapa",
+        "w-pole",
+        "w-pase",
+        "w-pomalaa"
+      ]
     },
     {
       "id": "duha-8",
@@ -102,7 +129,14 @@
       "primaryLetterId": "l-u",
       "title": "U",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lupa",
+        "w-mula",
+        "w-puma",
+        "w-pusa",
+        "w-pomalu"
+      ]
     },
     {
       "id": "duha-9",
@@ -113,7 +147,16 @@
       "primaryLetterId": "l-i",
       "title": "I",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lilie",
+        "w-pila",
+        "w-pilule",
+        "w-silo",
+        "w-mile",
+        "w-milaa",
+        "w-mimo"
+      ]
     }
   ]
 }

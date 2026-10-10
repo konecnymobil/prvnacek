@@ -40,6 +40,8 @@ export interface ManifestFile extends FileHeader<"manifest"> {
 export interface Lesson {
   id: LessonId;
   index: number;              // 1-based
+  /** Slož slovo: nová složitelná slova lekce; kolo obsahuje aspoň jedno. */
+  composeNewWordIds?: WordId[];
   letterIds: LetterId[];      // nová písmena lekce (Duhová řada: lekce 2 = A + Á)
   primaryLetterId: LetterId;  // písmeno na dlaždici
   title: string;              // "A + Á"

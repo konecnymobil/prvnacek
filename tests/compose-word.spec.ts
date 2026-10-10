@@ -33,7 +33,7 @@ test('Slož slovo: klepání – chyba bez trestu, správné složení ukáže o
   }
   for (const sid of word.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
   await expect(page.getByTestId('mascot')).toHaveAttribute('data-mood', 'radost');
-  await expect(page.getByTestId('picture')).toBeVisible();
+  if ((word as { imageId?: string | null }).imageId) await expect(page.getByTestId('picture')).toBeVisible();
   await expect(page.getByTestId('slots')).toContainText(word.text.replace(/\s/g, '').slice(0, 1));
   await expect.poll(async () => (await attempts(page)).filter((a) => a.activity === 'A5c' && a.correct).length).toBe(word.syllableIds.length);
   if (wrongId) expect((await attempts(page)).filter((a) => a.activity === 'A5c' && !a.correct).map((a) => a.itemId)).toEqual([target]);
@@ -74,7 +74,7 @@ test('Slož slovo: přetažení karty do políčka (pointer events)', async ({ p
     await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2, { steps: 8 });
     await page.mouse.up();
   }
-  await expect(page.getByTestId('picture')).toBeVisible();
+  if ((word as { imageId?: string | null }).imageId) await expect(page.getByTestId('picture')).toBeVisible();
   await expect.poll(async () => (await attempts(page)).filter((a) => a.activity === 'A5c' && a.correct).length).toBe(word.syllableIds.length); // žádné dvojité započtení (drag + click)
 });
 
@@ -91,4 +91,15 @@ test('Slož slovo: kolo skončí a lze ho opakovat; A5 historie se počítá v t
   await expect(page.getByTestId('round-end')).toBeVisible();
   await page.getByTestId('again').click();
   await expect(page.getByTestId('compose-activity')).toBeVisible();
+});
+
+test('Slož slovo v lekci E: kolo vždy obsahuje ALE nebo MELE', async ({ page }) => {
+  await unlockAll(page);
+  for (let i = 0; i < 6; i++) {
+    await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: /^E$/ }) }).click();
+    await page.getByTestId('open-compose').click();
+    const q = ((await page.getByTestId('compose-activity').getAttribute('data-queue')) ?? '').split(',');
+    expect(q.includes('w-ale') || q.includes('w-mele'), q.join(',')).toBe(true);
+    await page.goto('./');
+  }
 });
