@@ -15,6 +15,19 @@ const IMAGE_FILES: Record<string, string> = {
   'img-w-sele': 'sele',
   'img-w-maama': 'mama',
   'img-w-pole': 'pole',
+  'img-w-molo': 'molo',
+  'img-w-mula': 'mula',
+  'img-w-puma': 'puma',
+  'img-w-pusa': 'pusa',
+  'img-w-lilie': 'lilie',
+  'img-w-pilule': 'pilule',
+  'img-w-silo': 'silo',
+  'img-w-les': 'les',
+  'img-w-salaam': 'salam',
+  'img-w-los': 'los',
+  'img-w-losos': 'losos',
+  'img-w-pes': 'pes',
+  'img-w-sup': 'sup',
 };
 
 export function wordImageUrl(w: Word): string | null {

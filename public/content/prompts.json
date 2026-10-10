@@ -115,6 +115,20 @@
       "audioId": "snd-p-find-picture"
     },
     {
+      "id": "p-read-syllable",
+      "category": "instruction",
+      "activity": null,
+      "text": "Přečti si slabiku nahlas.",
+      "audioId": "snd-p-read-syllable"
+    },
+    {
+      "id": "p-read-word",
+      "category": "instruction",
+      "activity": null,
+      "text": "Přečti si slovo nahlas.",
+      "audioId": "snd-p-read-word"
+    },
+    {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,
