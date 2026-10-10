@@ -20,6 +20,7 @@ export interface Attempt {
   itemId: string; // id písmene/slabiky/slova
   correct: boolean;
   chosenId: string | null; // záměna (co dítě vybralo)
+  source?: 'review'; // pokus z Opakování napříč lekcemi (activity zůstává původní, tabulka pro rodiče ho počítá)
   at: number; // Date.now()
   day: string; // YYYY-MM-DD v místním čase
 }
