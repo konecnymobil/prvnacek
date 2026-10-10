@@ -39,29 +39,6 @@ test('A7 Čti slovo: slovo s obloučky, výběr obrázku, zápis A7, zvuk až po
   await expect(page.getByTestId('progress')).toHaveText(new RegExp(`^Úloha 2 z ${total + 1}$`)); // chybné slovo se zopakuje
 });
 
-test('Slovo k obrázku: celé kolo pokryje všechna dostupná slova, chyba se zopakuje, kolo lze opakovat', async ({ page }) => {
-  await open(page, 'open-words');
-  const act = page.getByTestId('word-activity');
-  const total = Number(await act.getAttribute('data-total'));
-  expect(total).toBeGreaterThanOrEqual(5);
-  const seen: string[] = [];
-  for (let i = 0; i < total; i++) {
-    const t = (await page.getByTestId('word-activity').getAttribute('data-target'))!;
-    seen.push(t);
-    if (i === 0) await page.locator(`[data-word]:not([data-word="${t}"])`).first().click();
-    await page.locator(`[data-word="${t}"]`).click();
-    await page.getByRole('button', { name: /Dál/ }).click();
-  }
-  // chybné první slovo se vrátilo na konec
-  await expect(page.getByTestId('word-activity')).toHaveAttribute('data-target', seen[0]);
-  expect(new Set(seen).size).toBe(total);
-  await page.locator(`[data-word="${seen[0]}"]`).click();
-  await page.getByRole('button', { name: /Dál/ }).click();
-  await expect(page.getByTestId('round-end')).toBeVisible();
-  await page.getByTestId('again').click();
-  await expect(page.getByTestId('word-activity')).toBeVisible();
-});
-
 test('nabídka: Čti slovo je v lekci M zamčená (málo slov s obrázkem)', async ({ page }) => {
   await unlockAll(page);
   await page.getByTestId('lesson-row').getByRole('button').filter({ hasText: /^M$/ }).click();

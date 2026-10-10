@@ -33,6 +33,7 @@ export interface ManifestFile extends FileHeader<"manifest"> {
   contentVersion: string;
   defaultOrderId: OrderId;
   files: { path: string; kind: string; schema: string }[];
+  scripts: ScriptsDeclaration;
 }
 
 // ---------- order.duha.json / order.agata.json ----------
@@ -58,6 +59,25 @@ export interface OrderFile extends FileHeader<"order"> {
   lessons: Lesson[];
 }
 
+// ---------- tvary písma ----------
+export type ScriptFormId = "upperPrint" | "lowerPrint" | "cursive"; // velká tiskací, malá tiskací, psací
+export interface ScriptFormDecl {
+  id: ScriptFormId;
+  label: string;
+  fontRequired: boolean;       // psací = potřebuje font (jen text, žádné obrázky)
+  introducedAtLesson: PerOrder<number | null>; // konfigurace: od které lekce; null = neurčeno (neověřeno)
+  verified: boolean;
+  note: string;
+}
+export interface ScriptsDeclaration { defaultMode: ScriptFormId; forms: ScriptFormDecl[]; note: string }
+/** Nastavení aplikace (rodičovská sekce, mimo data): aktivní forma a dostupnost fontů. */
+export interface AppScriptSettings { mode: ScriptFormId; available: Record<ScriptFormId, boolean> }
+/** Text pro zobrazení; cursive = malými písmeny pro psací font. Nedostupná forma → upperPrint. */
+export type Forms = Record<ScriptFormId, string>;
+export function formText(f: Forms, s: AppScriptSettings): string {
+  return s.available[s.mode] ? f[s.mode] : f.upperPrint;
+}
+
 // ---------- letters.json ----------
 export interface LetterSound {
   ipa: string;                 // symbol z fonetické sady Azure cs-CZ
@@ -71,7 +91,8 @@ export interface LetterSound {
 export interface Letter {
   id: LetterId;
   upper: string;               // "M" – ve v1 se zobrazují jen velká tiskací bezpatková
-  lower: string;               // "m" – pro v2
+  lower: string;               // "m"
+  forms: Forms & { cursiveUpper: string }; // cursive = malé psací, cursiveUpper = velké psací (font)
   kind: "vowel" | "consonant";
   isLong: boolean;             // Á
   baseLetterId: LetterId | null; // Á → l-a
@@ -105,6 +126,7 @@ export interface LettersFile extends FileHeader<"letters"> {
 export interface Syllable {
   id: SyllableId;
   text: string;                // "MA" (velká písmena)
+  forms: Forms;                // {upperPrint:"MA", lowerPrint:"ma", cursive:"ma"}
   textLower: string;           // "ma" (pro TTS)
   /** CV = otevřená slabika; V = samotná samohláska jako slabika slova (O-SA, A-LE);
    *  CVC/VC = zavřená slabika – jen poslední slabika slov s difficulty 2 (PES, O-SEL, SA-LÁM). */
@@ -131,6 +153,12 @@ export type PartOfSpeech = "noun" | "verb" | "adj" | "adv" | "function";
 export interface Word {
   id: WordId;
   text: string;                // "MÁMA"
+  forms: Forms;
+  /** „Slož slovo“ (A5c): jen víceslabičná slova. */
+  usableInComposeTask: boolean;
+  /** Chybné slabiky k poskládání: otevřené CV s usableInSyllableTasks, probrané v lekci slova, nikdy ne správné,
+   *  ne lišící se jen délkou, nedávají jiné slovo. 0–3 (u nejranějších slov 0). */
+  distractorSyllableIds: SyllableId[];
   textLower: string;
   syllableIds: SyllableId[];   // dělení na slabiky přes id
   syllablesText: string[];     // ["MÁ","MA"] – pohodlí pro UI (shodné se syllableIds)
@@ -236,6 +264,8 @@ export interface AudioSelectionEntry {
   selectedClipId: ClipId | null;   // jen při status "selected"; musí být v candidateClipIds
   decidedAt: string | null;        // YYYY-MM-DD
   note: string | null;
+  /** Varianty přidané až po výběru: výběr platí, ale zvuk čeká na nový poslech (po poslechu vyprázdnit). */
+  newCandidateClipIds: ClipId[];
   sourceFile: string | null;       // zdrojový soubor vybrané varianty, cesta od kořene repozitáře (např. audio-trial/…)
 }
 /** Klip ověřený poslechem – riziko (např. „zní jako slovo“) je vyřešené. */

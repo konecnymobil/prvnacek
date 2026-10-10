@@ -19,16 +19,20 @@ test('Čti slabiku a Čti slovo: pokyn zazní na začátku úlohy, nové obrázk
   await expect.poll(() => urls.some((u) => u.endsWith('snd-p-read-word.mp3'))).toBe(true);
   await page.getByRole('button', { name: 'Zpět' }).first().click();
 
-  // nové obrázky: slova s imageId z dávky 13 musí mít v Slovo k obrázku načtený <img>
-  await page.getByTestId('open-words').click();
-  const total = Number(await page.getByTestId('word-activity').getAttribute('data-total'));
+  // nové obrázky: každé složené slovo musí ukázat načtený obrázek (Slož slovo)
+  await page.getByTestId('open-compose').click();
+  const total = Number(await page.getByTestId('compose-activity').getAttribute('data-total'));
   const loaded = new Set<string>();
+  const words = await page.evaluate(async () => (await (await fetch('content/words.json')).json()).words);
   for (let i = 0; i < total; i++) {
-    const t = (await page.getByTestId('word-activity').getAttribute('data-target'))!;
-    for (const src of await page.locator('[data-word] img').evaluateAll((els) => els.map((e) => (e as HTMLImageElement).src))) loaded.add(src);
-    expect(await page.locator('[data-word] img').evaluateAll((els) => els.every((e) => (e as HTMLImageElement).naturalWidth > 0))).toBe(true);
-    await page.locator(`[data-word="${t}"]`).click();
+    const t = (await page.getByTestId('compose-activity').getAttribute('data-target'))!;
+    const w = words.find((x: { id: string }) => x.id === t);
+    for (const sid of w.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
+    const img = page.getByTestId('picture');
+    await expect(img).toBeVisible();
+    await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    loaded.add((await img.getAttribute('src'))!);
     await page.getByRole('button', { name: /Dál/ }).click();
   }
-  expect(loaded.size).toBeGreaterThan(9); // dřív bylo obrázků jen 9
+  expect(loaded.size).toBeGreaterThan(3);
 });

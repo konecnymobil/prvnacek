@@ -36,7 +36,13 @@
         "V",
         "K"
       ],
-      "audioId": "snd-l-m"
+      "audioId": "snd-l-m",
+      "forms": {
+        "upperPrint": "M",
+        "lowerPrint": "m",
+        "cursive": "m",
+        "cursiveUpper": "M"
+      }
     },
     {
       "id": "l-a",
@@ -74,7 +80,13 @@
         "X",
         "N"
       ],
-      "audioId": "snd-l-a"
+      "audioId": "snd-l-a",
+      "forms": {
+        "upperPrint": "A",
+        "lowerPrint": "a",
+        "cursive": "a",
+        "cursiveUpper": "A"
+      }
     },
     {
       "id": "l-aa",
@@ -109,7 +121,13 @@
         "K",
         "N"
       ],
-      "audioId": "snd-l-aa"
+      "audioId": "snd-l-aa",
+      "forms": {
+        "upperPrint": "Á",
+        "lowerPrint": "á",
+        "cursive": "á",
+        "cursiveUpper": "Á"
+      }
     },
     {
       "id": "l-l",
@@ -143,7 +161,13 @@
         "F",
         "H"
       ],
-      "audioId": "snd-l-l"
+      "audioId": "snd-l-l",
+      "forms": {
+        "upperPrint": "L",
+        "lowerPrint": "l",
+        "cursive": "l",
+        "cursiveUpper": "L"
+      }
     },
     {
       "id": "l-e",
@@ -180,7 +204,13 @@
         "K",
         "T"
       ],
-      "audioId": "snd-l-e"
+      "audioId": "snd-l-e",
+      "forms": {
+        "upperPrint": "E",
+        "lowerPrint": "e",
+        "cursive": "e",
+        "cursiveUpper": "E"
+      }
     },
     {
       "id": "l-s",
@@ -216,7 +246,13 @@
         "B",
         "Š"
       ],
-      "audioId": "snd-l-s"
+      "audioId": "snd-l-s",
+      "forms": {
+        "upperPrint": "S",
+        "lowerPrint": "s",
+        "cursive": "s",
+        "cursiveUpper": "S"
+      }
     },
     {
       "id": "l-o",
@@ -254,7 +290,13 @@
         "D",
         "Ů"
       ],
-      "audioId": "snd-l-o"
+      "audioId": "snd-l-o",
+      "forms": {
+        "upperPrint": "O",
+        "lowerPrint": "o",
+        "cursive": "o",
+        "cursiveUpper": "O"
+      }
     },
     {
       "id": "l-p",
@@ -290,7 +332,13 @@
         "D",
         "K"
       ],
-      "audioId": "snd-l-p"
+      "audioId": "snd-l-p",
+      "forms": {
+        "upperPrint": "P",
+        "lowerPrint": "p",
+        "cursive": "p",
+        "cursiveUpper": "P"
+      }
     },
     {
       "id": "l-u",
@@ -327,7 +375,13 @@
         "H",
         "Y"
       ],
-      "audioId": "snd-l-u"
+      "audioId": "snd-l-u",
+      "forms": {
+        "upperPrint": "U",
+        "lowerPrint": "u",
+        "cursive": "u",
+        "cursiveUpper": "U"
+      }
     },
     {
       "id": "l-i",
@@ -363,7 +417,13 @@
         "F",
         "Y"
       ],
-      "audioId": "snd-l-i"
+      "audioId": "snd-l-i",
+      "forms": {
+        "upperPrint": "I",
+        "lowerPrint": "i",
+        "cursive": "i",
+        "cursiveUpper": "I"
+      }
     }
   ],
   "pictureWords": [

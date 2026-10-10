@@ -64,23 +64,6 @@ test('chybné položky ze zkoušky se vracejí do procvičování', async ({ pag
   await expect.poll(async () => (await attempts(page)).some((a) => a.itemId === 'l-m' && a.correct)).toBe(true);
 });
 
-test('Slovo k obrázku: poslech, kontrola odpovědi, pokrok do IndexedDB', async ({ page }) => {
-  await unlockAll(page);
-  await tile(page, 'L').click();
-  await page.getByTestId('open-words').click();
-  const act = page.getByTestId('word-activity');
-  await expect(act).toBeVisible();
-  const target = (await act.getAttribute('data-target'))!;
-  const wrong = page.locator(`[data-word]:not([data-word="${target}"])`).first();
-  await wrong.click();
-  await expect(page.getByTestId('feedback')).toContainText('Skoro');
-  await page.locator(`[data-word="${target}"]`).click();
-  await expect(page.getByTestId('feedback')).toContainText('Správně');
-  await expect.poll(async () => (await attempts(page)).filter((a) => a.activity === 'A5').map((a) => [a.itemId, a.correct])).toEqual([[target, false], [target, true]]);
-  await page.getByRole('button', { name: /Dál/ }).click();
-  await expect(page.getByTestId('progress')).toHaveText(/^Úloha 2 z \d+$/);
-});
-
 test('lekce I: stejné aktivity fungují jen z obsahu', async ({ page }) => {
   await unlockAll(page);
   await tile(page, 'I').click();
@@ -88,8 +71,8 @@ test('lekce I: stejné aktivity fungují jen z obsahu', async ({ page }) => {
   await page.getByRole('button', { name: /Slož slabiku/ }).click();
   await expect(page.getByTestId('feedback')).toBeVisible();
   await page.getByRole('button', { name: 'Zpět' }).first().click();
-  await page.getByTestId('open-words').click();
-  await expect(page.getByTestId('word-activity')).toBeVisible();
+  await page.getByTestId('open-compose').click();
+  await expect(page.getByTestId('compose-activity')).toBeVisible();
   await page.getByRole('button', { name: 'Zpět' }).first().click();
   await page.getByRole('button', { name: /Najdi písmeno/ }).click();
   await expect(page.getByTestId('letter-activity')).toBeVisible();

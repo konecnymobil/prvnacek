@@ -129,6 +129,13 @@
       "audioId": "snd-p-read-word"
     },
     {
+      "id": "p-compose-word",
+      "category": "instruction",
+      "activity": "A5c",
+      "text": "Slož slovo.",
+      "audioId": "snd-p-compose-word"
+    },
+    {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,

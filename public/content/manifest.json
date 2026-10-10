@@ -1,8 +1,47 @@
 {
   "schemaVersion": 1,
   "kind": "manifest",
-  "contentVersion": "2026-10-10.1",
+  "contentVersion": "2026-10-10.2",
   "defaultOrderId": "duha",
+  "scripts": {
+    "defaultMode": "upperPrint",
+    "forms": [
+      {
+        "id": "upperPrint",
+        "label": "Velká tiskací",
+        "fontRequired": false,
+        "introducedAtLesson": {
+          "duha": 1,
+          "agata": 1
+        },
+        "verified": true,
+        "note": "Výchozí ve v1."
+      },
+      {
+        "id": "lowerPrint",
+        "label": "Malá tiskací",
+        "fontRequired": false,
+        "introducedAtLesson": {
+          "duha": null,
+          "agata": null
+        },
+        "verified": false,
+        "note": "NEOVĚŘENO: kdy ji Živá abeceda zavádí (Agáta orientačně únor). Zatím jen konfigurace."
+      },
+      {
+        "id": "cursive",
+        "label": "Psací",
+        "fontRequired": true,
+        "introducedAtLesson": {
+          "duha": null,
+          "agata": null
+        },
+        "verified": false,
+        "note": "NEOVĚŘENO: kdy se zavádí. Jen text pro psací font (žádné obrázky); dostupnost fontu nastavuje rodič."
+      }
+    ],
+    "note": "Data deklarují podporované formy písma. Aktivní režim a dostupnost fontů (psací) nastavuje rodič v rodičovské sekci (viz AppScriptSettings v types.ts). Kdy se která forma zavádí, je konfigurace (introducedAtLesson), zatím neověřená."
+  },
   "files": [
     {
       "path": "order.duha.json",

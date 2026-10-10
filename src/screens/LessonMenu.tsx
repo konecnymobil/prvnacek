@@ -4,6 +4,7 @@ import type { Lesson } from '../content/types';
 import type { Screen } from '../App';
 import { say } from '../activities/common';
 import { lessonPictureWords } from './WordActivity';
+import { composeWords } from '../activities/composeWord';
 import { lessonSyllables, allUsableSyllables } from './SyllableActivity';
 import { getLessonState, type LessonStatus } from '../storage/db';
 
@@ -24,7 +25,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
   const letter = content.letterById.get(lesson.primaryLetterId)!;
   const hasSyllables = lessonSyllables(content, lesson).length > 0;
   const hasRead = allUsableSyllables(content, lesson).length >= 3;
-  const hasWords = lessonPictureWords(content, lesson).length >= 2;
+  const hasWords = composeWords(content, lesson).length >= 1;
   const hasReadWords = lessonPictureWords(content, lesson).length >= 3;
   const [status, setStatus] = useState<LessonStatus | null>(null);
 
@@ -50,8 +51,8 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('readSyllable')} disabled={!hasRead} data-testid="open-read">
           📖 Čti slabiku
         </button>
-        <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('wordActivity')} disabled={!hasWords} data-testid="open-words">
-          🖼 Slovo k obrázku
+        <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('composeWord')} disabled={!hasWords} data-testid="open-compose">
+          🧱 Slož slovo
         </button>
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('readWord')} disabled={!hasReadWords} data-testid="open-readword">
           📚 Čti slovo
