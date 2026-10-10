@@ -48,6 +48,7 @@ test('Slož slovo: rozptylovač (od 3. úlohy) se vrátí, správné složení s
     const w = (await page.evaluate(async () => (await (await fetch('content/words.json')).json()).words)).find((x: { id: string }) => x.id === t);
     for (const sid of w.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
     await page.getByRole('button', { name: /Dál/ }).click();
+    await expect(page.getByTestId('progress')).toHaveText(new RegExp(`^Úloha ${i + 2} z \\d+$`));
   }
   const t = (await page.getByTestId('compose-activity').getAttribute('data-target'))!;
   const w = (await page.evaluate(async () => (await (await fetch('content/words.json')).json()).words)).find((x: { id: string }) => x.id === t);
@@ -58,7 +59,8 @@ test('Slož slovo: rozptylovač (od 3. úlohy) se vrátí, správné složení s
   await expect(page.getByTestId('mascot')).toHaveAttribute('data-mood', 'povzbuzeni');
   await expect(page.getByTestId('slot').first()).toHaveAttribute('data-filled', '');
   for (const sid of w.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
-  await expect(page.getByTestId('picture')).toBeVisible();
+  await expect(page.getByTestId('mascot')).toHaveAttribute('data-mood', 'radost');
+  if ((w as { imageId?: string | null }).imageId) await expect(page.getByTestId('picture')).toBeVisible();
   await expect.poll(async () => (await attempts(page)).some((a) => a.activity === 'A5c' && a.chosenId === distractor && !a.correct)).toBe(true);
 });
 
