@@ -29,6 +29,7 @@ test('Čti slabiku a Čti slovo: pokyn zazní na začátku úlohy, nové obrázk
     const w = words.find((x: { id: string }) => x.id === t);
     for (const sid of w.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
     const img = page.getByTestId('picture');
+    if (!w.imageId) { await expect(page.getByRole('button', { name: /Dál/ })).toBeVisible(); await page.getByRole('button', { name: /Dál/ }).click(); continue; } // ALE, MELE nemají obrázek
     await expect(img).toBeVisible();
     await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     loaded.add((await img.getAttribute('src'))!);

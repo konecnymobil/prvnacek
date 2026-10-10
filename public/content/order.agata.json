@@ -23,7 +23,8 @@
       "primaryLetterId": "l-a",
       "title": "A",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": []
     },
     {
       "id": "agata-2",
@@ -34,7 +35,8 @@
       "primaryLetterId": "l-aa",
       "title": "Á",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": []
     },
     {
       "id": "agata-3",
@@ -45,7 +47,10 @@
       "primaryLetterId": "l-m",
       "title": "M",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-maama"
+      ]
     },
     {
       "id": "agata-4",
@@ -56,7 +61,11 @@
       "primaryLetterId": "l-l",
       "title": "L",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lama",
+        "w-malaa"
+      ]
     },
     {
       "id": "agata-5",
@@ -67,7 +76,11 @@
       "primaryLetterId": "l-e",
       "title": "E",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-ale",
+        "w-mele"
+      ]
     },
     {
       "id": "agata-6",
@@ -78,7 +91,11 @@
       "primaryLetterId": "l-s",
       "title": "S",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-sele",
+        "w-sama"
+      ]
     },
     {
       "id": "agata-7",
@@ -89,7 +106,12 @@
       "primaryLetterId": "l-o",
       "title": "O",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-maso",
+        "w-molo",
+        "w-maalo"
+      ]
     },
     {
       "id": "agata-8",
@@ -100,7 +122,13 @@
       "primaryLetterId": "l-p",
       "title": "P",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-mapa",
+        "w-pole",
+        "w-pase",
+        "w-pomalaa"
+      ]
     },
     {
       "id": "agata-9",
@@ -111,7 +139,14 @@
       "primaryLetterId": "l-u",
       "title": "U",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lupa",
+        "w-mula",
+        "w-puma",
+        "w-pusa",
+        "w-pomalu"
+      ]
     },
     {
       "id": "agata-10",
@@ -122,7 +157,16 @@
       "primaryLetterId": "l-i",
       "title": "I",
       "verified": true,
-      "verificationNote": null
+      "verificationNote": null,
+      "composeNewWordIds": [
+        "w-lilie",
+        "w-pila",
+        "w-pilule",
+        "w-silo",
+        "w-mile",
+        "w-milaa",
+        "w-mimo"
+      ]
     }
   ]
 }
