@@ -59,22 +59,21 @@ export function useScript(): Ctx {
 
 /** Rejstřík text (velká tiskací) → forms; naplní se po načtení obsahu. */
 let index = new Map<string, Forms>();
-let capLetter = new Map<string, string>(); // malé psací písmeno → velké psací
 let wordCursive = new Set<string>();
 export function indexContent(c: { letters: { upper: string; forms: Forms & { cursiveUpper?: string } }[]; syllables: { text: string; forms: Forms }[]; words: { text: string; forms: Forms }[] }) {
   index = new Map<string, Forms>([...c.letters.map((l) => [l.upper, l.forms] as const), ...c.syllables.map((s) => [s.text, s.forms] as const), ...c.words.map((w) => [w.text, w.forms] as const)]);
-  capLetter = new Map(c.letters.filter((l) => l.forms.cursiveUpper).map((l) => [l.forms.cursive, l.forms.cursiveUpper!] as const));
   const syl = new Set(c.syllables.map((x) => x.forms.cursive));
   wordCursive = new Set(c.words.map((w) => w.forms.cursive).filter((t) => !syl.has(t)));
 }
 const plain = (t: string): Forms => ({ upperPrint: t, lowerPrint: t.toLowerCase(), cursive: t.toLowerCase() });
-const capInitial = (t: string) => { const c = [...t][0] ?? ''; return (capLetter.get(c) ?? c.toUpperCase()) + t.slice(c.length); };
 
 /** Psací tvar: samostatné písmeno = velké psací (cursiveUpper), slovo s velkým počátečním písmenem, slabika malými.
  *  V režimu „všechny tvary“ u písmene „Mm“ (velké + malé psací). Slovo: velké počáteční z cursiveUpper písmene (obsah zatím nemá velkou psací formu slov). */
 function cursiveText(f: Forms & { cursiveUpper?: string }, all: boolean): string {
-  if (f.cursiveUpper) return all ? f.cursiveUpper + f.cursive : f.cursiveUpper;
-  return wordCursive.has(f.cursive) ? capInitial(f.cursive) : f.cursive;
+  const up = f.cursiveUpper;
+  if (!up) return f.cursive;
+  if ([...f.cursive].length === 1) return all ? up + f.cursive : up; // písmeno: M / Mm
+  return wordCursive.has(f.cursive) ? up : f.cursive; // slovo: velké počáteční (cursiveUpper), slabika malými
 }
 const withCursive = (f: Forms, all: boolean): Forms => ({ ...f, cursive: cursiveText(f, all) });
 

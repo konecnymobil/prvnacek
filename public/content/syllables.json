@@ -29,7 +29,8 @@
       "forms": {
         "upperPrint": "MA",
         "lowerPrint": "ma",
-        "cursive": "ma"
+        "cursive": "ma",
+        "cursiveUpper": "Ma"
       }
     },
     {
@@ -59,7 +60,8 @@
       "forms": {
         "upperPrint": "MÁ",
         "lowerPrint": "má",
-        "cursive": "má"
+        "cursive": "má",
+        "cursiveUpper": "Má"
       }
     },
     {
@@ -89,7 +91,8 @@
       "forms": {
         "upperPrint": "ME",
         "lowerPrint": "me",
-        "cursive": "me"
+        "cursive": "me",
+        "cursiveUpper": "Me"
       }
     },
     {
@@ -119,7 +122,8 @@
       "forms": {
         "upperPrint": "MO",
         "lowerPrint": "mo",
-        "cursive": "mo"
+        "cursive": "mo",
+        "cursiveUpper": "Mo"
       }
     },
     {
@@ -149,7 +153,8 @@
       "forms": {
         "upperPrint": "MU",
         "lowerPrint": "mu",
-        "cursive": "mu"
+        "cursive": "mu",
+        "cursiveUpper": "Mu"
       }
     },
     {
@@ -179,7 +184,8 @@
       "forms": {
         "upperPrint": "MI",
         "lowerPrint": "mi",
-        "cursive": "mi"
+        "cursive": "mi",
+        "cursiveUpper": "Mi"
       }
     },
     {
@@ -209,7 +215,8 @@
       "forms": {
         "upperPrint": "LA",
         "lowerPrint": "la",
-        "cursive": "la"
+        "cursive": "la",
+        "cursiveUpper": "La"
       }
     },
     {
@@ -239,7 +246,8 @@
       "forms": {
         "upperPrint": "LÁ",
         "lowerPrint": "lá",
-        "cursive": "lá"
+        "cursive": "lá",
+        "cursiveUpper": "Lá"
       }
     },
     {
@@ -269,7 +277,8 @@
       "forms": {
         "upperPrint": "LE",
         "lowerPrint": "le",
-        "cursive": "le"
+        "cursive": "le",
+        "cursiveUpper": "Le"
       }
     },
     {
@@ -299,7 +308,8 @@
       "forms": {
         "upperPrint": "LO",
         "lowerPrint": "lo",
-        "cursive": "lo"
+        "cursive": "lo",
+        "cursiveUpper": "Lo"
       }
     },
     {
@@ -329,7 +339,8 @@
       "forms": {
         "upperPrint": "LU",
         "lowerPrint": "lu",
-        "cursive": "lu"
+        "cursive": "lu",
+        "cursiveUpper": "Lu"
       }
     },
     {
@@ -359,7 +370,8 @@
       "forms": {
         "upperPrint": "LI",
         "lowerPrint": "li",
-        "cursive": "li"
+        "cursive": "li",
+        "cursiveUpper": "Li"
       }
     },
     {
@@ -389,7 +401,8 @@
       "forms": {
         "upperPrint": "SA",
         "lowerPrint": "sa",
-        "cursive": "sa"
+        "cursive": "sa",
+        "cursiveUpper": "Sa"
       }
     },
     {
@@ -419,7 +432,8 @@
       "forms": {
         "upperPrint": "SÁ",
         "lowerPrint": "sá",
-        "cursive": "sá"
+        "cursive": "sá",
+        "cursiveUpper": "Sá"
       }
     },
     {
@@ -449,7 +463,8 @@
       "forms": {
         "upperPrint": "SE",
         "lowerPrint": "se",
-        "cursive": "se"
+        "cursive": "se",
+        "cursiveUpper": "Se"
       }
     },
     {
@@ -479,7 +494,8 @@
       "forms": {
         "upperPrint": "SO",
         "lowerPrint": "so",
-        "cursive": "so"
+        "cursive": "so",
+        "cursiveUpper": "So"
       }
     },
     {
@@ -509,7 +525,8 @@
       "forms": {
         "upperPrint": "SU",
         "lowerPrint": "su",
-        "cursive": "su"
+        "cursive": "su",
+        "cursiveUpper": "Su"
       }
     },
     {
@@ -539,7 +556,8 @@
       "forms": {
         "upperPrint": "SI",
         "lowerPrint": "si",
-        "cursive": "si"
+        "cursive": "si",
+        "cursiveUpper": "Si"
       }
     },
     {
@@ -569,7 +587,8 @@
       "forms": {
         "upperPrint": "PA",
         "lowerPrint": "pa",
-        "cursive": "pa"
+        "cursive": "pa",
+        "cursiveUpper": "Pa"
       }
     },
     {
@@ -599,7 +618,8 @@
       "forms": {
         "upperPrint": "PÁ",
         "lowerPrint": "pá",
-        "cursive": "pá"
+        "cursive": "pá",
+        "cursiveUpper": "Pá"
       }
     },
     {
@@ -629,7 +649,8 @@
       "forms": {
         "upperPrint": "PE",
         "lowerPrint": "pe",
-        "cursive": "pe"
+        "cursive": "pe",
+        "cursiveUpper": "Pe"
       }
     },
     {
@@ -659,7 +680,8 @@
       "forms": {
         "upperPrint": "PO",
         "lowerPrint": "po",
-        "cursive": "po"
+        "cursive": "po",
+        "cursiveUpper": "Po"
       }
     },
     {
@@ -689,7 +711,8 @@
       "forms": {
         "upperPrint": "PU",
         "lowerPrint": "pu",
-        "cursive": "pu"
+        "cursive": "pu",
+        "cursiveUpper": "Pu"
       }
     },
     {
@@ -719,7 +742,8 @@
       "forms": {
         "upperPrint": "PI",
         "lowerPrint": "pi",
-        "cursive": "pi"
+        "cursive": "pi",
+        "cursiveUpper": "Pi"
       }
     },
     {
@@ -748,7 +772,8 @@
       "forms": {
         "upperPrint": "A",
         "lowerPrint": "a",
-        "cursive": "a"
+        "cursive": "a",
+        "cursiveUpper": "A"
       }
     },
     {
@@ -777,7 +802,8 @@
       "forms": {
         "upperPrint": "Á",
         "lowerPrint": "á",
-        "cursive": "á"
+        "cursive": "á",
+        "cursiveUpper": "Á"
       }
     },
     {
@@ -806,7 +832,8 @@
       "forms": {
         "upperPrint": "E",
         "lowerPrint": "e",
-        "cursive": "e"
+        "cursive": "e",
+        "cursiveUpper": "E"
       }
     },
     {
@@ -835,7 +862,8 @@
       "forms": {
         "upperPrint": "O",
         "lowerPrint": "o",
-        "cursive": "o"
+        "cursive": "o",
+        "cursiveUpper": "O"
       }
     },
     {
@@ -864,7 +892,8 @@
       "forms": {
         "upperPrint": "U",
         "lowerPrint": "u",
-        "cursive": "u"
+        "cursive": "u",
+        "cursiveUpper": "U"
       }
     },
     {
@@ -893,7 +922,8 @@
       "forms": {
         "upperPrint": "I",
         "lowerPrint": "i",
-        "cursive": "i"
+        "cursive": "i",
+        "cursiveUpper": "I"
       }
     },
     {
@@ -924,7 +954,8 @@
       "forms": {
         "upperPrint": "LES",
         "lowerPrint": "les",
-        "cursive": "les"
+        "cursive": "les",
+        "cursiveUpper": "Les"
       }
     },
     {
@@ -955,7 +986,8 @@
       "forms": {
         "upperPrint": "LOS",
         "lowerPrint": "los",
-        "cursive": "los"
+        "cursive": "los",
+        "cursiveUpper": "Los"
       }
     },
     {
@@ -986,7 +1018,8 @@
       "forms": {
         "upperPrint": "LÁM",
         "lowerPrint": "lám",
-        "cursive": "lám"
+        "cursive": "lám",
+        "cursiveUpper": "Lám"
       }
     },
     {
@@ -1016,7 +1049,8 @@
       "forms": {
         "upperPrint": "MÁM",
         "lowerPrint": "mám",
-        "cursive": "mám"
+        "cursive": "mám",
+        "cursiveUpper": "Mám"
       }
     },
     {
@@ -1047,7 +1081,8 @@
       "forms": {
         "upperPrint": "PEL",
         "lowerPrint": "pel",
-        "cursive": "pel"
+        "cursive": "pel",
+        "cursiveUpper": "Pel"
       }
     },
     {
@@ -1078,7 +1113,8 @@
       "forms": {
         "upperPrint": "PES",
         "lowerPrint": "pes",
-        "cursive": "pes"
+        "cursive": "pes",
+        "cursiveUpper": "Pes"
       }
     },
     {
@@ -1109,7 +1145,8 @@
       "forms": {
         "upperPrint": "SEL",
         "lowerPrint": "sel",
-        "cursive": "sel"
+        "cursive": "sel",
+        "cursiveUpper": "Sel"
       }
     },
     {
@@ -1140,7 +1177,8 @@
       "forms": {
         "upperPrint": "SEM",
         "lowerPrint": "sem",
-        "cursive": "sem"
+        "cursive": "sem",
+        "cursiveUpper": "Sem"
       }
     },
     {
@@ -1170,7 +1208,8 @@
       "forms": {
         "upperPrint": "SOS",
         "lowerPrint": "sos",
-        "cursive": "sos"
+        "cursive": "sos",
+        "cursiveUpper": "Sos"
       }
     },
     {
@@ -1201,7 +1240,8 @@
       "forms": {
         "upperPrint": "SUP",
         "lowerPrint": "sup",
-        "cursive": "sup"
+        "cursive": "sup",
+        "cursiveUpper": "Sup"
       }
     },
     {
@@ -1232,7 +1272,8 @@
       "forms": {
         "upperPrint": "SÁM",
         "lowerPrint": "sám",
-        "cursive": "sám"
+        "cursive": "sám",
+        "cursiveUpper": "Sám"
       }
     }
   ]

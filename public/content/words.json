@@ -45,7 +45,8 @@
       "forms": {
         "upperPrint": "MÁMA",
         "lowerPrint": "máma",
-        "cursive": "máma"
+        "cursive": "máma",
+        "cursiveUpper": "Máma"
       },
       "firstSyllableId": "s-maa",
       "usableInMemoryGame": true,
@@ -92,7 +93,8 @@
       "forms": {
         "upperPrint": "MÁ",
         "lowerPrint": "má",
-        "cursive": "má"
+        "cursive": "má",
+        "cursiveUpper": "Má"
       },
       "firstSyllableId": "s-maa",
       "usableInMemoryGame": false,
@@ -142,7 +144,8 @@
       "forms": {
         "upperPrint": "LAMA",
         "lowerPrint": "lama",
-        "cursive": "lama"
+        "cursive": "lama",
+        "cursiveUpper": "Lama"
       },
       "firstSyllableId": "s-la",
       "usableInMemoryGame": true,
@@ -193,7 +196,8 @@
       "forms": {
         "upperPrint": "MALÁ",
         "lowerPrint": "malá",
-        "cursive": "malá"
+        "cursive": "malá",
+        "cursiveUpper": "Malá"
       },
       "firstSyllableId": "s-ma",
       "usableInMemoryGame": false,
@@ -243,7 +247,8 @@
       "forms": {
         "upperPrint": "ALE",
         "lowerPrint": "ale",
-        "cursive": "ale"
+        "cursive": "ale",
+        "cursiveUpper": "Ale"
       },
       "firstSyllableId": "s-a",
       "usableInMemoryGame": false,
@@ -297,7 +302,8 @@
       "forms": {
         "upperPrint": "MELE",
         "lowerPrint": "mele",
-        "cursive": "mele"
+        "cursive": "mele",
+        "cursiveUpper": "Mele"
       },
       "firstSyllableId": "s-me",
       "usableInMemoryGame": false,
@@ -351,7 +357,8 @@
       "forms": {
         "upperPrint": "SELE",
         "lowerPrint": "sele",
-        "cursive": "sele"
+        "cursive": "sele",
+        "cursiveUpper": "Sele"
       },
       "firstSyllableId": "s-se",
       "usableInMemoryGame": true,
@@ -405,7 +412,8 @@
       "forms": {
         "upperPrint": "SAMA",
         "lowerPrint": "sama",
-        "cursive": "sama"
+        "cursive": "sama",
+        "cursiveUpper": "Sama"
       },
       "firstSyllableId": "s-sa",
       "usableInMemoryGame": false,
@@ -456,7 +464,8 @@
       "forms": {
         "upperPrint": "SE",
         "lowerPrint": "se",
-        "cursive": "se"
+        "cursive": "se",
+        "cursiveUpper": "Se"
       },
       "firstSyllableId": "s-se",
       "usableInMemoryGame": false,
@@ -507,7 +516,8 @@
       "forms": {
         "upperPrint": "MASO",
         "lowerPrint": "maso",
-        "cursive": "maso"
+        "cursive": "maso",
+        "cursiveUpper": "Maso"
       },
       "firstSyllableId": "s-ma",
       "usableInMemoryGame": true,
@@ -561,7 +571,8 @@
       "forms": {
         "upperPrint": "MOLO",
         "lowerPrint": "molo",
-        "cursive": "molo"
+        "cursive": "molo",
+        "cursiveUpper": "Molo"
       },
       "firstSyllableId": "s-mo",
       "usableInMemoryGame": true,
@@ -616,7 +627,8 @@
       "forms": {
         "upperPrint": "MÁLO",
         "lowerPrint": "málo",
-        "cursive": "málo"
+        "cursive": "málo",
+        "cursiveUpper": "Málo"
       },
       "firstSyllableId": "s-maa",
       "usableInMemoryGame": false,
@@ -670,7 +682,8 @@
       "forms": {
         "upperPrint": "MAPA",
         "lowerPrint": "mapa",
-        "cursive": "mapa"
+        "cursive": "mapa",
+        "cursiveUpper": "Mapa"
       },
       "firstSyllableId": "s-ma",
       "usableInMemoryGame": true,
@@ -725,7 +738,8 @@
       "forms": {
         "upperPrint": "POLE",
         "lowerPrint": "pole",
-        "cursive": "pole"
+        "cursive": "pole",
+        "cursiveUpper": "Pole"
       },
       "firstSyllableId": "s-po",
       "usableInMemoryGame": true,
@@ -780,7 +794,8 @@
       "forms": {
         "upperPrint": "PASE",
         "lowerPrint": "pase",
-        "cursive": "pase"
+        "cursive": "pase",
+        "cursiveUpper": "Pase"
       },
       "firstSyllableId": "s-pa",
       "usableInMemoryGame": false,
@@ -831,7 +846,8 @@
       "forms": {
         "upperPrint": "PO",
         "lowerPrint": "po",
-        "cursive": "po"
+        "cursive": "po",
+        "cursiveUpper": "Po"
       },
       "firstSyllableId": "s-po",
       "usableInMemoryGame": false,
@@ -886,7 +902,8 @@
       "forms": {
         "upperPrint": "POMALÁ",
         "lowerPrint": "pomalá",
-        "cursive": "pomalá"
+        "cursive": "pomalá",
+        "cursiveUpper": "Pomalá"
       },
       "firstSyllableId": "s-po",
       "usableInMemoryGame": false,
@@ -941,7 +958,8 @@
       "forms": {
         "upperPrint": "LUPA",
         "lowerPrint": "lupa",
-        "cursive": "lupa"
+        "cursive": "lupa",
+        "cursiveUpper": "Lupa"
       },
       "firstSyllableId": "s-lu",
       "usableInMemoryGame": true,
@@ -996,7 +1014,8 @@
       "forms": {
         "upperPrint": "MULA",
         "lowerPrint": "mula",
-        "cursive": "mula"
+        "cursive": "mula",
+        "cursiveUpper": "Mula"
       },
       "firstSyllableId": "s-mu",
       "usableInMemoryGame": true,
@@ -1051,7 +1070,8 @@
       "forms": {
         "upperPrint": "PUMA",
         "lowerPrint": "puma",
-        "cursive": "puma"
+        "cursive": "puma",
+        "cursiveUpper": "Puma"
       },
       "firstSyllableId": "s-pu",
       "usableInMemoryGame": true,
@@ -1106,7 +1126,8 @@
       "forms": {
         "upperPrint": "PUSA",
         "lowerPrint": "pusa",
-        "cursive": "pusa"
+        "cursive": "pusa",
+        "cursiveUpper": "Pusa"
       },
       "firstSyllableId": "s-pu",
       "usableInMemoryGame": true,
@@ -1165,7 +1186,8 @@
       "forms": {
         "upperPrint": "POMALU",
         "lowerPrint": "pomalu",
-        "cursive": "pomalu"
+        "cursive": "pomalu",
+        "cursiveUpper": "Pomalu"
       },
       "firstSyllableId": "s-po",
       "usableInMemoryGame": false,
@@ -1221,7 +1243,8 @@
       "forms": {
         "upperPrint": "LILIE",
         "lowerPrint": "lilie",
-        "cursive": "lilie"
+        "cursive": "lilie",
+        "cursiveUpper": "Lilie"
       },
       "firstSyllableId": "s-li",
       "usableInMemoryGame": true,
@@ -1276,7 +1299,8 @@
       "forms": {
         "upperPrint": "PILA",
         "lowerPrint": "pila",
-        "cursive": "pila"
+        "cursive": "pila",
+        "cursiveUpper": "Pila"
       },
       "firstSyllableId": "s-pi",
       "usableInMemoryGame": true,
@@ -1334,7 +1358,8 @@
       "forms": {
         "upperPrint": "PILULE",
         "lowerPrint": "pilule",
-        "cursive": "pilule"
+        "cursive": "pilule",
+        "cursiveUpper": "Pilule"
       },
       "firstSyllableId": "s-pi",
       "usableInMemoryGame": true,
@@ -1389,7 +1414,8 @@
       "forms": {
         "upperPrint": "SILO",
         "lowerPrint": "silo",
-        "cursive": "silo"
+        "cursive": "silo",
+        "cursiveUpper": "Silo"
       },
       "firstSyllableId": "s-si",
       "usableInMemoryGame": true,
@@ -1444,7 +1470,8 @@
       "forms": {
         "upperPrint": "MILE",
         "lowerPrint": "mile",
-        "cursive": "mile"
+        "cursive": "mile",
+        "cursiveUpper": "Mile"
       },
       "firstSyllableId": "s-mi",
       "usableInMemoryGame": false,
@@ -1499,7 +1526,8 @@
       "forms": {
         "upperPrint": "MILÁ",
         "lowerPrint": "milá",
-        "cursive": "milá"
+        "cursive": "milá",
+        "cursiveUpper": "Milá"
       },
       "firstSyllableId": "s-mi",
       "usableInMemoryGame": false,
@@ -1553,7 +1581,8 @@
       "forms": {
         "upperPrint": "MIMO",
         "lowerPrint": "mimo",
-        "cursive": "mimo"
+        "cursive": "mimo",
+        "cursiveUpper": "Mimo"
       },
       "firstSyllableId": "s-mi",
       "usableInMemoryGame": false,
@@ -1604,7 +1633,8 @@
       "forms": {
         "upperPrint": "SI",
         "lowerPrint": "si",
-        "cursive": "si"
+        "cursive": "si",
+        "cursiveUpper": "Si"
       },
       "firstSyllableId": "s-si",
       "usableInMemoryGame": false,
@@ -1651,7 +1681,8 @@
       "forms": {
         "upperPrint": "MÁM",
         "lowerPrint": "mám",
-        "cursive": "mám"
+        "cursive": "mám",
+        "cursiveUpper": "Mám"
       },
       "firstSyllableId": "s-maam",
       "usableInMemoryGame": false,
@@ -1699,7 +1730,8 @@
       "forms": {
         "upperPrint": "LES",
         "lowerPrint": "les",
-        "cursive": "les"
+        "cursive": "les",
+        "cursiveUpper": "Les"
       },
       "firstSyllableId": "s-les",
       "usableInMemoryGame": false,
@@ -1751,7 +1783,8 @@
       "forms": {
         "upperPrint": "SALÁM",
         "lowerPrint": "salám",
-        "cursive": "salám"
+        "cursive": "salám",
+        "cursiveUpper": "Salám"
       },
       "firstSyllableId": "s-sa",
       "usableInMemoryGame": true,
@@ -1803,7 +1836,8 @@
       "forms": {
         "upperPrint": "SEM",
         "lowerPrint": "sem",
-        "cursive": "sem"
+        "cursive": "sem",
+        "cursiveUpper": "Sem"
       },
       "firstSyllableId": "s-sem",
       "usableInMemoryGame": false,
@@ -1851,7 +1885,8 @@
       "forms": {
         "upperPrint": "SÁM",
         "lowerPrint": "sám",
-        "cursive": "sám"
+        "cursive": "sám",
+        "cursiveUpper": "Sám"
       },
       "firstSyllableId": "s-saam",
       "usableInMemoryGame": false,
@@ -1899,7 +1934,8 @@
       "forms": {
         "upperPrint": "LOS",
         "lowerPrint": "los",
-        "cursive": "los"
+        "cursive": "los",
+        "cursiveUpper": "Los"
       },
       "firstSyllableId": "s-los",
       "usableInMemoryGame": false,
@@ -1949,7 +1985,8 @@
       "forms": {
         "upperPrint": "LOSOS",
         "lowerPrint": "losos",
-        "cursive": "losos"
+        "cursive": "losos",
+        "cursiveUpper": "Losos"
       },
       "firstSyllableId": "s-lo",
       "usableInMemoryGame": true,
@@ -2004,7 +2041,8 @@
       "forms": {
         "upperPrint": "OSEL",
         "lowerPrint": "osel",
-        "cursive": "osel"
+        "cursive": "osel",
+        "cursiveUpper": "Osel"
       },
       "firstSyllableId": "s-o",
       "usableInMemoryGame": false,
@@ -2056,7 +2094,8 @@
       "forms": {
         "upperPrint": "PES",
         "lowerPrint": "pes",
-        "cursive": "pes"
+        "cursive": "pes",
+        "cursiveUpper": "Pes"
       },
       "firstSyllableId": "s-pes",
       "usableInMemoryGame": false,
@@ -2107,7 +2146,8 @@
       "forms": {
         "upperPrint": "POPEL",
         "lowerPrint": "popel",
-        "cursive": "popel"
+        "cursive": "popel",
+        "cursiveUpper": "Popel"
       },
       "firstSyllableId": "s-po",
       "usableInMemoryGame": false,
@@ -2159,7 +2199,8 @@
       "forms": {
         "upperPrint": "SUP",
         "lowerPrint": "sup",
-        "cursive": "sup"
+        "cursive": "sup",
+        "cursiveUpper": "Sup"
       },
       "firstSyllableId": "s-sup",
       "usableInMemoryGame": false,
