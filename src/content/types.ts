@@ -70,20 +70,8 @@ export interface ScriptFormDecl {
   note: string;
 }
 export interface ScriptsDeclaration { defaultMode: ScriptFormId; forms: ScriptFormDecl[]; note: string }
-/** Nastavení aplikace (rodičovská sekce, mimo data): aktivní forma a dostupnost fontů. */
-export type ScriptModeId = ScriptFormId | "all"; // all = všechny povolené tvary najednou (Aa + psací)
-export interface AppScriptSettings { mode: ScriptModeId; available: Record<ScriptFormId, boolean> }
-/** Text pro zobrazení; cursive = malými písmeny pro psací font. Nedostupná forma → upperPrint. */
+/** Formy textu v obsahu (varianty písma a jejich skládání řeší src/components/Glyphs.tsx). */
 export type Forms = Record<ScriptFormId, string> & { cursiveUpper?: string };
-/** Povolené tvary v pořadí velké, malé, psací (pro režim „all“). */
-export function formsList(f: Forms, s: AppScriptSettings): [ScriptFormId, string][] {
-  const o = (["upperPrint", "lowerPrint", "cursive"] as ScriptFormId[]).filter((x) => s.available[x]).map((x) => [x, f[x]] as [ScriptFormId, string]);
-  return o.length ? o : [["upperPrint", f.upperPrint]];
-}
-export function formText(f: Forms, s: AppScriptSettings): string {
-  if (s.mode === "all") return formsList(f, s).map(([, t]) => t).join(" ");
-  return s.available[s.mode] ? f[s.mode] : f.upperPrint;
-}
 
 // ---------- letters.json ----------
 export interface LetterSound {

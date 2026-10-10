@@ -290,7 +290,7 @@ a {
 @keyframes compose-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
 /* ---------- Design v0.3: tvar písma ---------- */
-.glyph[data-script="cursive"] { font-family: var(--font-family-script); font-weight: var(--font-weight-script); font-feature-settings: normal; font-size: calc(1em * var(--fs-script-scale)); line-height: var(--lh-script); letter-spacing: 0; text-transform: none; }
+.glyph[data-script="cursive"], .glyph[data-script="cursiveUpper"] { font-family: var(--font-family-script); font-weight: var(--font-weight-script); font-feature-settings: normal; font-size: calc(1em * var(--fs-script-scale)); line-height: var(--lh-script); letter-spacing: 0; text-transform: none; }
 .pismo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); }
 .pismo-opt { min-height: 132px; border-radius: var(--r-lg); background: #fff; border: 3px solid #D5DAE3; display: grid; place-items: center; align-content: center; gap: 4px; padding: 10px; color: var(--c-ink); font: inherit; cursor: pointer; }
 .pismo-opt .sample { font-size: 52px; line-height: 1.2; font-weight: 600; }
@@ -316,13 +316,13 @@ a {
 
 /* ---------- Oprava rozložení: vše se vejde na obrazovku (dvh s vh zálohou), psací glyfy uvnitř karet, všechny tvary najednou ---------- */
 #root, .app { min-height: 100vh; min-height: 100dvh; }
-.glyph[data-script="cursive"] { display: inline-block; padding: 0.08em 0.18em; line-height: var(--lh-script); max-width: 100%; }
+.glyph[data-script="cursive"], .glyph[data-script="cursiveUpper"] { display: inline-block; padding: 0.08em 0.18em; line-height: var(--lh-script); max-width: 100%; }
 .tile, .slot, .stone { overflow: hidden; display: inline-flex; align-items: center; justify-content: center; max-width: 100%; }
 .glyph-all { display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 .3em; max-width: 100%; }
 .glyph-all > .glyph { font-size: .62em; }
 .stone .glyph-all > .glyph { font-size: .5em; }
 .stone { width: auto; min-width: var(--touch-child); padding: 0 var(--sp-2); }
-.stone .glyph[data-script="cursive"] { padding: 0 .08em; line-height: 1.3; }
+.stone .glyph[data-script="cursive"], .stone .glyph[data-script="cursiveUpper"], .glyph[data-script="cursiveUpper"] { padding: 0 .08em; line-height: 1.3; }
 
 #lesson-menu-fit, .lesson-menu { gap: clamp(8px, 2dvh, var(--sp-4)); padding-top: calc(clamp(8px, 2dvh, var(--sp-5)) + env(safe-area-inset-top)); padding-bottom: calc(clamp(8px, 2dvh, var(--sp-5)) + env(safe-area-inset-bottom)); }
 .lesson-menu h1 { font-size: clamp(22px, 4dvh, var(--fs-h1)); }
@@ -347,3 +347,6 @@ a {
 .pex-card img { max-width: 80%; max-height: 80%; object-fit: contain; }
 .pex-stars { font-size: 3rem; margin: 0; }
 @media (prefers-reduced-motion: reduce) { .pex-card { transition: none; } }
+
+.pismo-opt .sample { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .35em; max-width: 100%; }
+.pismo-opt .sample .glyph { font-size: .6em; }

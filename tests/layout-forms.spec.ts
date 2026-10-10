@@ -55,14 +55,43 @@ test('psací glyfy zůstanou uvnitř karty (hlavně s, á)', async ({ page }) =>
 test('„všechny tvary“ je výchozí, ukáže Aa + psací a uloží se po přepnutí', async ({ page }) => {
   await page.goto('./');
   const stone = page.getByTestId('lesson-row').getByRole('button').first();
-  await expect(stone.locator('.glyph-all .glyph')).toHaveCount(3);
+  await expect(stone.locator('.glyph-all .glyph')).toHaveCount(4);
   await expect(stone.locator('.glyph[data-script="upperPrint"]')).toHaveText('M');
   await expect(stone.locator('.glyph[data-script="cursive"]')).toBeVisible();
-  await page.getByTestId('script-switch').click(); // → velké tiskací
+  await page.getByTestId('script-switch').click(); // → malé tiskací
   await expect(stone.locator('.glyph-all')).toHaveCount(0);
-  expect(((await idbGet(page, 'script')) as { current: string }).current).toBe('upperPrint');
-  for (let i = 0; i < 3; i++) await page.getByTestId('script-switch').click();
+  expect(((await idbGet(page, 'script')) as { current: string }).current).toBe('lower');
+  for (let i = 0; i < 6; i++) await page.getByTestId('script-switch').click();
   await page.reload();
   await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph-all')).toHaveCount(1);
-  expect(await page.evaluate(() => document.documentElement.dataset.pismo)).toBe('vse');
+  expect(await page.evaluate(() => document.documentElement.dataset.pismo)).toBe('all');
+});
+
+test('kombinované varianty se vejdou do karet na iPadu (bez přetečení)', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 768 });
+  await unlockAll(page);
+  for (const v of ['all', 'cursiveBoth', 'printBoth']) {
+    await page.evaluate(async (id) => {
+      const db: IDBDatabase = await new Promise((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => res(r.result); });
+      const tx = db.transaction('settings', 'readwrite');
+      tx.objectStore('settings').put({ allowed: Object.fromEntries(['lower', 'upper', 'cursive', 'cursiveUpper', 'printBoth', 'cursiveBoth', 'all'].map((k) => [k, true])), def: id, current: null }, 'script');
+      await new Promise((r) => { tx.oncomplete = r; }); db.close();
+    }, v);
+    await page.reload();
+    await page.evaluate(() => document.fonts.load('400 40px "Playwrite CZ"'));
+    const stones = page.getByTestId('lesson-row').getByRole('button');
+    await expect(stones.first().locator('.glyph-all')).toHaveAttribute('data-variant', v);
+    const n = await stones.count();
+    for (let i = 0; i < n; i++) {
+      const r = await stones.nth(i).evaluate((b) => { const c = b.getBoundingClientRect(); return Math.min(...[...b.querySelectorAll('.glyph')].map((e) => { const g = e.getBoundingClientRect(); return Math.min(g.left - c.left, c.right - g.right, g.top - c.top, c.bottom - g.bottom); })); });
+      expect(r).toBeGreaterThanOrEqual(-0.5);
+    }
+    await stones.nth(n - 1).click();
+    const hero = page.locator('.tile-hero');
+    await expect(hero).toBeVisible();
+    const h = await hero.evaluate((b) => { const c = b.getBoundingClientRect(); return Math.min(...[...b.querySelectorAll('.glyph')].map((e) => { const g = e.getBoundingClientRect(); return Math.min(g.left - c.left, c.right - g.right, g.top - c.top, c.bottom - g.bottom); })); });
+    expect(h).toBeGreaterThanOrEqual(-0.5);
+    expect(await page.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight + 1)).toBe(true);
+    await page.goto('./');
+  }
 });

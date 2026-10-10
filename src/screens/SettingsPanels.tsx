@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { ALL_LABEL, SCRIPT_FORMS, SCRIPT_LABEL, modeLabel, normalizeScriptConfig, useScript } from '../components/Glyphs';
+import { VARIANTS, allowedVariants, normalizeScriptConfig, useScript, type VariantId } from '../components/Glyphs';
 import { buildBackup, downloadBackup, resetProgress } from '../storage/backup';
-import type { Forms, ScriptFormId } from '../content/types';
 
-const SAMPLE: Forms = { upperPrint: 'MA LA', lowerPrint: 'ma la', cursive: 'Ma la' }; // psací: velké M + malé (Playwrite má velká psací písmena)
+const EX = { upperPrint: 'MA LA', lowerPrint: 'ma la', cursive: 'ma la', cursiveUpper: 'Ma la' };
 
 /** Nastavení → Písmo: rodič zapíná/vypíná tvary (aspoň jeden zůstane) a volí výchozí. */
 export function ScriptSettingsPanel() {
@@ -11,28 +10,28 @@ export function ScriptSettingsPanel() {
   const [msg, setMsg] = useState('');
   const [err, setErr] = useState('');
   const save = (c: typeof cfg) => saveConfig(c).then(() => setErr(''), () => setErr('Nastavení písma se nepodařilo uložit.'));
-  const toggle = (f: ScriptFormId) => {
-    if (cfg.allowed[f] && SCRIPT_FORMS.filter((x) => cfg.allowed[x]).length === 1) { setMsg('Aspoň jeden tvar písma musí zůstat zapnutý.'); return; }
+  const toggle = (f: VariantId) => {
+    if (cfg.allowed[f] && allowedVariants(cfg).length === 1) { setMsg('Aspoň jedna varianta písma musí zůstat zapnutý.'); return; }
     setMsg('');
     void save(normalizeScriptConfig({ ...cfg, allowed: { ...cfg.allowed, [f]: !cfg.allowed[f] } }));
   };
   return (
     <section className="card" data-testid="script-settings">
       <h2>Písmo pro dítě</h2>
-      <p className="small muted">Zapni tvary písma, které dítě smí používat. Aspoň jeden musí zůstat zapnutý. Dítě uvidí jen povolené tvary (tlačítko „Aa Písmo“ na domovské obrazovce). Změny platí hned, i ve zkoušce.</p>
+      <p className="small muted">Zapni varianty písma, které dítě smí používat (7 možností). Aspoň jedna musí zůstat zapnutá, výchozí je „Vše“. Dítě uvidí jen povolené varianty (tlačítko „Aa Písmo“ na domovské obrazovce). Změny platí hned, i ve zkoušce.</p>
       <div className="pismo-grid" role="group" aria-label="Povolené tvary písma">
-        {SCRIPT_FORMS.map((f) => (
-          <button key={f} className="pismo-opt" data-form={f} aria-pressed={cfg.allowed[f]} onClick={() => toggle(f)}>
-            <span className="sample"><span className="glyph" data-script={f}>{SAMPLE[f]}</span></span>
-            <span className="lab">{SCRIPT_LABEL[f]}</span>
-            <span className="check">{cfg.allowed[f] ? '✓ povoleno' : 'vypnuto'}</span>
+        {VARIANTS.map((v) => (
+          <button key={v.id} className="pismo-opt" data-form={v.id} aria-pressed={cfg.allowed[v.id]} onClick={() => toggle(v.id)}>
+            <span className="sample">{v.forms.map((k) => <span key={k} className="glyph" data-script={k}>{EX[k]}</span>)}</span>
+            <span className="lab">{v.label}</span>
+            <span className="check">{cfg.allowed[v.id] ? '✓ povoleno' : 'vypnuto'}</span>
           </button>
         ))}
       </div>
-      <h3>Výchozí tvar</h3>
-      <div className="seg pismo-def" role="group" aria-label="Výchozí tvar písma">
-        {(SCRIPT_FORMS.filter((f) => cfg.allowed[f]).length > 1 ? (['all', ...SCRIPT_FORMS.filter((f) => cfg.allowed[f])] as const) : SCRIPT_FORMS.filter((f) => cfg.allowed[f])).map((f) => (
-          <button key={f} className="kbtn" data-def={f} aria-pressed={cfg.def === f} onClick={() => void save({ ...cfg, def: f, current: null })}>{f === 'all' ? ALL_LABEL + ' (Aa + psací)' : modeLabel(f)}{cfg.def === f ? ' ✓' : ''}</button>
+      <h3>Výchozí varianta</h3>
+      <div className="seg pismo-def" role="group" aria-label="Výchozí varianta písma">
+        {allowedVariants(cfg).map((id) => (
+          <button key={id} className="kbtn" data-def={id} aria-pressed={cfg.def === id} onClick={() => void save({ ...cfg, def: id, current: null })}>{VARIANTS.find((v) => v.id === id)!.label}{cfg.def === id ? ' ✓' : ''}</button>
         ))}
       </div>
       <p className="small muted" role="status" data-testid="script-msg">{msg}</p>
