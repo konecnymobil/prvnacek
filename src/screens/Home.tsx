@@ -2,6 +2,7 @@ import Glyphs, { modeLabel, useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { useEffect, useState } from 'react';
 import type { Screen } from '../App';
+import { availablePairs } from '../activities/pexeso';
 import { getLessonStatesMap, isLessonUnlocked, type LessonState } from '../storage/db';
 
 interface Props {
@@ -59,6 +60,9 @@ export default function Home({ content, error, go, openLesson }: Props) {
           </div>
           {order.lessons.filter((l) => states[l.id]?.status === 'approved').length >= 2 && (
             <button className="kbtn kbtn-primary kbtn-xl" data-testid="open-review" onClick={() => go('review')}>🔁 Opakování</button>
+          )}
+          {availablePairs(content, states) >= 3 && (
+            <button className="kbtn kbtn-primary kbtn-xl" data-testid="open-pexeso" onClick={() => go('pexeso')}>🃏 Pexeso</button>
           )}
           {hint && <p className="notice" role="status" data-testid="lock-hint">🔒 {hint}</p>}
           <p className="small muted" data-testid="content-version">
