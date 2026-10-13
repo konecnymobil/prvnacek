@@ -1,3 +1,4 @@
+import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -135,6 +136,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     );
   }
 
+  useStickerOnDone('cviceni', n >= total);
   useTaskLog('A5c', lesson.id, n >= total);
   if (n >= total) {
     return (

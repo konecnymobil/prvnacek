@@ -1,3 +1,4 @@
+import { awardSticker } from '../album/album';
 import { useEffect, useRef, useState } from 'react';
 import Mascot from '../activities/Mascot';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -54,6 +55,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
     saved.current = true;
     const g: PexGame = { at: Date.now(), pairs, stars: starsFor(pairs), flips };
     (async () => { const list = ((await getSetting<PexGame[]>(PEX_KEY)) ?? []); await setSetting(PEX_KEY, [...list, g]); })().catch(() => setSaveError(true));
+    void awardSticker('pexeso').catch(() => {});
     void say(['snd-p-round-end'].filter((id) => content.audioIds.has(id)));
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 

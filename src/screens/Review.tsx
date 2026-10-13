@@ -1,3 +1,4 @@
+import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useEffect, useRef, useState } from 'react';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
@@ -37,6 +38,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     if (it) void say([...promptAudio(content, PROMPT[it.kind]), itemAudio(content, it)]);
   }, [content, it]);
 
+  useStickerOnDone('opakovani', !!items && items.length > 0 && n >= items.length);
   useTaskLog('review', undefined, !!items && items.length > 0 && n >= items.length);
   if (!items) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
   if (items.length === 0) return <main className="screen activity" data-testid="review-empty"><p className="notice">Opakování se otevře, až rodič schválí aspoň dvě lekce.</p><button className="kbtn" onClick={back}>Zpět</button></main>;

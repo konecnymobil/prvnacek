@@ -1,3 +1,4 @@
+import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -92,6 +93,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   if (pool.length < 3) {
     return <main className="screen activity"><p className="notice">Slabiky budou k dispozici od lekce A.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
   }
+  useStickerOnDone('cviceni', n >= ROUND_SIZE);
   useTaskLog('A6', lesson.id, n >= ROUND_SIZE);
   if (n >= ROUND_SIZE) {
     return (

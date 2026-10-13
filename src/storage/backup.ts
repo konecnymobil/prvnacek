@@ -2,7 +2,7 @@
 import { getDb, type ActivityEvent, type Attempt, type LessonState } from './db';
 
 export const BACKUP_FORMAT = 'prvnacek-backup';
-export const BACKUP_VERSION = 2; // v2 = + events (M4); import v1 zůstává podporovaný
+export const BACKUP_VERSION = 2; // v2 = + events (M4); album:owned je v settings; import v1 zůstává podporovaný
 
 interface BackupRecording { audioId: string; mimeType: string; createdAt: number; base64: string }
 export interface BackupFile {
@@ -113,8 +113,8 @@ export async function downloadBackup(b: BackupFile): Promise<'download' | 'share
   return 'download';
 }
 
-/** Čistý začátek: smaže pokrok (pokusy), stavy/zamykání lekcí a výsledky zkoušek (settings „tests:*“).
- *  NEMAŽE vlastní nahrávky rodiče ani ostatní nastavení (např. tvary písma). Jedna transakce. */
+/** Čistý začátek: smaže pokrok (pokusy), stavy/zamykání lekcí, události a výsledky zkoušek (settings „tests:*“).
+ *  NEMAŽE vlastní nahrávky rodiče ani ostatní nastavení (tvary písma, album:owned). Jedna transakce. */
 export async function resetProgress(): Promise<void> {
   const db = await getDb();
   const tx = db.transaction(['attempts', 'lessonStates', 'settings', 'events'], 'readwrite');
