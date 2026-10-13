@@ -4,6 +4,7 @@ import { requestPersistentStorage } from './storage/db';
 import Home from './screens/Home';
 import SoundTest from './screens/SoundTest';
 import About from './screens/About';
+import DataPolicy from './screens/DataPolicy';
 import LessonMenu from './screens/LessonMenu';
 import LetterActivity from './screens/LetterActivity';
 import ReadSyllable from './screens/ReadSyllable';
@@ -22,7 +23,7 @@ import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -61,6 +62,8 @@ function AppInner() {
       {content && screen === 'sounds' && <Sounds content={content} go={setScreen} />}
       {content && screen === 'album' && <Album content={content} back={() => setScreen('home')} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
+      {screen === 'dataPolicy' && <DataPolicy go={setScreen} back="parent" />}
+      {screen === 'dataPolicyAbout' && <DataPolicy go={setScreen} back="about" />}
     </div>
   );
 }

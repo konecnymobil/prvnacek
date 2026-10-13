@@ -14,6 +14,7 @@ export default function About({ content, go }: { content: Content | null; go: (s
       <section className="card">
         <p>Prvňáček – čtení pro prvňáčky. Data o pokroku a vlastní nahrávky zůstávají jen v tomto zařízení.</p>
         {content && <p className="muted">Verze obsahu: {content.version}</p>}
+        <p><button className="kbtn" onClick={() => go('dataPolicyAbout')} data-testid="about-data-policy">🔒 Jak nakládáme s daty</button></p>
         <h2>Licence</h2>
         <p data-testid="attribution">
           Písmo Andika © SIL Global, SIL Open Font License 1.1 (
