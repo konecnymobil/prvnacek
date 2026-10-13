@@ -1,5 +1,5 @@
 {
-  "policyVersion": "1.1.0",
+  "policyVersion": "1.1.1",
   "effectiveDate": "2026-10-13",
   "title": "Jak nakládáme s daty",
   "intro": "Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejopatrněji. Tady je přehled, co aplikace ukládá a jaká pravidla platí.",
@@ -19,7 +19,7 @@
     {
       "id": "device",
       "title": "Data zůstávají v zařízení dítěte",
-      "text": "Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na domácí MiniPC s Home Assistantem nebo do cloudu."
+      "text": "Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na náš server."
     },
     {
       "id": "signin",
@@ -58,10 +58,10 @@
     },
     {
       "id": "controller",
-      "title": "Správce a server",
-      "text": "Správcem údajů je Jiří Konečný. Server běží na jeho domácím MiniPC s Home Assistantem."
+      "title": "Správce údajů a server",
+      "text": "Správcem údajů je Jiří Konečný. Zálohy ukládáme na náš server."
     }
   ],
   "changes": "Při každé změně pravidel zvýšíme číslo verze a tento dokument aktualizujeme.",
-  "backupNote": "Pro budoucí zálohu na server (zatím není aktivní): e-mail rodiče se na serveru ukládá jen jako zašifrovaný otisk, nikdy jako čitelná adresa, a správce (Jiří Konečný) k němu nemá přístup. Server běží na MiniPC s Home Assistantem. Když ztratíš kód zálohy i přístup k e-mailu, záloha je nenávratně ztracená."
+  "backupNote": "Pro budoucí zálohu na server (zatím není aktivní): e-mail rodiče se na serveru ukládá jen jako zašifrovaný otisk, nikdy jako čitelná adresa, a správce (Jiří Konečný) k němu nemá přístup. Když ztratíš kód zálohy i přístup k e-mailu, záloha je nenávratně ztracená."
 }

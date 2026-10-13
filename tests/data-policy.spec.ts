@@ -11,6 +11,11 @@ test('docs/nakladani-s-daty.md je aktuální (npm run gen:policy)', () => {
   expect(fs.readFileSync(MD, 'utf8')).toBe(renderMarkdown(policy));
 });
 
+test('uživatelské texty nezmiňují hardware', () => {
+  const texts = [fs.readFileSync(POLICY, 'utf8'), fs.readFileSync(MD, 'utf8'), fs.readFileSync('src/screens/DataPolicy.tsx', 'utf8'), fs.readFileSync('src/screens/BackupPanel.tsx', 'utf8'), fs.readFileSync('src/screens/About.tsx', 'utf8')];
+  for (const t of texts) expect(t).not.toMatch(/mini ?pc|home ?assistant|raspberry|\bNAS\b/i);
+});
+
 test('změna pravidel vyžaduje zvýšení policyVersion', () => {
   const lock = JSON.parse(fs.readFileSync(LOCK, 'utf8'));
   expect(lock[policy.policyVersion], 'Pravidla se změnila bez zvýšení policyVersion – zvyš verzi a spusť npm run gen:policy').toBe(policyHash(policy));
@@ -22,6 +27,7 @@ async function expectAllRules(page: Page) {
   await expect(page.getByTestId('policy-version')).toContainText(policy.effectiveDate);
   for (const r of policy.rules) await expect(page.getByTestId(`policy-rule-${r.id}`)).toContainText(r.text);
   await expect(page.getByTestId('policy-backup-note')).toHaveText(policy.backupNote);
+  await expect(page.locator('body')).not.toContainText(/MiniPC|Home Assistant/i);
   for (const i of policy.today.items) await expect(page.getByText(i, { exact: true })).toBeVisible();
 }
 

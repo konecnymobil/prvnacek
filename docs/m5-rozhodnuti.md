@@ -19,3 +19,7 @@ Datum: 2026-10-13. Tento dokument doplňuje a v případě rozporu **má předno
 10. **Server:** běží na Jiřího MiniPC s Home Assistantem.
 
 Krátká poznámka (`backupNote` v `data-policy.json`) se zobrazuje i u Zálohy a obnovy v rodičovské sekci s označením, že platí pro budoucí zálohu na server (zatím neaktivní).
+
+## Doplnění 2026-10-13 (policyVersion 1.1.1)
+
+Uživatelské texty (obrazovka, `docs/nakladani-s-daty.md`, `backupNote`) nezmiňují hardware – jen „náš server“. Interně: server běží na Jiřího MiniPC s Home Assistantem. Test hlídá, že se MiniPC/Home Assistant v uživatelských textech neobjeví.

@@ -1,6 +1,6 @@
 # Jak nakládáme s daty
 
-Verze 1.1.0, platná od 2026-10-13.
+Verze 1.1.1, platná od 2026-10-13.
 
 <!-- Generováno z src/policy/data-policy.json příkazem `npm run gen:policy`. Neupravovat ručně. -->
 
@@ -18,7 +18,7 @@ Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejo
 
 ## Pravidla
 
-1. **Data zůstávají v zařízení dítěte.** Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na domácí MiniPC s Home Assistantem nebo do cloudu.
+1. **Data zůstávají v zařízení dítěte.** Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na náš server.
 2. **Přihlášení bez účtu.** Rodič používá důvěryhodné zařízení a nepotřebuje žádný účet. Dítě si vybere svůj obrázek (avatar), obrázkový PIN je volitelný.
 3. **Přezdívka a poznámky jen v zařízení, vždy šifrovaně.** Přezdívka dítěte a poznámky rodiče zůstávají jen v zařízení, dokud se rodič nerozhodne synchronizovat vše najednou na náš server. Za přenos přes QR kód odpovídá rodič. Data jsou vždy šifrovaná; na serveru jsou šifrovaná a přístup k nim mají jen rodiče přes e-mail.
 4. **Nahrávky hlasu jen na výslovné přání.** Vlastní nahrávky hlasu se synchronizují jen tehdy, když si to rodič výslovně zapne. Ve výchozím stavu je synchronizace nahrávek vypnutá.
@@ -26,10 +26,10 @@ Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejo
 6. **Historie nejdéle 1 rok.** Historie pokusů se uchovává nejdéle 1 rok. Starší pokusy se převedou na souhrnná čísla a jednotlivé záznamy se smažou.
 7. **Ztracený kód zálohy.** Když rodič ztratí kód pro obnovu zálohy a nezobrazí ho na žádném propojeném zařízení, obnoví ho ověřením přes e-mail připojený k profilu. Pokud ztratí i přístup k tomuto e-mailu, záloha je nenávratně ztracená a nikdo ji nedokáže obnovit.
 8. **E-mail jen jako klíč k záloze.** E-mail rodiče slouží jen k propojení zálohy a obnovy. Server neukládá čitelnou adresu, ale jen její zašifrovaný otisk, takže ji správce (Jiří Konečný) nevidí a nemá k ní přístup. Při obnově rodič adresu zadá, server porovná otisk a pošle kód na zadanou adresu, aniž by ji uložil.
-9. **Správce a server.** Správcem údajů je Jiří Konečný. Server běží na jeho domácím MiniPC s Home Assistantem.
+9. **Správce údajů a server.** Správcem údajů je Jiří Konečný. Zálohy ukládáme na náš server.
 
 ## Poznámka u zálohy
 
-Pro budoucí zálohu na server (zatím není aktivní): e-mail rodiče se na serveru ukládá jen jako zašifrovaný otisk, nikdy jako čitelná adresa, a správce (Jiří Konečný) k němu nemá přístup. Server běží na MiniPC s Home Assistantem. Když ztratíš kód zálohy i přístup k e-mailu, záloha je nenávratně ztracená.
+Pro budoucí zálohu na server (zatím není aktivní): e-mail rodiče se na serveru ukládá jen jako zašifrovaný otisk, nikdy jako čitelná adresa, a správce (Jiří Konečný) k němu nemá přístup. Když ztratíš kód zálohy i přístup k e-mailu, záloha je nenávratně ztracená.
 
 Při každé změně pravidel zvýšíme číslo verze a tento dokument aktualizujeme.
