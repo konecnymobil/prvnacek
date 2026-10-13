@@ -1,6 +1,7 @@
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import { playAudio, stopAudio } from '../audio/player';
+import { noteAnswer } from './taskLog';
 import { addAttempt, getAllAttempts, getAttempts, getLessonState, getTestResults, setLessonStatus } from '../storage/db';
 import { useEffect, useState } from 'react';
 import radost from '../assets/mascot/kulisek-radost.svg';
@@ -71,7 +72,9 @@ export async function recordAttempt(
   correct: boolean,
 ): Promise<void> {
   const orderId = content.defaultOrderId;
-  await addAttempt({ orderId, lessonId: lesson.id, activity, itemId, correct, chosenId });
+  const { responseMs, round } = noteAnswer();
+  await addAttempt({ orderId, lessonId: lesson.id, activity, itemId, correct, chosenId, responseMs, round,
+    reason: correct ? null : 'confused', confusedWith: correct ? null : chosenId });
   const state = await getLessonState(orderId, lesson.id);
   if (state?.status === 'approved') return;
   const all = await getAttempts(orderId, lesson.id);

@@ -1,3 +1,4 @@
+import { useTaskLog } from '../activities/taskLog';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -125,6 +126,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     );
   }
 
+  useTaskLog('A4', lesson.id, n >= ROUND_SIZE);
   if (n >= ROUND_SIZE) {
     return (
       <main className="screen activity" data-testid="round-end">

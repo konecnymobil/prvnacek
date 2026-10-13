@@ -77,7 +77,7 @@ test('záloha: export → smazání → import včetně nahrávky, s potvrzením
   const before = await counts(page);
   await passGate(page);
   const [dl] = await Promise.all([page.waitForEvent('download'), page.getByTestId('backup-export').click()]);
-  expect(dl.suggestedFilename()).toMatch(/^prvnacek-zaloha-\d{4}-\d{2}-\d{2}-v1\.json$/);
+  expect(dl.suggestedFilename()).toMatch(/^prvnacek-zaloha-\d{4}-\d{2}-\d{2}-v2\.json$/);
   const path = info.outputPath('backup.json');
   await dl.saveAs(path);
   await clearAll(page);

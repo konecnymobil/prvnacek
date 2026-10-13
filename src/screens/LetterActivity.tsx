@@ -1,3 +1,4 @@
+import { useTaskLog } from '../activities/taskLog';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -107,6 +108,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
     setMessage('Poslechni si hlásku a najdi její písmenko.');
   };
 
+  useTaskLog('A2', lesson.id, n >= ROUND_SIZE);
   if (n >= ROUND_SIZE) {
     return (
       <main className="screen activity" data-testid="round-end">

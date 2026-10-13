@@ -4,6 +4,7 @@ import Mascot from '../activities/Mascot';
 import type { Content } from '../content/load';
 import { promptAudio, randomPrompt, say, stopSay } from '../activities/common';
 import { buildReview, itemAudio, itemForms, type ReviewItem } from '../activities/review';
+import { noteAnswer, useTaskLog } from '../activities/taskLog';
 import { addAttempt, getAllAttempts, getLessonStatesMap } from '../storage/db';
 
 const PROMPT = { letter: 'p-find-letter', syllable: 'p-find-syllable', word: 'p-a7' } as const;
@@ -36,6 +37,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     if (it) void say([...promptAudio(content, PROMPT[it.kind]), itemAudio(content, it)]);
   }, [content, it]);
 
+  useTaskLog('review', undefined, !!items && items.length > 0 && n >= items.length);
   if (!items) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
   if (items.length === 0) return <main className="screen activity" data-testid="review-empty"><p className="notice">Opakování se otevře, až rodič schválí aspoň dvě lekce.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
   if (n >= items.length) {
@@ -55,7 +57,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     busy.current = true;
     const correct = id === item.id;
     try {
-      await addAttempt({ orderId: content.defaultOrderId, lessonId: item.lessonId, activity: item.activity, itemId: item.id, correct, chosenId: id, source: 'review' });
+      await addAttempt({ orderId: content.defaultOrderId, lessonId: item.lessonId, activity: item.activity, itemId: item.id, correct, chosenId: id, source: 'review', ...noteAnswer(), reason: correct ? null : 'confused', confusedWith: correct ? null : id });
       setSaveError(false);
     } catch { setSaveError(true); }
     busy.current = false;
