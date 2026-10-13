@@ -1,13 +1,15 @@
 import { awardSticker } from '../album/album';
 import { useEffect, useRef, useState } from 'react';
 import Mascot from '../activities/Mascot';
-import Glyphs, { useTaskForm } from '../components/Glyphs';
+import Glyphs, { GlyphText, useTaskForm } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { wordImageUrl } from '../content/images';
 import { say, stopSay } from '../activities/common';
 import { buildCards, levelsFor, pexesoCandidates, pickPairs, starsFor, PEX_KEY, type PexCard, type PexGame } from '../activities/pexeso';
 import { getLessonStatesMap, getSetting, setSetting, type LessonState } from '../storage/db';
 
+const END_PAUSE_MS = 500;
+const END_CAP_MS = 3000;
 const MISMATCH_MS = 1400;
 
 /** Pexeso: obrázek slova + první slabika slova. Bez trestů a bez počítání chyb. */
@@ -48,8 +50,14 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
   const saved = useRef(false);
   const word = (id: string) => content.wordById.get(id)!;
   const done = found.length === pairs;
+  const [showEnd, setShowEnd] = useState(false);
+  // Token pro přechod na konec: každé zrušení (Hrát znovu, odchod, unmount) ho zvýší → čekající krok se zahodí.
+  const endRun = useRef(0);
+  const endTimers = useRef<number[]>([]);
+  const cancelEnd = () => { endRun.current++; endTimers.current.forEach((t) => window.clearTimeout(t)); endTimers.current = []; };
+  const later = (ms: number) => new Promise<void>((r) => { endTimers.current.push(window.setTimeout(r, ms)); });
 
-  useEffect(() => () => { window.clearTimeout(timer.current); stopSay(); }, []);
+  useEffect(() => () => { window.clearTimeout(timer.current); cancelEnd(); stopSay(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!done || saved.current) return;
     saved.current = true;
@@ -69,20 +77,31 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
     if (next.length < 2) return;
     const [a, b] = next.map((k) => cards.find((x) => x.key === k)!);
     if (a.wordId === b.wordId) {
-      // Dřív: „hotovo“ z efektu konce + slovo z neuklizeného 500ms časovače → slovo, hotovo, slovo.
-      // Teď jedna sekvence: slovo jednou, u posledního páru hned za ním „hotovo“.
       const last = found.length + 1 === pairs;
       setFound((f) => [...f, a.wordId]); setOpen([]);
-      void say([word(a.wordId).audioId, ...(last ? ['snd-p-round-end'].filter((id) => content.audioIds.has(id)) : [])]);
+      const played = say([word(a.wordId).audioId]);
+      if (last) {
+        // Poslední pár: karta zůstane vidět, slovo dohraje (nejdéle END_CAP_MS), krátká pauza, pak konec a „hotovo“.
+        lock.current = true;
+        const run = ++endRun.current;
+        void (async () => {
+          await Promise.race([played, later(END_CAP_MS)]);
+          if (run !== endRun.current) return;
+          await later(END_PAUSE_MS);
+          if (run !== endRun.current) return;
+          setShowEnd(true);
+          void say(['snd-p-round-end'].filter((id) => content.audioIds.has(id)));
+        })();
+      }
     } else {
       lock.current = true;
       timer.current = window.setTimeout(() => { setOpen([]); lock.current = false; }, MISMATCH_MS);
     }
   };
 
-  const restart = () => { window.clearTimeout(timer.current); stopSay(); lock.current = false; setCards(buildCards(pickPairs(cands, pairs))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
+  const restart = () => { window.clearTimeout(timer.current); cancelEnd(); stopSay(); setShowEnd(false); lock.current = false; setCards(buildCards(pickPairs(cands, pairs))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
 
-  if (done) {
+  if (done && showEnd) {
     const stars = starsFor(pairs);
     return (
       <main className="screen activity" data-testid="pex-end">
@@ -92,8 +111,8 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
         {saveError && <p className="notice is-error" role="alert">Hru se nepodařilo uložit.</p>}
         <div className="actions">
           <button className="kbtn kbtn-primary kbtn-xl" onClick={restart}>Hrát znovu</button>
-          <button className="kbtn" onClick={again}>Jiná velikost</button>
-          <button className="kbtn" onClick={back}>Domů</button>
+          <button className="kbtn" onClick={() => { cancelEnd(); stopSay(); again(); }}>Jiná velikost</button>
+          <button className="kbtn" onClick={() => { cancelEnd(); stopSay(); back(); }}>Domů</button>
         </div>
       </main>
     );
@@ -101,7 +120,8 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
   return (
     <main className="screen activity pex" data-testid="pex-game" data-pairs={pairs} key={round}>
       <header className="topbar row">
-        <button className="kbtn" onClick={() => { stopSay(); back(); }}>Zpět</button>
+        <button className="kbtn" onClick={() => { cancelEnd(); stopSay(); back(); }}>Zpět</button>
+        {done && <button className="kbtn kbtn-primary" data-testid="pex-wait-restart" onClick={restart}>Hrát znovu</button>}
         <p className="muted" data-testid="pex-progress">Páry {found.length} z {pairs}</p>
       </header>
       <div className="pex-grid" data-cards={cards.length} role="group" aria-label="Karty pexesa">
@@ -113,7 +133,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
           return (
             <button key={c.key} className={`pex-card${isOpen ? ' is-open' : ''}${isFound ? ' is-matched' : ''}`} data-card={c.key} data-word={c.wordId} data-face={c.face}
               data-state={isFound ? 'matched' : isOpen ? 'open' : 'back'} aria-label={isOpen ? (c.face === 'picture' ? w.text : w.syllablesText[0]) : 'Zakrytá karta'} aria-pressed={isOpen} onClick={() => tap(c)}>
-              {isOpen ? (c.face === 'picture' ? (img ? <img src={img} alt={w.text} draggable={false} /> : <span>{w.text}</span>) : <Glyphs forms={content.syllableById.get(w.firstSyllableId)!.forms} form={form} />) : <span aria-hidden="true">?</span>}
+              {isOpen ? (c.face === 'picture' ? (img ? <img src={img} alt={w.text} draggable={false} /> : <GlyphText text={w.text} form={form} />) : <Glyphs forms={content.syllableById.get(w.firstSyllableId)!.forms} form={form} />) : <span aria-hidden="true">?</span>}
             </button>
           );
         })}

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
-import Glyphs from '../components/Glyphs';
+import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
@@ -30,6 +30,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const target = queue[Math.min(n, total - 1)];
   const [roundKey, setRoundKey] = useState(0);
   const auto = useAutoAdvance(); // po pochvale sám pokračuje
+  const form = useTaskForm(`${n}:${roundKey}`); // jedna forma pro karty, políčka i výsledné slovo
   const cards = useMemo<Card[]>(() => {
     const ids = [...target.syllableIds, ...distractorsFor(content, lesson, target, distractorCount(target, n))];
     return shuffle(ids.map((syllableId, i) => ({ key: `c${i}`, syllableId })));
@@ -169,7 +170,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         <div className="compose-slots" data-testid="slots">
           {target.syllableIds.map((_, i) => (
             <span key={i} className={`slot compose-slot${filled[i] ? ' is-right' : ''}${i === filled.length && !done ? ' is-next' : ''}`} data-testid="slot" data-filled={filled[i] ? sylText(filled[i].syllableId) : ''}>
-              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} /> : ''}
+              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={form} /> : ''}
             </span>
           ))}
         </div>
@@ -191,7 +192,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
               onClick={() => { if (suppressClick.current) { suppressClick.current = false; return; } void place(c); }}
               style={drag?.key === c.key ? { transform: `translate(${drag.x - 60}px, ${drag.y - 60}px)`, position: 'fixed', left: 0, top: 0, zIndex: 10, pointerEvents: 'none' } : undefined}
             >
-              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} />
+              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} form={form} />
             </button>
           );
         })}

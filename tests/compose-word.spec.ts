@@ -34,7 +34,7 @@ test('Slož slovo: klepání – chyba bez trestu, správné složení ukáže o
   for (const sid of word.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
   await expect(page.getByTestId('mascot')).toHaveAttribute('data-mood', 'radost');
   if ((word as { imageId?: string | null }).imageId) await expect(page.getByTestId('picture')).toBeVisible();
-  await expect(page.getByTestId('slots')).toContainText(word.text.replace(/\s/g, '').slice(0, 1));
+  await expect(page.getByTestId('slots')).toContainText(new RegExp(word.text.replace(/\s/g, '').slice(0, 1), 'i')); // jedna forma na úlohu (i malá)
   await expect.poll(async () => (await attempts(page)).filter((a) => a.activity === 'A5c' && a.correct).length).toBe(word.syllableIds.length);
   if (wrongId) expect((await attempts(page)).filter((a) => a.activity === 'A5c' && !a.correct).map((a) => a.itemId)).toEqual([target]);
   await page.getByRole('button', { name: /Dál/ }).click();
