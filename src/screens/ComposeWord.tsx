@@ -5,8 +5,7 @@ import Mascot from '../activities/Mascot';
 import Glyphs from '../components/Glyphs';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
-import { buildWordQueue } from '../activities/wordQueue';
-import { composeWords, distractorCount, distractorsFor } from '../activities/composeWord';
+import { composeQueue, composeWords, distractorCount, distractorsFor } from '../activities/composeWord';
 
 interface Props { content: Content; lesson: Lesson; back: () => void }
 interface Card { key: string; syllableId: string }
@@ -22,7 +21,7 @@ const START = 'Poslechni si slovo a slož ho ze slabik.';
 /** A5c – „Slož slovo“: dítě klepnutím nebo přetažením skládá slabiky do políček; po složení zazní slovo a ukáže se obrázek. */
 function Round({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
   const all = useMemo(() => composeWords(content, lesson), [content, lesson]);
-  const [queue, setQueue] = useState<Word[]>(() => buildWordQueue(all, lesson, priority));
+  const [queue, setQueue] = useState<Word[]>(() => composeQueue(all, lesson, priority));
   const [n, setN] = useState(0);
   const total = queue.length;
   const target = queue[Math.min(n, total - 1)];
@@ -123,7 +122,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   };
   const again = () => {
     stopSay();
-    setQueue(buildWordQueue(all, lesson, priority)); setRequeued([]); setFirstTry(0); reset(0); setRoundKey((k) => k + 1);
+    setQueue(composeQueue(all, lesson, priority)); setRequeued([]); setFirstTry(0); reset(0); setRoundKey((k) => k + 1);
   };
 
   if (all.length < 1) {
@@ -148,7 +147,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
 
   const img = wordImageUrl(target);
   return (
-    <main className="screen activity" data-testid="compose-activity" data-total={total} data-target={target.id} data-done={done}>
+    <main className="screen activity" data-testid="compose-activity" data-total={total} data-queue={queue.map((w) => w.id).join(",")} data-target={target.id} data-done={done}>
       <header className="topbar row">
         <button className="kbtn" onClick={back}>Zpět</button>
         <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
