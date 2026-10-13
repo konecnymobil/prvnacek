@@ -121,6 +121,12 @@ export function GlyphText({ text, className, form }: { text: string; className?:
 }
 export const usesCursive = (id: VariantId) => variantById(id).forms.some(isCursiveKey);
 
+/** Velké písmeno patří slovu, ne slabice: „S velkým“ (cursiveUpper) má velké jen první písmeno slova.
+ *  partForm = forma i-té slabiky ve slově (Má·ma, MÁ·MA, má·ma). */
+export const partForm = (form: FormKey, i: number): FormKey => (i === 0 ? form : form === 'cursiveUpper' ? 'cursive' : form);
+/** Forma volné karty se slabikou: u „S velkým“ malá, aby karta neprozradila, která slabika je první. */
+export const cardForm = (form: FormKey): FormKey => (form === 'cursiveUpper' ? 'cursive' : form);
+
 /** Úlohy s výběrem: v jedné úloze jedna forma pro všechny karty, mezi úlohami se mění.
  *  Pytlík: zamíchané formy povolené varianty, nová úloha nikdy nezíská tutéž formu jako předchozí (u jediné formy beze změny). */
 let bag: FormKey[] = [];

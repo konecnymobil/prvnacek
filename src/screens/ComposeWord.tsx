@@ -1,10 +1,10 @@
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
-import Glyphs, { useTaskForm } from '../components/Glyphs';
+import Glyphs, { GlyphText, cardForm, partForm, useTaskForm } from '../components/Glyphs';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
@@ -40,7 +40,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const [flash, setFlash] = useState<string | null>(null);
   const [requeued, setRequeued] = useState<string[]>([]);
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
-  const [message, setMessage] = useState(START);
+  const [message, setMessage] = useState<ReactNode>(START);
   const [saveError, setSaveError] = useState(false);
   const [firstTry, setFirstTry] = useState(0);
   const [wordWrong, setWordWrong] = useState(false);
@@ -69,7 +69,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
       if (nf.length === target.syllableIds.length) {
         setMood('radost');
         if (!wordWrong) setFirstTry((c) => c + 1);
-        setMessage(`Správně! ${target.text}.`);
+        setMessage(<>Správně! <GlyphText text={target.text} form={form} className="feedback-word" />.</>);
         auto.schedule(say([sylAudio(card.syllableId), target.audioId, ...randomPrompt(content, 'p-praise-')]));
       } else {
         setMood('premysli');
@@ -155,7 +155,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
 
   const img = wordImageUrl(target);
   return (
-    <main className="screen activity" data-testid="compose-activity" data-total={total} data-queue={queue.map((w) => w.id).join(",")} data-target={target.id} data-done={done}>
+    <main className="screen activity" data-testid="compose-activity" data-form={form} data-total={total} data-queue={queue.map((w) => w.id).join(",")} data-target={target.id} data-done={done}>
       <header className="topbar row">
         <button className="kbtn" onClick={back}>Zpět</button>
         <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
@@ -170,7 +170,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         <div className="compose-slots" data-testid="slots">
           {target.syllableIds.map((_, i) => (
             <span key={i} className={`slot compose-slot${filled[i] ? ' is-right' : ''}${i === filled.length && !done ? ' is-next' : ''}`} data-testid="slot" data-filled={filled[i] ? sylText(filled[i].syllableId) : ''}>
-              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={form} /> : ''}
+              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={partForm(form, i)} /> : ''}
             </span>
           ))}
         </div>
@@ -192,7 +192,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
               onClick={() => { if (suppressClick.current) { suppressClick.current = false; return; } void place(c); }}
               style={drag?.key === c.key ? { transform: `translate(${drag.x - 60}px, ${drag.y - 60}px)`, position: 'fixed', left: 0, top: 0, zIndex: 10, pointerEvents: 'none' } : undefined}
             >
-              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} form={form} />
+              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} form={cardForm(form)} />
             </button>
           );
         })}

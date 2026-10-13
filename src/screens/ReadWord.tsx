@@ -1,7 +1,7 @@
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
-import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { GlyphText, partForm, useTaskForm, type FormKey } from '../components/Glyphs';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
@@ -19,7 +19,7 @@ export function WordArcs({ word, form }: { word: Word; form?: FormKey }) {
     <span className="word-arcs" data-testid="word-arcs">
       {word.syllablesText.map((t, i) => (
         <span className="syll-arc" key={i} data-testid="word-syll">
-          <span className="syll-text"><GlyphText text={t} form={form} /></span>
+          <span className="syll-text"><GlyphText text={t} form={form && partForm(form, i)} /></span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
         </span>
       ))}
@@ -43,7 +43,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const choices = useMemo(() => pickChoices(all, target), [all, target, n]); // eslint-disable-line react-hooks/exhaustive-deps
   const [step, setStep] = useState<'read' | 'pick'>('read');
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
-  const [message, setMessage] = useState('Přečti si slovo nahlas.');
+  const [message, setMessage] = useState<ReactNode>('Přečti si slovo nahlas.');
   const [solved, setSolved] = useState(false);
   const [wrong, setWrong] = useState<string[]>([]);
   const [requeued, setRequeued] = useState<string[]>([]);
@@ -65,7 +65,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     busy.current = false;
     if (correct) {
       setSolved(true); setMood('radost'); setCorrectCount((c) => c + (wrong.length === 0 ? 1 : 0));
-      setMessage(`Správně! ${target.text}.`);
+      setMessage(<>Správně! <GlyphText text={target.text} form={form} className="feedback-word" />.</>);
       auto.schedule(say([target.audioId, ...randomPrompt(content, 'p-praise-')]));
     } else {
       setWrong((x) => [...x, w.id]); setMood('povzbuzeni');

@@ -7,9 +7,11 @@ test.use({ serviceWorkers: 'block' });
 async function oneForm(scope: Locator): Promise<string> {
   await expect(scope.locator('.glyph[data-script]').first()).toBeVisible();
   expect(await scope.locator('.glyph-all, [data-variant]').count(), 'žádný prvek nesmí ukazovat víc forem').toBe(0);
-  const forms = new Set(await scope.locator('.glyph[data-script]').evaluateAll((els) => els.map((e) => e.getAttribute('data-script')!)));
+  const raw = await scope.locator('.glyph[data-script]').evaluateAll((els) => els.map((e) => e.getAttribute('data-script')!));
+  // „S velkým“ = psací s velkým jen na začátku slova; karty a další slabiky jsou psací malé (stejné písmo)
+  const forms = new Set(raw.map((f) => (f === 'cursiveUpper' ? 'cursive' : f)));
   expect([...forms], 'v jedné úloze jen jedna forma').toHaveLength(1);
-  return [...forms][0];
+  return (await scope.getAttribute('data-form')) ?? raw.find((f) => f === 'cursiveUpper') ?? raw[0];
 }
 
 async function openLesson(page: Page) {
