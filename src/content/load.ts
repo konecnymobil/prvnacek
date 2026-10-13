@@ -1,3 +1,4 @@
+import { normalizeFormsCase } from './formCase';
 /**
  * Načtení obsahu z public/content/*.json (kopie z content/ od Slabikářky) a minimální validace.
  * Plná validace (JSON Schema, odkazy, IPA…) běží u zdroje: tools/content/validate_content.py.
@@ -87,6 +88,8 @@ export async function loadContent(): Promise<Content> {
   ]);
 
   const allIds = new Set<string>();
+  const caseFixes = normalizeFormsCase([...lettersFile.letters, ...syllablesFile.syllables, ...wordsFile.words]);
+  if (caseFixes.length) console.warn('Obsah: opravena velikost písmen ve tvarech', caseFixes);
   const letterById = indexById(lettersFile.letters, 'letters', allIds);
   indexById(lettersFile.pictureWords, 'pictureWords', allIds);
   const syllableById = indexById(syllablesFile.syllables, 'syllables', allIds);
