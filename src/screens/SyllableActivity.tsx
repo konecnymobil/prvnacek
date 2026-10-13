@@ -6,6 +6,7 @@ import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
 import Mascot from '../activities/Mascot';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, pickPriority, usePriorityIds } from '../activities/common';
+import { useAutoAdvance } from '../activities/autoAdvance';
 
 /** Slabiky použitelné ve slabikových úlohách (jen usableInSyllableTasks), složené z probraných písmen. */
 export function lessonSyllables(content: Content, lesson: Lesson): Syllable[] {
@@ -56,6 +57,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const [failed, setFailed] = useState(false);
   const busy = useRef(false);
   const form = useTaskForm(target);
+  const auto = useAutoAdvance(); // po pochvale sám pokračuje
 
   useEffect(() => () => stopSay(), []);
 
@@ -86,7 +88,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
       setMood('radost');
       setCorrectCount((c) => c + (failed ? 0 : 1));
       setMessage(`Správně! Slabika ${target.text}.`);
-      void say([target.audioId, ...randomPrompt(content, 'p-praise-')]);
+      auto.schedule(say([target.audioId, ...randomPrompt(content, 'p-praise-')]));
     } else {
       setFailed(true);
       setMood('povzbuzeni');
@@ -101,6 +103,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     setSlots((s) => s.map((x, i) => (i === idx ? null : x)));
   };
 
+  auto.target.current = () => next();
   const next = () => {
     stopSay();
     if (n + 1 >= ROUND_SIZE) {
@@ -176,7 +179,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
       )}
       {solved && (
         <div className="actions">
-          <button className="kbtn kbtn-primary kbtn-xl" onClick={next}>Dál ▶</button>
+          <button className="kbtn kbtn-primary kbtn-xl" onClick={auto.manual}>Dál ▶</button>
         </div>
       )}
     </main>

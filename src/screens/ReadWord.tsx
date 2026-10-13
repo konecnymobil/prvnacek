@@ -7,6 +7,7 @@ import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, stopSay, usePriorityIds } from '../activities/common';
+import { useAutoAdvance } from '../activities/autoAdvance';
 import { buildWordQueue, pickChoices } from '../activities/wordQueue';
 import { lessonPictureWords } from './WordActivity';
 
@@ -50,6 +51,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const [saveError, setSaveError] = useState(false);
   const busy = useRef(false);
   const form = useTaskForm(target);
+  const auto = useAutoAdvance(); // po pochvale sám pokračuje
 
   useEffect(() => () => stopSay(), []);
   // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
@@ -64,7 +66,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     if (correct) {
       setSolved(true); setMood('radost'); setCorrectCount((c) => c + (wrong.length === 0 ? 1 : 0));
       setMessage(`Správně! ${target.text}.`);
-      void say([target.audioId, ...randomPrompt(content, 'p-praise-')]);
+      auto.schedule(say([target.audioId, ...randomPrompt(content, 'p-praise-')]));
     } else {
       setWrong((x) => [...x, w.id]); setMood('povzbuzeni');
       if (!requeued.includes(target.id)) { setRequeued((r) => [...r, target.id]); setQueue((q) => [...q, target]); }
@@ -74,6 +76,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   };
 
   const reset = () => { setStep('read'); setSolved(false); setWrong([]); setMood('premysli'); setMessage('Přečti si slovo nahlas.'); };
+  auto.target.current = () => next();
   const next = () => {
     stopSay();
     if (n + 1 >= total) { setN(total); void say(promptAudio(content, 'p-round-end')); return; }
@@ -125,7 +128,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
           ))}
         </div>
       )}
-      {solved && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={next}>Dál ▶</button></div>}
+      {solved && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={auto.manual}>Dál ▶</button></div>}
     </main>
   );
 }

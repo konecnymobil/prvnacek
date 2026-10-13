@@ -6,6 +6,7 @@ import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import Mascot from '../activities/Mascot';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle, pickPriority, usePriorityIds } from '../activities/common';
+import { useAutoAdvance } from '../activities/autoAdvance';
 
 interface Task {
   target: Letter;
@@ -59,6 +60,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
   const [correctCount, setCorrectCount] = useState(0);
   const busy = useRef(false);
   const form = useTaskForm(task);
+  const auto = useAutoAdvance(); // po pochvale sám pokračuje
 
   const hear = useCallback(() => void say([task.target.audioId]), [task]);
 
@@ -85,7 +87,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
       setMood('radost');
       setCorrectCount((c) => c + (wrong.length === 0 ? 1 : 0));
       setMessage('Správně! Výborně!');
-      void say(randomPrompt(content, 'p-praise-'));
+      auto.schedule(say(randomPrompt(content, 'p-praise-')));
     } else {
       setWrong((w) => [...w, l.id]);
       setMood('povzbuzeni');
@@ -94,6 +96,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
     }
   };
 
+  auto.target.current = () => next();
   const next = () => {
     stopSay();
     if (n + 1 >= ROUND_SIZE) {
@@ -151,7 +154,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
       </div>
       {solved && (
         <div className="actions">
-          <button className="kbtn kbtn-primary kbtn-xl" onClick={next}>Dál ▶</button>
+          <button className="kbtn kbtn-primary kbtn-xl" onClick={auto.manual}>Dál ▶</button>
         </div>
       )}
     </main>
