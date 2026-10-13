@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "icons": "python3 scripts/make-icons.py",
     "tokens": "node src/design/tools/build-tokens.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "gen:policy": "node scripts/gen-policy.mjs"
   },
   "dependencies": {
     "idb": "^8.0.4",
