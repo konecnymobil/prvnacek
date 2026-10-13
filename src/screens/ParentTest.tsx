@@ -1,3 +1,4 @@
+import { awardSticker } from '../album/album';
 import { GlyphText } from '../components/Glyphs';
 import { useMemo, useState } from 'react';
 import type { Content } from '../content/load';
@@ -60,6 +61,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
         errors: results.flatMap((r, i) => (r.correct ? [] : [{ text: items[i].text, type: items[i].type, reason: r.reason, refId: items[i].refId, reviewKind: items[i].reviewKind }])),
       });
       setSaved(true);
+      void awardSticker('snaha', { refId: lesson.id }).catch(() => {});
     } catch {
       setSaveErr('Výsledek zkoušky se nepodařilo uložit do iPadu.');
     }
@@ -70,6 +72,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
     try {
       await persist();
       await approveLesson(orderId, lesson.id, next, 'test');
+      void awardSticker('lekce', { letter: content.letterById.get(lesson.primaryLetterId)?.upper, refId: lesson.id }).catch(() => {});
       const nl = next ? order.lessons.find((l) => l.id === next) : null;
       setApproved(nl ? `Schváleno ✓ Odemčena lekce ${nl.index}: ${nl.title}.` : 'Schváleno ✓ To byla poslední lekce.');
     } catch {

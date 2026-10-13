@@ -64,6 +64,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
           {availablePairs(content, states) >= 3 && (
             <button className="kbtn kbtn-primary kbtn-xl" data-testid="open-pexeso" onClick={() => go('pexeso')}>🃏 Pexeso</button>
           )}
+          <button className="kbtn kbtn-primary kbtn-xl" data-testid="open-album" onClick={() => go('album')}>⭐ Album</button>
           {hint && <p className="notice" role="status" data-testid="lock-hint">🔒 {hint}</p>}
           <p className="small muted" data-testid="content-version">
             Obsah {content.version} · {content.letters.length} písmen · {content.taskSyllables.length} slabik do úloh · {content.words.length} slov ·{' '}

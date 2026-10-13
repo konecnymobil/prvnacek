@@ -74,6 +74,12 @@ test('A2: celé kolo skončí obrazovkou Hotovo', async ({ page }) => {
     await page.getByRole('button', { name: /Dál/ }).click();
   }
   await expect(page.getByTestId('round-end')).toContainText('Napoprvé správně: 6 z 6');
+  const album = await page.evaluate(async () => {
+    const db: IDBDatabase = await new Promise((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => res(r.result); });
+    const v = await new Promise<{ stickerId: string; source: string }[] | undefined>((res) => { const q = db.transaction('settings').objectStore('settings').get('album:owned'); q.onsuccess = () => res(q.result); });
+    db.close(); return v;
+  });
+  expect(album?.map((x) => [x.stickerId, x.source])).toEqual([['t:1f41e', 'cviceni']]);
   await page.getByRole('button', { name: 'Zpět na lekci' }).click();
   await expect(page.getByTestId('lesson-menu')).toBeVisible();
   expect((await attempts(page)).length).toBe(6);

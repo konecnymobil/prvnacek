@@ -1,3 +1,4 @@
+import { useStickerOnDone } from '../album/useStickerOnDone';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -125,6 +126,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     );
   }
 
+  useStickerOnDone('cviceni', n >= ROUND_SIZE);
   if (n >= ROUND_SIZE) {
     return (
       <main className="screen activity" data-testid="round-end">

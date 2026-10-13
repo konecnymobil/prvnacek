@@ -104,11 +104,21 @@
   --m-celebrate: 1200ms;
   --m-ease-out: cubic-bezier(.2,.8,.2,1);
   --m-ease-bounce: cubic-bezier(.34,1.56,.64,1);
+  /* sticker */
+  --stk-size: clamp(110px, 17vmin, 170px); /* Běžná nálepka v albu */
+  --stk-size-special: clamp(130px, 20vmin, 200px); /* Speciální písmenková nálepka (schválená lekce) */
+  --stk-size-detail: clamp(240px, 42vmin, 400px); /* Zvětšená nálepka v detailu */
+  --stk-ring: #FFFFFF; /* Bílý okraj nálepky (výsek) */
+  --stk-ring-special: #FFC53D; /* Zlatý okraj speciální nálepky */
+  --stk-empty-stroke: #D4C19B; /* Vlídný obrys prázdného místa (čárkovaný) */
+  --stk-empty-fill: rgba(255,255,255,.45); /* Výplň prázdného místa */
+  --stk-page-bg: #FFFDF6; /* Stránka alba */
+  --stk-fly-duration: 1100ms; /* Let nové nálepky do alba */
 }
 
 /* Globálně: Andika cv30 – velké I jako prostá čára */
 html { font-feature-settings: var(--font-feature-settings); }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --m-fast: 0ms; --m-base: 0ms; --m-slow: 0ms; --m-celebrate: 0ms; }
+  :root { --m-fast: 0ms; --m-base: 0ms; --m-slow: 0ms; --m-celebrate: 0ms; --stk-fly-duration: 0ms; }
 }

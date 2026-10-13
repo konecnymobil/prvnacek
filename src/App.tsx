@@ -16,11 +16,12 @@ import ComposeWord from './screens/ComposeWord';
 import Pexeso from './screens/Pexeso';
 import Review from './screens/Review';
 import Sounds from './screens/Sounds';
+import Album from './screens/Album';
 import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -56,6 +57,7 @@ function AppInner() {
       {content && screen === 'parent' && <ParentHome content={content} go={setScreen} startTest={(id) => { setLessonId(id); setScreen('parentTest'); }} />}
       {lesson && content && screen === 'parentTest' && <ParentTest content={content} lesson={lesson} go={setScreen} />}
       {content && screen === 'sounds' && <Sounds content={content} go={setScreen} />}
+      {content && screen === 'album' && <Album content={content} back={() => setScreen('home')} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
     </div>
   );
