@@ -42,8 +42,19 @@ for (const [variant, forms] of Object.entries(VARIANTS)) {
       const capCards = cards.filter(hasUpper).length;
       if (form === 'upperPrint') expect(cards.every((t) => t === t.toUpperCase()), `karty ${cards}`).toBe(true);
       else expect(capCards, `karty ${cards} (${form}) nesmí mít velká písmena`).toBe(0);
-      for (const sid of w.syllableIds) await act.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
+      // špatné pořadí: nejdřív druhá slabika (odmítne se), pak správně
+      const wrong = w.syllableIds.find((x) => x !== w.syllableIds[0]);
+      if (wrong) { await act.locator(`[data-syllable="${wrong}"]:not([disabled])`).first().click(); await expect(act.getByTestId('slot').first()).toHaveAttribute('data-filled', ''); }
+      for (const [i, sid] of w.syllableIds.entries()) {
+        await act.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
+        if (i < w.syllableIds.length - 1) {
+          const slots = await act.getByTestId('slot').evaluateAll((els) => els.map((e) => e.textContent!.trim()));
+          slots.slice(1).forEach((t) => { if (form !== 'upperPrint') expect(hasUpper(t), `políčko ${t}`).toBe(false); });
+        }
+      }
       const expected = w.forms[form];
+      await expect(act.getByTestId('composed-word')).toHaveText(expected); // slovo vcelku z vlastního tvaru
+      await expect(act.getByTestId('composed-word').locator('.glyph')).toHaveAttribute('data-script', form);
       await expect(act.getByTestId('slots')).toHaveText(expected);
       if (form === 'cursiveUpper') expect(hasUpper(expected.slice(1))).toBe(false);
       const fb = act.getByTestId('feedback').locator('.glyph');

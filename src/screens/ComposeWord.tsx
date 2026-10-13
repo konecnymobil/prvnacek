@@ -168,7 +168,10 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       <div className="compose-board">
         <div className="compose-slots" data-testid="slots">
-          {target.syllableIds.map((_, i) => (
+          {done ? (
+            // Hotové slovo vcelku z vlastního tvaru slova (psací spojitě „Mele“), ne poskládané ze slabik
+            <span className="slot compose-slot compose-word is-right" data-testid="composed-word"><GlyphText text={target.text} form={wordCase(form).word} /></span>
+          ) : target.syllableIds.map((_, i) => (
             <span key={i} className={`slot compose-slot${filled[i] ? ' is-right' : ''}${i === filled.length && !done ? ' is-next' : ''}`} data-testid="slot" data-filled={filled[i] ? sylText(filled[i].syllableId) : ''}>
               {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={wordCase(form).part(i)} /> : ''}
             </span>
