@@ -29,11 +29,16 @@ test('Čti slabiku a Čti slovo: pokyn zazní na začátku úlohy, nové obrázk
     const w = words.find((x: { id: string }) => x.id === t);
     for (const sid of w.syllableIds) await page.locator(`[data-syllable="${sid}"]:not([disabled])`).first().click();
     const img = page.getByTestId('picture');
-    if (!w.imageId) { await expect(page.getByRole('button', { name: /Dál/ })).toBeVisible(); await page.getByRole('button', { name: /Dál/ }).click(); continue; } // ALE, MELE nemají obrázek
+    // posun: ručně Dál, nebo ho mezitím udělal automatický posun (#28) – nikdy dvakrát
+    const advance = async () => {
+      await page.getByRole('button', { name: /Dál/ }).click({ timeout: 1000 }).catch(() => {});
+      if (i + 1 < total) await expect(page.getByTestId('progress')).toHaveText(new RegExp(`Úloha ${i + 2} z`));
+    };
+    if (!w.imageId) { await advance(); continue; } // ALE, MELE nemají obrázek
     await expect(img).toBeVisible();
     await expect.poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     loaded.add((await img.getAttribute('src'))!);
-    await page.getByRole('button', { name: /Dál/ }).click();
+    await advance();
   }
   expect(loaded.size).toBeGreaterThan(3);
 });
