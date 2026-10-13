@@ -100,6 +100,7 @@ export async function playAudio(audioId: AudioId): Promise<AudioSource> {
   const token = playToken;
   const { blob, source } = await resolveAudio(audioId);
   if (token !== playToken) return source; // mezitím spuštěn jiný zvuk
+  (globalThis as { __prvPlayLog?: string[] }).__prvPlayLog?.push(audioId); // jen pro testy (pole zakládá test)
   await playBlob(blob, token);
   return source;
 }

@@ -56,7 +56,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
     const g: PexGame = { at: Date.now(), pairs, stars: starsFor(pairs), flips };
     (async () => { const list = ((await getSetting<PexGame[]>(PEX_KEY)) ?? []); await setSetting(PEX_KEY, [...list, g]); })().catch(() => setSaveError(true));
     void awardSticker('pexeso').catch(() => {});
-    void say(['snd-p-round-end'].filter((id) => content.audioIds.has(id)));
+    // „hotovo“ se pouští v tap() hned za posledním slovem, aby se nic nepřekrývalo
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const tap = (c: PexCard) => {
@@ -69,15 +69,18 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
     if (next.length < 2) return;
     const [a, b] = next.map((k) => cards.find((x) => x.key === k)!);
     if (a.wordId === b.wordId) {
+      // Dřív: „hotovo“ z efektu konce + slovo z neuklizeného 500ms časovače → slovo, hotovo, slovo.
+      // Teď jedna sekvence: slovo jednou, u posledního páru hned za ním „hotovo“.
+      const last = found.length + 1 === pairs;
       setFound((f) => [...f, a.wordId]); setOpen([]);
-      window.setTimeout(() => void say([word(a.wordId).audioId]), 500);
+      void say([word(a.wordId).audioId, ...(last ? ['snd-p-round-end'].filter((id) => content.audioIds.has(id)) : [])]);
     } else {
       lock.current = true;
       timer.current = window.setTimeout(() => { setOpen([]); lock.current = false; }, MISMATCH_MS);
     }
   };
 
-  const restart = () => { setCards(buildCards(pickPairs(cands, pairs))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
+  const restart = () => { window.clearTimeout(timer.current); stopSay(); lock.current = false; setCards(buildCards(pickPairs(cands, pairs))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
 
   if (done) {
     const stars = starsFor(pairs);
