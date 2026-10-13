@@ -72,8 +72,8 @@ export async function recordAttempt(
   correct: boolean,
 ): Promise<void> {
   const orderId = content.defaultOrderId;
-  const responseMs = noteAnswer();
-  await addAttempt({ orderId, lessonId: lesson.id, activity, itemId, correct, chosenId, responseMs,
+  const { responseMs, round } = noteAnswer();
+  await addAttempt({ orderId, lessonId: lesson.id, activity, itemId, correct, chosenId, responseMs, round,
     reason: correct ? null : 'confused', confusedWith: correct ? null : chosenId });
   const state = await getLessonState(orderId, lesson.id);
   if (state?.status === 'approved') return;

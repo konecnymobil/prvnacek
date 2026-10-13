@@ -51,7 +51,7 @@ export default function WeeklySummary({ content, go }: { content: Content; go: (
             <button className="kbtn" disabled={page === 0} onClick={() => setPage(page - 1)} data-testid="week-newer">Novější týden ›</button>
           </nav>
           <section className="card" data-section="overview"><h2>Týden v kostce</h2><p data-testid="summary-headline">{s.lines.headline}</p>
-            <p className="small muted">Hodnocené úlohy: {String(s.metrics.ratedTasks)}, úspěšnost {Math.round(Number(s.metrics.successRatio) * 100)} %, průměrné sezení {Math.round(Number(s.metrics.avgSessionMinutes))} min, signály únavy: {String(s.metrics.frustrationSignals)}.</p></section>
+            <p className="small muted">Hodnocené úlohy: {String(s.metrics.ratedTasks)}, úspěšnost {Math.round(Number(s.metrics.successRatio) * 100)} %, průměrné sezení {Math.round(Number(s.metrics.avgSessionMinutes))} min, signály únavy: {String(s.metrics.frustrationSignals)}{s.avgResponseSec !== null && <>, průměrná doba odpovědi {s.avgResponseSec.toFixed(1)} s</>}.</p></section>
           <section className="card" data-section="mastered"><h2>Co je zvládnuté</h2><p data-testid="summary-mastered">{s.lines.mastered}</p></section>
           <section className="card" data-section="tests"><h2>Zkoušky</h2><p data-testid="summary-tests">{s.lines.tests}</p>
             {s.approvedLessons.length > 0 && <p className="small muted">Schváleno: {s.approvedLessons.join(', ')}</p>}</section>

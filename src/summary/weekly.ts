@@ -15,7 +15,7 @@ export const IDLE_MS = 60 * 1000;
 export const ERROR_STREAK = 3;
 
 export interface SAttempt { at: number; day: string; activity: string; lessonId: string; itemId: string; correct: boolean;
-  chosenId?: string | null; reason?: string | null; confusedWith?: string | null }
+  chosenId?: string | null; reason?: string | null; confusedWith?: string | null; responseMs?: number | null; round?: number | null }
 export interface SEvent { at: number; day: string; kind: string; lessonId?: string }
 export interface STest { at: number; lessonId: string; errors: { reason: string | null; refId?: string | null }[] }
 export interface SLessonState { lessonId: string; status: string; approvedAt: number | null }
@@ -68,11 +68,34 @@ export function isMastered(att: SAttempt[], rule: AttemptMasteryRule): boolean {
   return att.slice(-3).filter((a) => !a.correct).length < 2;
 }
 
+/** attemptRules.countsForMastery = firstAttemptPerRound: jen první pokus o položku v kole (staré pokusy bez kola se počítají všechny). */
+export function masteryAttempts(att: SAttempt[]): SAttempt[] {
+  const seen = new Set<string>();
+  return att.filter((a) => {
+    if (a.round == null) return true;
+    const k = `${a.round}|${a.itemId}`;
+    if (seen.has(k)) return false;
+    seen.add(k); return true;
+  });
+}
+
+/** Aktuální lekce = nejvyšší odemčená (schválením předchozí nebo ručně rodičem). */
+export function currentLesson(c: SContent, states: SLessonState[]) {
+  const lessons = [...c.lessons].sort((a, b) => a.index - b.index);
+  const st = new Map(states.map((s) => [s.lessonId, s.status]));
+  let cur = lessons[0];
+  lessons.forEach((l, i) => {
+    const own = st.get(l.id);
+    if (i === 0 || (own && own !== 'locked') || st.get(lessons[i - 1].id) === 'approved') cur = l;
+  });
+  return cur;
+}
+
 function masteredSets(data: SData, c: SContent, spec: WeeklySummaryFile, until: number) {
   const usable = new Set(c.syllables.filter((s) => s.usableInSyllableTasks).map((s) => s.id));
   const words = new Set(c.words.map((w) => w.id));
   const by = new Map<string, SAttempt[]>();
-  for (const a of [...data.attempts].sort((x, y) => x.at - y.at)) if (a.at < until) {
+  for (const a of masteryAttempts([...data.attempts].sort((x, y) => x.at - y.at))) if (a.at < until) {
     const l = by.get(a.itemId) ?? []; l.push(a); by.set(a.itemId, l);
   }
   const syl = new Set<string>(), wrd = new Set<string>();
@@ -118,6 +141,7 @@ export interface WeekSummary {
   recommendations: { id: WeeklyRecommendationId; text: string }[];
   lines: { headline: string; mastered: string; tests: string; trend: string; errors: string[]; praise: string };
   approvedLessons: string[];
+  avgResponseSec: number | null;
 }
 
 function baseMetrics(data: SData, c: SContent, spec: WeeklySummaryFile, ws: number) {
@@ -134,10 +158,8 @@ function baseMetrics(data: SData, c: SContent, spec: WeeklySummaryFile, ws: numb
   for (const a of att) { if (a.correct) run = 0; else if (++run === ERROR_STREAK) streaks++; }
   const frustration = streaks + ev.filter((e) => e.kind === 'earlyExit' || e.kind === 'idle').length;
   const approved = data.lessonStates.filter((s) => s.status === 'approved' && s.approvedAt !== null && s.approvedAt >= ws && s.approvedAt < we);
-  // aktuální lekce = nejvyšší lekce s pokusem nebo schválením do konce týdne
-  const touched = new Set([...data.attempts.filter((a) => a.at < we && a.lessonId).map((a) => a.lessonId), ...data.lessonStates.filter((s) => s.status === 'approved' && (s.approvedAt ?? 0) < we).map((s) => s.lessonId)]);
   const lessons = [...c.lessons].sort((a, b) => a.index - b.index);
-  const cur = [...lessons].reverse().find((l) => touched.has(l.id)) ?? lessons[0];
+  const cur = currentLesson(c, data.lessonStates);
   const next = lessons.find((l) => l.index === cur.index + 1) ?? null;
   const curApproved = data.lessonStates.some((s) => s.lessonId === cur.id && s.status === 'approved' && (s.approvedAt ?? 0) < we);
   const curAll = data.attempts.filter((a) => a.lessonId === cur.id && a.at < we).sort((a, b) => a.at - b.at);
@@ -159,10 +181,14 @@ function baseMetrics(data: SData, c: SContent, spec: WeeklySummaryFile, ws: numb
     lettersMastered: m1.letters.size, syllablesMastered: m1.syl.size, wordsMastered: m1.wrd.size, newlyMastered: newly,
     testsTaken: tests.length, lessonsApproved: approved.length,
     recommendedForTest: !curApproved && isRecommendedForTest(curAll, c.recommendation),
-    currentLessonApproved: curApproved && !!next && !data.attempts.some((a) => a.lessonId === next.id && a.at < we),
+    currentLessonApproved: curApproved && !!next,
     frustrationSignals: frustration, topErrorCount: errors[0]?.count ?? 0,
   };
-  return { metrics, errors, cur, next, approved };
+  // doba odpovědi: pauzy > attemptRules.pauseThresholdSec se do průměru nepočítají
+  const pauseMs = (spec.attemptRules?.pauseThresholdSec ?? IDLE_MS / 1000) * 1000;
+  const rts = att.map((a) => a.responseMs).filter((x): x is number => typeof x === 'number' && x <= pauseMs);
+  const avgResponseSec = rts.length ? rts.reduce((s, x) => s + x, 0) / rts.length / 1000 : null;
+  return { metrics, errors, cur, next, approved, avgResponseSec };
 }
 
 /** Trend podle spec.trend: „víc/podobně/méně“, nebo „none“ když minulý týden nebyl. */
@@ -186,7 +212,7 @@ export function buildWeekSummary(data: SData, c: SContent, spec: WeeklySummaryFi
     minutes: trendLabel(spec, Number(m.minutesTotal), Number(p.minutesTotal), prevHad),
     success: !prevHad ? spec.trend.labels.none
       : Number(m.ratedTasks) >= minBase && Number(p.ratedTasks) >= minBase ? trendLabel(spec, Number(m.successRatio), Number(p.successRatio), true)
-      : `málo úloh na porovnání (potřeba aspoň ${minBase} v obou týdnech)`,
+      : (spec.templates.trendTooFew ?? ''),
     newly: trendLabel(spec, Number(m.newlyMastered), Number(p.newlyMastered), prevHad),
   };
   const we = addDays(ws, 6);
@@ -204,7 +230,7 @@ export function buildWeekSummary(data: SData, c: SContent, spec: WeeklySummaryFi
   const T = spec.templates;
   const recommendations = pickWeeklyRecommendations(spec, m).map((id) => ({ id, text: fillTemplate(spec.recommendations.find((r) => r.id === id)!.template, vals) }));
   return {
-    weekStart: ws, metrics: m, errors: w.errors, trend, recommendations,
+    weekStart: ws, avgResponseSec: w.avgResponseSec, metrics: m, errors: w.errors, trend, recommendations,
     approvedLessons: w.approved.map((s) => c.lessons.find((l) => l.id === s.lessonId)?.title ?? s.lessonId),
     lines: {
       headline: fillTemplate(T.headline, vals), mastered: fillTemplate(T.mastered, vals), tests: fillTemplate(T.tests, vals),

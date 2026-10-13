@@ -360,7 +360,13 @@ export interface WeeklyCondition { metric: WeeklyMetricId; op: ">" | ">=" | "<" 
 export type WeeklyRecommendationId = "pause" | "test" | "nextLesson" | "repeat" | "start" | "keepGoing";
 export interface AttemptMasteryRule { rule: "attempts"; minCorrect: number; minDistinctDays: number; lastN: number; minRatioLastN: number; text: string }
 export interface WeeklySummaryFile extends FileHeader<"weeklySummary"> {
-  period: { weekStartsOn: "monday"; timeZone: string; showOn: string; note: string };
+  period: { weekStartsOn: "monday"; timeZone: string; showOn: string; onlyCompletedWeeks: true; note: string };
+  /** Pravidla logování a výpočtů (rozhodnutí k PR #20). */
+  attemptRules: {
+    countsForMastery: "firstAttemptPerRound"; // jen první pokus o položku v kole; opakování → statistiky a chyby
+    countsForMasteryText: string; responseTime: string; pauseThresholdSec: number; aborted: string;
+    testErrors: string; currentLesson: string; newlyMastered: string; trendMinTasks: string;
+  };
   metrics: { id: WeeklyMetricId; label: string; unit: "min" | "count" | "ratio" | "bool"; definition: string }[];
   mastery: {
     letter: { rule: "approvedLesson"; text: string };

@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
-import { buildWeekSummary, categorizeError, completedWeeks, isMastered, sessionStats, trendLabel, weekStartOf, addDays, type SAttempt, type SContent, type SData } from '../src/summary/weekly';
+import { buildWeekSummary, categorizeError, currentLesson, masteryAttempts, completedWeeks, isMastered, sessionStats, trendLabel, weekStartOf, addDays, type SAttempt, type SContent, type SData } from '../src/summary/weekly';
 import type { WeeklySummaryFile } from '../src/content/types';
 
 const read = (f: string) => JSON.parse(fs.readFileSync(`public/content/${f}`, 'utf8'));
@@ -29,6 +29,18 @@ test.describe('metriky souhrnu (logika)', () => {
     expect(isMastered([att(d1, 's-ma', true), att(d1 + 1, 's-ma', true), att(d1 + 2, 's-ma', true)], spec.mastery.syllable)).toBe(false); // 1 den
     expect(isMastered([...ok, att(d2 + 1, 's-ma', false), att(d2 + 2, 's-ma', false)], spec.mastery.syllable)).toBe(false); // 2 chyby ze 3
   });
+  test('do zvládnutí jen první pokus o položku v kole', () => {
+    const d1 = new Date(2026, 9, 5, 10).getTime(), d2 = new Date(2026, 9, 6, 10).getTime();
+    // kolo 1: chyba, pak oprava (oprava se nepočítá); kolo 2 a 3: správně → jen 2 správné první pokusy
+    const a = [att(d1, 's-ma', false, { round: 1 }), att(d1 + 1, 's-ma', true, { round: 1 }), att(d1 + 2, 's-ma', true, { round: 2 }), att(d2, 's-ma', true, { round: 3 })];
+    expect(masteryAttempts(a).map((x) => x.correct)).toEqual([false, true, true]);
+    expect(isMastered(masteryAttempts(a), spec.mastery.syllable)).toBe(false);
+  });
+  test('aktuální lekce = nejvyšší odemčená (i ručně)', () => {
+    expect(currentLesson(C, []).id).toBe('duha-1');
+    expect(currentLesson(C, [{ lessonId: 'duha-1', status: 'approved', approvedAt: 1 }]).id).toBe('duha-2');
+    expect(currentLesson(C, [{ lessonId: 'duha-5', status: 'practicing', approvedAt: null }]).id).toBe('duha-5');
+  });
   test('kategorie chyb', () => {
     expect(categorizeError(C, 's-ma', 'confused', 's-maa').id).toBe('vowelLength');
     const lc = categorizeError(C, 'l-a', 'confused', 'l-e');
@@ -36,6 +48,12 @@ test.describe('metriky souhrnu (logika)', () => {
     expect(lc.pair).toBe('A × E');
     expect(categorizeError(C, 'l-m', 'unknown', null).id).toBe('unknown');
     expect(categorizeError(C, 's-ma', 'notBlended', null).id).toBe('notBlended');
+  });
+  test('málo úloh → trendTooFew', () => {
+    const ws = weekStartOf(new Date(2026, 9, 7).getTime());
+    const t0 = addDays(ws, -6) + 9 * 3600e3, t1 = addDays(ws, 1) + 9 * 3600e3;
+    const data: SData = { attempts: [att(t0, 's-ma', true), att(t1, 's-ma', true)], events: [], tests: [], lessonStates: [] };
+    expect(buildWeekSummary(data, C, spec, ws, 'Ema').trend.success).toBe(spec.templates.trendTooFew);
   });
   test('trend ±10 %', () => {
     expect(trendLabel(spec, 111, 100, true)).toBe(spec.trend.labels.up);
@@ -55,7 +73,9 @@ test.describe('metriky souhrnu (logika)', () => {
     expect(s.metrics.frustrationSignals).toBe(2); // 1× 3+ chyb za sebou + předčasné ukončení
     expect(s.errors[0].id).toBe('vowelLength');
     expect(s.recommendations.length).toBeLessThanOrEqual(2);
-    expect(s.lines.praise).toContain('Anička');
+    expect(s.lines.praise.startsWith('Anička')).toBe(true);
+    expect(s.trend.success).toBe(spec.trend.labels.none); // minulý týden bez procvičování
+    expect(spec.errorCategories.find((x) => x.id === 'unknown')!.label).toBe('Zatím neví');
     expect(completedWeeks(data, addDays(ws, 8))).toEqual([ws]);
   });
 });

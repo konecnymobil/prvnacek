@@ -26,6 +26,8 @@ export interface Attempt {
   confusedWith?: string | null;
   /** M4: doba odpovědi v ms (od zobrazení úlohy / předchozí odpovědi). */
   responseMs?: number | null;
+  /** M4: id kola; do zvládnutí se počítá jen první pokus o položku v kole. */
+  round?: number | null;
   at: number; // Date.now()
   day: string; // YYYY-MM-DD v místním čase
 }

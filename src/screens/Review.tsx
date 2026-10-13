@@ -57,7 +57,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     busy.current = true;
     const correct = id === item.id;
     try {
-      await addAttempt({ orderId: content.defaultOrderId, lessonId: item.lessonId, activity: item.activity, itemId: item.id, correct, chosenId: id, source: 'review', responseMs: noteAnswer(), reason: correct ? null : 'confused', confusedWith: correct ? null : id });
+      await addAttempt({ orderId: content.defaultOrderId, lessonId: item.lessonId, activity: item.activity, itemId: item.id, correct, chosenId: id, source: 'review', ...noteAnswer(), reason: correct ? null : 'confused', confusedWith: correct ? null : id });
       setSaveError(false);
     } catch { setSaveError(true); }
     busy.current = false;
