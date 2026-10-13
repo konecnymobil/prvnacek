@@ -1,5 +1,5 @@
 import { awardSticker } from '../album/album';
-import { GlyphText } from '../components/Glyphs';
+import { GlyphText, useTaskForm } from '../components/Glyphs';
 import { useMemo, useState } from 'react';
 import type { Content } from '../content/load';
 import type { ErrorReasonId, Lesson, TestItem } from '../content/types';
@@ -25,6 +25,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
   const [approved, setApproved] = useState<string | null>(null);
   const [saveErr, setSaveErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const form = useTaskForm(`${seed}:${results.length}`); // jedna forma na položku zkoušky
 
   if (!bp) {
     return (
@@ -142,7 +143,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
         <>
           <section className="card test-item">
             <p className="small muted">{typeInfo?.label}{reviewKindLabel ? ` (${reviewKindLabel})` : ''}</p>
-            <p className="test-text" data-testid="test-text" data-type={item.type}><GlyphText text={item.text} /></p>
+            <p className="test-text" data-testid="test-text" data-type={item.type}><GlyphText text={item.text} form={form} /></p>
             <p className="small muted">{typeInfo?.correctWhen}</p>
           </section>
           {askReason ? (
