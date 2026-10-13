@@ -1,3 +1,4 @@
+import policy from '../policy/data-policy.json';
 import { useEffect, useState } from 'react';
 import { buildBackup, downloadBackup, parseBackup, restoreBackup, summarize, type BackupFile } from '../storage/backup';
 import { requestPersistentStorage } from '../storage/db';
@@ -54,6 +55,7 @@ export default function BackupPanel({ onRestored }: { onRestored: () => void }) 
   return (
     <section className="card" data-testid="backup-panel">
       <h2>Záloha a obnova</h2>
+      <p className="muted" data-testid="backup-server-note">{policy.backupNote}</p>
       <StoragePanel />
       <p className="small muted">Záloha obsahuje pokrok, stavy lekcí, výsledky zkoušek, nastavení a tvoje nahrávky v jednom souboru.</p>
       <button className="kbtn kbtn-primary" disabled={busy} onClick={doExport} data-testid="backup-export">⬇ Stáhnout zálohu</button>

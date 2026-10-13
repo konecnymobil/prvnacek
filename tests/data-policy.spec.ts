@@ -3,7 +3,7 @@ import fs from 'node:fs';
 // @ts-expect-error – plain ESM script without types
 import { renderMarkdown, policyHash, MD, LOCK, POLICY } from '../scripts/gen-policy.mjs';
 
-const policy = JSON.parse(fs.readFileSync(POLICY, 'utf8')) as { policyVersion: string; effectiveDate: string; rules: { id: string; text: string }[]; today: { items: string[] } };
+const policy = JSON.parse(fs.readFileSync(POLICY, 'utf8')) as { policyVersion: string; effectiveDate: string; rules: { id: string; text: string }[]; today: { items: string[] }; backupNote: string };
 
 test.use({ serviceWorkers: 'block' });
 
@@ -21,6 +21,7 @@ async function expectAllRules(page: Page) {
   await expect(page.getByTestId('policy-version')).toContainText(policy.policyVersion);
   await expect(page.getByTestId('policy-version')).toContainText(policy.effectiveDate);
   for (const r of policy.rules) await expect(page.getByTestId(`policy-rule-${r.id}`)).toContainText(r.text);
+  await expect(page.getByTestId('policy-backup-note')).toHaveText(policy.backupNote);
   for (const i of policy.today.items) await expect(page.getByText(i, { exact: true })).toBeVisible();
 }
 
@@ -34,6 +35,8 @@ test('obrazovka z rodičovské sekce i z O aplikaci ukazuje všechna pravidla', 
   const q = (await page.getByTestId('gate-question').textContent())!;
   const [x, y] = q.split('=')[0].split('+').map((v) => parseInt(v, 10));
   await page.getByTestId('gate-answer').filter({ hasText: new RegExp(`^${x + y}$`) }).click();
+  await expect(page.getByTestId('backup-server-note')).toHaveText(policy.backupNote);
+  await expect(page.getByTestId('backup-server-note')).toContainText('zatím není aktivní');
   await page.getByTestId('open-data-policy').click();
   await expectAllRules(page);
   await page.getByRole('button', { name: 'Zpět' }).click();

@@ -1,5 +1,5 @@
 {
-  "policyVersion": "1.0.0",
+  "policyVersion": "1.1.0",
   "effectiveDate": "2026-10-13",
   "title": "Jak nakládáme s daty",
   "intro": "Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejopatrněji. Tady je přehled, co aplikace ukládá a jaká pravidla platí.",
@@ -16,12 +16,52 @@
     ]
   },
   "rules": [
-    { "id": "device", "title": "Data zůstávají v zařízení dítěte", "text": "Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na domácí MiniPC s Home Assistantem nebo do cloudu." },
-    { "id": "signin", "title": "Přihlášení bez účtu", "text": "Rodič používá důvěryhodné zařízení a nepotřebuje žádný účet. Dítě si vybere svůj obrázek (avatar), obrázkový PIN je volitelný." },
-    { "id": "private", "title": "Přezdívka a poznámky jen v zařízení, vždy šifrovaně", "text": "Přezdívka dítěte a poznámky rodiče zůstávají jen v zařízení, dokud se rodič nerozhodne synchronizovat vše najednou na náš server. Za přenos přes QR kód odpovídá rodič. Data jsou vždy šifrovaná; na serveru jsou šifrovaná a přístup k nim mají jen rodiče přes e-mail." },
-    { "id": "recordings", "title": "Nahrávky hlasu jen na výslovné přání", "text": "Vlastní nahrávky hlasu se synchronizují jen tehdy, když si to rodič výslovně zapne. Ve výchozím stavu je synchronizace nahrávek vypnutá." },
-    { "id": "class", "title": "Třída a učitel jen souhrnně", "text": "Propojení se třídou a učitelem přijde později. Učitel uvidí jen souhrnná čísla, nikdy jednotlivé pokusy ani nahrávky." },
-    { "id": "retention", "title": "Historie nejdéle 1 rok", "text": "Historie pokusů se uchovává nejdéle 1 rok. Starší pokusy se převedou na souhrnná čísla a jednotlivé záznamy se smažou." }
+    {
+      "id": "device",
+      "title": "Data zůstávají v zařízení dítěte",
+      "text": "Data dítěte zůstávají v zařízení, na kterém si hraje. Na jiné zařízení se přenesou jen na žádost rodiče pomocí QR kódu. Volitelně je bude možné uložit na domácí MiniPC s Home Assistantem nebo do cloudu."
+    },
+    {
+      "id": "signin",
+      "title": "Přihlášení bez účtu",
+      "text": "Rodič používá důvěryhodné zařízení a nepotřebuje žádný účet. Dítě si vybere svůj obrázek (avatar), obrázkový PIN je volitelný."
+    },
+    {
+      "id": "private",
+      "title": "Přezdívka a poznámky jen v zařízení, vždy šifrovaně",
+      "text": "Přezdívka dítěte a poznámky rodiče zůstávají jen v zařízení, dokud se rodič nerozhodne synchronizovat vše najednou na náš server. Za přenos přes QR kód odpovídá rodič. Data jsou vždy šifrovaná; na serveru jsou šifrovaná a přístup k nim mají jen rodiče přes e-mail."
+    },
+    {
+      "id": "recordings",
+      "title": "Nahrávky hlasu jen na výslovné přání",
+      "text": "Vlastní nahrávky hlasu se synchronizují jen tehdy, když si to rodič výslovně zapne. Ve výchozím stavu je synchronizace nahrávek vypnutá."
+    },
+    {
+      "id": "class",
+      "title": "Třída a učitel jen souhrnně",
+      "text": "Propojení se třídou a učitelem přijde později. Učitel uvidí jen souhrnná čísla, nikdy jednotlivé pokusy ani nahrávky."
+    },
+    {
+      "id": "retention",
+      "title": "Historie nejdéle 1 rok",
+      "text": "Historie pokusů se uchovává nejdéle 1 rok. Starší pokusy se převedou na souhrnná čísla a jednotlivé záznamy se smažou."
+    },
+    {
+      "id": "recovery",
+      "title": "Ztracený kód zálohy",
+      "text": "Když rodič ztratí kód pro obnovu zálohy a nezobrazí ho na žádném propojeném zařízení, obnoví ho ověřením přes e-mail připojený k profilu. Pokud ztratí i přístup k tomuto e-mailu, záloha je nenávratně ztracená a nikdo ji nedokáže obnovit."
+    },
+    {
+      "id": "email",
+      "title": "E-mail jen jako klíč k záloze",
+      "text": "E-mail rodiče slouží jen k propojení zálohy a obnovy. Server neukládá čitelnou adresu, ale jen její zašifrovaný otisk, takže ji správce (Jiří Konečný) nevidí a nemá k ní přístup. Při obnově rodič adresu zadá, server porovná otisk a pošle kód na zadanou adresu, aniž by ji uložil."
+    },
+    {
+      "id": "controller",
+      "title": "Správce a server",
+      "text": "Správcem údajů je Jiří Konečný. Server běží na jeho domácím MiniPC s Home Assistantem."
+    }
   ],
-  "changes": "Při každé změně pravidel zvýšíme číslo verze a tento dokument aktualizujeme."
+  "changes": "Při každé změně pravidel zvýšíme číslo verze a tento dokument aktualizujeme.",
+  "backupNote": "Pro budoucí zálohu na server (zatím není aktivní): e-mail rodiče se na serveru ukládá jen jako zašifrovaný otisk, nikdy jako čitelná adresa, a správce (Jiří Konečný) k němu nemá přístup. Server běží na MiniPC s Home Assistantem. Když ztratíš kód zálohy i přístup k e-mailu, záloha je nenávratně ztracená."
 }

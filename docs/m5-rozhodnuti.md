@@ -10,3 +10,12 @@ Datum: 2026-10-13. Tento dokument doplňuje a v případě rozporu **má předno
 6. **Retence:** historie pokusů max. 1 rok, poté agregace do souhrnných čísel.
 
 **Povinné:** dokument o nakládání s daty je viditelný v aplikaci, generuje se z jedné konfigurace (`npm run gen:policy`) a test hlídá aktuálnost markdownu, výpis všech pravidel na obrazovce a zvýšení `policyVersion` při změně pravidel.
+
+## Doplnění 2026-10-13 (policyVersion 1.1.0)
+
+7. **Ztracený kód zálohy:** pokud ho rodič ztratí a nezobrazí na žádném propojeném zařízení, obnoví ho ověřením přes e-mail připojený k profilu. Při ztrátě i e-mailu je záloha nenávratně ztracená – akceptováno.
+8. **E-mail jen jako propojovací klíč:** server ukládá jen zašifrovaný/hashovaný otisk, nikdy čitelnou adresu; správce k adrese nemá přístup. Při obnově rodič adresu zadá, server porovná otisk a pošle kód na zadanou adresu, aniž by ji uložil.
+9. **Správce údajů:** Jiří Konečný.
+10. **Server:** běží na Jiřího MiniPC s Home Assistantem.
+
+Krátká poznámka (`backupNote` v `data-policy.json`) se zobrazuje i u Zálohy a obnovy v rodičovské sekci s označením, že platí pro budoucí zálohu na server (zatím neaktivní).

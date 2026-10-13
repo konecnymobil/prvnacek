@@ -19,6 +19,8 @@ export default function DataPolicy({ go, back }: { go: (s: Screen) => void; back
             <li key={r.id} data-testid={`policy-rule-${r.id}`}><strong>{r.title}.</strong> {r.text}</li>
           ))}
         </ol>
+        <h2>Poznámka u zálohy</h2>
+        <p data-testid="policy-backup-note">{policy.backupNote}</p>
         <p className="muted">{policy.changes}</p>
       </section>
     </main>

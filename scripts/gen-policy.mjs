@@ -19,7 +19,7 @@ export function renderMarkdown(p) {
   for (const i of p.today.items) l.push(`- ${i}`);
   l.push('', '## Pravidla', '');
   p.rules.forEach((r, n) => l.push(`${n + 1}. **${r.title}.** ${r.text}`));
-  l.push('', p.changes, '');
+  l.push('', '## Poznámka u zálohy', '', p.backupNote, '', p.changes, '');
   return l.join('\n');
 }
 
