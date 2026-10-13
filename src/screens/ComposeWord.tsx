@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
 import Mascot from '../activities/Mascot';
-import Glyphs, { GlyphText, cardForm, partForm, useTaskForm } from '../components/Glyphs';
+import Glyphs, { GlyphText, useTaskForm, wordCase } from '../components/Glyphs';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
@@ -69,7 +69,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
       if (nf.length === target.syllableIds.length) {
         setMood('radost');
         if (!wordWrong) setFirstTry((c) => c + 1);
-        setMessage(<>Správně! <GlyphText text={target.text} form={form} className="feedback-word" />.</>);
+        setMessage(<>Správně! <GlyphText text={target.text} form={wordCase(form).word} className="feedback-word" />.</>);
         auto.schedule(say([sylAudio(card.syllableId), target.audioId, ...randomPrompt(content, 'p-praise-')]));
       } else {
         setMood('premysli');
@@ -170,7 +170,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         <div className="compose-slots" data-testid="slots">
           {target.syllableIds.map((_, i) => (
             <span key={i} className={`slot compose-slot${filled[i] ? ' is-right' : ''}${i === filled.length && !done ? ' is-next' : ''}`} data-testid="slot" data-filled={filled[i] ? sylText(filled[i].syllableId) : ''}>
-              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={partForm(form, i)} /> : ''}
+              {filled[i] ? <Glyphs forms={content.syllableById.get(filled[i].syllableId)!.forms} form={wordCase(form).part(i)} /> : ''}
             </span>
           ))}
         </div>
@@ -192,7 +192,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
               onClick={() => { if (suppressClick.current) { suppressClick.current = false; return; } void place(c); }}
               style={drag?.key === c.key ? { transform: `translate(${drag.x - 60}px, ${drag.y - 60}px)`, position: 'fixed', left: 0, top: 0, zIndex: 10, pointerEvents: 'none' } : undefined}
             >
-              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} form={cardForm(form)} />
+              <Glyphs forms={content.syllableById.get(c.syllableId)!.forms} form={wordCase(form).card} />
             </button>
           );
         })}

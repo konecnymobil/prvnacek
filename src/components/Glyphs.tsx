@@ -121,11 +121,14 @@ export function GlyphText({ text, className, form }: { text: string; className?:
 }
 export const usesCursive = (id: VariantId) => variantById(id).forms.some(isCursiveKey);
 
-/** Velké písmeno patří slovu, ne slabice: „S velkým“ (cursiveUpper) má velké jen první písmeno slova.
- *  partForm = forma i-té slabiky ve slově (Má·ma, MÁ·MA, má·ma). */
-export const partForm = (form: FormKey, i: number): FormKey => (i === 0 ? form : form === 'cursiveUpper' ? 'cursive' : form);
-/** Forma volné karty se slabikou: u „S velkým“ malá, aby karta neprozradila, která slabika je první. */
-export const cardForm = (form: FormKey): FormKey => (form === 'cursiveUpper' ? 'cursive' : form);
+/** Jediné místo pravidla „velké písmeno patří slovu, ne slabice“ (Slož slovo, Čti slovo, zpětná vazba).
+ *  - card: volná karta se slabikou – u „S velkým“ malá, aby neprozradila první slabiku
+ *  - part(i): i-tá slabika ve slově – jen první může být s velkým (Má·ma, MÁ·MA, má·ma)
+ *  - word: celé slovo (tvar slova z obsahu: Máma / MÁMA / máma) */
+export function wordCase(form: FormKey): { card: FormKey; part: (i: number) => FormKey; word: FormKey } {
+  const lower: FormKey = form === 'cursiveUpper' ? 'cursive' : form;
+  return { card: lower, part: (i) => (i === 0 ? form : lower), word: form };
+}
 
 /** Úlohy s výběrem: v jedné úloze jedna forma pro všechny karty, mezi úlohami se mění.
  *  Pytlík: zamíchané formy povolené varianty, nová úloha nikdy nezíská tutéž formu jako předchozí (u jediné formy beze změny). */

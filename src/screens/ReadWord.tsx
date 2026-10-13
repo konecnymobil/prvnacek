@@ -1,6 +1,6 @@
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
-import { GlyphText, partForm, useTaskForm, type FormKey } from '../components/Glyphs';
+import { GlyphText, useTaskForm, wordCase, type FormKey } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
@@ -19,7 +19,7 @@ export function WordArcs({ word, form }: { word: Word; form?: FormKey }) {
     <span className="word-arcs" data-testid="word-arcs">
       {word.syllablesText.map((t, i) => (
         <span className="syll-arc" key={i} data-testid="word-syll">
-          <span className="syll-text"><GlyphText text={t} form={form && partForm(form, i)} /></span>
+          <span className="syll-text"><GlyphText text={t} form={form && wordCase(form).part(i)} /></span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M6 4 Q50 30 94 4" /></svg>
         </span>
       ))}
@@ -65,7 +65,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     busy.current = false;
     if (correct) {
       setSolved(true); setMood('radost'); setCorrectCount((c) => c + (wrong.length === 0 ? 1 : 0));
-      setMessage(<>Správně! <GlyphText text={target.text} form={form} className="feedback-word" />.</>);
+      setMessage(<>Správně! <GlyphText text={target.text} form={wordCase(form).word} className="feedback-word" />.</>);
       auto.schedule(say([target.audioId, ...randomPrompt(content, 'p-praise-')]));
     } else {
       setWrong((x) => [...x, w.id]); setMood('povzbuzeni');
