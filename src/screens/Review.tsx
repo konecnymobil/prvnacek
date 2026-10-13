@@ -4,6 +4,7 @@ import Glyphs, { useTaskForm } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
 import type { Content } from '../content/load';
 import { promptAudio, randomPrompt, say, stopSay } from '../activities/common';
+import { useAutoAdvance } from '../activities/autoAdvance';
 import { buildReview, itemAudio, itemForms, type ReviewItem } from '../activities/review';
 import { noteAnswer, useTaskLog } from '../activities/taskLog';
 import { addAttempt, getAllAttempts, getLessonStatesMap } from '../storage/db';
@@ -34,6 +35,7 @@ export default function Review({ content, back }: { content: Content; back: () =
 
   const it = items?.[n];
   const form = useTaskForm(n);
+  const auto = useAutoAdvance(); // po pochvale sám pokračuje
   useEffect(() => {
     if (it) void say([...promptAudio(content, PROMPT[it.kind]), itemAudio(content, it)]);
   }, [content, it]);
@@ -66,7 +68,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     if (correct) {
       setSolved(true); setMood('radost'); setMessage('Správně! Výborně!');
       if (wrong.length === 0) setFirstTry((c) => c + 1);
-      void say(randomPrompt(content, 'p-praise-'));
+      auto.schedule(say(randomPrompt(content, 'p-praise-')));
     } else {
       const w = [...wrong, id];
       setWrong(w); setMood('povzbuzeni'); setMessage('Skoro! Poslechni si to ještě jednou a zkus to znovu.');
@@ -74,6 +76,7 @@ export default function Review({ content, back }: { content: Content; back: () =
     }
   };
 
+  auto.target.current = () => next();
   const next = () => {
     stopSay();
     if (n + 1 >= items.length) { setN(items.length); void say(promptAudio(content, 'p-round-end')); return; }
@@ -99,7 +102,7 @@ export default function Review({ content, back }: { content: Content; back: () =
           </button>
         ))}
       </div>
-      {solved && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="next" onClick={next}>Dál ▶</button></div>}
+      {solved && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="next" onClick={auto.manual}>Dál ▶</button></div>}
     </main>
   );
 }

@@ -7,6 +7,7 @@ import Mascot from '../activities/Mascot';
 import Glyphs from '../components/Glyphs';
 import { wordImageUrl } from '../content/images';
 import { promptAudio, randomPrompt, recordAttempt, say, shuffle, stopSay, usePriorityIds } from '../activities/common';
+import { useAutoAdvance } from '../activities/autoAdvance';
 import { composeQueue, composeWords, distractorCount, distractorsFor } from '../activities/composeWord';
 
 interface Props { content: Content; lesson: Lesson; back: () => void }
@@ -28,6 +29,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   const total = queue.length;
   const target = queue[Math.min(n, total - 1)];
   const [roundKey, setRoundKey] = useState(0);
+  const auto = useAutoAdvance(); // po pochvale sám pokračuje
   const cards = useMemo<Card[]>(() => {
     const ids = [...target.syllableIds, ...distractorsFor(content, lesson, target, distractorCount(target, n))];
     return shuffle(ids.map((syllableId, i) => ({ key: `c${i}`, syllableId })));
@@ -67,7 +69,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
         setMood('radost');
         if (!wordWrong) setFirstTry((c) => c + 1);
         setMessage(`Správně! ${target.text}.`);
-        void say([sylAudio(card.syllableId), target.audioId, ...randomPrompt(content, 'p-praise-')]);
+        auto.schedule(say([sylAudio(card.syllableId), target.audioId, ...randomPrompt(content, 'p-praise-')]));
       } else {
         setMood('premysli');
         setMessage('Správně, pokračuj dál.');
@@ -117,6 +119,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   };
   const suppressClick = useRef(false);
 
+  auto.target.current = () => nextTask();
   const nextTask = () => {
     stopSay();
     if (n + 1 >= total) { setN(total); void say(promptAudio(content, 'p-round-end')); return; }
@@ -193,7 +196,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
           );
         })}
       </div>
-      {done && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={nextTask}>Dál ▶</button></div>}
+      {done && <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={auto.manual}>Dál ▶</button></div>}
     </main>
   );
 }
