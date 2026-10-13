@@ -30,7 +30,13 @@ const idb = <T,>(page: Page, fn: string, arg?: unknown) => page.evaluate(async (
 }, [fn, arg] as const) as Promise<T>;
 
 const VARS = ['lower', 'upper', 'cursive', 'cursiveUpper', 'printBoth', 'cursiveBoth', 'all'];
-const putScript = (page: Page, v: unknown) => page.evaluate(async (val) => {
+const putScript = async (page: Page, v: unknown) => {
+  // počkat, až aplikace sama založí DB (jinak by open() vytvořil prázdnou DB bez storů)
+  await expect(page.getByTestId('lesson-row')).toBeVisible();
+  await page.waitForFunction(() => new Promise<boolean>((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => { const ok = r.result.objectStoreNames.contains('settings'); r.result.close(); res(ok); }; r.onerror = () => res(false); }));
+  await putScriptRaw(page, v);
+};
+const putScriptRaw = (page: Page, v: unknown) => page.evaluate(async (val) => {
   const db: IDBDatabase = await new Promise((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => res(r.result); });
   const tx = db.transaction('settings', 'readwrite'); tx.objectStore('settings').put(val, 'script');
   await new Promise((r) => { tx.oncomplete = r; }); db.close();

@@ -350,3 +350,41 @@ a {
 
 .pismo-opt .sample { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 .35em; max-width: 100%; }
 .pismo-opt .sample .glyph { font-size: .6em; }
+
+/* ---------- Přizpůsobení výšce okna (dvh; starší prohlížeče dostanou vh): aktivity se vejdou bez rolování ---------- */
+:root { --dh: 1vh; }
+@supports (height: 1dvh) { :root { --dh: 1dvh; } }
+.screen { padding-top: calc(clamp(6px, calc(var(--dh) * 1.6), 24px) + env(safe-area-inset-top)); padding-bottom: calc(clamp(6px, calc(var(--dh) * 1.6), 32px) + env(safe-area-inset-bottom)); gap: clamp(4px, calc(var(--dh) * 1.4), 20px); }
+.activity { gap: clamp(4px, calc(var(--dh) * 1.4), 16px); }
+.kbtn { min-height: clamp(44px, calc(var(--dh) * 7), var(--touch-child-min)); padding-block: clamp(2px, calc(var(--dh) * 0.8), var(--sp-3)); font-size: clamp(16px, calc(var(--dh) * 2.8), var(--fs-h3)); }
+.kbtn-xl { min-height: clamp(48px, calc(var(--dh) * 8.5), var(--touch-child-xl)); font-size: clamp(18px, calc(var(--dh) * 3.2), var(--fs-h2)); }
+.activity .actions { gap: clamp(6px, calc(var(--dh) * 1.4), var(--sp-4)); }
+.mascot { height: clamp(56px, calc(var(--dh) * 14), 200px); }
+.stage { gap: clamp(8px, calc(var(--dh) * 2), var(--sp-5)); }
+.feedback { font-size: clamp(16px, calc(var(--dh) * 2.8), var(--fs-h3)); min-height: 1.6em; }
+.activity p, .activity .muted { margin-block: clamp(0px, calc(var(--dh) * .5), var(--sp-2)); }
+.choices, .trays, .slots { gap: clamp(6px, calc(var(--dh) * 1.6), var(--sp-4)); }
+.tile, .slot { min-width: clamp(72px, calc(var(--dh) * 15), 120px); min-height: clamp(72px, calc(var(--dh) * 15), 120px); font-size: clamp(36px, calc(var(--dh) * 8), var(--fs-letter-card)); }
+.tile-sm { min-width: clamp(64px, calc(var(--dh) * 12), 100px); min-height: clamp(64px, calc(var(--dh) * 12), 100px); font-size: clamp(32px, calc(var(--dh) * 7), var(--fs-syllable)); }
+.tile-pic { min-width: clamp(84px, calc(var(--dh) * 20), 160px); min-height: clamp(84px, calc(var(--dh) * 20), 160px); padding: clamp(4px, calc(var(--dh) * 1), var(--sp-3)); }
+.tile-pic img { width: clamp(64px, calc(var(--dh) * 15), 120px); height: clamp(64px, calc(var(--dh) * 15), 120px); }
+.read-syll { font-size: clamp(48px, calc(var(--dh) * 17), 200px); line-height: 1.05; }
+.read-word { font-size: clamp(40px, calc(var(--dh) * 13), 150px); }
+.compose-board { gap: clamp(8px, calc(var(--dh) * 2.5), 32px); }
+.compose-slot { min-width: clamp(84px, calc(var(--dh) * 19), 240px); min-height: clamp(84px, calc(var(--dh) * 19), 240px); border-width: 4px; font-size: clamp(36px, calc(var(--dh) * 9), 110px); }
+.compose-pic { width: clamp(80px, calc(var(--dh) * 17), 140px); height: clamp(80px, calc(var(--dh) * 17), 140px); }
+.compose-pic img { width: 95%; height: 95%; }
+.compose-q { font-size: clamp(36px, calc(var(--dh) * 8), 64px); }
+.compose-card { min-width: clamp(72px, calc(var(--dh) * 14), 130px); min-height: clamp(72px, calc(var(--dh) * 14), 130px); font-size: clamp(36px, calc(var(--dh) * 8), 100px); }
+.compose-cards { padding: clamp(6px, calc(var(--dh) * 1.5), var(--sp-4)) var(--sp-4); gap: clamp(8px, calc(var(--dh) * 2), 32px); }
+.lesson-menu .tile-hero { min-width: clamp(90px, calc(var(--dh) * 22), 220px); min-height: clamp(90px, calc(var(--dh) * 22), 220px); font-size: clamp(48px, calc(var(--dh) * 12), 150px); }
+.lesson-menu .actions .kbtn { min-height: clamp(44px, calc(var(--dh) * 8), var(--touch-child-xl)); }
+h1 { font-size: clamp(22px, calc(var(--dh) * 4), var(--fs-h1)); }
+h2 { font-size: clamp(18px, calc(var(--dh) * 3.2), var(--fs-h2)); }
+.stone { height: clamp(52px, calc(var(--dh) * 9), var(--touch-child)); min-width: clamp(52px, calc(var(--dh) * 9), var(--touch-child)); font-size: clamp(22px, calc(var(--dh) * 4), var(--fs-map-letter)); }
+.card { padding: clamp(8px, calc(var(--dh) * 2), var(--sp-5)); gap: clamp(4px, calc(var(--dh) * 1.2), var(--sp-3)); }
+.pex-card { font-size: clamp(1.4rem, calc(var(--dh) * 5), 3.2rem); }
+.pex { height: 100vh; height: 100dvh; overflow: hidden; }
+.test-text { font-size: clamp(40px, calc(var(--dh) * 12), var(--fs-letter-hero)); }
+.test-run .rate-ok, .test-run .rate-bad { min-height: clamp(64px, calc(var(--dh) * 14), 120px); font-size: clamp(32px, calc(var(--dh) * 9), var(--fs-letter-hero)); }
+html, body { overflow-x: hidden; }
