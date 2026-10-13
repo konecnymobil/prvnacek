@@ -81,16 +81,18 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
       setFound((f) => [...f, a.wordId]); setOpen([]);
       const played = say([word(a.wordId).audioId]);
       if (last) {
-        // Poslední pár: karta zůstane vidět, slovo dohraje (nejdéle END_CAP_MS), krátká pauza, pak konec a „hotovo“.
+        // Poslední pár: karta zůstane vidět, slovo dohraje, hned „hotovo“ ještě nad hrací plochou
+        // (každý zvuk nejdéle END_CAP_MS), krátká pauza, pak tichá obrazovka Hotovo.
         lock.current = true;
         const run = ++endRun.current;
         void (async () => {
           await Promise.race([played, later(END_CAP_MS)]);
           if (run !== endRun.current) return;
+          await Promise.race([say(['snd-p-round-end'].filter((id) => content.audioIds.has(id))), later(END_CAP_MS)]);
+          if (run !== endRun.current) return;
           await later(END_PAUSE_MS);
           if (run !== endRun.current) return;
           setShowEnd(true);
-          void say(['snd-p-round-end'].filter((id) => content.audioIds.has(id)));
         })();
       }
     } else {
