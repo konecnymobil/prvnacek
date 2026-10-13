@@ -1,3 +1,4 @@
+import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
@@ -135,6 +136,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     );
   }
 
+  useTaskLog('A5c', lesson.id, n >= total);
   if (n >= total) {
     return (
       <main className="screen activity" data-testid="round-end">

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "manifest",
-  "contentVersion": "2026-10-10.4",
+  "contentVersion": "2026-10-13.1",
   "defaultOrderId": "duha",
   "scripts": {
     "defaultMode": "upperPrint",
@@ -92,6 +92,11 @@
       "path": "test-rules.json",
       "kind": "testRules",
       "schema": "schema/test-rules.schema.json"
+    },
+    {
+      "path": "weekly-summary.json",
+      "kind": "weeklySummary",
+      "schema": "schema/weekly-summary.schema.json"
     }
   ]
 }

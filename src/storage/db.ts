@@ -21,8 +21,25 @@ export interface Attempt {
   correct: boolean;
   chosenId: string | null; // záměna (co dítě vybralo)
   source?: 'review'; // pokus z Opakování napříč lekcemi (activity zůstává původní, tabulka pro rodiče ho počítá)
+  /** M4: důvod chyby (v procvičování „confused“, když dítě vybralo jinou položku). */
+  reason?: 'confused' | 'unknown' | 'notBlended' | null;
+  confusedWith?: string | null;
+  /** M4: doba odpovědi v ms (od zobrazení úlohy / předchozí odpovědi). */
+  responseMs?: number | null;
   at: number; // Date.now()
   day: string; // YYYY-MM-DD v místním čase
+}
+
+/** M4: události pro týdenní souhrn (začátek/konec úlohy, předčasné ukončení, nečinnost, zkouška, schválení). */
+export type ActivityEventKind = 'taskStart' | 'taskEnd' | 'earlyExit' | 'idle' | 'test' | 'approval';
+export interface ActivityEvent {
+  id?: number;
+  kind: ActivityEventKind;
+  at: number;
+  day: string;
+  activity?: string;
+  lessonId?: LessonId;
+  data?: Record<string, unknown>;
 }
 
 export interface LessonState {
@@ -55,10 +72,11 @@ interface PrvnacekDB extends DBSchema {
   lessonStates: { key: string; value: LessonState };
   recordings: { key: AudioId; value: StoredRecording };
   settings: { key: string; value: unknown };
+  events: { key: number; value: ActivityEvent };
 }
 
 export const DB_NAME = 'prvnacek';
-export const DB_VERSION = 1;
+export const DB_VERSION = 2;
 
 let dbPromise: Promise<IDBPDatabase<PrvnacekDB>> | null = null;
 
@@ -72,6 +90,7 @@ export function getDb(): Promise<IDBPDatabase<PrvnacekDB>> {
         db.createObjectStore('recordings', { keyPath: 'audioId' });
         db.createObjectStore('settings');
       }
+      if (oldVersion < 2) db.createObjectStore('events', { keyPath: 'id', autoIncrement: true });
     },
   });
   return dbPromise;
@@ -86,6 +105,15 @@ export function localDay(d = new Date()): string {
 export async function addAttempt(a: Omit<Attempt, 'id' | 'at' | 'day'> & Partial<Pick<Attempt, 'at' | 'day'>>): Promise<number> {
   const at = a.at ?? Date.now();
   return (await getDb()).add('attempts', { ...a, at, day: a.day ?? localDay(new Date(at)) });
+}
+
+export async function addEvent(e: Omit<ActivityEvent, 'id' | 'at' | 'day'> & { at?: number }): Promise<void> {
+  const at = e.at ?? Date.now();
+  await (await getDb()).add('events', { ...e, at, day: localDay(new Date(at)) });
+}
+
+export async function getAllEvents(): Promise<ActivityEvent[]> {
+  return (await getDb()).getAll('events');
 }
 
 export async function getAttempts(orderId: OrderId, lessonId: LessonId): Promise<Attempt[]> {
@@ -120,7 +148,10 @@ export async function setLessonStatus(
 /** Schválení rodičem. Schváleno se nikdy nesnižuje; odemkne další lekci (zamčená → procvičuje). */
 export async function approveLesson(orderId: OrderId, lessonId: LessonId, nextLessonId: LessonId | null, by: 'test' | 'manual'): Promise<void> {
   const cur = await getLessonState(orderId, lessonId);
-  if (cur?.status !== 'approved') await setLessonStatus(orderId, lessonId, 'approved', by);
+  if (cur?.status !== 'approved') {
+    await setLessonStatus(orderId, lessonId, 'approved', by);
+    await addEvent({ kind: 'approval', lessonId, data: { by } });
+  }
   if (nextLessonId) {
     const nx = await getLessonState(orderId, nextLessonId);
     if (!nx || nx.status === 'locked') await setLessonStatus(orderId, nextLessonId, 'practicing');
@@ -149,6 +180,7 @@ export async function saveTestResult(orderId: OrderId, r: TestResultRecord): Pro
   const key = `tests:${orderId}:${r.lessonId}`;
   const list = (await getSetting<TestResultRecord[]>(key)) ?? [];
   await setSetting(key, [...list, r]);
+  await addEvent({ kind: 'test', lessonId: r.lessonId, at: r.at, data: { score: r.score, total: r.total } });
 }
 
 export async function getTestResults(orderId: OrderId, lessonId: LessonId): Promise<TestResultRecord[]> {
