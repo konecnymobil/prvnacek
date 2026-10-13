@@ -1,4 +1,5 @@
 import { useStickerOnDone } from '../album/useStickerOnDone';
+import { useTaskLog } from '../activities/taskLog';
 import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
@@ -86,6 +87,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     return <main className="screen activity"><p className="notice">Slova s obrázky přijdou s dalšími lekcemi.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
   }
   useStickerOnDone('cviceni', n >= total);
+  useTaskLog('A7', lesson.id, n >= total);
   if (n >= total) {
     return (
       <main className="screen activity" data-testid="round-end">

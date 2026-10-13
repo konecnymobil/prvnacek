@@ -1,12 +1,14 @@
 import type { Content } from '../content/load';
 import type { Lesson, Word } from '../content/types';
-import { shuffle } from './common';
-import { lessonPictureWords } from '../screens/WordActivity';
+import { learnedLetters, shuffle } from './common';
+import { buildWordQueue, MAX_WORD_ROUND } from './wordQueue';
 
 /** Slova pro „Slož slovo“: s obrázkem, 2+ slabiky, obtížnost 1 (jen otevřené slabiky), z probraných písmen. */
 export function composeWords(content: Content, lesson: Lesson): Word[] {
-  return lessonPictureWords(content, lesson).filter(
-    (w) => w.usableInComposeTask && w.difficulty === 1 && w.syllableCount >= 2 && w.syllableIds.every((id) => content.syllableById.has(id)),
+  // Obrázek není povinný (ALE, MELE v lekci E ho nemají); chybějící obrázek se po složení jen nezobrazí.
+  const known = new Set(learnedLetters(content, lesson).map((l) => l.id));
+  return content.words.filter(
+    (w) => w.usableInComposeTask && w.letterIds.every((id) => known.has(id)) && w.difficulty === 1 && w.syllableCount >= 2 && w.syllableIds.every((id) => content.syllableById.has(id)),
   );
 }
 
@@ -37,4 +39,17 @@ export function distractorsFor(content: Content, lesson: Lesson, word: Word, cou
 export function distractorCount(word: Word, taskIndex: number): number {
   if (taskIndex < 2) return 0;
   return word.syllableCount >= 3 ? 2 : 1;
+}
+
+/** Kolo Slož slovo: běžná fronta + aspoň jedno nové slovo lekce (composeNewWordIds), je-li dostupné. */
+export function composeQueue(all: Word[], lesson: Lesson, priority: Set<string>): Word[] {
+  const q = buildWordQueue(all, lesson, priority);
+  const news = new Set(lesson.composeNewWordIds ?? []);
+  if (q.some((w) => news.has(w.id))) return q;
+  const add = shuffle(all.filter((w) => news.has(w.id)))[0];
+  if (!add) return q;
+  const out = q.slice();
+  if (out.length >= MAX_WORD_ROUND) out.splice(Math.floor(Math.random() * out.length), 1);
+  out.splice(Math.floor(Math.random() * (out.length + 1)), 0, add);
+  return out;
 }

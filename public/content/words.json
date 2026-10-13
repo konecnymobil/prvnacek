@@ -523,9 +523,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-la",
         "s-lo",
-        "s-se"
+        "s-mo",
+        "s-la"
       ]
     },
     {
@@ -578,9 +578,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
+        "s-so",
         "s-laa",
-        "s-me",
-        "s-la"
+        "s-me"
       ]
     },
     {
@@ -634,9 +634,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
+        "s-so",
         "s-le",
-        "s-la",
-        "s-saa"
+        "s-la"
       ]
     },
     {
@@ -746,8 +746,8 @@
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-pe",
-        "s-laa",
-        "s-la"
+        "s-paa",
+        "s-pa"
       ]
     },
     {
@@ -801,9 +801,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-la",
-        "s-me",
-        "s-le"
+        "s-pe",
+        "s-po",
+        "s-la"
       ]
     },
     {
@@ -910,8 +910,8 @@
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-paa",
-        "s-so",
-        "s-pa"
+        "s-pa",
+        "s-pe"
       ]
     },
     {
@@ -966,8 +966,8 @@
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-su",
-        "s-la",
-        "s-laa"
+        "s-pu",
+        "s-mu"
       ]
     },
     {
@@ -1021,9 +1021,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-sa",
         "s-su",
-        "s-me"
+        "s-lu",
+        "s-pu"
       ]
     },
     {
@@ -1077,9 +1077,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-paa",
-        "s-pa",
-        "s-mo"
+        "s-lu",
+        "s-su",
+        "s-mu"
       ]
     },
     {
@@ -1133,9 +1133,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-pa",
-        "s-so",
-        "s-lu"
+        "s-lu",
+        "s-su",
+        "s-mu"
       ]
     },
     {
@@ -1193,9 +1193,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-me",
-        "s-so",
-        "s-mu"
+        "s-mu",
+        "s-pu",
+        "s-su"
       ]
     },
     {
@@ -1251,8 +1251,8 @@
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-si",
-        "s-lo",
-        "s-mi"
+        "s-mi",
+        "s-pi"
       ]
     },
     {
@@ -1306,9 +1306,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-pa",
         "s-si",
-        "s-li"
+        "s-li",
+        "s-mi"
       ]
     },
     {
@@ -1366,8 +1366,8 @@
       "usableInComposeTask": true,
       "distractorSyllableIds": [
         "s-li",
-        "s-la",
-        "s-si"
+        "s-si",
+        "s-mi"
       ]
     },
     {
@@ -1421,9 +1421,9 @@
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-sa",
-        "s-laa",
-        "s-po"
+        "s-pi",
+        "s-li",
+        "s-mi"
       ]
     },
     {
@@ -1477,9 +1477,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-ma",
         "s-li",
-        "s-mu"
+        "s-pi",
+        "s-si"
       ]
     },
     {
@@ -1533,9 +1533,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-lu",
-        "s-mu",
-        "s-pi"
+        "s-pi",
+        "s-si",
+        "s-li"
       ]
     },
     {
@@ -1588,9 +1588,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-po",
-        "s-so",
-        "s-mu"
+        "s-pi",
+        "s-si",
+        "s-li"
       ]
     },
     {
@@ -2048,9 +2048,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-se",
+        "s-mo",
         "s-so",
-        "s-sa"
+        "s-lo"
       ]
     },
     {
@@ -2153,9 +2153,9 @@
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
       "distractorSyllableIds": [
-        "s-lo",
         "s-pe",
-        "s-so"
+        "s-paa",
+        "s-pa"
       ]
     },
     {

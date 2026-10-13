@@ -1,8 +1,8 @@
 /** Záloha a obnova všech dat do jednoho souboru JSON (nahrávky jako base64). Bez backendu. */
-import { getDb, type Attempt, type LessonState } from './db';
+import { getDb, type ActivityEvent, type Attempt, type LessonState } from './db';
 
 export const BACKUP_FORMAT = 'prvnacek-backup';
-export const BACKUP_VERSION = 1;
+export const BACKUP_VERSION = 2; // v2 = + events (M4); album:owned je v settings; import v1 zůstává podporovaný
 
 interface BackupRecording { audioId: string; mimeType: string; createdAt: number; base64: string }
 export interface BackupFile {
@@ -13,6 +13,8 @@ export interface BackupFile {
   lessonStates: LessonState[];
   settings: { key: string; value: unknown }[];
   recordings: BackupRecording[];
+  /** Od verze 2 (týdenní souhrn). Ve v1 chybí. */
+  events?: ActivityEvent[];
 }
 export interface BackupSummary { exportedAt: string; version: number; attempts: number; lessonStates: number; settings: number; tests: number; recordings: number }
 
@@ -41,6 +43,7 @@ export async function buildBackup(): Promise<BackupFile> {
     exportedAt: new Date().toISOString(),
     attempts: await db.getAll('attempts'),
     lessonStates: await db.getAll('lessonStates'),
+    events: await db.getAll('events'),
     settings,
     recordings: recs.map((r) => ({ audioId: r.audioId, mimeType: r.mimeType, createdAt: r.createdAt, base64: toBase64(r.data) })),
   };
@@ -74,6 +77,7 @@ export async function parseBackup(file: File): Promise<BackupFile> {
     throw new Error('Záloha je poškozená nebo neúplná.');
   for (const r of b.recordings) if (!r || typeof r.audioId !== 'string' || typeof r.base64 !== 'string') throw new Error('Záloha obsahuje poškozenou nahrávku.');
   for (const s of b.settings) if (!s || typeof s.key !== 'string') throw new Error('Záloha obsahuje poškozené nastavení.');
+  if (b.events !== undefined && !Array.isArray(b.events)) throw new Error('Záloha je poškozená nebo neúplná.');
   return b as BackupFile;
 }
 
@@ -81,8 +85,9 @@ export async function parseBackup(file: File): Promise<BackupFile> {
 export async function restoreBackup(b: BackupFile): Promise<void> {
   const db = await getDb();
   const recs = b.recordings.map((r) => ({ audioId: r.audioId, mimeType: r.mimeType, createdAt: r.createdAt, data: fromBase64(r.base64) }));
-  const tx = db.transaction(['attempts', 'lessonStates', 'recordings', 'settings'], 'readwrite');
-  await Promise.all([tx.objectStore('attempts').clear(), tx.objectStore('lessonStates').clear(), tx.objectStore('recordings').clear(), tx.objectStore('settings').clear()]);
+  const tx = db.transaction(['attempts', 'lessonStates', 'recordings', 'settings', 'events'], 'readwrite');
+  await Promise.all([tx.objectStore('attempts').clear(), tx.objectStore('lessonStates').clear(), tx.objectStore('recordings').clear(), tx.objectStore('settings').clear(), tx.objectStore('events').clear()]);
+  for (const e of b.events ?? []) tx.objectStore('events').put(e);
   for (const a of b.attempts) tx.objectStore('attempts').put(a);
   for (const s of b.lessonStates) tx.objectStore('lessonStates').put(s);
   for (const r of recs) tx.objectStore('recordings').put(r);
@@ -108,12 +113,13 @@ export async function downloadBackup(b: BackupFile): Promise<'download' | 'share
   return 'download';
 }
 
-/** Čistý začátek: smaže pokrok (pokusy), stavy/zamykání lekcí a výsledky zkoušek (settings „tests:*“).
- *  NEMAŽE vlastní nahrávky rodiče ani ostatní nastavení (např. tvary písma). Jedna transakce. */
+/** Čistý začátek: smaže pokrok (pokusy), stavy/zamykání lekcí, události a výsledky zkoušek (settings „tests:*“).
+ *  NEMAŽE vlastní nahrávky rodiče ani ostatní nastavení (tvary písma, album:owned). Jedna transakce. */
 export async function resetProgress(): Promise<void> {
   const db = await getDb();
-  const tx = db.transaction(['attempts', 'lessonStates', 'settings'], 'readwrite');
+  const tx = db.transaction(['attempts', 'lessonStates', 'settings', 'events'], 'readwrite');
   tx.objectStore('attempts').clear();
+  tx.objectStore('events').clear();
   tx.objectStore('lessonStates').clear();
   const keys = await tx.objectStore('settings').getAllKeys();
   for (const k of keys) if ((String(k).startsWith('tests:') || String(k).startsWith('pexeso:'))) tx.objectStore('settings').delete(k);

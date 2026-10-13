@@ -64,6 +64,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
       </header>
       <nav className="actions">
         <button className="kbtn kbtn-primary" onClick={() => go('sounds')} data-testid="open-sounds">🎙 Zvuky (nahrát vlastní hlásku)</button>
+        <button className="kbtn kbtn-primary" onClick={() => go('weeklySummary')} data-testid="open-summary">📅 Týdenní souhrn</button>
       </nav>
       {err && <p className="notice is-error" role="alert">{err}</p>}
 

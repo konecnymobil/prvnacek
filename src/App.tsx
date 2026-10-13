@@ -17,11 +17,12 @@ import Pexeso from './screens/Pexeso';
 import Review from './screens/Review';
 import Sounds from './screens/Sounds';
 import Album from './screens/Album';
+import WeeklySummary from './screens/WeeklySummary';
 import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -53,6 +54,7 @@ function AppInner() {
       {lesson && content && screen === 'composeWord' && <ComposeWord content={content} lesson={lesson} back={() => setScreen('lesson')} />}
       {content && screen === 'review' && <Review content={content} back={() => setScreen('home')} />}
       {content && screen === 'pexeso' && <Pexeso content={content} back={() => setScreen('home')} />}
+      {content && screen === 'weeklySummary' && <WeeklySummary content={content} go={setScreen} />}
       {screen === 'parentGate' && <ParentGate go={setScreen} onPass={() => setScreen('parent')} />}
       {content && screen === 'parent' && <ParentHome content={content} go={setScreen} startTest={(id) => { setLessonId(id); setScreen('parentTest'); }} />}
       {lesson && content && screen === 'parentTest' && <ParentTest content={content} lesson={lesson} go={setScreen} />}

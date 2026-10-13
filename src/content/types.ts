@@ -40,6 +40,8 @@ export interface ManifestFile extends FileHeader<"manifest"> {
 export interface Lesson {
   id: LessonId;
   index: number;              // 1-based
+  /** Slož slovo: nová složitelná slova lekce; kolo obsahuje aspoň jedno. */
+  composeNewWordIds?: WordId[];
   letterIds: LetterId[];      // nová písmena lekce (Duhová řada: lekce 2 = A + Á)
   primaryLetterId: LetterId;  // písmeno na dlaždici
   title: string;              // "A + Á"
@@ -349,6 +351,65 @@ export interface TestRulesFile extends FileHeader<"testRules"> {
   compositionAlgorithm: string[];
   parentGuideShort: string[];
   blueprints: TestBlueprint[];
+}
+
+// ---------- weekly-summary.json (M4) ----------
+export type WeeklyMetricId =
+  | "minutesTotal" | "sessions" | "activeDays" | "avgSessionMinutes" | "ratedTasks" | "successRatio"
+  | "currentLessonSuccessRatio" | "lettersMastered" | "syllablesMastered" | "wordsMastered" | "newlyMastered"
+  | "testsTaken" | "lessonsApproved" | "recommendedForTest" | "currentLessonApproved" | "frustrationSignals" | "topErrorCount";
+export interface WeeklyCondition { metric: WeeklyMetricId; op: ">" | ">=" | "<" | "<=" | "=="; value: number | boolean }
+export type WeeklyRecommendationId = "pause" | "test" | "nextLesson" | "repeat" | "start" | "keepGoing";
+export interface AttemptMasteryRule { rule: "attempts"; minCorrect: number; minDistinctDays: number; lastN: number; minRatioLastN: number; text: string }
+export interface WeeklySummaryFile extends FileHeader<"weeklySummary"> {
+  period: { weekStartsOn: "monday"; timeZone: string; showOn: string; onlyCompletedWeeks: true; note: string };
+  /** Pravidla logování a výpočtů (rozhodnutí k PR #20). */
+  attemptRules: {
+    countsForMastery: "firstAttemptPerRound"; // jen první pokus o položku v kole; opakování → statistiky a chyby
+    countsForMasteryText: string; responseTime: string; pauseThresholdSec: number; aborted: string;
+    testErrors: string; currentLesson: string; newlyMastered: string; trendMinTasks: string;
+  };
+  metrics: { id: WeeklyMetricId; label: string; unit: "min" | "count" | "ratio" | "bool"; definition: string }[];
+  mastery: {
+    letter: { rule: "approvedLesson"; text: string };
+    letterPracticeReady: { rule: "recommendation"; minRatedTasks: number; windowSize: number; minSuccessRatio: number; minDistinctDays: number; text: string };
+    syllable: AttemptMasteryRule;
+    word: AttemptMasteryRule;
+    lostMastery: { text: string };
+  };
+  errorCategories: { id: "vowelLength" | "letterConfusion" | "otherConfusion" | "notBlended" | "unknown";
+                     reasonId: ErrorReasonId; label: string; detection: string; parentText: string }[];
+  maxErrorsShown: number;
+  trend: { compare: "previousWeek"; metrics: WeeklyMetricId[]; upIfRelativeChange: number; downIfRelativeChange: number;
+           minBaseForRatio: number; text: string; labels: { up: string; same: string; down: string; none: string } };
+  recommendations: { id: WeeklyRecommendationId; priority: number; all: WeeklyCondition[]; any: WeeklyCondition[]; template: string }[];
+  maxRecommendationsShown: number;
+  recommendationRule: string;
+  templates: Record<string, string>;
+  placeholders: string[];
+  tone: string;
+}
+export type WeeklyMetrics = Record<WeeklyMetricId, number | boolean>;
+/** Vyhodnocení doporučení: seřadit podle priority, vrátit první vyhovující (max maxRecommendationsShown). */
+export function pickWeeklyRecommendations(file: WeeklySummaryFile, m: WeeklyMetrics): WeeklyRecommendationId[] {
+  const test = (c: WeeklyCondition): boolean => {
+    const v = m[c.metric];
+    switch (c.op) {
+      case "==": return v === c.value;
+      case ">": return Number(v) > Number(c.value);
+      case ">=": return Number(v) >= Number(c.value);
+      case "<": return Number(v) < Number(c.value);
+      case "<=": return Number(v) <= Number(c.value);
+    }
+  };
+  const ok = [...file.recommendations].sort((a, b) => a.priority - b.priority)
+    .filter((r) => r.all.every(test) && (r.any.length === 0 || r.any.some(test)));
+  const picked = ok.filter((r) => r.id !== "keepGoing").slice(0, file.maxRecommendationsShown).map((r) => r.id);
+  return picked.length ? picked : ["keepGoing"];
+}
+/** Doplnění placeholderů {name}; chybějící hodnota zůstane prázdná. */
+export function fillTemplate(t: string, values: Record<string, string | number>): string {
+  return t.replace(/\{(\w+)\}/g, (_, k: string) => (k in values ? String(values[k]) : ""));
 }
 
 // ---------- pomocné funkce (čisté, bez závislostí) ----------

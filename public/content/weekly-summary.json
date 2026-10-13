@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "kind": "weeklySummary",
+  "period": {
+    "weekStartsOn": "monday",
+    "timeZone": "device-local",
+    "showOn": "monday",
+    "onlyCompletedWeeks": true,
+    "note": "Souhrn jen za ukončený týden po–ne (rozpracovaný týden se neukazuje). Nic se neposílá ven; počítá se z IndexedDB."
+  },
+  "attemptRules": {
+    "countsForMastery": "firstAttemptPerRound",
+    "countsForMasteryText": "Do zvládnutí se počítá jen první pokus o položku v rámci kola. Opakování po chybě nebo po nápovědě se loguje a počítá do statistik (ratedTasks, successRatio) a kategorií chyb, ne do zvládnutí.",
+    "responseTime": "Od zobrazení položky (u první položky od otevření kola) nebo od předchozí odpovědi. Doby nad 60 s (pauza) se do průměru nepočítají.",
+    "pauseThresholdSec": 60,
+    "aborted": "Předčasné ukončení = odchod z kola po aspoň jedné odpovědi (bez odpovědi se nepočítá).",
+    "testErrors": "Chyby ze zkoušek jdou do kategorií chyb. Do zvládnutí slabik a slov ne; schválená zkouška = zvládnutí písmen lekce.",
+    "currentLesson": "Aktuální lekce = nejvyšší odemčená (odemyká se schválením předchozí nebo ručně rodičem v nastavení). Fallback, když aplikace odemykání nemá: lekce posledního hodnoceného pokusu.",
+    "newlyMastered": "Nově zvládnuto = zvládnuto na konci týdne a ne na jeho začátku.",
+    "trendMinTasks": "Pod 10 úloh v některém z týdnů se úspěšnost neporovnává; použije se šablona trendTooFew."
+  },
+  "metrics": [
+    {
+      "id": "minutesTotal",
+      "label": "Čas procvičování",
+      "unit": "min",
+      "definition": "Součet aktivního času sezení v týdnu (bez nečinnosti > 60 s)."
+    },
+    {
+      "id": "sessions",
+      "label": "Počet sezení",
+      "unit": "count",
+      "definition": "Sezení = souvislé používání, nové po 10 min nečinnosti."
+    },
+    {
+      "id": "activeDays",
+      "label": "Dny s procvičováním",
+      "unit": "count",
+      "definition": "Počet různých dnů (místní čas) s aspoň 1 hodnocenou úlohou."
+    },
+    {
+      "id": "avgSessionMinutes",
+      "label": "Průměrná délka sezení",
+      "unit": "min",
+      "definition": "minutesTotal / sessions."
+    },
+    {
+      "id": "ratedTasks",
+      "label": "Hodnocené úlohy",
+      "unit": "count",
+      "definition": "Úlohy procvičování s výsledkem ✓/✗ (A1 se nehodnotí, pexeso se nehodnotí)."
+    },
+    {
+      "id": "successRatio",
+      "label": "Úspěšnost",
+      "unit": "ratio",
+      "definition": "Správné / hodnocené úlohy v týdnu."
+    },
+    {
+      "id": "currentLessonSuccessRatio",
+      "label": "Úspěšnost v aktuální lekci",
+      "unit": "ratio",
+      "definition": "Jako successRatio, jen úlohy s položkami aktuální lekce (posledních windowSize úloh)."
+    },
+    {
+      "id": "lettersMastered",
+      "label": "Zvládnutá písmena",
+      "unit": "count",
+      "definition": "Písmena schválených lekcí (viz mastery.letter)."
+    },
+    {
+      "id": "syllablesMastered",
+      "label": "Zvládnuté slabiky",
+      "unit": "count",
+      "definition": "Viz mastery.syllable."
+    },
+    {
+      "id": "wordsMastered",
+      "label": "Zvládnutá slova",
+      "unit": "count",
+      "definition": "Viz mastery.word."
+    },
+    {
+      "id": "newlyMastered",
+      "label": "Nově zvládnuto tento týden",
+      "unit": "count",
+      "definition": "Písmena, slabiky a slova, která poprvé splnila mastery v tomto týdnu."
+    },
+    {
+      "id": "testsTaken",
+      "label": "Zkoušky",
+      "unit": "count",
+      "definition": "Spuštěné zkoušky lekce (Výzva s rodičem)."
+    },
+    {
+      "id": "lessonsApproved",
+      "label": "Schválené lekce",
+      "unit": "count",
+      "definition": "Lekce schválené rodičem v tomto týdnu."
+    },
+    {
+      "id": "recommendedForTest",
+      "label": "Doporučeno ke zkoušce",
+      "unit": "bool",
+      "definition": "isRecommendedForTest() pro aktuální lekci (test-rules.recommendation) a lekce ještě není schválená."
+    },
+    {
+      "id": "currentLessonApproved",
+      "label": "Aktuální lekce schválena",
+      "unit": "bool",
+      "definition": "Aktuální lekce je schválená, další ještě nezačala."
+    },
+    {
+      "id": "frustrationSignals",
+      "label": "Signály únavy",
+      "unit": "count",
+      "definition": "Součet: 3 a víc chyb za sebou, ukončení úlohy před koncem, nečinnost > 60 s uprostřed úlohy."
+    },
+    {
+      "id": "topErrorCount",
+      "label": "Nejčastější chyba – počet",
+      "unit": "count",
+      "definition": "Počet výskytů nejčastější kategorie chyb (errorCategories)."
+    }
+  ],
+  "mastery": {
+    "letter": {
+      "rule": "approvedLesson",
+      "text": "Písmeno je zvládnuté, když je jeho lekce schválená rodičem (po zkoušce podle test-rules nebo ručně)."
+    },
+    "letterPracticeReady": {
+      "rule": "recommendation",
+      "minRatedTasks": 20,
+      "windowSize": 20,
+      "minSuccessRatio": 0.8,
+      "minDistinctDays": 2,
+      "text": "Písmeno je připravené ke zkoušce podle test-rules.recommendation (jen informace, ne zvládnutí)."
+    },
+    "syllable": {
+      "rule": "attempts",
+      "minCorrect": 3,
+      "minDistinctDays": 2,
+      "lastN": 5,
+      "minRatioLastN": 0.8,
+      "text": "Slabika: aspoň 3× správně ve 2 různých dnech a z posledních 5 pokusů aspoň 80 % správně. Jen slabiky s usableInSyllableTasks."
+    },
+    "word": {
+      "rule": "attempts",
+      "minCorrect": 2,
+      "minDistinctDays": 2,
+      "lastN": 4,
+      "minRatioLastN": 0.75,
+      "text": "Slovo: aspoň 2× správně přečtené nebo složené ve 2 různých dnech a z posledních 4 pokusů aspoň 75 %. Slova difficulty 2 se počítají zvlášť (M3)."
+    },
+    "lostMastery": {
+      "text": "Při 2 chybách z posledních 3 pokusů se položka přestane počítat jako zvládnutá a vrátí se do opakování."
+    }
+  },
+  "errorCategories": [
+    {
+      "id": "vowelLength",
+      "reasonId": "confused",
+      "label": "Délka samohlásky",
+      "detection": "confusedWith se od cíle liší jen délkou (MA × MÁ).",
+      "parentText": "Plete krátkou a dlouhou samohlásku (MA × MÁ). Pomáhá protahovat: „mááá“."
+    },
+    {
+      "id": "letterConfusion",
+      "reasonId": "confused",
+      "label": "Záměna písmen",
+      "detection": "confusedWith obsahuje písmeno z visualConfusables nebo auditoryConfusables cílového písmene.",
+      "parentText": "Plete si podobná písmena ({pairs}). Ukažte si je vedle sebe a řekněte hlásky."
+    },
+    {
+      "id": "otherConfusion",
+      "reasonId": "confused",
+      "label": "Jiná záměna",
+      "detection": "confused, ale ani délka, ani záměna podobných písmen.",
+      "parentText": "Někdy přečte jinou slabiku nebo slovo. To ke čtení patří."
+    },
+    {
+      "id": "notBlended",
+      "reasonId": "notBlended",
+      "label": "Hláskuje, nespojí",
+      "detection": "Důvod chyby notBlended.",
+      "parentText": "Hlásky zná, ale ještě je nespojí (m-a místo „ma“). Zkuste spolu „zpívat“ slabiku: mmmaaa."
+    },
+    {
+      "id": "unknown",
+      "reasonId": "unknown",
+      "label": "Zatím neví",
+      "detection": "Důvod chyby unknown nebo bez odpovědi do ~10 s.",
+      "parentText": "U některých položek zatím neví. Vrátíme se k nim v opakování."
+    }
+  ],
+  "maxErrorsShown": 2,
+  "trend": {
+    "compare": "previousWeek",
+    "metrics": [
+      "minutesTotal",
+      "successRatio",
+      "newlyMastered"
+    ],
+    "upIfRelativeChange": 0.1,
+    "downIfRelativeChange": -0.1,
+    "minBaseForRatio": 10,
+    "text": "Změna o víc než 10 % = šipka nahoru/dolů, jinak „podobně“. Úspěšnost se porovnává jen při ≥ 10 úlohách v obou týdnech.",
+    "labels": {
+      "up": "víc než minulý týden",
+      "same": "podobně jako minulý týden",
+      "down": "méně než minulý týden",
+      "none": "minulý týden bez procvičování"
+    }
+  },
+  "recommendations": [
+    {
+      "id": "pause",
+      "priority": 1,
+      "any": [
+        {
+          "metric": "avgSessionMinutes",
+          "op": ">",
+          "value": 15
+        },
+        {
+          "metric": "frustrationSignals",
+          "op": ">=",
+          "value": 4
+        },
+        {
+          "metric": "successRatio",
+          "op": "<",
+          "value": 0.6
+        }
+      ],
+      "all": [
+        {
+          "metric": "ratedTasks",
+          "op": ">=",
+          "value": 10
+        }
+      ],
+      "template": "{childName} má za sebou náročný týden. Zkuste kratší chvilky (5–10 minut) a klidně den pauzu. Čtení se nemá dělat z povinnosti."
+    },
+    {
+      "id": "test",
+      "priority": 2,
+      "all": [
+        {
+          "metric": "recommendedForTest",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "any": [],
+      "template": "{childName} může zkusit Výzvu s rodičem v lekci {lessonTitle}. Vyberte si klidnou chvíli, ideálně dopoledne."
+    },
+    {
+      "id": "nextLesson",
+      "priority": 3,
+      "all": [
+        {
+          "metric": "currentLessonApproved",
+          "op": "==",
+          "value": true
+        }
+      ],
+      "any": [],
+      "template": "Lekce {lessonTitle} je hotová. Až budete chtít, otevřete další písmenko: {nextLessonTitle}."
+    },
+    {
+      "id": "repeat",
+      "priority": 4,
+      "any": [
+        {
+          "metric": "currentLessonSuccessRatio",
+          "op": "<",
+          "value": 0.7
+        },
+        {
+          "metric": "topErrorCount",
+          "op": ">=",
+          "value": 5
+        }
+      ],
+      "all": [
+        {
+          "metric": "ratedTasks",
+          "op": ">=",
+          "value": 10
+        }
+      ],
+      "template": "Vyplatí se ještě chvíli opakovat lekci {lessonTitle}. Nejvíc pomůže: {topErrorTip}"
+    },
+    {
+      "id": "start",
+      "priority": 5,
+      "all": [
+        {
+          "metric": "ratedTasks",
+          "op": "<",
+          "value": 10
+        }
+      ],
+      "any": [],
+      "template": "Tento týden bylo procvičování málo. Stačí pár minut denně, třeba hned po svačině."
+    },
+    {
+      "id": "keepGoing",
+      "priority": 9,
+      "all": [],
+      "any": [],
+      "template": "Jde to dobře. Pokračujte v lekci {lessonTitle} svým tempem."
+    }
+  ],
+  "maxRecommendationsShown": 2,
+  "recommendationRule": "Projít podle priority, vybrat první vyhovující (all = všechny podmínky, any = aspoň jedna, prázdné any = bez podmínky). keepGoing se ukáže jen, když nic jiného neplatí. Pause s jakoukoli jinou: ukázat pause první.",
+  "templates": {
+    "headline": "Týden {weekStart}–{weekEnd}: {minutesTotal} min, {sessions}× procvičování, {activeDays} dny.",
+    "mastered": "Zvládnuto celkem: {lettersMastered} písmen, {syllablesMastered} slabik, {wordsMastered} slov (tento týden nově {newlyMastered}).",
+    "tests": "Zkoušky: {testsTaken}, schválené lekce: {lessonsApproved}.",
+    "trend": "Čas: {trendMinutes}. Úspěšnost: {trendSuccess}.",
+    "errors": "Co ještě dělá potíže: {topErrorLabel} – {topErrorTip}",
+    "noErrors": "Tento týden žádné opakující se chyby. 🎉",
+    "praise": "{childName} si tento týden zaslouží velkou pochvalu za snahu, bez ohledu na čísla.",
+    "trendTooFew": "Na porovnání s minulým týdnem bylo zatím málo úloh. To nevadí – důležité je, že se čte."
+  },
+  "placeholders": [
+    "childName",
+    "weekStart",
+    "weekEnd",
+    "minutesTotal",
+    "sessions",
+    "activeDays",
+    "lettersMastered",
+    "syllablesMastered",
+    "wordsMastered",
+    "newlyMastered",
+    "testsTaken",
+    "lessonsApproved",
+    "trendMinutes",
+    "trendSuccess",
+    "topErrorLabel",
+    "topErrorTip",
+    "lessonTitle",
+    "nextLessonTitle",
+    "pairs"
+  ],
+  "tone": "Laskavě, bez srovnávání s jinými dětmi, bez slov „špatně“ a „neumí“. Čísla jen pro rodiče, ne pro dítě."
+}
