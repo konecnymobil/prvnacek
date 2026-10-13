@@ -5,8 +5,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 // GitHub Pages: https://konecnymobil.github.io/prvnacek/
 const base = '/prvnacek/';
 
+const BUILD_ID = `${(process.env.GITHUB_SHA ?? 'dev').slice(0, 7)} ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`;
+
 export default defineConfig({
   base,
+  define: { __BUILD_ID__: JSON.stringify(BUILD_ID) },
   plugins: [
     react(),
     VitePWA({
