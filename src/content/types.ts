@@ -225,7 +225,7 @@ export interface PostProcess {
 export interface AudioClip {
   id: ClipId;
   audioId: AudioId;            // výsledné id zvuku v aplikaci (i pro vlastní nahrávku rodiče)
-  category: "letter" | "syllable" | "word" | "pictureWord" | "prompt";
+  category: "letter" | "syllable" | "word" | "pictureWord" | "prompt" | "number"; // number = matematika
   refId: string;               // id položky obsahu
   text: string;
   variant: number;             // 1…variantCount
@@ -243,7 +243,12 @@ export interface AudioClip {
   /** Ověřeno poslechem (z audio-selection.json → listeningChecks). resolvedRisk = původní riziko. */
   listeningCheck: { status: "verified"; verifiedBy: string; verifiedAt: string; resolvedRisk: string | null } | null;
 }
+export type SubjectId = "cz-reading" | "math" | "world" | "english";
 export interface AudioScriptFile extends FileHeader<"audioScript"> {
+  /** Chybí = čtení (cz-reading). Předmětové skripty: content/<subject>/audio-script.json. */
+  subjectId?: SubjectId;
+  /** Zvuky z jiného skriptu (např. pochvaly ze čtení), které předmět používá bez přegenerování. */
+  sharedAudioIds?: AudioId[];
   contentVersion: string;
   voice: { name: string; fallback: string; locale: string };
   ssmlTemplate: string;        // obsahuje {voice} a {body}

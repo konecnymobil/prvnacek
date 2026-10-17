@@ -1,35 +1,59 @@
 /** u) Plocha pro psaní perem: Pointer Events, ochrana před dlaní, prst jako náhrada (koridor ×1,6).
  *  Tahy zůstávají jen v paměti komponenty (penStrokes se neukládají). */
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { StrokeTemplate } from '../math/strokes';
+import { squeakOff, squeakOn } from '../audio/squeak';
 
 type Kind = 'pen' | 'touch' | 'mouse';
 interface Stroke { kind: Kind; pts: [number, number][]; width: number }
-export interface TraceResult { ok: boolean; coverage: number; direction: boolean; usedFinger: boolean }
+export interface TraceResult { ok: boolean; coverage: number; direction: boolean; usedFinger: boolean; outside: number }
 
 const PALM_MS = 1500;
 
-/** Vyhodnocení podle 3a: pokrytí šablony v koridoru a směr (start každého tahu blíž začátku šablony než konci). */
-export function evaluate(svg: SVGSVGElement, t: StrokeTemplate, strokes: Stroke[]): TraceResult {
-  const usedFinger = strokes.some((s) => s.kind !== 'pen');
-  const tol = (t.corridor / 2) * (usedFinger ? t.fingerFactor : 1);
-  const pts = strokes.flatMap((s) => s.pts);
-  const paths = Array.from(svg.querySelectorAll<SVGPathElement>('path.tpl-center'));
-  let hit = 0, all = 0, direction = true;
-  paths.forEach((p, i) => {
+const SAMPLES = 60;
+const MAX_OUTSIDE = 0.15;
+const MIN_STROKE_PROGRESS = 0.85;
+
+type Pt = [number, number];
+/** Body šablony: pro každý tah SAMPLES+1 bodů po délce cesty (z vykreslených <path class="tpl-center">). */
+export function sampleTemplate(svg: SVGSVGElement): Pt[][] {
+  return Array.from(svg.querySelectorAll<SVGPathElement>('path.tpl-center')).map((p) => {
     const len = p.getTotalLength();
-    for (let k = 0; k <= 40; k++) {
-      const q = p.getPointAtLength((len * k) / 40); all++;
-      if (pts.some(([x, y]) => Math.hypot(x - q.x, y - q.y) <= tol)) hit++;
-    }
-    const s = strokes[i]; const a = p.getPointAtLength(0), b = p.getPointAtLength(len);
-    if (s && Math.hypot(a.x - b.x, a.y - b.y) > tol) {
-      const [x, y] = s.pts[0];
-      if (Math.hypot(x - a.x, y - a.y) > Math.hypot(x - b.x, y - b.y)) direction = false;
-    }
+    return Array.from({ length: SAMPLES + 1 }, (_, k) => { const q = p.getPointAtLength((len * k) / SAMPLES); return [q.x, q.y] as Pt; });
   });
-  const coverage = all ? hit / all : 0;
-  return { ok: strokes.length > 0 && coverage >= t.minCoverage && direction, coverage, direction, usedFinger };
+}
+const tolOf = (t: StrokeTemplate, finger: boolean) => (t.corridor / 2) * (finger ? t.fingerFactor : 1);
+export const distToTemplate = (samples: Pt[][], [x, y]: Pt) => Math.min(...samples.flat().map(([a, b]) => Math.hypot(x - a, y - b)));
+
+/** Jak daleko tah došel po šabloně: kurzor se posouvá jen dopředu po bodech v koridoru (okno −3…+8),
+ *  takže tah opačným směrem, od prostředka nebo jen kousek nedojde daleko. Vrací 0–1. */
+export function strokeProgress(tpl: Pt[], pts: Pt[], tol: number): number {
+  let c = -1;
+  for (const [x, y] of pts) {
+    let best = -1, bd = Infinity;
+    for (let k = Math.max(0, c - 3); k <= Math.min(SAMPLES, c + 8); k++) {
+      const d = Math.hypot(x - tpl[k][0], y - tpl[k][1]);
+      if (d <= tol && d < bd) { bd = d; best = k; }
+    }
+    if (best > c) c = best;
+  }
+  return c < 0 ? 0 : c / SAMPLES;
+}
+
+/** Vyhodnocení podle 3a: stejný počet tahů, každý ve správném pořadí a směru a pokrytý z ≥ 85 %,
+ *  nejvýš 15 % bodů mimo koridor. Myš se posuzuje jako pero, širší koridor má jen prst. */
+export function evaluate(svg: SVGSVGElement, t: StrokeTemplate, strokes: Stroke[]): TraceResult {
+  const real = strokes.filter((s) => s.pts.length >= 2);
+  const usedFinger = real.some((s) => s.kind === 'touch');
+  const tol = tolOf(t, usedFinger);
+  const samples = sampleTemplate(svg);
+  const progress = samples.map((tpl, i) => (real[i] ? strokeProgress(tpl, real[i].pts, tol) : 0));
+  const pts = real.flatMap((s) => s.pts);
+  const outside = pts.length ? pts.filter((p) => distToTemplate(samples, p) > tol).length / pts.length : 1;
+  const coverage = progress.length ? Math.min(...progress) : 0;
+  const direction = progress.every((p) => p >= MIN_STROKE_PROGRESS);
+  const ok = real.length === samples.length && direction && outside <= MAX_OUTSIDE;
+  return { ok, coverage, direction, usedFinger, outside };
 }
 
 export default function PenSurface({ template, onDone, showMe }: { template: StrokeTemplate; onDone?: (r: TraceResult) => void; showMe?: boolean }) {
@@ -41,6 +65,10 @@ export default function PenSurface({ template, onDone, showMe }: { template: Str
   const [ignored, setIgnored] = useState(0);
   const [kind, setKind] = useState<Kind | null>(null);
   const [demo, setDemo] = useState(0);
+  const [out, setOut] = useState(false);
+  const samplesRef = useRef<Pt[][] | null>(null);
+  useEffect(() => () => squeakOff(), []);
+  useEffect(() => { samplesRef.current = null; }, [template]);
   const [w, h] = template.box;
 
   const toLocal = (e: { clientX: number; clientY: number }): [number, number] => {
@@ -59,7 +87,7 @@ export default function PenSurface({ template, onDone, showMe }: { template: Str
     active.current = e.pointerId;
     try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* syntetické události */ }
     setKind(k);
-    const width = k === 'pen' ? 8 + 10 * (e.pressure || 0.5) : 26;
+    const width = k === 'pen' ? 8 + 10 * (e.pressure || 0.5) : k === 'mouse' ? 14 : 26;
     setStrokes((s) => [...s, { kind: k, pts: [toLocal(e)], width }]);
   };
   const move = (e: React.PointerEvent<SVGSVGElement>) => {
@@ -67,19 +95,27 @@ export default function PenSurface({ template, onDone, showMe }: { template: Str
     e.preventDefault();
     const evs = e.nativeEvent.getCoalescedEvents?.() ?? [];
     const pts = (evs.length ? evs : [e]).map(toLocal);
+    const svg = svgRef.current;
+    if (svg) {
+      samplesRef.current ??= sampleTemplate(svg);
+      const isOut = distToTemplate(samplesRef.current, pts[pts.length - 1]) > tolOf(template, e.pointerType === 'touch');
+      if (isOut) squeakOn(); else squeakOff();
+      setOut(isOut);
+    }
     setStrokes((s) => { const last = s[s.length - 1]; return [...s.slice(0, -1), { ...last, pts: [...last.pts, ...pts] }]; });
   };
   const up = (e: React.PointerEvent<SVGSVGElement>) => {
     if (e.pointerType === 'pen') { penDown.current = false; lastPenUp.current = performance.now(); }
     if (e.pointerId !== active.current) return;
     active.current = null;
+    squeakOff(); setOut(false);
   };
 
   return (
     <div className="pen-wrap">
       <svg
         ref={svgRef} className="pen-surface" data-testid="pen-surface" viewBox={`0 0 ${w} ${h}`}
-        data-strokes={strokes.length} data-ignored={ignored} data-input={kind ?? ''}
+        data-strokes={strokes.length} data-ignored={ignored} data-input={kind ?? ''} data-out={out ? 'true' : 'false'}
         onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
         onTouchStart={(e) => e.preventDefault()}
       >
