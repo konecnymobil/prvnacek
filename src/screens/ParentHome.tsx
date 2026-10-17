@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import BackupPanel from './BackupPanel';
 import { ProfilesPanel } from './Profiles';
-import { ScriptSettingsPanel, ResetPanel, ScriptStylePanel } from './SettingsPanels';
+import { ScriptSettingsPanel, ResetPanel, ScriptStylePanel, MathGamesPanel } from './SettingsPanels';
 import { useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import type { Screen } from '../App';
@@ -124,6 +124,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
       <h2 className="section-title">Nastavení</h2>
       <ScriptSettingsPanel />
       <ScriptStylePanel key={restored} />
+      <MathGamesPanel key={`m${restored}`} />
       <ProfilesPanel refresh={restored} />
       <BackupPanel onRestored={() => { load(); void script.reload(); setRestored((n) => n + 1); }} />
       <ResetPanel onDone={() => { load(); void script.reload(); }} />

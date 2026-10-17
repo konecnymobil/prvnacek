@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "manifest",
-  "contentVersion": "2026-10-17.1",
+  "contentVersion": "2026-10-17.2",
   "defaultOrderId": "duha",
   "scripts": {
     "defaultMode": "upperPrint",
@@ -102,6 +102,21 @@
       "path": "math/audio-script.json",
       "kind": "audioScript",
       "schema": "schema/audio-script.schema.json"
+    },
+    {
+      "path": "world/audio-script.json",
+      "kind": "audioScript",
+      "schema": "schema/audio-script.schema.json"
+    },
+    {
+      "path": "english/audio-script.json",
+      "kind": "audioScript",
+      "schema": "schema/audio-script.schema.json"
+    },
+    {
+      "path": "audio-effects.json",
+      "kind": "audioEffects",
+      "schema": "schema/audio-effects.schema.json"
     }
   ]
 }

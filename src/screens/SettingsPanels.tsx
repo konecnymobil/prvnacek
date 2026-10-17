@@ -111,3 +111,18 @@ export function ScriptStylePanel() {
     </section>
   );
 }
+
+/** Matematika – MM2 „Kolik vidíš?“: jak dlouho svítí tečky (2 s výchozí / 3 s), pro každé dítě zvlášť. */
+export function MathGamesPanel() {
+  const [ms, setMs] = useState(2000);
+  useEffect(() => { void getSetting<number>('mm2:showMs').then((v) => setMs(v ?? 2000), () => {}); }, []);
+  return (
+    <section className="card" data-testid="mm2-setting">
+      <h2>Hra „Kolik vidíš?“</h2>
+      <p className="small muted">Jak dlouho se ukazují tečky, než zhasnou (dítě si je může kdykoli ukázat znovu).</p>
+      <div className="seg" role="group" aria-label="Doba zobrazení teček">
+        {[2000, 3000].map((v) => <button key={v} className="kbtn" data-ms={v} aria-pressed={ms === v} onClick={() => { setMs(v); void setSetting('mm2:showMs', v); }}>{v / 1000} s{ms === v ? ' ✓' : ''}</button>)}
+      </div>
+    </section>
+  );
+}

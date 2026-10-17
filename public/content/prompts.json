@@ -136,6 +136,97 @@
       "audioId": "snd-p-compose-word"
     },
     {
+      "id": "p-game-ztratilo",
+      "category": "instruction",
+      "activity": null,
+      "text": "Co se ztratilo?",
+      "audioId": "snd-p-game-ztratilo"
+    },
+    {
+      "id": "p-game-detektiv",
+      "category": "instruction",
+      "activity": null,
+      "text": "Slabikový detektiv.",
+      "audioId": "snd-p-game-detektiv"
+    },
+    {
+      "id": "p-game-bublinky",
+      "category": "instruction",
+      "activity": null,
+      "text": "Bublinky.",
+      "audioId": "snd-p-game-bublinky"
+    },
+    {
+      "id": "p-game-domecky",
+      "category": "instruction",
+      "activity": null,
+      "text": "Slabikové domečky.",
+      "audioId": "snd-p-game-domecky"
+    },
+    {
+      "id": "p-game-obchod",
+      "category": "instruction",
+      "activity": null,
+      "text": "Slabikový obchod.",
+      "audioId": "snd-p-game-obchod"
+    },
+    {
+      "id": "p-mh-ztratilo",
+      "category": "instruction",
+      "activity": null,
+      "text": "Které písmenko chybí? Ťukni na něj.",
+      "audioId": "snd-p-mh-ztratilo"
+    },
+    {
+      "id": "p-mh-detektiv",
+      "category": "instruction",
+      "activity": null,
+      "text": "Podívej se do lupy. Najdi stejnou slabiku.",
+      "audioId": "snd-p-mh-detektiv"
+    },
+    {
+      "id": "p-mh-bublinky",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslouchej a ťukni na správnou bublinu.",
+      "audioId": "snd-p-mh-bublinky"
+    },
+    {
+      "id": "p-mh-domecky",
+      "category": "instruction",
+      "activity": null,
+      "text": "Do kterého domečku obrázek patří? Poslouchej, jak slovo začíná.",
+      "audioId": "snd-p-mh-domecky"
+    },
+    {
+      "id": "p-mh-obchod",
+      "category": "instruction",
+      "activity": null,
+      "text": "Přečti si nákupní lístek a dej do košíku, co je na něm.",
+      "audioId": "snd-p-mh-obchod"
+    },
+    {
+      "id": "p-mh-locked",
+      "category": "general",
+      "activity": null,
+      "text": "Tahle hra přijde s písmenkem",
+      "audioId": "snd-p-mh-locked"
+    },
+    {
+      "id": "p-mh-calm",
+      "category": "retry",
+      "activity": null,
+      "text": "Zastavíme se a zkusíme to spolu.",
+      "audioId": "snd-p-mh-calm"
+    },
+    {
+      "id": "p-mh-sticker-set",
+      "category": "reward",
+      "activity": null,
+      "text": "Máš novou nálepku do sady!",
+      "audioId": "snd-p-mh-sticker-set"
+    },
+    {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,

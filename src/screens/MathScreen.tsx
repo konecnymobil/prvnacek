@@ -4,6 +4,7 @@ import PenSurface, { type TraceResult } from '../components/PenSurface';
 import { awardSticker } from '../album/album';
 import { MATH_LESSONS, buildRound, classifyError, getMathProgress, mathUnlocked, saveRound, type MathErr, type MathLesson, type MathProgress, type MathTask } from '../math/math';
 import { digitTemplate } from '../math/strokes';
+import MathGame, { MATH_GAMES, type MathGameId } from '../games/MathGames';
 import { say, stopSay } from '../activities/common';
 
 /** Zvuky matematiky (content 2026-10-17.1, math/audio-script.json) + sdílené pochvaly ze čtení; vše přes frontu say(). */
@@ -21,11 +22,14 @@ const Dots = ({ n, item }: { n: number; item: string }) => (
   <span className="m-group" data-count={n}>{Array.from({ length: n }, (_, i) => <span key={i} className="m-item">{item}</span>)}</span>
 );
 
-export default function MathScreen({ back }: { back: () => void }) {
+export default function MathScreen({ back, openAlbum }: { back: () => void; openAlbum: () => void }) {
+  const [game, setGame] = useState<MathGameId | null>(null);
   const [progress, setProgress] = useState<MathProgress>({});
   const [lesson, setLesson] = useState<MathLesson | null>(null);
   useEffect(() => { if (!lesson) void getMathProgress().then(setProgress, () => {}); }, [lesson]);
 
+  const level = MATH_LESSONS.filter((_, i) => mathUnlocked(progress, i)).length;
+  if (game) return <MathGame id={game} level={level} back={() => setGame(null)} openAlbum={openAlbum} />;
   return (
     <main className="screen math subj--mat" data-testid="math-screen">
       <header className="topbar">
@@ -43,6 +47,14 @@ export default function MathScreen({ back }: { back: () => void }) {
                   {l.title}{(progress[l.id]?.rounds ?? 0) > 0 && <span className="m-done">⭐</span>}
                 </button>
               );
+            })}
+          </div>
+          <h2>🎲 Hry</h2>
+          <div className="subj-games">
+            {MATH_GAMES.map((g) => {
+              const open = level >= g.from;
+              return <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}`} data-game={g.id} data-locked={open ? 'false' : 'true'} disabled={!open} onClick={() => setGame(g.id)}>
+                <span className="game-icon">{g.icon}</span><span>{g.name}</span>{!open && <span aria-hidden>🔒</span>}</button>;
             })}
           </div>
         </section>
