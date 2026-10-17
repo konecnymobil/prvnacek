@@ -4,6 +4,9 @@ import { requestPersistentStorage } from './storage/db';
 import Home from './screens/Home';
 import SoundTest from './screens/SoundTest';
 import About from './screens/About';
+import { PICKED_KEY, ProfilePicker } from './screens/Profiles';
+import { getDb } from './storage/db';
+import { listProfiles } from './storage/profiles';
 import DataPolicy from './screens/DataPolicy';
 import LessonMenu from './screens/LessonMenu';
 import LetterActivity from './screens/LetterActivity';
@@ -23,7 +26,7 @@ import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout' | 'profiles';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -37,8 +40,11 @@ function AppInner() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
 
   useEffect(() => {
-    loadContent().then((c) => { indexContent(c); setContent(c); }, (e: unknown) => setError(e instanceof Error ? e.message : String(e)));
+    // obsah se ukáže až po migraci profilů a otevření DB dítěte → nic nečte data dřív, než jsou připravená
+    Promise.all([loadContent(), getDb().catch(() => null)]).then(([c]) => { indexContent(c); setContent(c); }, (e: unknown) => setError(e instanceof Error ? e.message : String(e)));
     requestPersistentStorage().then(setPersisted);
+    // víc dětí → úvodní obrazovka „Kdo si bude hrát?“ (jednou za spuštění)
+    void getDb().then(() => listProfiles()).then((l) => { if (l.length > 1 && !sessionStorage.getItem(PICKED_KEY)) setScreen('profiles'); }).catch(() => {});
   }, []);
 
   const lesson = content && lessonId ? content.orders[content.defaultOrderId].lessons.find((l) => l.id === lessonId) : undefined;
@@ -62,6 +68,7 @@ function AppInner() {
       {content && screen === 'sounds' && <Sounds content={content} go={setScreen} />}
       {content && screen === 'album' && <Album content={content} back={() => setScreen('home')} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
+      {screen === 'profiles' && <ProfilePicker go={setScreen} />}
       {screen === 'dataPolicy' && <DataPolicy go={setScreen} back="parent" />}
       {screen === 'dataPolicyAbout' && <DataPolicy go={setScreen} back="about" />}
     </div>

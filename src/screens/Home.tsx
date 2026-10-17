@@ -1,3 +1,5 @@
+import { useProfiles } from './Profiles';
+import { avatarEmoji } from '../storage/profiles';
 import Glyphs, { variantLabel, useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { useEffect, useState } from 'react';
@@ -17,12 +19,16 @@ export default function Home({ content, error, go, openLesson }: Props) {
   const [hint, setHint] = useState<string | null>(null);
   useEffect(() => { getLessonStatesMap().then(setStates, () => {}); }, [content]);
   const script = useScript();
+  const profiles = useProfiles();
   const order = content ? content.orders[content.defaultOrderId] : null;
 
   return (
     <main className="screen home">
       <header className="topbar">
         <h1>Prvňáček</h1>
+        {profiles.list.length > 1 && profiles.active && (
+          <button className="kbtn profile-chip" data-testid="profile-switch" onClick={() => go('profiles')} aria-label={`Kdo si hraje: ${profiles.active.name}. Změnit.`}>{avatarEmoji(profiles.active.avatar)}</button>
+        )}
         <p className="muted">Verze M1 – aktivity a rodičovská část</p>
         {script.modeList.length > 1 && (
           <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${variantLabel(script.variant)}`}>Aa Písmo</button>

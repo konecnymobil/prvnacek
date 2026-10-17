@@ -2,6 +2,7 @@ import policy from '../policy/data-policy.json';
 import { useEffect, useState } from 'react';
 import { buildBackup, downloadBackup, parseBackup, restoreBackup, summarize, type BackupFile } from '../storage/backup';
 import { requestPersistentStorage } from '../storage/db';
+import { getActiveProfile } from '../storage/profiles';
 
 export function StoragePanel() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
@@ -46,7 +47,7 @@ export default function BackupPanel({ onRestored }: { onRestored: () => void }) 
   const doImport = async () => {
     if (!pending) return;
     setBusy(true);
-    try { await restoreBackup(pending); setPending(null); setMsg({ ok: true, text: 'Záloha byla obnovena. Data v aplikaci jsou aktualizovaná.' }); onRestored(); }
+    try { const before = (await getActiveProfile())?.id; await restoreBackup(pending); if ((await getActiveProfile())?.id !== before) { window.location.reload(); return; } setPending(null); setMsg({ ok: true, text: 'Záloha byla obnovena. Data v aplikaci jsou aktualizovaná.' }); onRestored(); }
     catch (e) { setMsg({ ok: false, text: `Obnova selhala, původní data zůstala beze změny: ${(e as Error).message}` }); }
     setBusy(false);
   };
@@ -65,7 +66,7 @@ export default function BackupPanel({ onRestored }: { onRestored: () => void }) 
       </label>
       {s && (
         <div className="notice" role="alertdialog" data-testid="import-confirm">
-          <p><strong>Záloha z {new Date(s.exportedAt).toLocaleString('cs-CZ')}</strong> (formát {s.version}): {s.attempts} pokusů, {s.lessonStates} stavů lekcí, {s.tests} výsledků zkoušek, {s.settings} nastavení, {s.recordings} nahrávek.</p>
+          <p><strong>Záloha z {new Date(s.exportedAt).toLocaleString('cs-CZ')}</strong> (formát {s.version}{s.version >= 3 ? `, profilů: ${s.profiles}` : ', obnoví se do aktuálního profilu'}): {s.attempts} pokusů, {s.lessonStates} stavů lekcí, {s.tests} výsledků zkoušek, {s.settings} nastavení, {s.recordings} nahrávek.</p>
           <p><strong>Obnovením se přepíšou všechna současná data v tomto zařízení.</strong></p>
           <button className="kbtn kbtn-primary" disabled={busy} onClick={doImport} data-testid="import-confirm-yes">Přepsat a obnovit</button>
           <button className="kbtn" onClick={() => setPending(null)} data-testid="import-confirm-no">Zrušit</button>

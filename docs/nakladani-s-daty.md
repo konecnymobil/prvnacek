@@ -1,6 +1,6 @@
 # Jak nakládáme s daty
 
-Verze 1.1.1, platná od 2026-10-13.
+Verze 1.2.0, platná od 2026-10-17.
 
 <!-- Generováno z src/policy/data-policy.json příkazem `npm run gen:policy`. Neupravovat ručně. -->
 
@@ -9,6 +9,8 @@ Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejo
 ## Co aplikace ukládá dnes
 
 - Vše je uložené jen v tomto zařízení (v úložišti prohlížeče IndexedDB).
+- Každé dítě má v zařízení vlastní profil (jméno a zvířátko). Pokrok, nastavení, album i nahrávky jsou uložené odděleně pro každé dítě.
+- Při přechodu na profily aplikace jednou uložila v zařízení zálohu původních dat; rodič si ji může stáhnout v rodičovské sekci.
 - Pokusy v úlohách (co dítě řešilo, zda správně, jak dlouho) a události jako zkoušky, schválení lekcí nebo předčasné ukončení.
 - Stav lekcí (odemčené a schválené).
 - Nastavení, včetně tvaru písma a alba nálepek.
