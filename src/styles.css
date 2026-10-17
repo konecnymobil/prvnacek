@@ -479,3 +479,29 @@ html, body { overflow-x: hidden; }
 .style-preview { display: flex; gap: 8px; margin-top: 8px; }
 .style-glyph { width: 60px; height: 90px; background: #fff; border-radius: 8px; }
 .style-glyph path { fill: none; stroke: #222; stroke-width: 4; stroke-linecap: round; }
+
+/* ---- Minihry (r) ---- */
+.game-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; width: 100%; }
+.game-tile { min-height: 120px; border-radius: 20px; border: 3px solid var(--c-primary, #E8590C); background: #fff; font: inherit; font-size: 1.2rem; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: inherit; }
+.game-tile.is-locked { opacity: .55; }
+.game-icon { font-size: 2.4rem; }
+.game .progress { display: flex; gap: 6px; }
+.game .progress i { width: 14px; height: 14px; border-radius: 50%; background: #ddd; }
+.game .progress i.done { background: #2F9E44; } .game .progress i.now { background: #E8590C; }
+.game-stage { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.game-mascot { display: flex; align-items: center; gap: 12px; } .game-mascot .mascot { width: 80px; }
+.game-word, .game-lupa, .game-list { font-size: clamp(40px, 9vh, 80px); position: relative; padding: 8px 24px; background: #fff; border-radius: 16px; }
+.game-list small { display: block; font-size: 1rem; color: #666; }
+.game-pale { position: absolute; inset: 0; margin: auto; height: 100%; opacity: .25; pointer-events: none; }
+.game-opts { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.game-opt { min-width: 110px; min-height: 96px; font-size: clamp(28px, 6vh, 48px); }
+.game-opt img, .game-card img { height: clamp(80px, 16vh, 140px); }
+.game-opt.is-wrong { animation: shake .5s; } .game-opt.is-correct, .game-opt.is-hint { outline: 6px solid #2F9E44; }
+@keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.game-card { border: 4px dashed #999; border-radius: 16px; background: #fff; padding: 8px; } .game-card.is-picked { border-color: #2F9E44; border-style: solid; }
+.house { display: flex; flex-direction: column; align-items: center; } .house .roof { font-size: 2rem; line-height: 1; color: #E8590C; }
+.sky .bubble-opt { border-radius: 50%; width: 130px; height: 130px; animation: bob 4.4s linear infinite; }
+.sky.is-paused .bubble-opt { animation-play-state: paused; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
+@media (prefers-reduced-motion: reduce) { .sky .bubble-opt { animation: none; } }
+.home-play { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; } .home-play .kbtn { flex: 1 1 0; min-width: 0; margin: 0; }

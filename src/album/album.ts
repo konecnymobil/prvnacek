@@ -3,7 +3,7 @@ import { getSetting, setSetting } from '../storage/db';
 
 export type Letter = 'M' | 'A' | 'L' | 'E' | 'S' | 'O' | 'P' | 'U' | 'I';
 export type StickerId = `t:${string}` | `v:${string}` | `L:${string}`;
-export type StickerSource = 'cviceni' | 'snaha' | 'lekce' | 'pexeso' | 'opakovani' | 'matematika';
+export type StickerSource = 'cviceni' | 'snaha' | 'lekce' | 'pexeso' | 'opakovani' | 'matematika' | 'hra';
 export type SubjectId = 'cz-reading' | 'math';
 export interface StickerDef { id: StickerId; word: string; special?: boolean }
 export interface StickerSet { id: string; name: string; icon: StickerId; special?: boolean; items: StickerDef[] }
@@ -20,7 +20,7 @@ export const SETS: StickerSet[] = [
   { id: 'dobroty', name: 'Dobroty', icon: 't:1f34e', items: d([['t:1f34e', 'jablko'], ['t:1f353', 'jahoda'], ['v:salam', 'salám'], ['t:1f963', 'mísa']]) },
   { id: 'vylety', name: 'Výlety', icon: 't:1f680', items: d([['t:1f388', 'balónek'], ['t:1f680', 'raketa'], ['v:sup', 'paddleboard'], ['v:molo', 'molo'], ['t:1f5fa', 'mapa']]) },
 ];
-export const SOURCE_TEXT: Record<StickerSource, string> = { cviceni: 'za dokončené cvičení', snaha: 'za snahu ve výzvě s rodičem', lekce: 'za schválené písmenko', pexeso: 'za pexeso', opakovani: 'za opakování', matematika: 'za matematiku' };
+export const SOURCE_TEXT: Record<StickerSource, string> = { cviceni: 'za dokončené cvičení', snaha: 'za snahu ve výzvě s rodičem', lekce: 'za schválené písmenko', pexeso: 'za pexeso', opakovani: 'za opakování', matematika: 'za matematiku', hra: 'za hru' };
 
 export async function getOwned(): Promise<OwnedSticker[]> { return (await getSetting<OwnedSticker[]>(ALBUM_KEY)) ?? []; }
 
