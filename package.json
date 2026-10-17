@@ -11,7 +11,9 @@
     "icons": "python3 scripts/make-icons.py",
     "tokens": "node src/design/tools/build-tokens.mjs",
     "test:e2e": "playwright test",
-    "gen:policy": "node scripts/gen-policy.mjs"
+    "gen:policy": "node scripts/gen-policy.mjs",
+    "server:build": "tsc -p server",
+    "server:test": "tsc -p server && node --test server/dist/*.test.js"
   },
   "dependencies": {
     "idb": "^8.0.4",

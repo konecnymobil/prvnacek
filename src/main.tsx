@@ -4,6 +4,7 @@ import { registerSW } from 'virtual:pwa-register';
 import './design/tokens.css';
 import './styles.css';
 import App from './App';
+import { startAutoSync } from './sync/client';
 
 // iPad: zabránit zoomu gestem (pinch) – viewport má user-scalable=no, Safari ho ale ignoruje.
 document.addEventListener('gesturestart', (e) => e.preventDefault());
@@ -24,3 +25,5 @@ createRoot(document.getElementById('root')!).render(
     <App />
   </StrictMode>,
 );
+
+startAutoSync();

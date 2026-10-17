@@ -4,3 +4,5 @@ test-results/
 playwright-report/
 *.tsbuildinfo
 .env*
+.sync-test-data/
+server/data/
