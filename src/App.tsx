@@ -22,12 +22,13 @@ import Review from './screens/Review';
 import Sounds from './screens/Sounds';
 import Album from './screens/Album';
 import MathScreen from './screens/MathScreen';
+import Games from './screens/Games';
 import WeeklySummary from './screens/WeeklySummary';
 import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout' | 'profiles' | 'math';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout' | 'profiles' | 'math' | 'games';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -69,6 +70,7 @@ function AppInner() {
       {content && screen === 'sounds' && <Sounds content={content} go={setScreen} />}
       {content && screen === 'album' && <Album content={content} back={() => setScreen('home')} />}
       {screen === 'math' && <MathScreen back={() => setScreen('home')} />}
+      {content && screen === 'games' && <Games content={content} back={() => setScreen('home')} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
       {screen === 'profiles' && <ProfilePicker go={setScreen} />}
       {screen === 'dataPolicy' && <DataPolicy go={setScreen} back="parent" />}
