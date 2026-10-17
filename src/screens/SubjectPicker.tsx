@@ -1,10 +1,12 @@
 /** s) Výběr předmětu na dvě klepnutí: 1. = výběr (karta se zvedne, objeví se ➜), 2. = vstup. */
 import { useState } from 'react';
 
-export type SubjectKey = 'cz-reading' | 'math';
+export type SubjectKey = 'cz-reading' | 'math' | 'world' | 'english';
 const SUBJECTS: { id: SubjectKey; name: string; icon: string; cls: string }[] = [
   { id: 'cz-reading', name: 'Čtení', icon: '📖', cls: 'subj--cti' },
   { id: 'math', name: 'Matematika', icon: '🔢', cls: 'subj--mat' },
+  { id: 'world', name: 'Prvouka', icon: '🌳', cls: 'subj--prv' },
+  { id: 'english', name: 'Angličtina', icon: '🐶', cls: 'subj--aj' },
 ];
 
 export default function SubjectPicker({ current, onEnter }: { current: SubjectKey; onEnter: (s: SubjectKey) => void }) {

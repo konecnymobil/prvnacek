@@ -529,3 +529,17 @@ html, body { overflow-x: hidden; }
 .xg-frog { position: absolute; top: -52px; font-size: 48px; transition: transform 1.5s; } .is-jump .xg-frog { transform: translateX(380px); }
 .xg-flag { font-size: 72px; }
 .subj-games { display: flex; gap: 12px; flex-wrap: wrap; }
+.subject-picker .subj-card { font-size: 1rem; } .subject-picker .subj-icon { font-size: 1.5rem; }
+.xg-item, .xg-box, .xg-pic, .xg-mbox { font-size: 72px; display: flex; flex-direction: column; align-items: center; min-width: 120px; min-height: 120px; }
+.xg-item small, .xg-box small { font-size: 1rem; }
+.xg-train { display: flex; gap: 8px; font-size: 56px; align-items: center; } .xg-wagon { width: 96px; height: 80px; border: 4px solid var(--s); border-radius: 12px; background: var(--s-soft); font-size: 48px; }
+.xg-street { width: min(900px, 92vw); display: grid; grid-template-columns: 80px 1fr 80px; align-items: center; gap: 8px; font-size: 64px; }
+.xg-road { position: relative; height: 180px; background: #555; border-radius: 8px; }
+.xg-zebra { position: absolute; top: 0; bottom: 0; width: 80px; background: repeating-linear-gradient(0deg, #fff 0 16px, transparent 16px 32px); }
+.xg-light { position: absolute; top: -10px; font-size: 40px; }
+.xg-spot { position: absolute; top: 60px; width: 60px; height: 60px; border-radius: 50%; border: 3px solid #fff; background: rgba(255,255,255,.3); font-size: 28px; }
+.xg-en { font-size: 2rem; font-weight: 700; width: 100%; text-align: center; }
+.xg-canvas { position: relative; width: min(300px, 45vh); aspect-ratio: 1; background: #fff; border-radius: 16px; }
+.xg-canvas canvas, .xg-outline { position: absolute; inset: 0; width: 100%; height: 100%; }
+.xg-canvas canvas { touch-action: none; } .xg-outline { pointer-events: none; } .xg-outline path { fill: none; stroke: #222; stroke-width: 4; }
+.xg-paint { width: 72px; height: 72px; border-radius: 50%; border: 4px solid #fff; } .xg-paint[aria-pressed="true"] { border-color: #222; }
