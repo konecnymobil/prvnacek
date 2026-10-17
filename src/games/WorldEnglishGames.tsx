@@ -25,21 +25,21 @@ export default function SubjGame({ id, ...p }: P & { id: SubjGameId }) {
 const W = { cls: 'subj--prv' }, E = { cls: 'subj--aj' };
 
 /** MP1: věc → krabice (🎒 do školy / 🧸 hračky). Jen jednoznačné věci. */
-const SORT_ITEMS: { e: string; name: string; box: 'school' | 'toys' }[] = [
-  { e: '✏️', name: 'tužka', box: 'school' }, { e: '📏', name: 'pravítko', box: 'school' }, { e: '📕', name: 'kniha', box: 'school' }, { e: '✂️', name: 'nůžky', box: 'school' }, { e: '🖍️', name: 'pastelka', box: 'school' },
-  { e: '🧸', name: 'medvídek', box: 'toys' }, { e: '⚽', name: 'míč', box: 'toys' }, { e: '🪀', name: 'jojo', box: 'toys' }, { e: '🚂', name: 'vláček', box: 'toys' }, { e: '🪁', name: 'drak', box: 'toys' },
+const SORT_ITEMS: { e: string; name: string; box: 'school' | 'toys'; a: string }[] = [
+  { e: '✏️', a: 'snd-pv-w-tuzka', name: 'tužka', box: 'school' }, { e: '📏', a: 'snd-pv-w-pravitko', name: 'pravítko', box: 'school' }, { e: '📕', a: 'snd-pv-w-kniha', name: 'kniha', box: 'school' }, { e: '✂️', a: 'snd-pv-w-nuzky', name: 'nůžky', box: 'school' }, { e: '🖍️', a: 'snd-pv-w-pastelka', name: 'pastelka', box: 'school' },
+  { e: '🧸', a: 'snd-pv-w-medvidek', name: 'medvídek', box: 'toys' }, { e: '⚽', a: 'snd-pv-w-mic', name: 'míč', box: 'toys' }, { e: '🪀', a: 'snd-pv-w-jojo', name: 'jojo', box: 'toys' }, { e: '🚂', a: 'snd-pv-w-vlacek', name: 'vláček', box: 'toys' }, { e: '🪁', a: 'snd-pv-w-drak', name: 'drak', box: 'toys' },
 ];
 function Sort({ back, openAlbum }: P) {
   const tasks = useMemo(() => shuffle(SORT_ITEMS).slice(0, ROUND), []);
   const r = useMiniRound(ROUND, 'mp1', 'world');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   const box = (b: 'school' | 'toys', icon: string, label: string) => (
-    <button className={`kbtn xg-box${r.api.calm && t.box === b ? ' is-hint' : ''}`} data-box={b} aria-label={label} onClick={() => (t.box === b ? r.api.ok() : r.api.no())}>{icon}<small>{label}</small></button>
+    <button className={`kbtn xg-box${r.api.calm && t.box === b ? ' is-hint' : ''}`} data-box={b} aria-label={label} onClick={() => (t.box === b ? r.api.ok([t.a, b === 'school' ? 'snd-pv-w-do-skoly' : 'snd-pv-w-hracky'], 3500) : r.api.no())}>{icon}<small>{label}</small></button>
   );
   return (
-    <MiniShell title="Uklízíme" subjCls={W.cls} round={r} count={ROUND} nameAudio={['snd-pv-p-game-uklizime']} prompt={['snd-pv-p-sort']} intro="Kam to patří? Ťukni na správnou krabici." back={back} openAlbum={openAlbum}>
+    <MiniShell title="Uklízíme" subjCls={W.cls} round={r} count={ROUND} nameAudio={['snd-pv-p-game-uklizime']} prompt={['snd-pv-p-sort', t.a]} intro="Kam to patří? Ťukni na správnou krabici." back={back} openAlbum={openAlbum}>
       <div className="xg-col" data-testid="mp1" data-answer-box={undefined}>
-        <div className="xg-item" data-testid="mp1-item" data-box={t.box} aria-label={t.name}>{t.e}<small>{t.name}</small></div>
+        <button className="xg-item" data-testid="mp1-item" data-box={t.box} aria-label={t.name} onClick={() => void say([t.a])}>{t.e}<small>{t.name}</small></button>
         <div className="xg-row">{box('school', '🎒', 'do školy')}{box('toys', '🧸', 'hračky')}</div>
       </div>
     </MiniShell>

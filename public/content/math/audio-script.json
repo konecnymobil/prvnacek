@@ -14,7 +14,7 @@
     "snd-p-mh-sticker-set",
     "snd-p-show-answer"
   ],
-  "contentVersion": "2026-10-17.2",
+  "contentVersion": "2026-10-17.3",
   "voice": {
     "name": "cs-CZ-VlastaNeural",
     "fallback": "cs-CZ-AntoninNeural",
@@ -52,9 +52,9 @@
   },
   "listeningNote": "Matematika MVP: všechny klipy jsou nové, ověřit poslechem (boti zvuk neslyší). Pochvaly a „Zkus to ještě jednou.“ se berou ze čtení (sharedAudioIds).",
   "totals": {
-    "clips": 21,
-    "audioIds": 21,
-    "billableChars": 4638
+    "clips": 22,
+    "audioIds": 22,
+    "billableChars": 4856
   },
   "clips": [
     {
@@ -355,6 +355,26 @@
       "risk": null,
       "notes": "Matematika – pokyn.",
       "billableChars": 230,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-m-p-add-more",
+      "audioId": "snd-m-p-add-more",
+      "category": "prompt",
+      "refId": "m-p-add-more",
+      "text": "Ještě přidej.",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Ještě přidej.</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-m-p-add-more.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Matematika – pokyn.",
+      "billableChars": 218,
       "listeningCheck": null
     },
     {

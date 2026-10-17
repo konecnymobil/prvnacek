@@ -227,6 +227,13 @@
       "audioId": "snd-p-mh-sticker-set"
     },
     {
+      "id": "p-subject-pick",
+      "category": "general",
+      "activity": null,
+      "text": "Kam půjdeme dnes?",
+      "audioId": "snd-p-subject-pick"
+    },
+    {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,

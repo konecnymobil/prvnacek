@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "kind": "audioScript",
+  "subjectId": "app",
+  "sharedAudioIds": [],
+  "contentVersion": "2026-10-17.3",
+  "voice": {
+    "name": "cs-CZ-VlastaNeural",
+    "fallback": "cs-CZ-AntoninNeural",
+    "locale": "cs-CZ"
+  },
+  "ssmlTemplate": "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"cs-CZ\"><voice name=\"{voice}\">{body}</voice></speak>",
+  "phoneticAlphabet": {
+    "alphabet": "ipa",
+    "note": "Azure pro cs-CZ podporuje <phoneme alphabet=\"ipa\"> se svou sadou hlásek (SAPI sada pro cs-CZ není). Neznámý symbol vrací HTTP 400. Krátké i = ɪ, krátké e = ɛ, délka = ː (U+02D0, ne dvojtečka), šva = ə, hranice slabik = '.', přízvuk = ˈ.",
+    "phonesUsed": [],
+    "source": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-ssml-phonetic-sets#cs-cz"
+  },
+  "output": {
+    "dir": "audio",
+    "candidatesDir": "audio-src/candidates",
+    "format": "mp3 (mono, 24 kHz, 64 kbps), ořez ticha, srovnání hlasitosti",
+    "selectionRule": "Klip s variantami (candidate=true) se uloží do candidatesDir jako <audioId>--vN.mp3. Po poslechu Jiří vybere variantu; vybraný soubor se zkopíruje jako audio/<audioId>.mp3. Ostatní klipy jdou rovnou do audio/."
+  },
+  "listeningNote": "Společné zvuky aplikace (výběr předmětu): ověřit poslechem.",
+  "totals": {
+    "clips": 4,
+    "audioIds": 4,
+    "billableChars": 856
+  },
+  "clips": [
+    {
+      "id": "c-subject-cti",
+      "audioId": "snd-subject-cti",
+      "category": "prompt",
+      "refId": "subject-cti",
+      "text": "Čtení.",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Čtení.</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-subject-cti.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Název předmětu na výběru předmětů (po snd-p-subject-pick).",
+      "billableChars": 211,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-subject-mat",
+      "audioId": "snd-subject-mat",
+      "category": "prompt",
+      "refId": "subject-mat",
+      "text": "Matematika.",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Matematika.</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-subject-mat.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Název předmětu na výběru předmětů (po snd-p-subject-pick).",
+      "billableChars": 216,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-subject-prv",
+      "audioId": "snd-subject-prv",
+      "category": "prompt",
+      "refId": "subject-prv",
+      "text": "Prvouka.",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Prvouka.</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-subject-prv.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Název předmětu na výběru předmětů (po snd-p-subject-pick).",
+      "billableChars": 213,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-subject-aj",
+      "audioId": "snd-subject-aj",
+      "category": "prompt",
+      "refId": "subject-aj",
+      "text": "Angličtina.",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Angličtina.</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-subject-aj.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Název předmětu na výběru předmětů (po snd-p-subject-pick).",
+      "billableChars": 216,
+      "listeningCheck": null
+    }
+  ]
+}

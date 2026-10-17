@@ -25,12 +25,19 @@ async function album(page: Page, subject: string) {
 }
 
 test('MP1 Uklízíme: špatná krabice = oprava, správná projde; konec → album Prvouka', async ({ page }) => {
+  const pick = page.waitForRequest(/snd-p-subject-pick\.mp3/);
+  await page.goto('./');
+  await pick; // výběr předmětu se ozve po 1 s
+  const subj = page.waitForRequest(/snd-subject-prv\.mp3/);
+  const box = page.waitForRequest(/snd-pv-w-(do-skoly|hracky)\.mp3/);
   await open(page, 'world', 'mp1');
+  await subj;
   for (let k = 0; k < 5; k++) {
     const i = await idx(page); const box = await page.getByTestId('mp1-item').getAttribute('data-box');
     if (k === 0) { await page.locator(`.xg-box:not([data-box="${box}"])`).click(); await wrongMsg(page); }
     await page.locator(`.xg-box[data-box="${box}"]`).click(); await next(page, i);
   }
+  await box;
   await album(page, 'world');
 });
 
