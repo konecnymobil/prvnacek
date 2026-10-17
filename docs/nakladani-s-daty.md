@@ -1,6 +1,6 @@
 # Jak nakládáme s daty
 
-Verze 1.2.0, platná od 2026-10-17.
+Verze 1.3.0, platná od 2026-10-17.
 
 <!-- Generováno z src/policy/data-policy.json příkazem `npm run gen:policy`. Neupravovat ručně. -->
 
@@ -15,7 +15,8 @@ Prvňáček je aplikace pro malé děti, proto s jejich daty zacházíme co nejo
 - Stav lekcí (odemčené a schválené).
 - Nastavení, včetně tvaru písma a alba nálepek.
 - Vlastní nahrávky hlasu rodiče.
-- Nic se nikam neodesílá. Aplikace nemá účty, reklamy ani analytiku.
+- Bez zapnuté synchronizace se nic nikam neodesílá. Aplikace nemá účty, reklamy ani analytiku.
+- Synchronizace přes náš server je ve výchozím stavu vypnutá. Když ji rodič zapne, posílá se pokrok dětí (profily, pokusy, stav lekcí, nastavení a album) na náš server jen zašifrovaně klíčem rodiny, který je pouze v zařízeních rodiny – server data přečíst nedokáže. Nahrávky hlasu se nepřenáší. Další zařízení se připojí jednorázovým kódem (např. KOT-482-LAMA), který platí 10 minut. Rodič může synchronizaci kdykoli vypnout.
 - Záloha je soubor JSON, který si rodič sám stáhne a sám uloží. Za jeho bezpečné uložení odpovídá rodič.
 
 ## Pravidla

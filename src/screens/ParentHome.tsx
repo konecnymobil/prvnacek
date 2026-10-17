@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BackupPanel from './BackupPanel';
+import SyncPanel from './SyncPanel';
 import { ProfilesPanel } from './Profiles';
 import { ScriptSettingsPanel, ResetPanel, ScriptStylePanel, MathGamesPanel } from './SettingsPanels';
 import { useScript } from '../components/Glyphs';
@@ -126,6 +127,7 @@ export default function ParentHome({ content, go, startTest }: Props) {
       <ScriptStylePanel key={restored} />
       <MathGamesPanel key={`m${restored}`} />
       <ProfilesPanel refresh={restored} />
+      <SyncPanel onSynced={() => { load(); void script.reload(); setRestored((n) => n + 1); }} />
       <BackupPanel onRestored={() => { load(); void script.reload(); setRestored((n) => n + 1); }} />
       <ResetPanel onDone={() => { load(); void script.reload(); }} />
     </main>
