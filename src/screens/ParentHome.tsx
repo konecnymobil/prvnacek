@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BackupPanel from './BackupPanel';
+import { ProfilesPanel } from './Profiles';
 import { ScriptSettingsPanel, ResetPanel } from './SettingsPanels';
 import { useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
@@ -22,6 +23,7 @@ interface Props {
 export default function ParentHome({ content, go, startTest }: Props) {
   const script = useScript();
   const order = content.orders[content.defaultOrderId];
+  const [restored, setRestored] = useState(0);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [states, setStates] = useState<Record<string, LessonState>>({});
   const [tests, setTests] = useState<Record<string, TestResultRecord | undefined>>({});
@@ -121,7 +123,8 @@ export default function ParentHome({ content, go, startTest }: Props) {
       </section>
       <h2 className="section-title">Nastavení</h2>
       <ScriptSettingsPanel />
-      <BackupPanel onRestored={() => { load(); void script.reload(); }} />
+      <ProfilesPanel refresh={restored} />
+      <BackupPanel onRestored={() => { load(); void script.reload(); setRestored((n) => n + 1); }} />
       <ResetPanel onDone={() => { load(); void script.reload(); }} />
     </main>
   );

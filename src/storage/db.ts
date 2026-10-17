@@ -9,6 +9,7 @@
  */
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { AudioId, LessonId, OrderId } from '../content/types';
+import { ensureProfiles } from './profiles';
 
 export type LessonStatus = 'locked' | 'practicing' | 'recommended' | 'approved';
 
@@ -69,7 +70,7 @@ export interface Recording {
   createdAt: number;
 }
 
-interface PrvnacekDB extends DBSchema {
+export interface PrvnacekDB extends DBSchema {
   attempts: { key: number; value: Attempt; indexes: { byLesson: [OrderId, LessonId] } };
   lessonStates: { key: string; value: LessonState };
   recordings: { key: AudioId; value: StoredRecording };
@@ -82,20 +83,24 @@ export const DB_VERSION = 2;
 
 let dbPromise: Promise<IDBPDatabase<PrvnacekDB>> | null = null;
 
+/** Databáze AKTIVNÍHO dítěte (M5: každé dítě vlastní DB; první profil = původní „prvnacek“). */
 export function getDb(): Promise<IDBPDatabase<PrvnacekDB>> {
-  dbPromise ??= openDB<PrvnacekDB>(DB_NAME, DB_VERSION, {
-    upgrade(db, oldVersion) {
-      if (oldVersion < 1) {
-        const attempts = db.createObjectStore('attempts', { keyPath: 'id', autoIncrement: true });
-        attempts.createIndex('byLesson', ['orderId', 'lessonId']);
-        db.createObjectStore('lessonStates', { keyPath: 'key' });
-        db.createObjectStore('recordings', { keyPath: 'audioId' });
-        db.createObjectStore('settings');
-      }
-      if (oldVersion < 2) db.createObjectStore('events', { keyPath: 'id', autoIncrement: true });
+  dbPromise ??= ensureProfiles().then((p) => openChildDb(p.dbName));
+  return dbPromise;
+}
+
+export function openChildDb(name: string): Promise<IDBPDatabase<PrvnacekDB>> {
+  return openDB<PrvnacekDB>(name, DB_VERSION, {
+    // Podle skutečně chybějících stores (ne jen oldVersion): odolné i vůči DB založené bez stores.
+    upgrade(db) {
+      const has = (n: string) => db.objectStoreNames.contains(n as never);
+      if (!has('attempts')) db.createObjectStore('attempts', { keyPath: 'id', autoIncrement: true }).createIndex('byLesson', ['orderId', 'lessonId']);
+      if (!has('lessonStates')) db.createObjectStore('lessonStates', { keyPath: 'key' });
+      if (!has('recordings')) db.createObjectStore('recordings', { keyPath: 'audioId' });
+      if (!has('settings')) db.createObjectStore('settings');
+      if (!has('events')) db.createObjectStore('events', { keyPath: 'id', autoIncrement: true });
     },
   });
-  return dbPromise;
 }
 
 export function localDay(d = new Date()): string {

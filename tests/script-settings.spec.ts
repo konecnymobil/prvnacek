@@ -102,6 +102,7 @@ test('písmo: cyklus přeskočí zakázané varianty', async ({ page }) => {
 
 test('migrace starého nastavení (tvary + def) a poškozená hodnota', async ({ page }) => {
   await page.goto('./');
+  await expect(page.getByTestId('lesson-row')).toBeVisible(); // DB dítěte je připravená (M5)
   await putScript(page, { allowed: { upperPrint: true, lowerPrint: false, cursive: true }, def: 'upperPrint', current: 'cursive' });
   await page.reload();
   const stone = page.getByTestId('lesson-row').getByRole('button').first();
@@ -194,7 +195,7 @@ test('reset: zrušení po prvním kroku nic nesmaže; záloha obsahuje nastaven�
   const chunks: Buffer[] = [];
   for await (const c of file) chunks.push(c as Buffer);
   const b = JSON.parse(Buffer.concat(chunks).toString());
-  const sc = b.settings.find((x: { key: string }) => x.key === 'script');
+  const sc = (b.profiles?.[0].data ?? b).settings.find((x: { key: string }) => x.key === 'script');
   expect(sc.value.def).toBe('cursive');
   await page.getByTestId('reset-cancel').click();
   await expect(page.getByTestId('reset-step1')).toHaveCount(0);

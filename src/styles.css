@@ -436,3 +436,14 @@ h2 { font-size: clamp(18px, calc(var(--dh) * 3.2), var(--fs-h2)); }
 .test-text { font-size: clamp(40px, calc(var(--dh) * 12), var(--fs-letter-hero)); }
 .test-run .rate-ok, .test-run .rate-bad { min-height: clamp(64px, calc(var(--dh) * 14), 120px); font-size: clamp(32px, calc(var(--dh) * 9), var(--fs-letter-hero)); }
 html, body { overflow-x: hidden; }
+
+/* M5 profily dětí */
+.profile-tiles { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; align-items: center; min-height: 80dvh; }
+.profile-tile { width: clamp(200px, 26vw, 280px); height: clamp(200px, 26vw, 280px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.profile-tile.is-active { outline: 4px solid var(--c-key-edge); }
+.profile-emoji { font-size: clamp(96px, 14vw, 160px); line-height: 1; }
+.profile-emoji-sm { font-size: 32px; }
+.profile-chip { font-size: 32px; min-width: 64px; }
+.profile-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+.profile-list li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

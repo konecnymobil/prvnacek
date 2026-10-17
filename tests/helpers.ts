@@ -4,6 +4,7 @@ import { expect, type Page } from '@playwright/test';
 export async function unlockAll(page: Page) {
   await page.goto('./');
   await expect(page.getByTestId('lesson-row')).toBeVisible();
+  await waitForChildDb(page);
   await page.evaluate(async () => {
     const db: IDBDatabase = await new Promise((res, rej) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
     const ids = ['duha-1','duha-2','duha-3','duha-4','duha-5','duha-6','duha-7','duha-8','duha-9'];
@@ -13,4 +14,23 @@ export async function unlockAll(page: Page) {
     db.close();
   });
   await page.reload();
+}
+
+/** Počká, až appka dokončí migraci profilů a založí DB aktivního dítěte (první profil = „prvnacek“). */
+export async function waitForChildDb(page: Page) {
+  await expect.poll(() => page.evaluate(() => new Promise<boolean>((res) => {
+    const r = indexedDB.open('prvnacek-device');
+    r.onsuccess = () => {
+      const d = r.result;
+      if (!d.objectStoreNames.contains('meta')) { d.close(); return res(false); }
+      const q = d.transaction('meta').objectStore('meta').get('migratedV1');
+      q.onsuccess = () => { d.close(); res(!!q.result); };
+    };
+    r.onerror = () => res(false);
+  })), { timeout: 10000 }).toBe(true);
+  await expect.poll(() => page.evaluate(() => new Promise<boolean>((res) => {
+    const r = indexedDB.open('prvnacek');
+    r.onsuccess = () => { const ok = r.result.objectStoreNames.contains('settings'); r.result.close(); res(ok); };
+    r.onerror = () => res(false);
+  })), { timeout: 10000 }).toBe(true);
 }
