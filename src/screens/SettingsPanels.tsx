@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getSetting, setSetting } from '../storage/db';
+import { SCRIPT_STYLE_KEY, SCRIPT_STYLE_LABEL, letterTemplate, type ScriptStyle } from '../math/strokes';
 import { VARIANTS, allowedVariants, normalizeScriptConfig, useScript, type VariantId } from '../components/Glyphs';
 import { buildBackup, downloadBackup, resetProgress } from '../storage/backup';
 
@@ -83,6 +85,29 @@ export function ResetPanel({ onDone }: { onDone: () => void }) {
         </div>
       )}
       {msg && <p className={`notice ${msg.ok ? '' : 'is-error'}`} role={msg.ok ? 'status' : 'alert'} data-testid="reset-msg">{msg.text}</p>}
+    </section>
+  );
+}
+
+/** Styl psacího písma pro obtahovací šablony (ChildSettings.scriptStyle, pro každé dítě zvlášť). Výchozí klasické. */
+export function ScriptStylePanel() {
+  const [style, setStyle] = useState<ScriptStyle>('classic');
+  useEffect(() => { void getSetting<ScriptStyle>(SCRIPT_STYLE_KEY).then((v) => setStyle(v ?? 'classic'), () => {}); }, []);
+  const choose = (v: ScriptStyle) => { setStyle(v); void setSetting(SCRIPT_STYLE_KEY, v); };
+  return (
+    <section className="card" data-testid="script-style">
+      <h2>Styl psacího písma</h2>
+      <p className="small muted">Platí pro obtahovací šablony psacích písmen u tohoto dítěte.</p>
+      <div className="seg" role="group" aria-label="Styl psacího písma">
+        {(['classic', 'unjoined'] as ScriptStyle[]).map((v) => (
+          <button key={v} className="kbtn" data-style={v} aria-pressed={style === v} onClick={() => choose(v)}>{SCRIPT_STYLE_LABEL[v]}{style === v ? ' ✓' : ''}</button>
+        ))}
+      </div>
+      <div className="style-preview" data-testid="script-style-preview" data-style={style}>
+        {['a', 'm', 'k', 'A'].map((ch) => { const t = letterTemplate(ch, style); return t && (
+          <svg key={ch} viewBox={`0 0 ${t.box[0]} ${t.box[1]}`} className="style-glyph">{t.strokes.map((d, i) => <path key={i} d={d} />)}</svg>
+        ); })}
+      </div>
     </section>
   );
 }

@@ -4,6 +4,7 @@ import Glyphs, { variantLabel, useScript } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import { useEffect, useState } from 'react';
 import type { Screen } from '../App';
+import SubjectPicker from './SubjectPicker';
 import { availablePairs } from '../activities/pexeso';
 import { getLessonStatesMap, isLessonUnlocked, type LessonState } from '../storage/db';
 
@@ -34,6 +35,8 @@ export default function Home({ content, error, go, openLesson }: Props) {
           <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${variantLabel(script.variant)}`}>Aa Písmo</button>
         )}
       </header>
+
+      <SubjectPicker current="cz-reading" onEnter={(id) => (id === 'math' ? go('math') : document.querySelector('[data-testid="content-info"]')?.scrollIntoView({ behavior: 'smooth' }))} />
 
       {error && (
         <p className="notice is-error" role="alert" data-testid="content-error">

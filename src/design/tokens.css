@@ -122,3 +122,15 @@ html { font-feature-settings: var(--font-feature-settings); }
 @media (prefers-reduced-motion: reduce) {
   :root { --m-fast: 0ms; --m-base: 0ms; --m-slow: 0ms; --m-celebrate: 0ms; --stk-fly-duration: 0ms; }
 }
+
+/* Barvy předmětů (design/tokens.css v0.7.1) */
+:root {
+  --c-subj-cti: #E8590C;
+  --c-subj-cti-soft: #FFE8D6;
+  --c-subj-mat: #1971C2;
+  --c-subj-mat-soft: #DCEBFB;
+  --c-subj-prv: #2F9E44;
+  --c-subj-prv-soft: #DDF4E1;
+  --c-subj-aj: #C2255C;
+  --c-subj-aj-soft: #FCE1EC;
+}

@@ -447,3 +447,35 @@ html, body { overflow-x: hidden; }
 .profile-list { list-style: none; padding: 0; display: grid; gap: 12px; }
 .profile-list li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---- Předměty (s) ---- */
+.subj--cti { --s: var(--c-subj-cti); --s-soft: var(--c-subj-cti-soft); }
+.subj--mat { --s: var(--c-subj-mat); --s-soft: var(--c-subj-mat-soft); }
+.subject-picker { display: flex; gap: 12px; margin: 0 0 8px; }
+.subj-card { flex: 1; min-height: 64px; border-radius: 16px; border: 3px solid var(--s); background: var(--s-soft); color: inherit; font: inherit; font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; transition: transform .15s; }
+.subj-card.is-selected { box-shadow: 0 0 0 4px var(--s); }
+.subj-icon { font-size: 1.8rem; }
+.subj-go { position: absolute; right: 10px; top: 50%; margin-top: -22px; background: #2F9E44; color: #fff; border-radius: 50%; width: 44px; height: 44px; display: grid; place-items: center; }
+/* ---- Matematika ---- */
+.math .card { border-top: 6px solid var(--s); }
+.m-stone { font-size: 1.6rem; font-weight: 700; background: var(--s-soft); }
+.m-scene { min-height: 120px; display: flex; justify-content: center; margin: 12px 0; }
+.m-group { display: inline-flex; flex-wrap: wrap; gap: 8px; font-size: 3rem; min-width: 60px; min-height: 60px; justify-content: center; }
+.m-opt-dots .m-group { font-size: 1.6rem; color: var(--s); }
+.m-options { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.m-opt { min-width: 110px; min-height: 96px; font-size: 2rem; }
+.m-digit, .m-big { font-size: 3rem; color: var(--s); }
+/* ---- Pero (u) ---- */
+.pen-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.pen-surface { width: min(400px, 60vh); background: #fff; border-radius: 16px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; overscroll-behavior: contain; }
+.tpl-corridor { fill: none; stroke: var(--s-soft, #DCEBFB); stroke-linecap: round; stroke-linejoin: round; }
+.tpl-center { fill: none; stroke: #8a94a6; stroke-width: 1.2; stroke-dasharray: 3 3; }
+.tpl-start { fill: #2F9E44; }
+.tpl-num { fill: #fff; font-size: 8px; text-anchor: middle; font-weight: 700; pointer-events: none; }
+.tpl-demo { fill: none; stroke: #2F9E44; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: tpl-draw 1.2s forwards; }
+@keyframes tpl-draw { to { stroke-dashoffset: 0; } }
+.ink { fill: none; stroke: var(--s, #1971C2); stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.pen-actions { display: flex; gap: 12px; align-items: center; }
+.style-preview { display: flex; gap: 8px; margin-top: 8px; }
+.style-glyph { width: 60px; height: 90px; background: #fff; border-radius: 8px; }
+.style-glyph path { fill: none; stroke: #222; stroke-width: 4; stroke-linecap: round; }

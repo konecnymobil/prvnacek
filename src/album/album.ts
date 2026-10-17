@@ -3,10 +3,11 @@ import { getSetting, setSetting } from '../storage/db';
 
 export type Letter = 'M' | 'A' | 'L' | 'E' | 'S' | 'O' | 'P' | 'U' | 'I';
 export type StickerId = `t:${string}` | `v:${string}` | `L:${string}`;
-export type StickerSource = 'cviceni' | 'snaha' | 'lekce' | 'pexeso' | 'opakovani';
+export type StickerSource = 'cviceni' | 'snaha' | 'lekce' | 'pexeso' | 'opakovani' | 'matematika';
+export type SubjectId = 'cz-reading' | 'math';
 export interface StickerDef { id: StickerId; word: string; special?: boolean }
 export interface StickerSet { id: string; name: string; icon: StickerId; special?: boolean; items: StickerDef[] }
-export interface OwnedSticker { childId: string; stickerId: StickerId; source: StickerSource; earnedAt: string; refId?: string; seen: boolean }
+export interface OwnedSticker { childId: string; stickerId: StickerId; source: StickerSource; earnedAt: string; refId?: string; seen: boolean; subjectId?: SubjectId }
 
 export const ALBUM_KEY = 'album:owned';
 export const CHILD_ID = 'default'; // profily přijdou v M5
@@ -19,7 +20,7 @@ export const SETS: StickerSet[] = [
   { id: 'dobroty', name: 'Dobroty', icon: 't:1f34e', items: d([['t:1f34e', 'jablko'], ['t:1f353', 'jahoda'], ['v:salam', 'salám'], ['t:1f963', 'mísa']]) },
   { id: 'vylety', name: 'Výlety', icon: 't:1f680', items: d([['t:1f388', 'balónek'], ['t:1f680', 'raketa'], ['v:sup', 'paddleboard'], ['v:molo', 'molo'], ['t:1f5fa', 'mapa']]) },
 ];
-export const SOURCE_TEXT: Record<StickerSource, string> = { cviceni: 'za dokončené cvičení', snaha: 'za snahu ve výzvě s rodičem', lekce: 'za schválené písmenko', pexeso: 'za pexeso', opakovani: 'za opakování' };
+export const SOURCE_TEXT: Record<StickerSource, string> = { cviceni: 'za dokončené cvičení', snaha: 'za snahu ve výzvě s rodičem', lekce: 'za schválené písmenko', pexeso: 'za pexeso', opakovani: 'za opakování', matematika: 'za matematiku' };
 
 export async function getOwned(): Promise<OwnedSticker[]> { return (await getSetting<OwnedSticker[]>(ALBUM_KEY)) ?? []; }
 
@@ -31,7 +32,7 @@ export function nextSticker(owned: OwnedSticker[]): StickerId | null {
 }
 
 /** Udělí nálepku. Běžná: další v pořadí (když je vše, nic – dál jen hvězdičky). Speciální L:x jen za schválení lekce. */
-export async function awardSticker(source: StickerSource, opts: { letter?: string; refId?: string } = {}): Promise<StickerId | null> {
+export async function awardSticker(source: StickerSource, opts: { letter?: string; refId?: string; subjectId?: SubjectId } = {}): Promise<StickerId | null> {
   const owned = await getOwned();
   let id: StickerId | null;
   if (source === 'lekce') {
@@ -40,7 +41,7 @@ export async function awardSticker(source: StickerSource, opts: { letter?: strin
     if (id && owned.some((o) => o.stickerId === id)) id = null;
   } else id = nextSticker(owned);
   if (!id) return null;
-  await setSetting(ALBUM_KEY, [...owned, { childId: CHILD_ID, stickerId: id, source, earnedAt: new Date().toISOString(), refId: opts.refId, seen: false }]);
+  await setSetting(ALBUM_KEY, [...owned, { childId: CHILD_ID, stickerId: id, source, earnedAt: new Date().toISOString(), refId: opts.refId, seen: false, subjectId: opts.subjectId ?? (source === 'matematika' ? 'math' : 'cz-reading') }]);
   return id;
 }
 
