@@ -16,7 +16,7 @@ async function playRound(page: Page) {
       await opts.nth(j).click();
       if (await round.locator('.game-opt.is-correct').count()) break;
       sawWrong = true;
-      await expect(page.getByTestId('game-msg')).toContainText(/Skoro|Zastavíme/);
+      await expect(page.getByTestId('game-msg')).toContainText(/Skoro! Zkus to znovu|Zastavíme se a zkusíme to spolu/);
       await expect(page.getByTestId('game-hint')).toBeVisible();
     }
     await expect(page.getByTestId('game-end').or(page.locator(`[data-testid="game-round"]:not([data-index="${idx}"])`))).toBeVisible({ timeout: 10000 });
@@ -59,6 +59,8 @@ test('zamčená hra řekne, s kterým písmenkem přijde', async ({ page }) => {
   await page.getByTestId('open-games').click();
   const tile = page.locator('.game-tile[data-game="obchod"]');
   await expect(tile).toHaveAttribute('data-locked', 'true');
+  const snd = page.waitForRequest(/snd-p-mh-locked\.mp3/);
   await tile.click();
+  await snd;
   await expect(page.getByTestId('game-lock-hint')).toContainText('Tahle hra přijde s písmenkem');
 });

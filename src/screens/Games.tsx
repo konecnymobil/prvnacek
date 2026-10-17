@@ -32,7 +32,7 @@ export default function Games({ content, back }: { content: Content; back: () =>
           const letter = min !== null ? lessons.find((l) => l.index === min)?.title.split(' ')[0] : null;
           return (
             <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}`} data-game={g.id} data-locked={open ? 'false' : 'true'}
-              onClick={() => (open ? setGame(g.id) : setHint(letter ? `Tahle hra přijde s písmenkem ${letter}.` : 'Tahle hra přijde později.'))}>
+              onClick={() => { if (open) { setGame(g.id); return; } setHint(letter ? `Tahle hra přijde s písmenkem ${letter}.` : 'Tahle hra přijde později.'); const L = min !== null ? lessons.find((l) => l.index === min) : undefined; const la = L ? content.letterById.get(L.primaryLetterId)?.audioId : undefined; void say(['snd-p-mh-locked', ...(la ? [la] : [])]); }}>
               <span className="game-icon">{g.icon}</span><span>{g.name}</span>{!open && <span aria-hidden>🔒</span>}
             </button>
           );
@@ -65,7 +65,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
   const auto = useAutoAdvance();
   auto.target.current = () => { setI((n) => n + 1); setTries(0); setStreak(0); setHintOn(false); setCalm(false); setSolved(false); setPicked(false); setMsg(''); };
 
-  useEffect(() => { if (t && t.prompt.length) void say(t.prompt); }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (t) void say([...(i === 0 ? [`snd-p-game-${game}`] : []), ...t.prompt]); }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => stopSay(), []);
   useEffect(() => {
     if (!done || !tasks.length) return;
@@ -74,7 +74,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
       const r: RoundResult = { gameId: game, startedAt: started, finishedAt: new Date().toISOString(), tasks: log, stickerId };
       await setSetting(GAMES_KEY, [...((await getSetting<RoundResult[]>(GAMES_KEY)) ?? []), r]);
     })().catch(() => {});
-    void say(['p-round-end', 'p-sticker'].flatMap((id) => { const p = content.promptById.get(id); return p ? [p.audioId] : []; }));
+    void say(['snd-fx-tada', 'snd-p-mh-sticker-set']);
   }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choose = (id: string) => {
@@ -84,19 +84,18 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
       setSolved(true); setMsg(['Výborně!', 'Správně!', 'To je ono!', 'Dobře čteš!'][i % 4]);
       setLog((l) => [...l, { id: t.id, tries: tries + 1, hintUsed: hintOn }]);
       const praise = content.promptById.get(`p-praise-${(i % 6) + 1}`);
-      auto.schedule(say([...(praise ? [praise.audioId] : []), ...t.ok]));
+      auto.schedule(say(['snd-fx-ok', ...(praise ? [praise.audioId] : []), ...t.ok]));
     } else {
       setTries((n) => n + 1); setStreak((n) => n + 1); setWrong(id); setTimeout(() => setWrong(null), 700);
-      setMsg('Skoro! Zkus to ještě jednou.');
-      const p = content.promptById.get('p-retry-2'); if (p) void say([p.audioId]);
-      if (streak + 1 >= 3) { setCalm(true); setStreak(0); setMsg('Zastavíme se. Poslechni a podívej se pořádně.'); }
+      if (streak + 1 >= 3) { setCalm(true); setStreak(0); setMsg('Zastavíme se a zkusíme to spolu.'); void say(['snd-fx-try', 'snd-p-mh-calm']); }
+      else { setMsg('Skoro! Zkus to znovu.'); void say(['snd-fx-try', 'snd-p-retry-2']); }
     }
   };
 
   if (!tasks.length) return <main className="screen activity"><button className="kbtn" onClick={back}>Zpět</button><p className="notice">Na tuhle hru zatím není dost slov.</p></main>;
   if (done) return (
     <main className="screen activity game-end" data-testid="game-end">
-      <Mascot mood="radost" /><h1>Nálepka do alba!</h1><p>Hotovo! Máš novou nálepku do alba.</p>
+      <Mascot mood="radost" /><h1>Nálepka do alba!</h1><p>Máš novou nálepku do sady!</p>
       <button className="kbtn kbtn-primary kbtn-xl" data-testid="game-back" onClick={back}>➜ Další hry</button>
     </main>
   );
@@ -109,7 +108,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
         <button className="kbtn" onClick={back}>Zpět</button>
         <div className="progress" data-testid="game-dots">{tasks.map((_, k) => <i key={k} className={k < i ? 'done' : k === i ? 'now' : ''} />)}</div>
         {tries > 0 && <button className="kbtn game-hint" data-testid="game-hint" aria-label="Nápověda" onClick={() => { setHintOn(true); void say(t.hint); }}>🔍</button>}
-        {t.prompt.length > 0 && <button className="kbtn" aria-label="Zopakuj zadání" onClick={() => void say(t.prompt)}>🔊</button>}
+        {<button className="kbtn" aria-label="Zopakuj zadání" onClick={() => void say(t.prompt)}>🔊</button>}
       </header>
       <div className="game-stage">
         <div className="game-mascot"><Mascot mood={solved ? 'radost' : tries ? 'premysli' : 'povzbuzeni'} /><p className="bubble" data-testid="game-msg">{msg || def.text}</p></div>

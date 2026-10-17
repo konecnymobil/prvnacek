@@ -1,10 +1,43 @@
 {
- "contentVersion": "2026-10-17.1",
+ "contentVersion": "2026-10-17.2",
  "voice": "cs-CZ-VlastaNeural",
  "format": "mp3 mono 24 kHz 64 kbps",
  "processing": "silence trimmed at -55dB, +40 ms lead / +150 ms tail, gain to RMS -20.0 dBFS capped at peak -1.0 dBFS",
- "count": 172,
+ "count": 204,
  "sounds": [
+  {
+   "audioId": "snd-fx-ok",
+   "file": "snd-fx-ok.mp3",
+   "clipId": null,
+   "source": "make_effects.py",
+   "category": "effect",
+   "refId": "snd-fx-ok",
+   "text": "krátký jemný stoupající dvojtón (správně)",
+   "durationMs": 480,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-fx-tada",
+   "file": "snd-fx-tada.mp3",
+   "clipId": null,
+   "source": "make_effects.py",
+   "category": "effect",
+   "refId": "snd-fx-tada",
+   "text": "trojzvuk dur nahoru (konec kola / nálepka)",
+   "durationMs": 1008,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-fx-try",
+   "file": "snd-fx-try.mp3",
+   "clipId": null,
+   "source": "make_effects.py",
+   "category": "effect",
+   "refId": "snd-fx-try",
+   "text": "krátký měkký nízký tón (zkus znovu), bez negativního vyznění",
+   "durationMs": 432,
+   "skipped": true
+  },
   {
    "audioId": "snd-l-a",
    "file": "snd-l-a.mp3",
@@ -123,10 +156,8 @@
    "category": "number",
    "refId": "m-n-0",
    "text": "nula",
-   "gainDb": -4.5,
-   "rmsDb": -21.8,
-   "peakDb": -11.0,
-   "durationMs": 792
+   "durationMs": 792,
+   "skipped": true
   },
   {
    "audioId": "snd-m-n-1",
@@ -136,10 +167,8 @@
    "category": "number",
    "refId": "m-n-1",
    "text": "jedna",
-   "gainDb": -3.7,
-   "rmsDb": -21.6,
-   "peakDb": -9.6,
-   "durationMs": 864
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-m-n-2",
@@ -149,10 +178,8 @@
    "category": "number",
    "refId": "m-n-2",
    "text": "dva",
-   "gainDb": -1.2,
-   "rmsDb": -22.2,
-   "peakDb": -7.9,
-   "durationMs": 648
+   "durationMs": 648,
+   "skipped": true
   },
   {
    "audioId": "snd-m-n-3",
@@ -162,10 +189,8 @@
    "category": "number",
    "refId": "m-n-3",
    "text": "tři",
-   "gainDb": 0.7,
-   "rmsDb": -22.2,
-   "peakDb": -5.4,
-   "durationMs": 624
+   "durationMs": 624,
+   "skipped": true
   },
   {
    "audioId": "snd-m-n-4",
@@ -175,10 +200,8 @@
    "category": "number",
    "refId": "m-n-4",
    "text": "čtyři",
-   "gainDb": -1.4,
-   "rmsDb": -21.6,
-   "peakDb": -8.1,
-   "durationMs": 864
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-m-n-5",
@@ -188,10 +211,8 @@
    "category": "number",
    "refId": "m-n-5",
    "text": "pět",
-   "gainDb": -0.9,
-   "rmsDb": -21.8,
-   "peakDb": -7.3,
-   "durationMs": 768
+   "durationMs": 768,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-count",
@@ -201,10 +222,34 @@
    "category": "prompt",
    "refId": "m-p-count",
    "text": "Kolik jich je?",
-   "gainDb": -4.4,
-   "rmsDb": -21.2,
-   "peakDb": -8.5,
-   "durationMs": 1176
+   "durationMs": 1176,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-dots",
+   "file": "snd-m-p-dots.mp3",
+   "clipId": "c-m-p-dots",
+   "source": "c-m-p-dots.mp3",
+   "category": "prompt",
+   "refId": "m-p-dots",
+   "text": "Podívej se pozorně. Kolik je tam teček?",
+   "gainDb": -2.9,
+   "rmsDb": -20.7,
+   "peakDb": -7.1,
+   "durationMs": 4080
+  },
+  {
+   "audioId": "snd-m-p-feed-n",
+   "file": "snd-m-p-feed-n.mp3",
+   "clipId": "c-m-p-feed-n",
+   "source": "c-m-p-feed-n.mp3",
+   "category": "prompt",
+   "refId": "m-p-feed-n",
+   "text": "Dej do misky tolik jablek:",
+   "gainDb": -4.1,
+   "rmsDb": -20.9,
+   "peakDb": -8.8,
+   "durationMs": 2136
   },
   {
    "audioId": "snd-m-p-find-n",
@@ -214,10 +259,60 @@
    "category": "prompt",
    "refId": "m-p-find-n",
    "text": "Najdi jich tolik:",
-   "gainDb": -3.7,
+   "durationMs": 1512,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-game-cesticka",
+   "file": "snd-m-p-game-cesticka.mp3",
+   "clipId": "c-m-p-game-cesticka",
+   "source": "c-m-p-game-cesticka.mp3",
+   "category": "prompt",
+   "refId": "m-p-game-cesticka",
+   "text": "Číselná cestička.",
+   "gainDb": -3.2,
+   "rmsDb": -20.9,
+   "peakDb": -9.0,
+   "durationMs": 1872
+  },
+  {
+   "audioId": "snd-m-p-game-kolik",
+   "file": "snd-m-p-game-kolik.mp3",
+   "clipId": "c-m-p-game-kolik",
+   "source": "c-m-p-game-kolik.mp3",
+   "category": "prompt",
+   "refId": "m-p-game-kolik",
+   "text": "Kolik vidíš?",
+   "gainDb": -4.1,
+   "rmsDb": -21.1,
+   "peakDb": -8.2,
+   "durationMs": 1320
+  },
+  {
+   "audioId": "snd-m-p-game-krmeni",
+   "file": "snd-m-p-game-krmeni.mp3",
+   "clipId": "c-m-p-game-krmeni",
+   "source": "c-m-p-game-krmeni.mp3",
+   "category": "prompt",
+   "refId": "m-p-game-krmeni",
+   "text": "Krmení zvířátek.",
+   "gainDb": -4.1,
    "rmsDb": -21.0,
-   "peakDb": -9.4,
-   "durationMs": 1512
+   "peakDb": -9.2,
+   "durationMs": 1752
+  },
+  {
+   "audioId": "snd-m-p-missing-n",
+   "file": "snd-m-p-missing-n.mp3",
+   "clipId": "c-m-p-missing-n",
+   "source": "c-m-p-missing-n.mp3",
+   "category": "prompt",
+   "refId": "m-p-missing-n",
+   "text": "Které číslo chybí na cestičce?",
+   "gainDb": -3.9,
+   "rmsDb": -20.8,
+   "peakDb": -8.2,
+   "durationMs": 2472
   },
   {
    "audioId": "snd-m-p-more",
@@ -227,10 +322,21 @@
    "category": "prompt",
    "refId": "m-p-more",
    "text": "Kde je jich víc?",
-   "gainDb": -3.6,
-   "rmsDb": -21.1,
-   "peakDb": -8.8,
-   "durationMs": 1416
+   "durationMs": 1416,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-pick-digit",
+   "file": "snd-m-p-pick-digit.mp3",
+   "clipId": "c-m-p-pick-digit",
+   "source": "c-m-p-pick-digit.mp3",
+   "category": "prompt",
+   "refId": "m-p-pick-digit",
+   "text": "Vyber, které číslo to je.",
+   "gainDb": -4.1,
+   "rmsDb": -20.8,
+   "peakDb": -8.6,
+   "durationMs": 2256
   },
   {
    "audioId": "snd-m-p-same",
@@ -240,10 +346,21 @@
    "category": "prompt",
    "refId": "m-p-same",
    "text": "Kde je jich stejně?",
-   "gainDb": -4.5,
-   "rmsDb": -21.1,
-   "peakDb": -9.6,
-   "durationMs": 1392
+   "durationMs": 1392,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-too-many",
+   "file": "snd-m-p-too-many.mp3",
+   "clipId": "c-m-p-too-many",
+   "source": "c-m-p-too-many.mp3",
+   "category": "prompt",
+   "refId": "m-p-too-many",
+   "text": "To je moc, jedno vrať.",
+   "gainDb": -2.9,
+   "rmsDb": -20.9,
+   "peakDb": -8.6,
+   "durationMs": 2136
   },
   {
    "audioId": "snd-m-p-trace",
@@ -253,10 +370,8 @@
    "category": "prompt",
    "refId": "m-p-trace",
    "text": "Obtáhni číslici.",
-   "gainDb": -3.5,
-   "rmsDb": -20.9,
-   "peakDb": -8.2,
-   "durationMs": 1752
+   "durationMs": 1752,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-trace-start",
@@ -266,10 +381,21 @@
    "category": "prompt",
    "refId": "m-p-trace-start",
    "text": "Začni nahoře u tečky.",
-   "gainDb": -2.8,
-   "rmsDb": -20.9,
-   "peakDb": -8.6,
-   "durationMs": 1944
+   "durationMs": 1944,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-write-digit",
+   "file": "snd-m-p-write-digit.mp3",
+   "clipId": "c-m-p-write-digit",
+   "source": "c-m-p-write-digit.mp3",
+   "category": "prompt",
+   "refId": "m-p-write-digit",
+   "text": "Napiš číslici.",
+   "gainDb": -3.5,
+   "rmsDb": -21.0,
+   "peakDb": -8.0,
+   "durationMs": 1512
   },
   {
    "audioId": "snd-p-a1-intro",
@@ -448,6 +574,71 @@
    "skipped": true
   },
   {
+   "audioId": "snd-p-game-bublinky",
+   "file": "snd-p-game-bublinky.mp3",
+   "clipId": "c-p-game-bublinky",
+   "source": "c-p-game-bublinky.mp3",
+   "category": "prompt",
+   "refId": "p-game-bublinky",
+   "text": "Bublinky.",
+   "gainDb": -2.9,
+   "rmsDb": -21.3,
+   "peakDb": -9.1,
+   "durationMs": 1104
+  },
+  {
+   "audioId": "snd-p-game-detektiv",
+   "file": "snd-p-game-detektiv.mp3",
+   "clipId": "c-p-game-detektiv",
+   "source": "c-p-game-detektiv.mp3",
+   "category": "prompt",
+   "refId": "p-game-detektiv",
+   "text": "Slabikový detektiv.",
+   "gainDb": -3.7,
+   "rmsDb": -20.9,
+   "peakDb": -8.2,
+   "durationMs": 1896
+  },
+  {
+   "audioId": "snd-p-game-domecky",
+   "file": "snd-p-game-domecky.mp3",
+   "clipId": "c-p-game-domecky",
+   "source": "c-p-game-domecky.mp3",
+   "category": "prompt",
+   "refId": "p-game-domecky",
+   "text": "Slabikové domečky.",
+   "gainDb": -4.0,
+   "rmsDb": -20.9,
+   "peakDb": -9.1,
+   "durationMs": 1752
+  },
+  {
+   "audioId": "snd-p-game-obchod",
+   "file": "snd-p-game-obchod.mp3",
+   "clipId": "c-p-game-obchod",
+   "source": "c-p-game-obchod.mp3",
+   "category": "prompt",
+   "refId": "p-game-obchod",
+   "text": "Slabikový obchod.",
+   "gainDb": -3.1,
+   "rmsDb": -21.0,
+   "peakDb": -7.5,
+   "durationMs": 1752
+  },
+  {
+   "audioId": "snd-p-game-ztratilo",
+   "file": "snd-p-game-ztratilo.mp3",
+   "clipId": "c-p-game-ztratilo",
+   "source": "c-p-game-ztratilo.mp3",
+   "category": "prompt",
+   "refId": "p-game-ztratilo",
+   "text": "Co se ztratilo?",
+   "gainDb": -2.8,
+   "rmsDb": -21.1,
+   "peakDb": -7.5,
+   "durationMs": 1296
+  },
+  {
    "audioId": "snd-p-listen",
    "file": "snd-p-listen.mp3",
    "clipId": "c-p-listen",
@@ -457,6 +648,110 @@
    "text": "Poslouchej.",
    "durationMs": 1128,
    "skipped": true
+  },
+  {
+   "audioId": "snd-p-mh-bublinky",
+   "file": "snd-p-mh-bublinky.mp3",
+   "clipId": "c-p-mh-bublinky",
+   "source": "c-p-mh-bublinky.mp3",
+   "category": "prompt",
+   "refId": "p-mh-bublinky",
+   "text": "Poslouchej a ťukni na správnou bublinu.",
+   "gainDb": -4.6,
+   "rmsDb": -20.7,
+   "peakDb": -7.9,
+   "durationMs": 3024
+  },
+  {
+   "audioId": "snd-p-mh-calm",
+   "file": "snd-p-mh-calm.mp3",
+   "clipId": "c-p-mh-calm",
+   "source": "c-p-mh-calm.mp3",
+   "category": "prompt",
+   "refId": "p-mh-calm",
+   "text": "Zastavíme se a zkusíme to spolu.",
+   "gainDb": -4.3,
+   "rmsDb": -20.8,
+   "peakDb": -8.2,
+   "durationMs": 2592
+  },
+  {
+   "audioId": "snd-p-mh-detektiv",
+   "file": "snd-p-mh-detektiv.mp3",
+   "clipId": "c-p-mh-detektiv",
+   "source": "c-p-mh-detektiv.mp3",
+   "category": "prompt",
+   "refId": "p-mh-detektiv",
+   "text": "Podívej se do lupy. Najdi stejnou slabiku.",
+   "gainDb": -3.1,
+   "rmsDb": -20.6,
+   "peakDb": -7.6,
+   "durationMs": 4296
+  },
+  {
+   "audioId": "snd-p-mh-domecky",
+   "file": "snd-p-mh-domecky.mp3",
+   "clipId": "c-p-mh-domecky",
+   "source": "c-p-mh-domecky.mp3",
+   "category": "prompt",
+   "refId": "p-mh-domecky",
+   "text": "Do kterého domečku obrázek patří? Poslouchej, jak slovo začíná.",
+   "gainDb": -2.4,
+   "rmsDb": -20.6,
+   "peakDb": -5.9,
+   "durationMs": 6264
+  },
+  {
+   "audioId": "snd-p-mh-locked",
+   "file": "snd-p-mh-locked.mp3",
+   "clipId": "c-p-mh-locked",
+   "source": "c-p-mh-locked.mp3",
+   "category": "prompt",
+   "refId": "p-mh-locked",
+   "text": "Tahle hra přijde s písmenkem",
+   "gainDb": -3.7,
+   "rmsDb": -20.8,
+   "peakDb": -7.8,
+   "durationMs": 2376
+  },
+  {
+   "audioId": "snd-p-mh-obchod",
+   "file": "snd-p-mh-obchod.mp3",
+   "clipId": "c-p-mh-obchod",
+   "source": "c-p-mh-obchod.mp3",
+   "category": "prompt",
+   "refId": "p-mh-obchod",
+   "text": "Přečti si nákupní lístek a dej do košíku, co je na něm.",
+   "gainDb": -3.9,
+   "rmsDb": -20.6,
+   "peakDb": -7.8,
+   "durationMs": 4536
+  },
+  {
+   "audioId": "snd-p-mh-sticker-set",
+   "file": "snd-p-mh-sticker-set.mp3",
+   "clipId": "c-p-mh-sticker-set",
+   "source": "c-p-mh-sticker-set.mp3",
+   "category": "prompt",
+   "refId": "p-mh-sticker-set",
+   "text": "Máš novou nálepku do sady!",
+   "gainDb": -4.0,
+   "rmsDb": -20.8,
+   "peakDb": -9.5,
+   "durationMs": 2304
+  },
+  {
+   "audioId": "snd-p-mh-ztratilo",
+   "file": "snd-p-mh-ztratilo.mp3",
+   "clipId": "c-p-mh-ztratilo",
+   "source": "c-p-mh-ztratilo.mp3",
+   "category": "prompt",
+   "refId": "p-mh-ztratilo",
+   "text": "Které písmenko chybí? Ťukni na něj.",
+   "gainDb": -2.4,
+   "rmsDb": -20.7,
+   "peakDb": -7.0,
+   "durationMs": 3864
   },
   {
    "audioId": "snd-p-new-letter",
@@ -677,6 +972,97 @@
    "text": "Ahoj! Pojď si se mnou hrát s písmenky.",
    "durationMs": 4056,
    "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-crossing",
+   "file": "snd-pv-p-crossing.mp3",
+   "clipId": "c-pv-p-crossing",
+   "source": "c-pv-p-crossing.mp3",
+   "category": "prompt",
+   "refId": "pv-p-crossing",
+   "text": "Tady přecházíme po přechodu, když svítí zelená.",
+   "gainDb": -3.0,
+   "rmsDb": -20.7,
+   "peakDb": -8.0,
+   "durationMs": 3768
+  },
+  {
+   "audioId": "snd-pv-p-game-cesta",
+   "file": "snd-pv-p-game-cesta.mp3",
+   "clipId": "c-pv-p-game-cesta",
+   "source": "c-pv-p-game-cesta.mp3",
+   "category": "prompt",
+   "refId": "pv-p-game-cesta",
+   "text": "Bezpečná cesta.",
+   "gainDb": -3.2,
+   "rmsDb": -21.0,
+   "peakDb": -7.8,
+   "durationMs": 1632
+  },
+  {
+   "audioId": "snd-pv-p-game-drive",
+   "file": "snd-pv-p-game-drive.mp3",
+   "clipId": "c-pv-p-game-drive",
+   "source": "c-pv-p-game-drive.mp3",
+   "category": "prompt",
+   "refId": "pv-p-game-drive",
+   "text": "Co bylo dřív?",
+   "gainDb": -3.6,
+   "rmsDb": -21.2,
+   "peakDb": -8.6,
+   "durationMs": 1296
+  },
+  {
+   "audioId": "snd-pv-p-game-uklizime",
+   "file": "snd-pv-p-game-uklizime.mp3",
+   "clipId": "c-pv-p-game-uklizime",
+   "source": "c-pv-p-game-uklizime.mp3",
+   "category": "prompt",
+   "refId": "pv-p-game-uklizime",
+   "text": "Uklízíme.",
+   "gainDb": -3.5,
+   "rmsDb": -21.2,
+   "peakDb": -9.0,
+   "durationMs": 1224
+  },
+  {
+   "audioId": "snd-pv-p-order",
+   "file": "snd-pv-p-order.mp3",
+   "clipId": "c-pv-p-order",
+   "source": "c-pv-p-order.mp3",
+   "category": "prompt",
+   "refId": "pv-p-order",
+   "text": "Ťukej na obrázky tak, jak jdou po sobě.",
+   "gainDb": -2.9,
+   "rmsDb": -20.7,
+   "peakDb": -6.7,
+   "durationMs": 3480
+  },
+  {
+   "audioId": "snd-pv-p-route",
+   "file": "snd-pv-p-route.mp3",
+   "clipId": "c-pv-p-route",
+   "source": "c-pv-p-route.mp3",
+   "category": "prompt",
+   "refId": "pv-p-route",
+   "text": "Nakresli cestu z domu do školy. Nebo ťukni na místo, kde přejdeš silnici.",
+   "gainDb": -3.6,
+   "rmsDb": -20.6,
+   "peakDb": -7.3,
+   "durationMs": 6432
+  },
+  {
+   "audioId": "snd-pv-p-sort",
+   "file": "snd-pv-p-sort.mp3",
+   "clipId": "c-pv-p-sort",
+   "source": "c-pv-p-sort.mp3",
+   "category": "prompt",
+   "refId": "pv-p-sort",
+   "text": "Kam to patří? Ťukni na správnou krabici.",
+   "gainDb": -2.1,
+   "rmsDb": -20.6,
+   "peakDb": -6.0,
+   "durationMs": 4152
   },
   {
    "audioId": "snd-pw-akvaarium",

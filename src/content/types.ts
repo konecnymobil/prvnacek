@@ -249,6 +249,8 @@ export interface AudioScriptFile extends FileHeader<"audioScript"> {
   subjectId?: SubjectId;
   /** Zvuky z jiného skriptu (např. pochvaly ze čtení), které předmět používá bez přegenerování. */
   sharedAudioIds?: AudioId[];
+  /** Připravené texty, které se zatím NEgenerují (např. angličtina čeká na slovíčka a hlas). */
+  pending?: { audioId: AudioId; text: string; status: "pending"; note: string }[];
   contentVersion: string;
   voice: { name: string; fallback: string; locale: string };
   ssmlTemplate: string;        // obsahuje {voice} a {body}
@@ -257,6 +259,14 @@ export interface AudioScriptFile extends FileHeader<"audioScript"> {
   listeningNote: string;
   totals: { clips: number; audioIds: number; billableChars: number };
   clips: AudioClip[];
+}
+
+// ---------- audio-effects.json ----------
+/** Zvukové efekty bez hlasu (lokální syntéza, ne Azure), soubory audio/<audioId>.mp3. */
+export interface AudioEffectsFile extends FileHeader<"audioEffects"> {
+  contentVersion: string;
+  note: string;
+  effects: { audioId: AudioId; fileName: string; description: string; approxDurationS: number }[];
 }
 
 // ---------- audio-selection.json ----------

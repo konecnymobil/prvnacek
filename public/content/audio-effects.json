@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "kind": "audioEffects",
+  "contentVersion": "2026-10-17.2",
+  "note": "Zvukové efekty bez hlasu, syntetizované lokálně (tools/audio/make_effects.py, ffmpeg), ne Azure. Hlasitost o ~6 dB pod řečí (RMS -26 dBFS), krátké a jemné.",
+  "effects": [
+    {
+      "audioId": "snd-fx-ok",
+      "fileName": "snd-fx-ok.mp3",
+      "description": "krátký jemný stoupající dvojtón (správně)",
+      "approxDurationS": 0.35
+    },
+    {
+      "audioId": "snd-fx-try",
+      "fileName": "snd-fx-try.mp3",
+      "description": "krátký měkký nízký tón (zkus znovu), bez negativního vyznění",
+      "approxDurationS": 0.3
+    },
+    {
+      "audioId": "snd-fx-tada",
+      "fileName": "snd-fx-tada.mp3",
+      "description": "trojzvuk dur nahoru (konec kola / nálepka)",
+      "approxDurationS": 0.9
+    }
+  ]
+}

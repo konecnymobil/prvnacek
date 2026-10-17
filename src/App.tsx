@@ -23,6 +23,7 @@ import Sounds from './screens/Sounds';
 import Album from './screens/Album';
 import MathScreen from './screens/MathScreen';
 import Games from './screens/Games';
+import type { SubjectId } from './album/album';
 import WeeklySummary from './screens/WeeklySummary';
 import { ScriptProvider, indexContent } from './components/Glyphs';
 
@@ -37,6 +38,8 @@ export default function App() {
 function AppInner() {
   const [screen, setScreen] = useState<Screen>('home');
   const [lessonId, setLessonId] = useState<string | null>(null);
+  const [albumSubject, setAlbumSubject] = useState<SubjectId | undefined>(undefined);
+  const openAlbum = (s: SubjectId) => { setAlbumSubject(s); setScreen('album'); };
   const [content, setContent] = useState<Content | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [persisted, setPersisted] = useState<boolean | null>(null);
@@ -68,8 +71,8 @@ function AppInner() {
       {content && screen === 'parent' && <ParentHome content={content} go={setScreen} startTest={(id) => { setLessonId(id); setScreen('parentTest'); }} />}
       {lesson && content && screen === 'parentTest' && <ParentTest content={content} lesson={lesson} go={setScreen} />}
       {content && screen === 'sounds' && <Sounds content={content} go={setScreen} />}
-      {content && screen === 'album' && <Album content={content} back={() => setScreen('home')} />}
-      {screen === 'math' && <MathScreen back={() => setScreen('home')} />}
+      {content && screen === 'album' && <Album key={albumSubject ?? 'r'} content={content} subject={albumSubject} back={() => { setAlbumSubject(undefined); setScreen('home'); }} />}
+      {screen === 'math' && <MathScreen back={() => setScreen('home')} openAlbum={() => openAlbum('math')} />}
       {content && screen === 'games' && <Games content={content} back={() => setScreen('home')} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
       {screen === 'profiles' && <ProfilePicker go={setScreen} />}

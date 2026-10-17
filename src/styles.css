@@ -505,3 +505,27 @@ html, body { overflow-x: hidden; }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-24px); } }
 @media (prefers-reduced-motion: reduce) { .sky .bubble-opt { animation: none; } }
 .home-play { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; } .home-play .kbtn { flex: 1 1 0; min-width: 0; margin: 0; }
+.subj--prv { --s: var(--c-subj-prv); --s-soft: var(--c-subj-prv-soft); }
+.subj--aj { --s: var(--c-subj-aj); --s-soft: var(--c-subj-aj-soft); }
+.alb-subjects { display: flex; gap: 6px; }
+.alb-subj { background: var(--s-soft); border: 3px solid transparent; font-size: 1.6rem; min-width: 56px; }
+.alb-subj[aria-selected="true"] { border-color: var(--s); }
+.stk-emoji { font-size: 4rem; line-height: 1; } .stk-emoji.sm { font-size: 1.4rem; } .stk--big .stk-emoji { font-size: 7rem; }
+.xg-shake { animation: shake .5s; }
+/* ---- Minihry předmětů (x) ---- */
+.xg-row { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.xg-col { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.xg-animal { font-size: 96px; position: relative; } .xg-animal .num { position: absolute; right: -10px; top: -10px; background: var(--s); color: #fff; font-size: 36px; border-radius: 50%; width: 56px; height: 56px; display: grid; place-items: center; }
+.xg-animal.is-hint .num { animation: pulse .6s 3; } @keyframes pulse { 50% { transform: scale(1.3); } }
+.xg-bowl { min-width: 280px; min-height: 96px; border-radius: 0 0 140px 140px; background: var(--s-soft); border: 4px solid var(--s); display: flex; flex-wrap: wrap; justify-content: center; }
+.xg-in, .xg-food { font-size: 52px; background: none; border: 0; min-width: 80px; min-height: 80px; }
+.xg-flash { position: relative; width: 240px; height: 240px; background: #fff; border-radius: 24px; border: 4px solid var(--s); }
+.xg-flash i { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: var(--s); transition: opacity .3s; }
+.xg-flash.is-off i { opacity: 0; }
+.xg-num { min-width: 110px; min-height: 110px; font-size: 56px; } .xg-num.is-hint, .is-hint { outline: 6px solid #2F9E44; }
+.xg-stones { display: flex; gap: 16px; align-items: center; }
+.xg-stone { position: relative; width: 110px; height: 90px; border-radius: 50%; background: #cfd8dc; display: grid; place-items: center; font-size: 48px; font-weight: 700; }
+.xg-stone.gap { background: var(--s-soft); border: 4px dashed var(--s); }
+.xg-frog { position: absolute; top: -52px; font-size: 48px; transition: transform 1.5s; } .is-jump .xg-frog { transform: translateX(380px); }
+.xg-flag { font-size: 72px; }
+.subj-games { display: flex; gap: 12px; flex-wrap: wrap; }

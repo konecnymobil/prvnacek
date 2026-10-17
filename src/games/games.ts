@@ -19,7 +19,6 @@ export const GAME_ROUND = 6;
 const BANNED = new Set(['MÍSU', 'LETÍ', 'MÁSLO', 'MELOUN', 'LEV']);
 const LONG = /[ÉÍÓÚŮ]/;
 const oid = (c: Content) => c.defaultOrderId;
-const pr = (c: Content, id: string) => { const p = c.promptById.get(id); return p ? [p.audioId] : []; };
 
 export function maxLessonIndex(c: Content, states: Record<string, LessonState | undefined>): number {
   const ls = c.orders[oid(c)].lessons;
@@ -48,7 +47,7 @@ export const GAMES: GameDef[] = [
       return shuffle(picWords(c, idx).filter((w) => w.text.length >= 2)).slice(0, GAME_ROUND).map((w) => {
         const gap = Math.floor(Math.random() * w.text.length);
         const ans = known.find((l) => l.upper === w.text[gap]) ?? c.letters.find((l) => l.upper === w.text[gap])!;
-        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap]), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: pr(c, 'p-find-letter'), hint: [w.audioId], ok: [w.audioId] };
+        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap]), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: ['snd-p-mh-ztratilo'], hint: [w.audioId], ok: [w.audioId] };
       });
     },
   },
@@ -60,7 +59,7 @@ export const GAMES: GameDef[] = [
         const similar = pool.filter((x) => x.id !== s.id && (x.consonantLetterId === s.consonantLetterId || x.vowelLetterId === s.vowelLetterId));
         const rest = pool.filter((x) => x.id !== s.id && !similar.includes(x));
         const opts = shuffle([s, ...shuffle(similar).slice(0, 3), ...shuffle(rest)].slice(0, 4));
-        return { id: s.id, answer: s.id, options: opts.map((x) => ({ id: x.id, forms: x.forms })), show: s.forms, prompt: pr(c, 'p-find-syllable'), hint: [s.audioId], ok: [s.audioId] };
+        return { id: s.id, answer: s.id, options: opts.map((x) => ({ id: x.id, forms: x.forms })), show: s.forms, prompt: ['snd-p-mh-detektiv'], hint: [s.audioId], ok: [s.audioId] };
       });
     },
   },
@@ -69,10 +68,10 @@ export const GAMES: GameDef[] = [
     build: (c, idx) => {
       if (idx < 3) { // kolo písmen (nikdy nemíchá)
         const ls = knownLetters(c, idx);
-        return Array.from({ length: GAME_ROUND }, (_, i) => { const l = ls[i % ls.length]; return { id: `${l.id}-${i}`, answer: l.id, options: opt4(l, ls).map(letterOpt), prompt: [...pr(c, 'p-a2'), l.audioId], hint: [l.audioId], ok: [l.audioId] }; });
+        return Array.from({ length: GAME_ROUND }, (_, i) => { const l = ls[i % ls.length]; return { id: `${l.id}-${i}`, answer: l.id, options: opt4(l, ls).map(letterOpt), prompt: ['snd-p-mh-bublinky', l.audioId], hint: [l.audioId], ok: [l.audioId] }; });
       }
       const pool = sylls(c, idx);
-      return shuffle(pool).slice(0, GAME_ROUND).map((s) => ({ id: s.id, answer: s.id, options: opt4(s, pool).map((x) => ({ id: x.id, forms: x.forms })), prompt: [...pr(c, 'p-a5b'), s.audioId], hint: [s.audioId], ok: [s.audioId] }));
+      return shuffle(pool).slice(0, GAME_ROUND).map((s) => ({ id: s.id, answer: s.id, options: opt4(s, pool).map((x) => ({ id: x.id, forms: x.forms })), prompt: ['snd-p-mh-bublinky', s.audioId], hint: [s.audioId], ok: [s.audioId] }));
     },
   },
   {
@@ -82,14 +81,14 @@ export const GAMES: GameDef[] = [
       const groups = [...houseGroups(c, idx)].sort(() => Math.random() - 0.5).slice(0, housesFor(idx));
       const houses: Opt[] = groups.map(([sid]) => ({ id: sid, forms: c.syllableById.get(sid)!.forms }));
       const cards = shuffle(groups.flatMap(([sid, ws]) => shuffle(ws).slice(0, Math.max(2, Math.ceil(6 / groups.length))).map((w) => ({ w, sid })))).slice(0, 6);
-      return cards.map(({ w, sid }) => ({ id: w.id, answer: sid, options: houses, img: wordImageUrl(w)!, prompt: [], hint: houses.map((h) => c.syllableById.get(h.id)!.audioId), ok: [w.audioId] }));
+      return cards.map(({ w, sid }) => ({ id: w.id, answer: sid, options: houses, img: wordImageUrl(w)!, prompt: ['snd-p-mh-domecky'], hint: houses.map((h) => c.syllableById.get(h.id)!.audioId), ok: [w.audioId] }));
     },
   },
   {
     id: 'obchod', name: 'Slabikový obchod', icon: '🧺', text: 'Přečti lístek a dej zboží do košíku.', minLesson: () => 6,
     build: (c, idx) => {
       const ws = picWords(c, idx).filter((w) => w.usableInPictureTasks);
-      return shuffle(ws).slice(0, GAME_ROUND).map((w) => ({ id: w.id, answer: w.id, options: opt4(w, ws).map((x) => ({ id: x.id, img: wordImageUrl(x)! })), show: w.forms, prompt: pr(c, 'p-a6'), hint: [w.audioId], ok: [w.audioId] }));
+      return shuffle(ws).slice(0, GAME_ROUND).map((w) => ({ id: w.id, answer: w.id, options: opt4(w, ws).map((x) => ({ id: x.id, img: wordImageUrl(x)! })), show: w.forms, prompt: ['snd-p-mh-obchod'], hint: [w.audioId], ok: [w.audioId] }));
     },
   },
 ];
