@@ -106,6 +106,7 @@ test('migrace starého nastavení (tvary + def) a poškozená hodnota', async ({
   await putScript(page, { allowed: { upperPrint: true, lowerPrint: false, cursive: true }, def: 'upperPrint', current: 'cursive' });
   await page.reload();
   const stone = page.getByTestId('lesson-row').getByRole('button').first();
+  await expect(stone.locator('.glyph')).toHaveCount(1, { timeout: 10000 }); // nastavení se načítá asynchronně (nejdřív výchozí „vše“)
   await expect(stone.locator('.glyph')).toHaveAttribute('data-script', 'cursive'); // starý current zachován
   await passGate(page);
   const on = async (v: string) => (await form(page, v).getAttribute('aria-pressed')) === 'true';
@@ -123,6 +124,7 @@ test('import staré zálohy převede nastavení písma na nový model', async ({
   await expect(page.getByTestId('lesson-row')).toBeVisible();
   await seed(page); // staré nastavení: bez velkých tiskacích, def cursive
   await page.reload();
+  await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph')).toHaveCount(1, { timeout: 10000 });
   await expect(page.getByTestId('lesson-row').getByRole('button').first().locator('.glyph')).toHaveAttribute('data-script', 'cursive');
   await passGate(page);
   expect(await form(page, 'upper').getAttribute('aria-pressed')).toBe('false');

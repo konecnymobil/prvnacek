@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "manifest",
-  "contentVersion": "2026-10-17.2",
+  "contentVersion": "2026-10-17.3",
   "defaultOrderId": "duha",
   "scripts": {
     "defaultMode": "upperPrint",
@@ -110,6 +110,11 @@
     },
     {
       "path": "english/audio-script.json",
+      "kind": "audioScript",
+      "schema": "schema/audio-script.schema.json"
+    },
+    {
+      "path": "app/audio-script.json",
       "kind": "audioScript",
       "schema": "schema/audio-script.schema.json"
     },

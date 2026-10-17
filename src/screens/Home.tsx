@@ -36,7 +36,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
         )}
       </header>
 
-      <SubjectPicker current="cz-reading" onEnter={(id) => (id === 'math' ? go('math') : document.querySelector('[data-testid="content-info"]')?.scrollIntoView({ behavior: 'smooth' }))} />
+      <SubjectPicker current="cz-reading" onEnter={(id) => (id === 'math' ? go('math') : id === 'world' ? go('world') : id === 'english' ? go('english') : document.querySelector('[data-testid="content-info"]')?.scrollIntoView({ behavior: 'smooth' }))} />
 
       {error && (
         <p className="notice is-error" role="alert" data-testid="content-error">

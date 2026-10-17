@@ -42,7 +42,7 @@ function Feed({ level, back, openAlbum }: P) {
           <div className="xg-row xg-pile">{Array.from({ length: 6 - bowl }, (_, k) => <button key={k} className="xg-food" data-testid="mm1-food" aria-label="jídlo"
             onClick={() => { const b = bowl + 1; setBowl(b); if (b <= 5) void say([num(b)]); }}>{t.f}</button>)}</div>
         </div>
-        <button className="kbtn kbtn-primary kbtn-xl" data-testid="mm1-go" aria-label="Hotovo" onClick={() => (bowl === t.n ? r.api.ok() : (bowl > t.n ? r.api.no('To je moc, jedno vrať.', ['snd-m-p-too-many']) : r.api.no()))}>✓</button>
+        <button className="kbtn kbtn-primary kbtn-xl" data-testid="mm1-go" aria-label="Hotovo" onClick={() => (bowl === t.n ? r.api.ok() : (bowl > t.n ? r.api.no('To je moc, jedno vrať.', ['snd-m-p-too-many']) : r.api.no('Ještě přidej.', ['snd-m-p-add-more'])))}>✓</button>
       </div>
     </MiniShell>
   );

@@ -3,7 +3,7 @@
   "kind": "audioScript",
   "subjectId": "english",
   "sharedAudioIds": [],
-  "contentVersion": "2026-10-17.2",
+  "contentVersion": "2026-10-17.3",
   "voice": {
     "name": "en-GB-?Neural",
     "fallback": "en-GB-SoniaNeural",
@@ -34,31 +34,103 @@
       "audioId": "snd-en-p-game-megaboxy",
       "text": "Megaboxes!",
       "status": "pending",
-      "note": "ME1 název (zvážit český název hry)"
+      "note": "ME1 název (zvážit český název hry). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
     },
     {
       "audioId": "snd-en-p-find-x",
       "text": "Find the …!",
       "status": "pending",
-      "note": "ME1 šablona; doplnit slovíčka Unit 1 (At School)"
+      "note": "ME1 šablona; doplnit slovíčka Unit 1 (At School). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
     },
     {
       "audioId": "snd-en-p-colour-x-y",
       "text": "Colour the … …",
       "status": "pending",
-      "note": "ME2 šablona; předmět z Unit 1 + barva z Unit 2"
+      "note": "ME2 šablona; předmět z Unit 1 + barva z Unit 2. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
     },
     {
       "audioId": "snd-en-p-game-colour",
       "text": "Colour it!",
       "status": "pending",
-      "note": "ME2 název"
+      "note": "ME2 název. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
     },
     {
       "audioId": "snd-en-p-say-it",
       "text": "Say it!",
       "status": "pending",
-      "note": "ME3 pokyn před vzorem"
+      "note": "ME3 pokyn před vzorem. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-pencil",
+      "text": "pencil",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-book",
+      "text": "book",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-bag",
+      "text": "bag",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-crayon",
+      "text": "crayon",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-ruler",
+      "text": "ruler",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-scissors",
+      "text": "scissors",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-ball",
+      "text": "ball",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-apple",
+      "text": "apple",
+      "status": "pending",
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-red",
+      "text": "red",
+      "status": "pending",
+      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-blue",
+      "text": "blue",
+      "status": "pending",
+      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-yellow",
+      "text": "yellow",
+      "status": "pending",
+      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+    },
+    {
+      "audioId": "snd-en-w-green",
+      "text": "green",
+      "status": "pending",
+      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
     }
   ]
 }

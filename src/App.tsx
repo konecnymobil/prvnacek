@@ -24,12 +24,13 @@ import Album from './screens/Album';
 import MathScreen from './screens/MathScreen';
 import Games from './screens/Games';
 import type { SubjectId } from './album/album';
+import SubjectGames from './screens/SubjectGames';
 import WeeklySummary from './screens/WeeklySummary';
 import { ScriptProvider, indexContent } from './components/Glyphs';
 
 /** Obrazovky se přepínají jen ve stavu aplikace – URL se nemění (žádný hash ani history routing,
  *  iOS by jinak mohl resetovat oprávnění mikrofonu). */
-export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout' | 'profiles' | 'math' | 'games';
+export type Screen = 'home' | 'soundTest' | 'about' | 'lesson' | 'letterActivity' | 'syllableActivity' | 'readSyllable' | 'readWord' | 'composeWord' | 'review' | 'pexeso' | 'parentGate' | 'parent' | 'parentTest' | 'sounds' | 'album' | 'weeklySummary' | 'dataPolicy' | 'dataPolicyAbout' | 'profiles' | 'math' | 'games' | 'world' | 'english';
 
 export default function App() {
   return <ScriptProvider><AppInner /></ScriptProvider>;
@@ -74,6 +75,7 @@ function AppInner() {
       {content && screen === 'album' && <Album key={albumSubject ?? 'r'} content={content} subject={albumSubject} back={() => { setAlbumSubject(undefined); setScreen('home'); }} />}
       {screen === 'math' && <MathScreen back={() => setScreen('home')} openAlbum={() => openAlbum('math')} />}
       {content && screen === 'games' && <Games content={content} back={() => setScreen('home')} />}
+      {(screen === 'world' || screen === 'english') && <SubjectGames key={screen} subject={screen} back={() => setScreen('home')} openAlbum={() => openAlbum(screen)} />}
       {screen === 'about' && <About content={content} go={setScreen} />}
       {screen === 'profiles' && <ProfilePicker go={setScreen} />}
       {screen === 'dataPolicy' && <DataPolicy go={setScreen} back="parent" />}

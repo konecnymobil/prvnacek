@@ -246,7 +246,7 @@ export interface AudioClip {
 export type SubjectId = "cz-reading" | "math" | "world" | "english";
 export interface AudioScriptFile extends FileHeader<"audioScript"> {
   /** Chybí = čtení (cz-reading). Předmětové skripty: content/<subject>/audio-script.json. */
-  subjectId?: SubjectId;
+  subjectId?: SubjectId | "app";   // "app" = společné zvuky aplikace (content/app/)
   /** Zvuky z jiného skriptu (např. pochvaly ze čtení), které předmět používá bez přegenerování. */
   sharedAudioIds?: AudioId[];
   /** Připravené texty, které se zatím NEgenerují (např. angličtina čeká na slovíčka a hlas). */
