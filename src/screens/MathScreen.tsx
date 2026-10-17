@@ -4,6 +4,18 @@ import PenSurface, { type TraceResult } from '../components/PenSurface';
 import { awardSticker } from '../album/album';
 import { MATH_LESSONS, buildRound, classifyError, getMathProgress, mathUnlocked, saveRound, type MathErr, type MathLesson, type MathProgress, type MathTask } from '../math/math';
 import { digitTemplate } from '../math/strokes';
+import { say, stopSay } from '../activities/common';
+
+/** Zvuky matematiky (content 2026-10-17.1, math/audio-script.json) + sdílené pochvaly ze čtení; vše přes frontu say(). */
+export const MATH_AUDIO = {
+  praise: ['snd-p-praise-1', 'snd-p-praise-2', 'snd-p-praise-3', 'snd-p-praise-4', 'snd-p-praise-5'],
+  roundEnd: ['snd-p-round-end', 'snd-p-sticker'],
+  retry: 'snd-p-retry-1',
+  count: 'snd-m-p-count', findN: 'snd-m-p-find-n', more: 'snd-m-p-more', trace: 'snd-m-p-trace', traceStart: 'snd-m-p-trace-start',
+  num: (n: number) => `snd-m-n-${n}`,
+};
+const instruction = (t: MathTask): string[] =>
+  t.kind === 'count' ? [MATH_AUDIO.count] : t.kind === 'find' ? [MATH_AUDIO.findN, MATH_AUDIO.num(t.n)] : t.kind === 'compare' ? [MATH_AUDIO.more] : [MATH_AUDIO.trace, MATH_AUDIO.traceStart];
 
 const Dots = ({ n, item }: { n: number; item: string }) => (
   <span className="m-group" data-count={n}>{Array.from({ length: n }, (_, i) => <span key={i} className="m-item">{item}</span>)}</span>
@@ -49,19 +61,23 @@ function Round({ lesson, onEnd }: { lesson: MathLesson; onEnd: () => void }) {
   const t = tasks[i];
   const finished = i >= tasks.length;
 
+  useEffect(() => { if (t) void say(instruction(t)); }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => stopSay(), []);
   useEffect(() => {
     if (!finished) return;
+    void say([MATH_AUDIO.praise[4], ...MATH_AUDIO.roundEnd]);
     void saveRound(lesson.id, stats).then(() => awardSticker('matematika', { refId: lesson.id })).catch(() => {});
   }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const praise = () => void say([MATH_AUDIO.praise[i % MATH_AUDIO.praise.length]]);
   const next = () => { setFb(null); setTries(0); setI((n) => n + 1); };
   const answer = (correct: boolean, err?: MathErr) => {
-    if (correct) { setStats((s) => ({ ...s, correct: s.correct + (tries === 0 ? 1 : 0) })); setFb('ok'); setTimeout(next, 900); }
-    else { setStats((s) => ({ ...s, wrong: s.wrong + 1, errors: err ? { ...s.errors, [err]: (s.errors[err] ?? 0) + 1 } : s.errors })); setTries((n) => n + 1); setFb('try'); }
+    if (correct) { praise(); setStats((s) => ({ ...s, correct: s.correct + (tries === 0 ? 1 : 0) })); setFb('ok'); setTimeout(next, 1400); }
+    else { void say([MATH_AUDIO.retry]); setStats((s) => ({ ...s, wrong: s.wrong + 1, errors: err ? { ...s.errors, [err]: (s.errors[err] ?? 0) + 1 } : s.errors })); setTries((n) => n + 1); setFb('try'); }
   };
   const onTrace = (r: TraceResult) => {
-    if (r.ok) { setStats((s) => ({ ...s, traced: s.traced + 1 })); setFb('ok'); setTimeout(next, 900); }
-    else { setTries((n) => n + 1); setFb('try'); }
+    if (r.ok) { praise(); setStats((s) => ({ ...s, traced: s.traced + 1 })); setFb('ok'); setTimeout(next, 1400); }
+    else { void say([MATH_AUDIO.retry, MATH_AUDIO.traceStart]); setTries((n) => n + 1); setFb('try'); }
   };
 
   if (finished) return (

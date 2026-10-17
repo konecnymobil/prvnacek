@@ -1,9 +1,9 @@
 {
- "contentVersion": "2026-10-13.3",
+ "contentVersion": "2026-10-17.1",
  "voice": "cs-CZ-VlastaNeural",
  "format": "mp3 mono 24 kHz 64 kbps",
  "processing": "silence trimmed at -55dB, +40 ms lead / +150 ms tail, gain to RMS -20.0 dBFS capped at peak -1.0 dBFS",
- "count": 160,
+ "count": 172,
  "sounds": [
   {
    "audioId": "snd-l-a",
@@ -114,6 +114,162 @@
    "text": "U",
    "durationMs": 456,
    "skipped": true
+  },
+  {
+   "audioId": "snd-m-n-0",
+   "file": "snd-m-n-0.mp3",
+   "clipId": "c-m-n-0",
+   "source": "c-m-n-0.mp3",
+   "category": "number",
+   "refId": "m-n-0",
+   "text": "nula",
+   "gainDb": -4.5,
+   "rmsDb": -21.8,
+   "peakDb": -11.0,
+   "durationMs": 792
+  },
+  {
+   "audioId": "snd-m-n-1",
+   "file": "snd-m-n-1.mp3",
+   "clipId": "c-m-n-1",
+   "source": "c-m-n-1.mp3",
+   "category": "number",
+   "refId": "m-n-1",
+   "text": "jedna",
+   "gainDb": -3.7,
+   "rmsDb": -21.6,
+   "peakDb": -9.6,
+   "durationMs": 864
+  },
+  {
+   "audioId": "snd-m-n-2",
+   "file": "snd-m-n-2.mp3",
+   "clipId": "c-m-n-2",
+   "source": "c-m-n-2.mp3",
+   "category": "number",
+   "refId": "m-n-2",
+   "text": "dva",
+   "gainDb": -1.2,
+   "rmsDb": -22.2,
+   "peakDb": -7.9,
+   "durationMs": 648
+  },
+  {
+   "audioId": "snd-m-n-3",
+   "file": "snd-m-n-3.mp3",
+   "clipId": "c-m-n-3",
+   "source": "c-m-n-3.mp3",
+   "category": "number",
+   "refId": "m-n-3",
+   "text": "tři",
+   "gainDb": 0.7,
+   "rmsDb": -22.2,
+   "peakDb": -5.4,
+   "durationMs": 624
+  },
+  {
+   "audioId": "snd-m-n-4",
+   "file": "snd-m-n-4.mp3",
+   "clipId": "c-m-n-4",
+   "source": "c-m-n-4.mp3",
+   "category": "number",
+   "refId": "m-n-4",
+   "text": "čtyři",
+   "gainDb": -1.4,
+   "rmsDb": -21.6,
+   "peakDb": -8.1,
+   "durationMs": 864
+  },
+  {
+   "audioId": "snd-m-n-5",
+   "file": "snd-m-n-5.mp3",
+   "clipId": "c-m-n-5",
+   "source": "c-m-n-5.mp3",
+   "category": "number",
+   "refId": "m-n-5",
+   "text": "pět",
+   "gainDb": -0.9,
+   "rmsDb": -21.8,
+   "peakDb": -7.3,
+   "durationMs": 768
+  },
+  {
+   "audioId": "snd-m-p-count",
+   "file": "snd-m-p-count.mp3",
+   "clipId": "c-m-p-count",
+   "source": "c-m-p-count.mp3",
+   "category": "prompt",
+   "refId": "m-p-count",
+   "text": "Kolik jich je?",
+   "gainDb": -4.4,
+   "rmsDb": -21.2,
+   "peakDb": -8.5,
+   "durationMs": 1176
+  },
+  {
+   "audioId": "snd-m-p-find-n",
+   "file": "snd-m-p-find-n.mp3",
+   "clipId": "c-m-p-find-n",
+   "source": "c-m-p-find-n.mp3",
+   "category": "prompt",
+   "refId": "m-p-find-n",
+   "text": "Najdi jich tolik:",
+   "gainDb": -3.7,
+   "rmsDb": -21.0,
+   "peakDb": -9.4,
+   "durationMs": 1512
+  },
+  {
+   "audioId": "snd-m-p-more",
+   "file": "snd-m-p-more.mp3",
+   "clipId": "c-m-p-more",
+   "source": "c-m-p-more.mp3",
+   "category": "prompt",
+   "refId": "m-p-more",
+   "text": "Kde je jich víc?",
+   "gainDb": -3.6,
+   "rmsDb": -21.1,
+   "peakDb": -8.8,
+   "durationMs": 1416
+  },
+  {
+   "audioId": "snd-m-p-same",
+   "file": "snd-m-p-same.mp3",
+   "clipId": "c-m-p-same",
+   "source": "c-m-p-same.mp3",
+   "category": "prompt",
+   "refId": "m-p-same",
+   "text": "Kde je jich stejně?",
+   "gainDb": -4.5,
+   "rmsDb": -21.1,
+   "peakDb": -9.6,
+   "durationMs": 1392
+  },
+  {
+   "audioId": "snd-m-p-trace",
+   "file": "snd-m-p-trace.mp3",
+   "clipId": "c-m-p-trace",
+   "source": "c-m-p-trace.mp3",
+   "category": "prompt",
+   "refId": "m-p-trace",
+   "text": "Obtáhni číslici.",
+   "gainDb": -3.5,
+   "rmsDb": -20.9,
+   "peakDb": -8.2,
+   "durationMs": 1752
+  },
+  {
+   "audioId": "snd-m-p-trace-start",
+   "file": "snd-m-p-trace-start.mp3",
+   "clipId": "c-m-p-trace-start",
+   "source": "c-m-p-trace-start.mp3",
+   "category": "prompt",
+   "refId": "m-p-trace-start",
+   "text": "Začni nahoře u tečky.",
+   "gainDb": -2.8,
+   "rmsDb": -20.9,
+   "peakDb": -8.6,
+   "durationMs": 1944
   },
   {
    "audioId": "snd-p-a1-intro",
@@ -937,10 +1093,8 @@
    "category": "syllable",
    "refId": "s-la",
    "text": "LA",
-   "gainDb": 0.4,
-   "rmsDb": -22.4,
-   "peakDb": -9.6,
-   "durationMs": 576
+   "durationMs": 576,
+   "skipped": true
   },
   {
    "audioId": "snd-s-laa",
@@ -950,10 +1104,8 @@
    "category": "syllable",
    "refId": "s-laa",
    "text": "LÁ",
-   "gainDb": -1.2,
-   "rmsDb": -21.9,
-   "peakDb": -10.0,
-   "durationMs": 744
+   "durationMs": 744,
+   "skipped": true
   },
   {
    "audioId": "snd-s-laam",
@@ -963,10 +1115,8 @@
    "category": "syllable",
    "refId": "s-laam",
    "text": "LÁM",
-   "gainDb": -2.2,
-   "rmsDb": -21.6,
-   "peakDb": -10.8,
-   "durationMs": 864
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-s-le",
@@ -976,10 +1126,8 @@
    "category": "syllable",
    "refId": "s-le",
    "text": "LE",
-   "gainDb": -0.5,
-   "rmsDb": -22.2,
-   "peakDb": -7.9,
-   "durationMs": 624
+   "durationMs": 624,
+   "skipped": true
   },
   {
    "audioId": "snd-s-les",
@@ -1000,10 +1148,8 @@
    "category": "syllable",
    "refId": "s-li",
    "text": "LI",
-   "gainDb": -1.1,
-   "rmsDb": -22.1,
-   "peakDb": -9.4,
-   "durationMs": 648
+   "durationMs": 648,
+   "skipped": true
   },
   {
    "audioId": "snd-s-lo",
@@ -1013,10 +1159,8 @@
    "category": "syllable",
    "refId": "s-lo",
    "text": "LO",
-   "gainDb": -0.2,
-   "rmsDb": -22.3,
-   "peakDb": -9.9,
-   "durationMs": 600
+   "durationMs": 600,
+   "skipped": true
   },
   {
    "audioId": "snd-s-los",
@@ -1037,10 +1181,8 @@
    "category": "syllable",
    "refId": "s-lu",
    "text": "LU",
-   "gainDb": -1.1,
-   "rmsDb": -22.3,
-   "peakDb": -10.8,
-   "durationMs": 600
+   "durationMs": 600,
+   "skipped": true
   },
   {
    "audioId": "snd-s-ma",
@@ -1050,10 +1192,8 @@
    "category": "syllable",
    "refId": "s-ma",
    "text": "MA",
-   "gainDb": -3.2,
-   "rmsDb": -22.6,
-   "peakDb": -11.3,
-   "durationMs": 552
+   "durationMs": 552,
+   "skipped": true
   },
   {
    "audioId": "snd-s-maa",
@@ -1085,10 +1225,8 @@
    "category": "syllable",
    "refId": "s-me",
    "text": "ME",
-   "gainDb": -2.9,
-   "rmsDb": -22.3,
-   "peakDb": -10.5,
-   "durationMs": 600
+   "durationMs": 600,
+   "skipped": true
   },
   {
    "audioId": "snd-s-mi",
@@ -1109,10 +1247,8 @@
    "category": "syllable",
    "refId": "s-mo",
    "text": "MO",
-   "gainDb": -3.1,
-   "rmsDb": -22.2,
-   "peakDb": -10.5,
-   "durationMs": 624
+   "durationMs": 624,
+   "skipped": true
   },
   {
    "audioId": "snd-s-mu",
@@ -1122,10 +1258,8 @@
    "category": "syllable",
    "refId": "s-mu",
    "text": "MU",
-   "gainDb": -3.4,
-   "rmsDb": -22.2,
-   "peakDb": -11.8,
-   "durationMs": 624
+   "durationMs": 624,
+   "skipped": true
   },
   {
    "audioId": "snd-s-pa",
@@ -1135,10 +1269,8 @@
    "category": "syllable",
    "refId": "s-pa",
    "text": "PA",
-   "gainDb": 6.9,
-   "rmsDb": -23.0,
-   "peakDb": -5.6,
-   "durationMs": 480
+   "durationMs": 480,
+   "skipped": true
   },
   {
    "audioId": "snd-s-paa",
@@ -1148,10 +1280,8 @@
    "category": "syllable",
    "refId": "s-paa",
    "text": "PÁ",
-   "gainDb": 0.1,
-   "rmsDb": -22.3,
-   "peakDb": -8.3,
-   "durationMs": 600
+   "durationMs": 600,
+   "skipped": true
   },
   {
    "audioId": "snd-s-pe",
@@ -1161,10 +1291,8 @@
    "category": "syllable",
    "refId": "s-pe",
    "text": "PE",
-   "gainDb": 0.8,
-   "rmsDb": -23.0,
-   "peakDb": -6.6,
-   "durationMs": 480
+   "durationMs": 480,
+   "skipped": true
   },
   {
    "audioId": "snd-s-pel",
@@ -1174,10 +1302,8 @@
    "category": "syllable",
    "refId": "s-pel",
    "text": "PEL",
-   "gainDb": -0.9,
-   "rmsDb": -22.0,
-   "peakDb": -7.4,
-   "durationMs": 696
+   "durationMs": 696,
+   "skipped": true
   },
   {
    "audioId": "snd-s-pes",
@@ -1198,10 +1324,8 @@
    "category": "syllable",
    "refId": "s-pi",
    "text": "PI",
-   "gainDb": 1.7,
-   "rmsDb": -23.2,
-   "peakDb": -8.3,
-   "durationMs": 456
+   "durationMs": 456,
+   "skipped": true
   },
   {
    "audioId": "snd-s-po",
@@ -1222,10 +1346,8 @@
    "category": "syllable",
    "refId": "s-pu",
    "text": "PU",
-   "gainDb": 1.7,
-   "rmsDb": -23.0,
-   "peakDb": -8.8,
-   "durationMs": 480
+   "durationMs": 480,
+   "skipped": true
   },
   {
    "audioId": "snd-s-sa",
@@ -1235,10 +1357,8 @@
    "category": "syllable",
    "refId": "s-sa",
    "text": "SA",
-   "gainDb": 2.1,
-   "rmsDb": -22.2,
-   "peakDb": -4.1,
-   "durationMs": 624
+   "durationMs": 624,
+   "skipped": true
   },
   {
    "audioId": "snd-s-saa",
@@ -1248,10 +1368,8 @@
    "category": "syllable",
    "refId": "s-saa",
    "text": "SÁ",
-   "gainDb": -0.2,
-   "rmsDb": -21.7,
-   "peakDb": -6.2,
-   "durationMs": 816
+   "durationMs": 816,
+   "skipped": true
   },
   {
    "audioId": "snd-s-saam",
@@ -1283,10 +1401,8 @@
    "category": "syllable",
    "refId": "s-sel",
    "text": "SEL",
-   "gainDb": -0.8,
-   "rmsDb": -21.6,
-   "peakDb": -6.5,
-   "durationMs": 864
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-s-sem",
@@ -1318,10 +1434,8 @@
    "category": "syllable",
    "refId": "s-so",
    "text": "SO",
-   "gainDb": 1.0,
-   "rmsDb": -22.0,
-   "peakDb": -6.3,
-   "durationMs": 672
+   "durationMs": 672,
+   "skipped": true
   },
   {
    "audioId": "snd-s-sos",
@@ -1342,10 +1456,8 @@
    "category": "syllable",
    "refId": "s-su",
    "text": "SU",
-   "gainDb": -0.1,
-   "rmsDb": -22.0,
-   "peakDb": -6.4,
-   "durationMs": 672
+   "durationMs": 672,
+   "skipped": true
   },
   {
    "audioId": "snd-s-sup",

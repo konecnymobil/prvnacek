@@ -27,7 +27,7 @@ async function solveUntilTrace(page: Page) {
 }
 
 /** Syntetické Pointer Events v souřadnicích šablony (viewBox). */
-async function stroke(page: Page, pointerType: 'pen' | 'touch', pts: [number, number][], opts: { id?: number; up?: boolean; width?: number } = {}) {
+async function stroke(page: Page, pointerType: 'pen' | 'touch' | 'mouse', pts: [number, number][], opts: { id?: number; up?: boolean; width?: number } = {}) {
   await page.evaluate(({ pointerType, pts, id, up, width }) => {
     const svg = document.querySelector('[data-testid="pen-surface"]') as SVGSVGElement;
     const m = svg.getScreenCTM()!;
@@ -57,15 +57,19 @@ test('výběr předmětu na dvě klepnutí, matematika má lekce 1 až 0–5, da
 
 test('Kolik jich je?: špatná odpověď = zkus znovu, správná = posun', async ({ page }) => {
   await openMath(page);
+  const instr = page.waitForRequest(/snd-m-p-count\.mp3/);
   await page.locator('[data-lesson="m1"]').click();
+  await instr;
   const task = page.getByTestId('math-task');
   await expect(task).toHaveAttribute('data-kind', 'count');
   const n = await page.locator('.m-scene .m-item').count();
   await task.locator(`.m-opt:not([data-value="${n}"])`).first().click();
   await expect(page.getByTestId('math-try')).toBeVisible();
   await expect(task).toHaveAttribute('data-index', '0');
+  const praise = page.waitForRequest(/snd-p-praise-\d\.mp3/);
   await task.locator(`.m-opt[data-value="${n}"]`).click();
   await expect(page.getByTestId('math-ok')).toBeVisible();
+  await praise;
   await expect(task).toHaveAttribute('data-index', '1');
 });
 
@@ -133,4 +137,62 @@ test('styl psacího písma: výchozí klasické, přepnutí na nespojované se u
   const [c, d] = q2.split('=')[0].split('+').map((x) => parseInt(x, 10));
   await page.getByTestId('gate-answer').filter({ hasText: new RegExp(`^${c + d}$`) }).click();
   await expect(page.getByTestId('script-style').locator('button[data-style="unjoined"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
+async function toTrace(page: Page) {
+  await openMath(page);
+  await page.locator('[data-lesson="m1"]').click();
+  await solveUntilTrace(page);
+  await expect(page.getByTestId('pen-surface')).toBeVisible();
+}
+async function attempt(page: Page, pts: [number, number][]) {
+  await page.getByTestId('pen-clear').click();
+  await stroke(page, 'mouse', pts, { id: 21 });
+  await page.getByTestId('pen-done').click();
+}
+
+test('myš: špatná 1 (opačný směr, jen kus, mimo koridor) neprojde, správná projde', async ({ page }) => {
+  await toTrace(page);
+  const tries = page.getByTestId('math-try');
+  await attempt(page, one().reverse());
+  await expect(tries).toBeVisible();
+  await attempt(page, one().slice(0, 25));
+  await expect(tries).toBeVisible();
+  const detour = one(); detour.splice(20, 0, ...Array.from({ length: 12 }, (_, k) => [95, 20 + k * 8] as [number, number]));
+  await attempt(page, detour);
+  await expect(tries).toBeVisible();
+  await attempt(page, one(14)); // myš = koridor pera, posun o 14 neprojde
+  await expect(tries).toBeVisible();
+  await attempt(page, one());
+  await expect(page.getByTestId('math-end')).toBeVisible({ timeout: 10000 });
+});
+
+test('pískání: začne mimo obrys a utichne po návratu (mock AudioContext)', async ({ page }) => {
+  await page.addInitScript(() => {
+    const w = window as unknown as { __sq: { on: number; off: number }; AudioContext: unknown };
+    w.__sq = { on: 0, off: 0 };
+    class Node { connect(n: unknown) { return n; } disconnect() {} }
+    class Osc extends Node { type = 'sine'; frequency = { value: 0 }; start() { w.__sq.on++; } stop() { w.__sq.off++; } }
+    class Gain extends Node { gain = { value: 0 }; }
+    w.AudioContext = class { destination = {}; state = 'running'; resume() { return Promise.resolve(); } createOscillator() { return new Osc(); } createGain() { return new Gain(); } };
+  });
+  await toTrace(page);
+  const sq = () => page.evaluate(() => (window as unknown as { __sq: { on: number; off: number } }).__sq);
+  const surf = page.getByTestId('pen-surface');
+  await stroke(page, 'mouse', one().slice(0, 10), { id: 31, up: false });
+  expect((await sq()).on).toBe(0);
+  await page.evaluate(() => {
+    const svg = document.querySelector('[data-testid="pen-surface"]') as SVGSVGElement; const m = svg.getScreenCTM()!;
+    const mv = (x: number, y: number) => { const p = new DOMPoint(x, y).matrixTransform(m); svg.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerId: 31, pointerType: 'mouse', clientX: p.x, clientY: p.y })); };
+    mv(95, 100);
+  });
+  await expect(surf).toHaveAttribute('data-out', 'true');
+  expect(await sq()).toEqual({ on: 1, off: 0 });
+  await page.evaluate(() => {
+    const svg = document.querySelector('[data-testid="pen-surface"]') as SVGSVGElement; const m = svg.getScreenCTM()!;
+    const p = new DOMPoint(64, 60).matrixTransform(m);
+    svg.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerId: 31, pointerType: 'mouse', clientX: p.x, clientY: p.y }));
+  });
+  await expect(surf).toHaveAttribute('data-out', 'false');
+  expect(await sq()).toEqual({ on: 1, off: 1 });
 });
