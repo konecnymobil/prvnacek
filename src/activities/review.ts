@@ -1,6 +1,6 @@
 import type { Content } from '../content/load';
 import type { Attempt, LessonState } from '../storage/db';
-import { shuffle } from './common';
+import { guardSize, recentIds, remember, shuffle } from './fresh';
 
 export type ReviewKind = 'letter' | 'syllable' | 'word';
 export interface ReviewItem {
@@ -60,9 +60,12 @@ export function buildReview(content: Content, states: Record<string, LessonState
     }
     return cands.filter((x) => x.kind === 'word' && x.id !== c.id).map((x) => x.id);
   };
+  const recent = recentIds('review', guardSize(cands.length, REVIEW_SIZE)); // položky z minulého kola ne hned na začátek
   while (items.length < REVIEW_SIZE) {
-    const pool = cands.filter((c) => !chosen.some((x) => x.id === c.id) && !dead.has(c.id));
-    if (!pool.length) break;
+    const open = cands.filter((c) => !chosen.some((x) => x.id === c.id) && !dead.has(c.id));
+    if (!open.length) break;
+    const fresh = open.filter((c) => !recent.has(c.id));
+    const pool = fresh.length ? fresh : open;
     const last2 = chosen.slice(-2);
     const ws = pool.map((c) => {
       let w = weight(c);
@@ -78,6 +81,7 @@ export function buildReview(content: Content, states: Record<string, LessonState
     chosen.push(c);
     items.push({ ...c, activity: ACT[c.kind], choiceIds: shuffle([c.id, ...shuffle(others).slice(0, 2)]) });
   }
+  remember('review', ...items.map((x) => x.id));
   return items;
 }
 
