@@ -8,6 +8,7 @@ import { say, stopSay } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
 import { awardSticker } from '../album/album';
 import { getLessonStatesMap, getSetting, setSetting, type LessonState } from '../storage/db';
+import ShopRound from '../games/Shop';
 import { GAMES, gameById, maxLessonIndex, type GameId, type GameTask } from '../games/games';
 
 export const GAMES_KEY = 'games:rounds';
@@ -20,6 +21,7 @@ export default function Games({ content, back }: { content: Content; back: () =>
   useEffect(() => { getLessonStatesMap().then(setStates, () => setStates({})); return () => stopSay(); }, []);
   if (!states) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
   const idx = maxLessonIndex(content, states);
+  if (game === 'obchod') return <ShopRound content={content} idx={idx} back={() => setGame(null)} />;
   if (game) return <Round key={game} content={content} game={game} idx={idx} back={() => setGame(null)} />;
   const lessons = content.orders[content.defaultOrderId].lessons;
   return (
@@ -129,7 +131,6 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
             🔍 {tries > 0 || solved ? <Glyphs forms={t.show} form={lupaForm(form, variant)} className="lupa-text" /> : <span className="lupa-ear" aria-hidden>👂</span>}
           </button>
         )}
-        {game === 'obchod' && t.show && <div className="game-list" data-testid="game-target"><small>Nákupní lístek</small><Glyphs forms={t.show} form={form} /></div>}
         {game === 'domecky' && t.img && <button className={`game-card${picked ? ' is-picked' : ''}`} data-testid="game-card" data-word={t.word} onClick={() => { setPicked(true); if (t.word) void say([t.word]); }}><img src={t.img} alt="obrázek" /></button>}
         <div className={`game-opts${game === 'bublinky' ? ` sky${hintOn ? ' is-paused' : ''}` : ''}`}>
           {t.options.map((o, k) => (

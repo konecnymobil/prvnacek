@@ -469,3 +469,28 @@ export function isRecommendedForTest(
   const days = new Set(attempts.map((a) => a.day)).size;
   return ratio >= rec.minSuccessRatio && days >= rec.minDistinctDays;
 }
+
+// ---------- shop.json (Slabikový obchod: lístek se 3 slovy + 2 podobné obrázky navíc; obsah 2026-10-19.9) ----------
+export type ShopSimilarity = "sameFirstSyllable" | "firstSyllableDiffersOnlyInLength" | "sameLastSyllable" | "sameFirstLetter" | "sharedSyllable";
+export interface ShopSet {
+  id: string;
+  listWordIds: WordId[];          // 3 slova na lístku (pořadí shora dolů)
+  listText: string[];
+  distractorWordIds: WordId[];    // 2 obrázky navíc, nejsou na lístku
+  distractorText: string[];
+  distractorReasons: { wordId: WordId; similarTo: WordId; reason: ShopSimilarity }[];
+  minLessonId: Record<OrderId, LessonId>;
+}
+export interface ShopGameFile extends FileHeader<"shopGame"> {
+  gameId: "obchod";
+  instructionPromptId: PromptId;
+  instructionAudioId: AudioId;
+  replacesPromptId: PromptId;
+  listSize: 3;
+  distractorCount: 2;
+  startsAt: Record<OrderId, LessonId>;
+  startRule: string;
+  rules: Record<string, string>;
+  similarityReasons: { id: ShopSimilarity; weight: number }[];
+  lessons: { lessonByOrder: Record<OrderId, LessonId>; newLetterIds: LetterId[]; availableWordIds: WordId[]; sets: ShopSet[] }[];
+}

@@ -13,6 +13,7 @@ import {
   type OrderId,
   type Prompt,
   type PromptsFile,
+  type ShopGameFile,
   type Syllable,
   type SyllablesFile,
   type TestRulesFile,
@@ -32,6 +33,8 @@ export interface Content {
   words: Word[];
   prompts: Prompt[];
   testRules: TestRulesFile;
+  /** Slabikový obchod (shop.json); chybí-li, hra zůstane zamčená. */
+  shop: ShopGameFile | null;
   letterById: Map<string, Letter>;
   syllableById: Map<string, Syllable>;
   wordById: Map<string, Word>;
@@ -86,6 +89,7 @@ export async function loadContent(): Promise<Content> {
     fetchJson<PromptsFile>('prompts.json', 'prompts'),
     fetchJson<TestRulesFile>('test-rules.json', 'testRules'),
   ]);
+  const shop = await fetchJson<ShopGameFile>('shop.json', 'shopGame').catch((e) => { console.warn('Obsah: shop.json chybí, Obchod bude zamčený.', e); return null; });
 
   const allIds = new Set<string>();
   const caseFixes = normalizeFormsCase([...lettersFile.letters, ...syllablesFile.syllables, ...wordsFile.words]);
@@ -131,6 +135,7 @@ export async function loadContent(): Promise<Content> {
     words: wordsFile.words,
     prompts: promptsFile.prompts,
     testRules,
+    shop,
     letterById,
     syllableById,
     wordById,
