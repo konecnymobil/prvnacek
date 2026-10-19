@@ -11,6 +11,8 @@ export interface GameTask {
   id: string; answer: string; options: Opt[];
   /** zobrazení úlohy: slovo s mezerou, slabika v lupě, nákupní lístek, obrázek pro domeček */
   show?: Forms; gapIndex?: number; img?: string;
+  /** zvuk slova k obrázku (Domečky: po pokynu a znovu po ťuknutí na obrázek) */
+  word?: string;
   prompt: string[]; hint: string[]; ok: string[];
 }
 export interface GameDef { id: GameId; name: string; icon: string; text: string; minLesson: (c: Content) => number | null; build: (c: Content, maxIdx: number) => GameTask[] }
@@ -82,7 +84,7 @@ export const GAMES: GameDef[] = [
       const houses: Opt[] = groups.map(([sid]) => ({ id: sid, forms: c.syllableById.get(sid)!.forms }));
       const per = Math.max(2, Math.ceil(6 / groups.length));
       const cards = freshOrder('mh-domecky', shuffle(groups.flatMap(([sid, ws]) => drawRound(`mh-domecky:${sid}`, ws, per, (w) => w.id).map((w) => ({ w, sid })))).slice(0, 6), (x) => x.w.id);
-      return cards.map(({ w, sid }) => ({ id: w.id, answer: sid, options: houses, img: wordImageUrl(w)!, prompt: ['snd-p-mh-domecky'], hint: houses.map((h) => c.syllableById.get(h.id)!.audioId), ok: [w.audioId] }));
+      return cards.map(({ w, sid }) => ({ id: w.id, answer: sid, options: houses, img: wordImageUrl(w)!, word: w.audioId, prompt: ['snd-p-mh-domecky', w.audioId], hint: houses.map((h) => c.syllableById.get(h.id)!.audioId), ok: [w.audioId] }));
     },
   },
   {
