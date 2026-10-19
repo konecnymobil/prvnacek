@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import Mascot from '../activities/Mascot';
+import { drawFresh } from '../activities/fresh';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle, pickPriority, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
 
@@ -13,7 +14,7 @@ interface Task {
   choices: Letter[];
 }
 
-function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
+export function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
   const learned = learnedLetters(content, lesson);
   let targets = lesson.letterIds.map((id) => content.letterById.get(id)!).filter((l) => l.id !== prev);
   // lekce s jediným písmenem: po něm následuje dříve probrané písmeno, ať se stejné nevolá dvakrát za sebou
@@ -22,7 +23,7 @@ function makeTask(content: Content, lesson: Lesson, prev: string | null, priorit
   // k písmenům lekce se přidají písmena, která dítěti ve zkoušce nešla (i z dřívějších lekcí)
   const extra = learned.filter((l) => priority.has(l.id) && !targets.some((t) => t.id === l.id) && l.id !== prev);
   const all = targets.length ? [...targets, ...extra] : learned;
-  const target = pickPriority(all, priority, first);
+  const target = drawFresh(`A2:${lesson.id}`, all, (l) => l.id, ROUND_SIZE, (a) => pickPriority(a, priority, first));
   // Á a A si dítě zatím nespletlo záměrně: krátké a dlouhé nedáváme vedle sebe jako nabídku.
   const confusable = (l: Letter) => l.baseLetterId === target.id || target.baseLetterId === l.id;
   let pool = learned.filter((l) => l.id !== target.id && !confusable(l));

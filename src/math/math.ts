@@ -1,5 +1,6 @@
 /** Matematika MVP – Matýskova matematika, 1. díl (content/predmety-plan.md kap. 1). Pokrok v DB aktivního dítěte. */
 import { getSetting, setSetting } from '../storage/db';
+import { drawFresh, shuffle } from '../activities/fresh';
 
 export interface MathLesson { id: string; title: string; nums: number[]; newDigit: number }
 export const MATH_LESSONS: MathLesson[] = [
@@ -38,16 +39,19 @@ const ITEMS = ['🍎', '🐞', '⭐', '🎈', '🐟', '🌼', '🚗', '🧸'];
 const rnd = <T,>(a: readonly T[]): T => a[Math.floor(Math.random() * a.length)];
 function options(nums: number[], n: number): number[] {
   const pool = [...new Set([...nums, n - 1, n + 1].filter((x) => x >= 0 && x <= 5))];
-  const others = pool.filter((x) => x !== n).sort(() => Math.random() - 0.5).slice(0, 3);
+  const others = shuffle(pool.filter((x) => x !== n)).slice(0, 3);
   return [n, ...others].sort((a, b) => a - b);
 }
 
 /** Kolo: 5 úloh s automatickou kontrolou + obtažení nové číslice na konci. */
 export function buildRound(l: MathLesson): MathTask[] {
   const kinds: MathTask['kind'][] = l.nums.length > 1 ? ['count', 'find', 'compare', 'count', 'find'] : ['count', 'find', 'count', 'find', 'count'];
+  const per = (k: string) => kinds.filter((x) => x === k).length;
+  const pairs = l.nums.flatMap((a) => l.nums.map((b) => [a, b] as const));
   const tasks: MathTask[] = kinds.map((k) => {
-    const n = rnd(l.nums.filter((x) => k !== 'count' || x > 0));
-    if (k === 'compare') { const a = rnd(l.nums); const b = Math.random() < 0.25 ? a : rnd(l.nums); return { kind: 'compare', a, b, item: rnd(ITEMS) }; }
+    // stejná otázka (druh + číslo) se v kole ani hned v dalším kole neopakuje (zásoba je malá, hlídá se podle její velikosti)
+    if (k === 'compare') { const [a, b] = drawFresh(`math:${l.id}:compare`, pairs, (p) => p.join('-'), per(k)); return { kind: 'compare', a, b, item: rnd(ITEMS) }; }
+    const n = drawFresh(`math:${l.id}:${k}`, l.nums.filter((x) => k !== 'count' || x > 0), String, per(k));
     return k === 'count' ? { kind: 'count', n, item: rnd(ITEMS), options: options(l.nums, n) } : { kind: 'find', n, options: options(l.nums, n) };
   });
   return [...tasks, { kind: 'trace', digit: l.newDigit }];
