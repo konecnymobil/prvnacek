@@ -13,6 +13,7 @@ async function fakeEnglishNouns(page: Page) {
   await page.route(/snd-en-w-(?!hello)[a-z]+\.mp3$/, (route) => route.fulfill({ path: 'public/audio/tts/snd-en-w-hello.mp3', contentType: 'audio/mpeg' }));
 }
 async function open(page: Page, subject: string, game: string) {
+  test.setTimeout(60_000); // 5 kol × 1,5 s + zvuky; v CI je WebKit pomalejší
   if (subject === 'english') await fakeEnglishNouns(page);
   await page.goto('./');
   await expect(page.getByTestId('lesson-row')).toBeVisible();
