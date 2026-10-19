@@ -12,19 +12,34 @@ export const MATH_LESSONS: MathLesson[] = [
 ];
 export const MATH_PROGRESS_KEY = 'math:progress';
 export type MathErr = 'count-off-by-one' | 'digit-confusion';
-export interface MathLessonProgress { rounds: number; correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }
+export interface MathLessonProgress { rounds: number; /** A-08: kola s ≥ 80 % napoprvé (nejvýš 1 chyba z 5). Chybí = starší data (odemčeno už dřív). */ goodRounds?: number; correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }
 export type MathProgress = Record<string, MathLessonProgress>;
 
 export async function getMathProgress(): Promise<MathProgress> { return (await getSetting<MathProgress>(MATH_PROGRESS_KEY)) ?? {}; }
-export function mathUnlocked(p: MathProgress, i: number): boolean { return i === 0 || (p[MATH_LESSONS[i - 1].id]?.rounds ?? 0) > 0; }
+/** A-08: další lekce se odemkne po 2 úspěšných kolech (≥ 80 % napoprvé). Starší záznamy bez goodRounds zůstávají odemčené. */
+export const MATH_GOOD_ROUNDS = 2;
+export const isGoodRound = (r: { correct: number; wrong: number }) => r.wrong <= 1 && r.correct > 0;
+export function mathUnlocked(p: MathProgress, i: number): boolean {
+  if (i === 0) return true;
+  const prev = p[MATH_LESSONS[i - 1].id];
+  if (!prev) return false;
+  return prev.goodRounds === undefined ? prev.rounds > 0 : prev.goodRounds >= MATH_GOOD_ROUNDS;
+}
 export function classifyError(answer: number, chosen: number): MathErr { return Math.abs(answer - chosen) === 1 ? 'count-off-by-one' : 'digit-confusion'; }
 
-export async function saveRound(lessonId: string, r: { correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }): Promise<void> {
+/** A-15: dokončená lekce matematiky jde i do games:rounds (gameId math-lesson) pro týdenní souhrn. */
+export const ROUNDS_LOG_KEY = 'games:rounds';
+export async function saveRound(lessonId: string, r: { correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }, rated?: number, startedAt?: string): Promise<void> {
+  if (rated !== undefined) {
+    const log = (await getSetting<unknown[]>(ROUNDS_LOG_KEY)) ?? [];
+    await setSetting(ROUNDS_LOG_KEY, [...log, { gameId: 'math-lesson', subjectId: 'math', lessonId, startedAt: startedAt ?? new Date().toISOString(), finishedAt: new Date().toISOString(), rated, firstTry: Math.min(r.correct, rated), stickerId: null }]);
+  }
   const p = await getMathProgress();
   const o = p[lessonId] ?? { rounds: 0, correct: 0, wrong: 0, errors: {}, traced: 0 };
   const errors = { ...o.errors };
   for (const [k, v] of Object.entries(r.errors)) errors[k as MathErr] = (errors[k as MathErr] ?? 0) + (v ?? 0);
-  p[lessonId] = { rounds: o.rounds + 1, correct: o.correct + r.correct, wrong: o.wrong + r.wrong, errors, traced: o.traced + r.traced };
+  const good = (o.goodRounds ?? (o.rounds > 0 ? MATH_GOOD_ROUNDS : 0)) + (isGoodRound(r) ? 1 : 0);
+  p[lessonId] = { goodRounds: good, rounds: o.rounds + 1, correct: o.correct + r.correct, wrong: o.wrong + r.wrong, errors, traced: o.traced + r.traced };
   await setSetting(MATH_PROGRESS_KEY, p);
 }
 

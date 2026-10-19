@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { GlyphText, useTaskForm, wordCase, type FormKey } from '../components/Glyphs';
@@ -87,7 +88,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   };
 
   if (all.length < 3) {
-    return <main className="screen activity"><p className="notice">Slova s obrázky přijdou s dalšími lekcemi.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
+    return <main className="screen activity"><p className="notice">Slova s obrázky přijdou s dalšími lekcemi.</p><HomeButton onClick={back} /></main>;
   }
   useStickerOnDone('cviceni', n >= total);
   useTaskLog('A7', lesson.id, n >= total);
@@ -108,7 +109,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   return (
     <main className="screen activity" data-testid="readword-activity" data-target={target.id} data-total={total}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
       </header>
       <div className="stage"><Mascot mood={mood} /></div>

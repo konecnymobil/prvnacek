@@ -34,7 +34,7 @@ for (const id of ['ztratilo', 'detektiv', 'bublinky', 'domecky', 'obchod']) {
   test(`minihra ${id}: chybná volba = klidná oprava, kolo se dohraje a uloží`, async ({ page }) => {
     await unlockAll(page);
     await page.getByTestId('open-games').click();
-    await page.locator(`.game-tile[data-game="${id}"]`).click();
+    { const tile = page.locator(`.game-tile[data-game="${id}"]`); await tile.click(); await tile.click(); }
     await expect(page.getByTestId('game-round')).toHaveAttribute('data-game', id);
     // automatická kontrola: první špatná možnost
     const round = page.getByTestId('game-round');
@@ -63,4 +63,18 @@ test('zamčená hra řekne, s kterým písmenkem přijde', async ({ page }) => {
   await tile.click();
   await snd;
   await expect(page.getByTestId('game-lock-hint')).toContainText('Tahle hra přijde s písmenkem');
+});
+
+test('dlaždice hry: 1. klepnutí řekne název, 2. otevře', async ({ page }) => {
+  await unlockAll(page);
+  await page.getByTestId('open-games').click();
+  const tile = page.locator('.game-tile[data-game="bublinky"]');
+  const snd = page.waitForRequest(/snd-p-game-bublinky\.mp3/);
+  await tile.click();
+  await snd;
+  await expect(tile).toHaveClass(/is-selected/);
+  await expect(page.getByTestId('game-round')).toHaveCount(0);
+  await tile.click();
+  await expect(page.getByTestId('game-round')).toBeVisible();
+  await expect(page.getByTestId('home-btn')).toHaveAttribute('aria-label', 'Zpět');
 });

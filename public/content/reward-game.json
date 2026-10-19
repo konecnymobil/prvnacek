@@ -1,0 +1,2041 @@
+{
+  "schemaVersion": 1,
+  "kind": "rewardGame",
+  "variant": {
+    "id": "gates",
+    "name": "Zvířátka do ohrádky",
+    "text": "Hejno zvířátek (tečky; druh zvířátka a kulisu volí Pastelka) prochází branami +1/+2 (od do5 i −1); dítě v každé řadě vybere levou nebo pravou bránu, aby do ohrádky došlo přesně tolik zvířátek, kolik je teček na ohrádce. Bez boje a bez násobení."
+  },
+  "alternatives": [
+    {
+      "id": "pipes",
+      "name": "Potrubí",
+      "status": "option"
+    },
+    {
+      "id": "blocks",
+      "name": "Posouvání bloků",
+      "status": "option"
+    }
+  ],
+  "unlockRules": {
+    "countsAsPractice": [
+      "A3a",
+      "A3b",
+      "A2",
+      "A4",
+      "A6",
+      "A5c",
+      "A7",
+      "review",
+      "math-lesson",
+      "parent-test"
+    ],
+    "notCounted": [
+      "A1",
+      "pexeso",
+      "minihry (ztratilo, detektiv, bublinky, domecky, obchod, mm1–mm3, mp1–mp3, me1–me2)",
+      "reward-game"
+    ],
+    "creditPerRound": 1,
+    "parentTestCredit": 2,
+    "creditsPerLevel": 2,
+    "lessonApprovedBonusLevels": 1,
+    "roundQualifies": "Kolo je dokončené (obrazovka konce kola) a není „prázdné klikání“: nejvýš 1 úloha v kole s ≥ 3 špatnými ťuknutími během 2 s. Úspěšnost se nevyžaduje (odměna za dokončení a snahu). Čas sám o sobě nic neodemyká.",
+    "maxStoredLevels": 1,
+    "storedLevelExpires": "konec dne",
+    "replays": "Už dohrané levely jdou z mapy zahrát znovu, ale každé zahrání (nové i opakované) se počítá do sessionCap.",
+    "text": "1 level za 2 započtená kola procvičování (zkouška s rodičem = 2 kola, schválená lekce = +1 level). Nejvýš 1 odemčený level čeká; nevyužitý propadne na konci dne."
+  },
+  "sessionCap": {
+    "levelsPerSession": 2,
+    "levelsPerDay": 3,
+    "minPracticeRoundsBeforeFirstLevelOfDay": 2,
+    "afterLevel": "Návrat na mapu lekce (tlačítko Zpět k procvičování), žádné „další level“.",
+    "parentAdjustable": {
+      "levelsPerDay": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "enabled": true
+    }
+  },
+  "levelRules": {
+    "puzzlesPerLevel": 3,
+    "targetDurationSec": [
+      60,
+      120
+    ],
+    "attemptsPerPuzzle": 3,
+    "afterFailedAttempts": "Po 3. pokusu se ukáže správná cesta (zvuk Takhle to šlo.) a jde se dál. Level se vždy dokončí.",
+    "input": "prst i pero (ťuknutí na bránu nebo tah přes bránu)",
+    "feedback": "Zvířátka se počítají nahlas po jedné při vstupu do ohrádky (klipy čísel snd-m-n-* do 5)."
+  },
+  "forbidden": [
+    "reklamy",
+    "měny a nákupy",
+    "násilí a boj",
+    "streaky",
+    "loot a náhodné odměny",
+    "odpočty a časový tlak",
+    "nekonečná smyčka",
+    "odemčení za čas nebo za neúspěch bez snahy"
+  ],
+  "availableFrom": {
+    "mathLesson": "m3",
+    "orReadingLessonsApproved": 3,
+    "text": "Hra se nabízí od lekce matematiky m3 nebo po 3 schválených lekcích čtení (do3 má jen 4 hádanky). Do té doby je odměnou nálepka v albu (stávající)."
+  },
+  "tierRule": "Tier podle nejvyšší odemčené lekce matematiky (math/lessons.json rangeByLesson): do m3 → do3, m4 → do4, m5–m6 → do5; do10 až s lekcemi do 10. Bez matematiky → do3 jen s tečkami.",
+  "tiers": [
+    {
+      "id": "do3",
+      "max": 3,
+      "operations": [
+        "+1",
+        "+2"
+      ],
+      "gateRows": 2,
+      "forMathLessons": [
+        "none",
+        "m0",
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "showDigits": "jen číslice probrané v matematice (rangeByLesson), jinak jen tečky",
+      "levels": [
+        {
+          "id": "do3-1",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-2",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-3",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-4",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-5",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-6",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-7",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do3-8",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "do4",
+      "max": 4,
+      "operations": [
+        "+1",
+        "+2"
+      ],
+      "gateRows": 2,
+      "forMathLessons": [
+        "m4"
+      ],
+      "showDigits": "jen číslice probrané v matematice (rangeByLesson), jinak jen tečky",
+      "levels": [
+        {
+          "id": "do4-1",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-2",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-3",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "only",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-4",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right",
+                "only"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-5",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "only",
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-6",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-7",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do4-8",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "do5",
+      "max": 5,
+      "operations": [
+        "+1",
+        "+2",
+        "-1"
+      ],
+      "gateRows": 3,
+      "forMathLessons": [
+        "m5",
+        "m6"
+      ],
+      "showDigits": "jen číslice probrané v matematice (rangeByLesson), jinak jen tečky",
+      "levels": [
+        {
+          "id": "do5-1",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "-1",
+                  "+2"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-2",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-3",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left",
+                "right",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "only",
+                "right",
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-4",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 1,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 1,
+              "solution": [
+                "only",
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "-1",
+                  "+2"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-5",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ]
+              ],
+              "target": 1,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "-1",
+                  "+2"
+                ],
+                [
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-6",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "right",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-7",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do5-8",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+2"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "only",
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "do10",
+      "max": 10,
+      "operations": [
+        "+1",
+        "+2",
+        "-1"
+      ],
+      "gateRows": 3,
+      "forMathLessons": [],
+      "showDigits": "jen číslice probrané v matematice (rangeByLesson), jinak jen tečky",
+      "levels": [
+        {
+          "id": "do10-1",
+          "puzzles": [
+            {
+              "start": 3,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "left"
+              ]
+            },
+            {
+              "start": 5,
+              "gateRows": [
+                [
+                  "+2"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 9,
+              "solution": [
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 5,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 8,
+              "solution": [
+                "right",
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-2",
+          "puzzles": [
+            {
+              "start": 4,
+              "gateRows": [
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 7,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 5,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 8,
+              "solution": [
+                "only",
+                "right",
+                "left"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-3",
+          "puzzles": [
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2",
+                  "-1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 2,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "+2"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 7,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 5,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 6,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-4",
+          "puzzles": [
+            {
+              "start": 5,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "-1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 6,
+              "gateRows": [
+                [
+                  "+2"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 10,
+              "solution": [
+                "only",
+                "right",
+                "left"
+              ]
+            },
+            {
+              "start": 3,
+              "gateRows": [
+                [
+                  "+2"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 6,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-5",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+2"
+                ]
+              ],
+              "target": 6,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 3,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-6",
+          "puzzles": [
+            {
+              "start": 6,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ]
+              ],
+              "target": 9,
+              "solution": [
+                "right",
+                "only",
+                "left"
+              ]
+            },
+            {
+              "start": 1,
+              "gateRows": [
+                [
+                  "-1",
+                  "+2"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+2"
+                ]
+              ],
+              "target": 4,
+              "solution": [
+                "left",
+                "right",
+                "only"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+2",
+                  "-1"
+                ],
+                [
+                  "+2"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-7",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+2",
+                  "+1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "only",
+                "left",
+                "right"
+              ]
+            },
+            {
+              "start": 4,
+              "gateRows": [
+                [
+                  "+2",
+                  "+1"
+                ],
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+2",
+                  "-1"
+                ],
+                [
+                  "-1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 5,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "do10-8",
+          "puzzles": [
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ],
+                [
+                  "+1"
+                ]
+              ],
+              "target": 6,
+              "solution": [
+                "left",
+                "right",
+                "only"
+              ]
+            },
+            {
+              "start": 4,
+              "gateRows": [
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "+2"
+                ]
+              ],
+              "target": 8,
+              "solution": [
+                "left",
+                "only",
+                "right"
+              ]
+            },
+            {
+              "start": 2,
+              "gateRows": [
+                [
+                  "-1",
+                  "+1"
+                ],
+                [
+                  "+1",
+                  "-1"
+                ],
+                [
+                  "+2"
+                ]
+              ],
+              "target": 6,
+              "solution": [
+                "right",
+                "left",
+                "only"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "puzzlePoolSize": {
+    "do3": 4,
+    "do4": 16,
+    "do5": 732,
+    "do10": 9032
+  },
+  "weeklySummary": {
+    "metricId": "rewardLevels",
+    "text": "Rodič vidí počet odehraných levelů vedle kol procvičování."
+  },
+  "neededClips": [
+    {
+      "audioId": "snd-p-rw-name",
+      "text": "Zvířátka do ohrádky."
+    },
+    {
+      "audioId": "snd-p-rw-goal",
+      "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček."
+    },
+    {
+      "audioId": "snd-p-rw-pick-gate",
+      "text": "Vyber bránu."
+    },
+    {
+      "audioId": "snd-p-rw-exact",
+      "text": "Přesně tolik!"
+    },
+    {
+      "audioId": "snd-p-rw-too-many",
+      "text": "Je jich moc. Zkus jinou cestu."
+    },
+    {
+      "audioId": "snd-p-rw-too-few",
+      "text": "Je jich málo. Zkus jinou cestu."
+    },
+    {
+      "audioId": "snd-p-rw-show-path",
+      "text": "Takhle to šlo."
+    },
+    {
+      "audioId": "snd-p-rw-unlock",
+      "text": "Zvířátka na tebe čekají. Můžeš si zahrát."
+    },
+    {
+      "audioId": "snd-p-rw-locked",
+      "text": "Ještě kolo procvičování a zvířátka se vrátí."
+    },
+    {
+      "audioId": "snd-p-rw-done-today",
+      "text": "Zvířátka už dnes spí. Zítra zase."
+    },
+    {
+      "audioId": "snd-p-rw-back",
+      "text": "Zvířátka jsou doma. Jdeme zase procvičovat."
+    }
+  ]
+}

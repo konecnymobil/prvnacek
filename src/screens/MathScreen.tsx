@@ -1,5 +1,7 @@
 /** Matematika MVP (Matýsek 1. díl): výběr lekce → kolo 5 úloh s automatickou kontrolou + obtažení číslice perem/prstem. */
-import { useEffect, useMemo, useState } from 'react';
+import HomeButton from '../components/HomeButton';
+import { useTileTap } from '../games/tileTap';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import PenSurface, { type TraceResult } from '../components/PenSurface';
 import { awardSticker } from '../album/album';
 import { MATH_LESSONS, buildRound, classifyError, getMathProgress, mathUnlocked, saveRound, type MathErr, type MathLesson, type MathProgress, type MathTask } from '../math/math';
@@ -24,6 +26,7 @@ const Dots = ({ n, item }: { n: number; item: string }) => (
 
 export default function MathScreen({ back, openAlbum }: { back: () => void; openAlbum: () => void }) {
   const [game, setGame] = useState<MathGameId | null>(null);
+  const tiles = useTileTap();
   const [progress, setProgress] = useState<MathProgress>({});
   const [lesson, setLesson] = useState<MathLesson | null>(null);
   useEffect(() => { if (!lesson) void getMathProgress().then(setProgress, () => {}); }, [lesson]);
@@ -33,7 +36,7 @@ export default function MathScreen({ back, openAlbum }: { back: () => void; open
   return (
     <main className="screen math subj--mat" data-testid="math-screen">
       <header className="topbar">
-        <button className="back" onClick={() => (lesson ? setLesson(null) : back())}>‹ Zpět</button>
+        <HomeButton onClick={() => (lesson ? setLesson(null) : back())} />
         <h1>🔢 Matematika{lesson ? ` · ${lesson.title}` : ''}</h1>
       </header>
       {!lesson && (
@@ -53,7 +56,7 @@ export default function MathScreen({ back, openAlbum }: { back: () => void; open
           <div className="subj-games">
             {MATH_GAMES.map((g) => {
               const open = level >= g.from;
-              return <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}`} data-game={g.id} data-locked={open ? 'false' : 'true'} disabled={!open} onClick={() => setGame(g.id)}>
+              return <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}${tiles.selected === g.id ? ' is-selected' : ''}`} data-game={g.id} data-locked={open ? 'false' : 'true'} disabled={!open} onClick={() => tiles.tap(g.id, () => setGame(g.id))}>
                 <span className="game-icon">{g.icon}</span><span>{g.name}</span>{!open && <span aria-hidden>🔒</span>}</button>;
             })}
           </div>
@@ -70,6 +73,7 @@ function Round({ lesson, onEnd }: { lesson: MathLesson; onEnd: () => void }) {
   const [stats, setStats] = useState({ correct: 0, wrong: 0, errors: {} as Partial<Record<MathErr, number>>, traced: 0 });
   const [fb, setFb] = useState<'ok' | 'try' | null>(null);
   const [tries, setTries] = useState(0);
+  const started = useRef(new Date().toISOString());
   const t = tasks[i];
   const finished = i >= tasks.length;
 
@@ -78,7 +82,7 @@ function Round({ lesson, onEnd }: { lesson: MathLesson; onEnd: () => void }) {
   useEffect(() => {
     if (!finished) return;
     void say([MATH_AUDIO.praise[4], ...MATH_AUDIO.roundEnd]);
-    void saveRound(lesson.id, stats).then(() => awardSticker('matematika', { refId: lesson.id })).catch(() => {});
+    void saveRound(lesson.id, stats, tasks.filter((x) => x.kind !== 'trace').length, started.current).then(() => awardSticker('matematika', { refId: lesson.id })).catch(() => {});
   }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const praise = () => void say([MATH_AUDIO.praise[i % MATH_AUDIO.praise.length]]);

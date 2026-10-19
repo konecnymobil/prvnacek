@@ -119,3 +119,19 @@ test('A4: slabiky jsou zamčené v lekci M, v lekci A se skládá MA/MÁ', async
 async function openLessonByIndex(page: Page, letter: string) {
   await page.getByTestId('lesson-row').getByRole('button').filter({ has: page.locator('[data-script="upperPrint"]', { hasText: new RegExp(`^${letter}$`) }) }).click();
 }
+
+test('A-09: v lekci A má kolo skládání slabik 4 úlohy', async ({ page }) => {
+  await openLesson(page, 'M');
+  await page.getByRole('button', { name: 'Zpět' }).click();
+  await openLessonByIndex(page, 'A');
+  await page.getByRole('button', { name: /Slož slabiku/ }).click();
+  for (let i = 0; i < 4; i++) {
+    const act = page.getByTestId('syllable-activity');
+    await expect(act).toHaveAttribute('data-index', String(i), { timeout: 8000 });
+    const target = (await act.getAttribute('data-target'))!;
+    await act.locator('[data-letter="l-m"]').click();
+    await act.locator(`[data-letter="${target === 's-ma' ? 'l-a' : 'l-aa'}"]`).click();
+    await expect(page.getByTestId('mascot')).toHaveAttribute('data-mood', 'radost');
+  }
+  await expect(page.getByTestId('round-end')).toBeVisible({ timeout: 10000 });
+});

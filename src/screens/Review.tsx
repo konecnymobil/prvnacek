@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useEffect, useRef, useState } from 'react';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -43,7 +44,7 @@ export default function Review({ content, back }: { content: Content; back: () =
   useStickerOnDone('opakovani', !!items && items.length > 0 && n >= items.length);
   useTaskLog('review', undefined, !!items && items.length > 0 && n >= items.length);
   if (!items) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
-  if (items.length === 0) return <main className="screen activity" data-testid="review-empty"><p className="notice">Opakování se otevře, až rodič schválí aspoň dvě lekce.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
+  if (items.length === 0) return <main className="screen activity" data-testid="review-empty"><p className="notice">Opakování se otevře, až rodič schválí aspoň dvě lekce.</p><HomeButton onClick={back} /></main>;
   if (n >= items.length) {
     return (
       <main className="screen activity" data-testid="round-end">
@@ -86,7 +87,7 @@ export default function Review({ content, back }: { content: Content; back: () =
   return (
     <main className="screen activity" data-testid="review-activity" data-kind={item.kind} data-lesson={item.lessonId} data-target={item.id} data-total={items.length}>
       <header className="topbar row">
-        <button className="kbtn" onClick={() => { stopSay(); back(); }}>Zpět</button>
+        <HomeButton onClick={() => { stopSay(); back(); }} />
         <p className="muted" data-testid="progress">Opakování {n + 1} z {items.length}</p>
       </header>
       <div className="stage">

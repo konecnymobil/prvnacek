@@ -99,7 +99,7 @@ test('zkouška: ✓/✗, zpět, pauza, důvod; schválení odemkne další lekci
   // 5/6, 1 chyba u nového písmene → doporučeno
   await expect(page.getByTestId('test-score')).toHaveText('5 / 6');
   await expect(page.getByTestId('test-result')).toHaveAttribute('data-recommend', 'true');
-  await expect(page.getByTestId('test-errors')).toContainText('zaměnil');
+  await expect(page.getByTestId('test-errors')).toContainText('záměna');
   await page.getByTestId('approve').click();
   await expect(page.getByTestId('approved-msg')).toContainText('Odemčena lekce 2');
   const st = await dbGet(page, 'lessonStates');

@@ -4,7 +4,7 @@ import type { Content } from '../content/load';
 import type { Screen } from '../App';
 import type { WeeklySummaryFile } from '../content/types';
 import { getAllAttempts, getAllEvents, getAllLessonStates, getDb, getSetting, setSetting, type TestResultRecord } from '../storage/db';
-import { buildWeekSummary, completedWeeks, type SContent, type SData } from '../summary/weekly';
+import { buildWeekSummary, completedWeeks, toGameRound, type SContent, type SData } from '../summary/weekly';
 
 export const CHILD_NAME_KEY = 'childName';
 
@@ -12,7 +12,8 @@ async function loadData(): Promise<SData> {
   const db = await getDb();
   const tests: TestResultRecord[] = [];
   for (const k of await db.getAllKeys('settings')) if (String(k).startsWith('tests:')) tests.push(...(((await db.get('settings', k)) as TestResultRecord[]) ?? []));
-  return { attempts: await getAllAttempts(), events: await getAllEvents(), tests, lessonStates: await getAllLessonStates() };
+  const rounds = ((await getSetting<Parameters<typeof toGameRound>[0][]>('games:rounds')) ?? []).filter((r) => r && typeof r.gameId === 'string' && typeof r.finishedAt === 'string').map(toGameRound);
+  return { attempts: await getAllAttempts(), events: await getAllEvents(), tests, lessonStates: await getAllLessonStates(), gameRounds: rounds };
 }
 
 export default function WeeklySummary({ content, go }: { content: Content; go: (s: Screen) => void }) {
@@ -57,6 +58,8 @@ export default function WeeklySummary({ content, go }: { content: Content; go: (
             {s.approvedLessons.length > 0 && <p className="small muted">Schváleno: {s.approvedLessons.join(', ')}</p>}</section>
           <section className="card" data-section="trend"><h2>Trend</h2><p data-testid="summary-trend">{s.lines.trend}</p><p className="small muted">Nově zvládnuto: {s.trend.newly}.</p></section>
           <section className="card" data-section="errors"><h2>Co ještě dělá potíže</h2>{s.lines.errors.map((t) => <p key={t} data-testid="summary-error">{t}</p>)}</section>
+          {s.lines.subjects.length > 0 && <section className="card" data-section="subjects" data-testid="summary-subjects"><h2>Hry a předměty</h2>
+            {s.lines.subjects.map((t, k) => <p key={k} className={t.startsWith('–') ? 'small' : undefined} data-testid="summary-subject-line">{t}</p>)}</section>}
           <section className="card" data-section="recommendations"><h2>Doporučení na další týden</h2>
             <ul>{s.recommendations.map((r) => <li key={r.id} data-rec={r.id}>{r.text}</li>)}</ul></section>
           <section className="card" data-section="praise"><p data-testid="summary-praise">{s.lines.praise}</p></section>

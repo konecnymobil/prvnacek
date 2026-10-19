@@ -108,7 +108,7 @@ test('pero: přijato, dotyk při položeném peru ignorován, prst má širší 
     r.onsuccess = () => { const q = r.result.transaction('settings').objectStore('settings').get('math:progress'); q.onsuccess = () => { r.result.close(); res(q.result?.m1?.rounds ?? 0); }; };
   }))).toBe(1);
   await page.getByTestId('math-end-ok').click();
-  await expect(page.locator('[data-lesson="m2"]')).toHaveAttribute('data-locked', 'false');
+  await expect(page.locator('[data-lesson="m2"]')).toHaveAttribute('data-locked', 'true'); // A-08: odemkne až 2. úspěšné kolo
 });
 
 test('styl psacího písma: výchozí klasické, přepnutí na nespojované se uloží', async ({ page }) => {
@@ -195,4 +195,17 @@ test('pískání: začne mimo obrys a utichne po návratu (mock AudioContext)', 
   });
   await expect(surf).toHaveAttribute('data-out', 'false');
   expect(await sq()).toEqual({ on: 1, off: 1 });
+});
+
+test.describe('A-08: odemykání matematiky po úspěšném kole', () => {
+  test('neúspěšné kolo neodemkne, 2 úspěšná ano; stará data zůstanou odemčená', async () => {
+    const { mathUnlocked, isGoodRound, MATH_LESSONS, MATH_GOOD_ROUNDS } = await import('../src/math/math');
+    const id = MATH_LESSONS[0].id;
+    expect(isGoodRound({ correct: 2, wrong: 6 })).toBe(false);
+    expect(isGoodRound({ correct: 5, wrong: 0 })).toBe(true);
+    const base = { correct: 0, wrong: 0, errors: {}, traced: 0 };
+    expect(mathUnlocked({ [id]: { ...base, rounds: 3, goodRounds: 0 } }, 1)).toBe(false);
+    expect(mathUnlocked({ [id]: { ...base, rounds: 3, goodRounds: MATH_GOOD_ROUNDS } }, 1)).toBe(true);
+    expect(mathUnlocked({ [id]: { ...base, rounds: 1 } }, 1)).toBe(true);
+  });
 });

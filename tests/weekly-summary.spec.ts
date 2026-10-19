@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import fs from 'node:fs';
-import { buildWeekSummary, categorizeError, currentLesson, masteryAttempts, completedWeeks, isMastered, sessionStats, trendLabel, weekStartOf, addDays, type SAttempt, type SContent, type SData } from '../src/summary/weekly';
+import { buildWeekSummary, gameStats, toGameRound, categorizeError, currentLesson, masteryAttempts, completedWeeks, isMastered, sessionStats, trendLabel, weekStartOf, addDays, type SAttempt, type SContent, type SData } from '../src/summary/weekly';
 import type { WeeklySummaryFile } from '../src/content/types';
 
 const read = (f: string) => JSON.parse(fs.readFileSync(`public/content/${f}`, 'utf8'));
@@ -80,6 +80,51 @@ test.describe('metriky souhrnu (logika)', () => {
   });
 });
 
+test.describe('A-15: hry a předměty v souhrnu', () => {
+  const ws = weekStartOf(new Date(2026, 9, 7).getTime());
+  const at = new Date(addDays(ws, 2) + 10 * 3600e3).toISOString();
+  const tasks = (n: number, first: number) => Array.from({ length: n }, (_, i) => ({ id: `t${i}`, tries: i < first ? 1 : 2, hintUsed: false }));
+  const rounds = [
+    toGameRound({ gameId: 'ztratilo', finishedAt: at, tasks: tasks(5, 4) }),
+    toGameRound({ gameId: 'ztratilo', finishedAt: at, tasks: tasks(5, 5) }),
+    toGameRound({ gameId: 'pexeso', finishedAt: at, tasks: tasks(6, 6) }), // nepočítá se
+    toGameRound({ gameId: 'math-lesson', subjectId: 'math', finishedAt: at, rated: 5, firstTry: 3 }),
+    toGameRound({ gameId: 'mm2', subjectId: 'math', finishedAt: at, tasks: tasks(3, 3) }), // < 5 úloh → bez %
+    toGameRound({ gameId: 'mp2', subjectId: 'world', finishedAt: new Date(addDays(ws, -3)).toISOString(), tasks: tasks(4, 4) }), // minulý týden
+  ];
+  test('počty, pexeso mimo, úspěšnost od 5 úloh, české tvary', () => {
+    const rows = gameStats(spec, rounds, ws);
+    expect(rows.map((r) => r.id)).toEqual(['cz-reading', 'math', 'world', 'english']);
+    const read = rows[0];
+    expect(read.rounds).toBe(2);
+    expect(read.games.find((g) => g.gameId === 'pexeso')).toBeUndefined();
+    expect(read.games.find((g) => g.gameId === 'ztratilo')!.successRatio).toBeCloseTo(0.9);
+    const math = rows[1];
+    expect(math.games.find((g) => g.gameId === 'math-lesson')!.successRatio).toBeCloseTo(0.6);
+    expect(math.games.find((g) => g.gameId === 'mm2')!.successRatio).toBeNull();
+    expect(rows[2].rounds).toBe(0);
+    const s = buildWeekSummary({ attempts: [], events: [], tests: [], lessonStates: [], gameRounds: rounds }, C, spec, ws, 'Anička');
+    expect(s.metrics.gameRounds).toBe(4);
+    expect(s.metrics.subjectsPracticed).toBe(2);
+    expect(s.metrics.mathRounds).toBe(2);
+    expect(s.lines.subjects[0]).toBe('Hry a předměty: 4 kola her, 2 předměty.');
+    expect(s.lines.subjects).toContain('Čtení: 2 kola, napoprvé správně 90 %.');
+    expect(s.lines.subjects).toContain('– Kolik vidíš?: 1 kolo.');
+    expect(s.lines.subjects.some((l) => l.includes('Prvouka') || l.includes('Pexeso'))).toBe(false);
+  });
+  test('doporučení gamesOnly a tryMath', () => {
+    const many = Array.from({ length: 5 }, () => toGameRound({ gameId: 'bublinky', finishedAt: at, tasks: tasks(5, 5) }));
+    const s = buildWeekSummary({ attempts: [], events: [], tests: [], lessonStates: [], gameRounds: many }, C, spec, ws, 'Anička');
+    expect(s.recommendations.map((r) => r.id)).toContain('gamesOnly');
+    const t = addDays(ws, 1) + 9 * 3600e3;
+    const a = Array.from({ length: 12 }, (_, i) => att(t + i * 20e3, 's-ma', true));
+    const s2 = buildWeekSummary({ attempts: a, events: [], tests: [], lessonStates: [], gameRounds: [] }, C, spec, ws, 'Anička');
+    expect(s2.metrics.mathRounds).toBe(0);
+    expect(s2.recommendations.map((r) => r.id)).toContain('tryMath');
+    expect(s2.lines.subjects).toEqual([spec.templates.subjectsNone]);
+  });
+});
+
 test.describe('obrazovka souhrnu', () => {
   test.use({ serviceWorkers: 'block' });
   async function passGate(page: Page) {
@@ -112,7 +157,8 @@ test.describe('obrazovka souhrnu', () => {
     await page.getByTestId('open-summary').click();
     await expect(page.getByTestId('summary-headline')).toContainText('2 min');
     const order = await page.locator('[data-section]').evaluateAll((els) => els.map((e) => e.getAttribute('data-section')));
-    expect(order).toEqual(['overview', 'mastered', 'tests', 'trend', 'errors', 'recommendations', 'praise']);
+    expect(order).toEqual(['overview', 'mastered', 'tests', 'trend', 'errors', 'subjects', 'recommendations', 'praise']);
+    await expect(page.getByTestId('summary-subjects')).toContainText(spec.templates.subjectsNone);
     await expect(page.locator('[data-rec]')).toHaveCount(1);
     await expect(page.locator('[data-rec="start"]')).toBeVisible();
     await page.getByTestId('week-older').click();

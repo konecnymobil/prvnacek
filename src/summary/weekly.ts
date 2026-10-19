@@ -2,7 +2,7 @@
  * M4 – týdenní souhrn pro rodiče. Čisté funkce bez prohlížečových závislostí (testuje se i v Node).
  * Prahy: z weekly-summary.json (mastery, trend, doporučení) a konstanty níže (sezení/únava podle zadání M4).
  */
-import {
+import { czPlural,
   fillTemplate, isRecommendedForTest, pickWeeklyRecommendations,
   type WeeklyMetrics, type WeeklyRecommendationId, type WeeklySummaryFile, type AttemptMasteryRule,
 } from '../content/types';
@@ -26,7 +26,34 @@ export interface SContent {
   words: { id: string; letterIds: string[] }[];
   recommendation: { minRatedTasks: number; windowSize: number; minSuccessRatio: number; minDistinctDays: number };
 }
-export interface SData { attempts: SAttempt[]; events: SEvent[]; tests: STest[]; lessonStates: SLessonState[] }
+/** Dokončené kolo hry nebo lekce matematiky (games:rounds). rated = úlohy s výsledkem, firstTry = splněné napoprvé. */
+export interface SGameRound { gameId: string; subjectId: string; at: number; rated: number; firstTry: number }
+export interface SData { attempts: SAttempt[]; events: SEvent[]; tests: STest[]; lessonStates: SLessonState[]; gameRounds?: SGameRound[] }
+
+/** Záznam z games:rounds → SGameRound. Čtecí hry nemají subjectId (cz-reading); úloha napoprvé = 1 pokus bez nápovědy. */
+export function toGameRound(r: { gameId: string; subjectId?: string; finishedAt: string; tasks?: { tries: number; hintUsed?: boolean }[]; rated?: number; firstTry?: number }): SGameRound {
+  const tasks = r.tasks ?? [];
+  return { gameId: r.gameId, subjectId: r.subjectId ?? 'cz-reading', at: Date.parse(r.finishedAt),
+    rated: r.rated ?? tasks.length, firstTry: r.firstTry ?? tasks.filter((t) => t.tries <= 1 && !t.hintUsed).length };
+}
+
+export interface GameRow { gameId: string; label: string; rounds: number; ratedTasks: number; firstTryCorrect: number; successRatio: number | null }
+export interface SubjectRow { id: string; label: string; rounds: number; ratedTasks: number; firstTryCorrect: number; games: GameRow[] }
+/** A-15: hry a předměty za týden podle weekly-summary.json subjects[]. Pexeso (countsInSummary false) se nepočítá;
+ *  úspěšnost až od gameSummary.minTasksForRatio úloh. */
+export function gameStats(spec: WeeklySummaryFile, rounds: SGameRound[], ws: number): SubjectRow[] {
+  const we = addDays(ws, 7);
+  const minR = spec.gameSummary?.minTasksForRatio ?? 5;
+  const inW = rounds.filter((r) => r.at >= ws && r.at < we);
+  return (spec.subjects ?? []).map((s) => {
+    const games = s.games.filter((g) => g.countsInSummary).map((g) => {
+      const rs = inW.filter((r) => r.gameId === g.id);
+      const rated = rs.reduce((a, r) => a + r.rated, 0), first = rs.reduce((a, r) => a + r.firstTry, 0);
+      return { gameId: g.id, label: g.label, rounds: rs.length, ratedTasks: rated, firstTryCorrect: first, successRatio: rated >= minR ? first / rated : null };
+    });
+    return { id: s.id, label: s.label, games, rounds: games.reduce((a, g) => a + g.rounds, 0), ratedTasks: games.reduce((a, g) => a + g.ratedTasks, 0), firstTryCorrect: games.reduce((a, g) => a + g.firstTryCorrect, 0) };
+  });
+}
 
 /** Pondělí 00:00 (místní čas) týdne, do kterého patří t. */
 export function weekStartOf(t: number): number {
@@ -139,7 +166,7 @@ export interface WeekSummary {
   errors: { id: ErrorCategoryId; count: number; label: string; tip: string }[];
   trend: { minutes: string; success: string; newly: string };
   recommendations: { id: WeeklyRecommendationId; text: string }[];
-  lines: { headline: string; mastered: string; tests: string; trend: string; errors: string[]; praise: string };
+  lines: { headline: string; mastered: string; tests: string; trend: string; errors: string[]; praise: string; subjects: string[] };
   approvedLessons: string[];
   avgResponseSec: number | null;
 }
@@ -183,12 +210,26 @@ function baseMetrics(data: SData, c: SContent, spec: WeeklySummaryFile, ws: numb
     recommendedForTest: !curApproved && isRecommendedForTest(curAll, c.recommendation),
     currentLessonApproved: curApproved && !!next,
     frustrationSignals: frustration, topErrorCount: errors[0]?.count ?? 0,
+    ...gameMetrics(gameStats(spec, data.gameRounds ?? [], ws)),
   };
   // doba odpovědi: pauzy > attemptRules.pauseThresholdSec se do průměru nepočítají
   const pauseMs = (spec.attemptRules?.pauseThresholdSec ?? IDLE_MS / 1000) * 1000;
   const rts = att.map((a) => a.responseMs).filter((x): x is number => typeof x === 'number' && x <= pauseMs);
   const avgResponseSec = rts.length ? rts.reduce((s, x) => s + x, 0) / rts.length / 1000 : null;
   return { metrics, errors, cur, next, approved, avgResponseSec };
+}
+
+function gameMetrics(rows: SubjectRow[]) {
+  const by = (id: string) => rows.find((r) => r.id === id);
+  const all = rows.reduce((a, r) => ({ rounds: a.rounds + r.rounds, rated: a.rated + r.ratedTasks, first: a.first + r.firstTryCorrect }), { rounds: 0, rated: 0, first: 0 });
+  const math = by('math');
+  return {
+    gameRounds: all.rounds, gameRatedTasks: all.rated, gameFirstTryRatio: all.rated ? all.first / all.rated : 0,
+    subjectsPracticed: rows.filter((r) => r.rounds > 0).length,
+    readingRounds: by('cz-reading')?.rounds ?? 0, mathRounds: math?.rounds ?? 0,
+    mathFirstTryRatio: math?.ratedTasks ? math.firstTryCorrect / math.ratedTasks : 0,
+    worldRounds: by('world')?.rounds ?? 0, englishRounds: by('english')?.rounds ?? 0,
+  };
 }
 
 /** Trend podle spec.trend: „víc/podobně/méně“, nebo „none“ když minulý týden nebyl. */
@@ -237,6 +278,27 @@ export function buildWeekSummary(data: SData, c: SContent, spec: WeeklySummaryFi
       trend: fillTemplate(T.trend, vals),
       errors: w.errors.length ? w.errors.map((e) => fillTemplate(T.errors, { ...vals, topErrorLabel: e.label, topErrorTip: e.tip })) : [T.noErrors],
       praise: fillTemplate(T.praise, vals),
+      subjects: subjectLines(spec, gameStats(spec, data.gameRounds ?? [], ws), m),
     },
   };
+}
+
+/** Blok „Hry a předměty“: nadpis, řádek za předmět s aspoň 1 kolem a pod ním řádky her s aspoň 1 kolem. */
+export function subjectLines(spec: WeeklySummaryFile, rows: SubjectRow[], m: WeeklyMetrics): string[] {
+  const T = spec.templates, F = spec.plurals?.forms ?? {};
+  const w = (n: number, k: string) => (F[k] ? czPlural(n, F[k]) : '');
+  if (!T.subjectsHeadline) return [];
+  if (!Number(m.gameRounds)) return T.subjectsNone ? [T.subjectsNone] : [];
+  const gr = Number(m.gameRounds), sp = Number(m.subjectsPracticed);
+  const out = [fillTemplate(T.subjectsHeadline, { gameRounds: gr, gameRoundsWord: w(gr, 'gameRounds'), subjectsPracticed: sp, subjectsPracticedWord: w(sp, 'subjectsPracticed') })];
+  const minR = spec.gameSummary?.minTasksForRatio ?? 5;
+  for (const s of rows.filter((r) => r.rounds > 0)) {
+    const ratio = s.ratedTasks >= minR ? Math.round((s.firstTryCorrect / s.ratedTasks) * 100) : null;
+    out.push(fillTemplate(ratio === null ? T.subjectLineNoRatio : T.subjectLine, { subjectLabel: s.label, rounds: s.rounds, roundsWord: w(s.rounds, 'rounds'), firstTryPercent: ratio ?? '' }));
+    for (const g of s.games.filter((x) => x.rounds > 0)) {
+      const gr2 = g.successRatio === null ? null : Math.round(g.successRatio * 100);
+      out.push(`– ${fillTemplate(gr2 === null ? T.gameLineNoRatio : T.gameLine, { gameLabel: g.label, rounds: g.rounds, roundsWord: w(g.rounds, 'gameRounds'), firstTryPercent: gr2 ?? '' })}`);
+    }
+  }
+  return out;
 }

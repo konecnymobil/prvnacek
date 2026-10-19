@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
@@ -135,7 +136,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
     return (
       <main className="screen activity">
         <p className="notice">Slova ke skládání přijdou s dalšími lekcemi.</p>
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
       </main>
     );
   }
@@ -157,7 +158,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   return (
     <main className="screen activity" data-testid="compose-activity" data-form={form} data-total={total} data-queue={queue.map((w) => w.id).join(",")} data-target={target.id} data-done={done}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <p className="muted" data-testid="progress">Úloha {n + 1} z {total}</p>
       </header>
       <div className="stage">

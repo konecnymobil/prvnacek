@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "kind": "mathLessons",
+  "lessons": [
+    {
+      "id": "m0",
+      "index": 0,
+      "title": "Kde to je?",
+      "nums": [],
+      "newDigit": null,
+      "tasks": {
+        "kinds": [
+          "where",
+          "where",
+          "where",
+          "where",
+          "where"
+        ],
+        "positionsFirstRound": [
+          "top",
+          "bottom",
+          "middle"
+        ],
+        "positionsLater": [
+          "top",
+          "bottom",
+          "middle",
+          "left",
+          "right"
+        ],
+        "promptIds": {
+          "top": "snd-m-p-where-top",
+          "bottom": "snd-m-p-where-bottom",
+          "middle": "snd-m-p-where-middle",
+          "left": "snd-m-p-where-left",
+          "right": "snd-m-p-where-right"
+        },
+        "note": "Mřížka 3×3, jeden obrázek na hledané pozici a 2–3 další. Vlevo/vpravo z pohledu dítěte, ruka-ikona u okraje jako nápověda. Bez čísel a bez čtení."
+      },
+      "optionRule": null
+    },
+    {
+      "id": "m1",
+      "index": 1,
+      "title": "1",
+      "nums": [
+        1
+      ],
+      "newDigit": 1,
+      "tasks": {
+        "kinds": [
+          "find-group",
+          "count",
+          "find-group",
+          "count",
+          "find-group",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 1,
+        "groupSizesMax": 2,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    },
+    {
+      "id": "m2",
+      "index": 2,
+      "title": "1–2",
+      "nums": [
+        1,
+        2
+      ],
+      "newDigit": 2,
+      "tasks": {
+        "kinds": [
+          "count",
+          "find",
+          "more",
+          "count",
+          "find",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 2,
+        "groupSizesMax": 3,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    },
+    {
+      "id": "m3",
+      "index": 3,
+      "title": "1–3",
+      "nums": [
+        1,
+        2,
+        3
+      ],
+      "newDigit": 3,
+      "tasks": {
+        "kinds": [
+          "count",
+          "find",
+          "more",
+          "count",
+          "same",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 3,
+        "groupSizesMax": 4,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    },
+    {
+      "id": "m4",
+      "index": 4,
+      "title": "1–4",
+      "nums": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "newDigit": 4,
+      "tasks": {
+        "kinds": [
+          "count",
+          "find",
+          "more",
+          "count",
+          "same",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 3,
+        "groupSizesMax": 5,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    },
+    {
+      "id": "m5",
+      "index": 5,
+      "title": "1–5",
+      "nums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "newDigit": 5,
+      "tasks": {
+        "kinds": [
+          "count",
+          "find",
+          "more",
+          "count",
+          "same",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 3,
+        "groupSizesMax": 6,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    },
+    {
+      "id": "m6",
+      "index": 6,
+      "title": "0–5",
+      "nums": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "newDigit": 0,
+      "tasks": {
+        "kinds": [
+          "count",
+          "find",
+          "more",
+          "count",
+          "same",
+          "trace"
+        ],
+        "promptIds": {
+          "count": "snd-m-p-count",
+          "find": "snd-m-p-find-n",
+          "find-group": "snd-m-p-find-n",
+          "more": "snd-m-p-more",
+          "same": "snd-m-p-same",
+          "trace": "snd-m-p-trace"
+        },
+        "note": "more: dvě skupiny a ≠ b (bez tlačítka „stejně“). same: vzor + 3 skupiny, jedna stejná. find-group (m1): „Najdi jich tolik: jedna“ – 3 skupiny předmětů (1 / 2 / 3), číslice se nečtou."
+      },
+      "optionRule": {
+        "digitOptionsFrom": "learned",
+        "maxDigitOptions": 3,
+        "groupSizesMax": 6,
+        "answerPositionBalanced": true,
+        "text": "Číslice v možnostech jen z nums této a dřívějších lekcí (žádná nenaučená). Skupiny předmětů mohou mít o 1 víc než max (jen jako „víc“). Pozice správné možnosti rovnoměrně (možnosti seřazené, ale vybrané tak, aby odpověď nebyla pořád uprostřed). Stejné n nejvýš 2× za sebou."
+      }
+    }
+  ],
+  "unlockRule": {
+    "minRounds": 2,
+    "minFirstTryRatio": 0.8,
+    "minDistinctDays": 2,
+    "orParentTest": true,
+    "orParentManual": true,
+    "text": "Další lekce se odemkne po 2 kolech s ≥ 80 % napoprvé ve 2 různých dnech, nebo po zkoušce s rodičem, nebo ručně v rodičovské sekci. m0 → m1 stačí 1 dokončené kolo.",
+    "m0": {
+      "minRounds": 1
+    }
+  },
+  "parentTest": {
+    "itemCount": 6,
+    "passScore": 5,
+    "items": [
+      {
+        "type": "showDigit",
+        "count": 3,
+        "text": "Rodič řekne číslo, dítě ukáže číslici na kartičkách (nová číslice aspoň 2×)."
+      },
+      {
+        "type": "buildSet",
+        "count": 3,
+        "text": "Dítě vyskládá N víček nebo kostek (N z nums lekce, aspoň 1× nové číslo)."
+      }
+    ],
+    "note": "Zkouška s rodičem bez nových klipů: rodič čte zadání z obrazovky, aplikace ukáže číslo a rodič hodnotí ✓/✗. Pro m0 zkouška není."
+  },
+  "rangeByLesson": {
+    "m0": 0,
+    "m1": 1,
+    "m2": 2,
+    "m3": 3,
+    "m4": 4,
+    "m5": 5,
+    "m6": 5
+  }
+}

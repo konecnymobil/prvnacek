@@ -9,7 +9,7 @@ async function open(page: Page, subject: string, game: string) {
   await waitForChildDb(page);
   const card = page.locator(`.subj-card[data-subject="${subject}"]`);
   await card.click(); await card.click();
-  await page.locator(`.game-tile[data-game="${game}"]`).click();
+  { const tile = page.locator(`.game-tile[data-game="${game}"]`); await tile.click(); await tile.click(); }
   await expect(page.getByTestId('game-round')).toBeVisible();
 }
 const idx = (page: Page) => page.getByTestId('game-round').getAttribute('data-index');

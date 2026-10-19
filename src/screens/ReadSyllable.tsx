@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -5,9 +6,9 @@ import type { Content } from '../content/load';
 import type { Lesson, Syllable } from '../content/types';
 import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
-import { ROUND_SIZE, randomPrompt, promptAudio, recordAttempt, say, stopSay, pickPriority, usePriorityIds, shuffle } from '../activities/common';
+import { randomPrompt, promptAudio, recordAttempt, say, stopSay, pickPriority, usePriorityIds, shuffle } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
-import { allUsableSyllables, lessonSyllables } from './SyllableActivity';
+import { allUsableSyllables, practiceSyllables, syllableRoundSize } from './SyllableActivity';
 
 interface Props { content: Content; lesson: Lesson; back: () => void }
 
@@ -40,9 +41,10 @@ export default function ReadSyllable(props: Props) {
 }
 
 function Round({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
+  const ROUND = syllableRoundSize(lesson);
   const pool = useMemo(() => allUsableSyllables(content, lesson), [content, lesson]);
   const candidates = useMemo(() => {
-    const base = lessonSyllables(content, lesson);
+    const base = practiceSyllables(content, lesson);
     const extra = pool.filter((s) => priority.has(s.id) && !base.some((b) => b.id === s.id));
     return [...base, ...extra];
   }, [content, lesson, pool, priority]);
@@ -86,7 +88,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   auto.target.current = () => next();
   const next = () => {
     stopSay();
-    if (n + 1 >= ROUND_SIZE) { setN(ROUND_SIZE); void say(promptAudio(content, 'p-round-end')); return; }
+    if (n + 1 >= ROUND) { setN(ROUND); void say(promptAudio(content, 'p-round-end')); return; }
     setN(n + 1);
     setTask(makeTask(pool, candidates, priority, false, task.target.id));
     setStep('read'); setSolved(false); setFailed(false); setWrongIds([]); setMood('premysli');
@@ -94,16 +96,16 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   };
 
   if (pool.length < 3) {
-    return <main className="screen activity"><p className="notice">Slabiky budou k dispozici od lekce A.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
+    return <main className="screen activity"><p className="notice">Slabiky budou k dispozici od lekce A.</p><HomeButton onClick={back} /></main>;
   }
-  useStickerOnDone('cviceni', n >= ROUND_SIZE);
-  useTaskLog('A6', lesson.id, n >= ROUND_SIZE);
-  if (n >= ROUND_SIZE) {
+  useStickerOnDone('cviceni', n >= ROUND);
+  useTaskLog('A6', lesson.id, n >= ROUND);
+  if (n >= ROUND) {
     return (
       <main className="screen activity" data-testid="round-end">
         <Mascot mood="radost" />
         <h1>Hotovo! To bylo skvělé hraní.</h1>
-        <p className="muted">Napoprvé správně: {correctCount} z {ROUND_SIZE}</p>
+        <p className="muted">Napoprvé správně: {correctCount} z {ROUND}</p>
         <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button></div>
       </main>
     );
@@ -112,8 +114,8 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   return (
     <main className="screen activity" data-testid="read-activity" data-target={task.target.id}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
-        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
+        <HomeButton onClick={back} />
+        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND}</p>
       </header>
       <div className="stage"><Mascot mood={mood} /></div>
       <div className="read-syll" data-testid="read-syllable"><SyllableArc text={task.target.text} form={form} /></div>

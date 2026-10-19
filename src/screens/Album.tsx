@@ -1,4 +1,5 @@
 /** M4 Album nálepek (dítě). Bez počtů „4/12“, bez „chybí“, nic nejde ztratit. */
+import HomeButton from '../components/HomeButton';
 import { useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import { say, stopSay } from '../activities/common';
@@ -61,7 +62,7 @@ export default function Album({ content, back, subject: initialSubject }: { cont
   return (
     <main className="screen album" data-testid="album">
       <header className="topbar">
-        <button className="back" onClick={back}>‹ Zpět</button>
+        <HomeButton onClick={back} />
         <div className="alb-subjects" role="tablist" aria-label="Předměty">
           {SUBJECT_TABS.filter((t) => SETS.some((x) => setSubject(x) === t.id)).map((t) => (
             <button key={t.id} role="tab" aria-selected={t.id === subject} aria-label={t.name} className={`kbtn alb-subj subj--${t.id === 'cz-reading' ? 'cti' : t.id === 'math' ? 'mat' : t.id === 'world' ? 'prv' : 'aj'}`} data-testid={`alb-subj-${t.id}`}

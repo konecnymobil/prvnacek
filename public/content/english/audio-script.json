@@ -3,134 +3,281 @@
   "kind": "audioScript",
   "subjectId": "english",
   "sharedAudioIds": [],
-  "contentVersion": "2026-10-17.3",
+  "contentVersion": "2026-10-19.6",
   "voice": {
-    "name": "en-GB-?Neural",
+    "name": "en-GB-LibbyNeural",
     "fallback": "en-GB-SoniaNeural",
     "locale": "en-GB"
   },
   "ssmlTemplate": "<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"en-GB\"><voice name=\"{voice}\">{body}</voice></speak>",
   "phoneticAlphabet": {
     "alphabet": "ipa",
-    "note": "en-GB; IPA zatím nepoužito.",
+    "note": "en-GB; IPA zatím nepoužito (žádné <phoneme> – validátor kontroluje cs-CZ sadu i u předmětů).",
     "phonesUsed": [],
     "source": "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support"
   },
   "output": {
     "dir": "audio",
     "candidatesDir": "audio-src/candidates",
-    "format": "mp3 (mono, 24 kHz, 64 kbps)",
-    "selectionRule": "Zatím negenerovat."
+    "format": "mp3 (mono, 24 kHz, 64 kbps), ořez ticha, srovnání hlasitosti",
+    "selectionRule": "Klipy bez variant jdou rovnou do audio/ (finalize_audio.py)."
   },
-  "listeningNote": "PENDING: čeká na slovíčka z Unit 1–2 (Shine Now 1) a na výběr en-GB hlasu poslechem.",
+  "listeningNote": "Hlas en-GB-LibbyNeural (Jiří 2026-10-19). Vygenerováno 10 jistých klipů (pokyny ME1–ME3, Hello!, barvy). Slovíčka Unit 1–2 stále pending. Ověřit poslechem prefixy Find the / Colour the a barvy.",
   "totals": {
-    "clips": 0,
-    "audioIds": 0,
-    "billableChars": 0
+    "clips": 10,
+    "audioIds": 10,
+    "billableChars": 2114
   },
-  "clips": [],
-  "pending": [
+  "clips": [
     {
+      "id": "c-en-p-game-megaboxy",
       "audioId": "snd-en-p-game-megaboxy",
+      "category": "prompt",
+      "refId": "en-p-game-megaboxy",
       "text": "Megaboxes!",
-      "status": "pending",
-      "note": "ME1 název (zvážit český název hry). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Megaboxes!</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-p-game-megaboxy.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "ME1 název hry.",
+      "billableChars": 214,
+      "listeningCheck": null
     },
     {
+      "id": "c-en-p-find-x",
       "audioId": "snd-en-p-find-x",
-      "text": "Find the …!",
-      "status": "pending",
-      "note": "ME1 šablona; doplnit slovíčka Unit 1 (At School). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "category": "prompt",
+      "refId": "en-p-find-x",
+      "text": "Find the",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Find the</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-p-find-x.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "ME1 prefix: aplikace přehraje Find the + [noun] (snd-en-w-*). Bez teček/výkřičníku.",
+      "billableChars": 212,
+      "listeningCheck": null
     },
     {
-      "audioId": "snd-en-p-colour-x-y",
-      "text": "Colour the … …",
-      "status": "pending",
-      "note": "ME2 šablona; předmět z Unit 1 + barva z Unit 2. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
-    },
-    {
+      "id": "c-en-p-game-colour",
       "audioId": "snd-en-p-game-colour",
+      "category": "prompt",
+      "refId": "en-p-game-colour",
       "text": "Colour it!",
-      "status": "pending",
-      "note": "ME2 název. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Colour it!</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-p-game-colour.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "ME2 název hry.",
+      "billableChars": 214,
+      "listeningCheck": null
     },
     {
-      "audioId": "snd-en-p-say-it",
-      "text": "Say it!",
-      "status": "pending",
-      "note": "ME3 pokyn před vzorem. Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "id": "c-en-p-colour-x-y",
+      "audioId": "snd-en-p-colour-x-y",
+      "category": "prompt",
+      "refId": "en-p-colour-x-y",
+      "text": "Colour the",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Colour the</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-p-colour-x-y.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "ME2 prefix: Colour the + [noun] (snd-en-w-*) + [colour] (snd-en-c-*). Pořadí: prefix → slovo → barva.",
+      "billableChars": 214,
+      "listeningCheck": null
     },
+    {
+      "id": "c-en-p-say-it",
+      "audioId": "snd-en-p-say-it",
+      "category": "prompt",
+      "refId": "en-p-say-it",
+      "text": "Say it!",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-8%\">Say it!</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-p-say-it.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "ME3 / Say it – pokyn před vzorem.",
+      "billableChars": 211,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-en-w-hello",
+      "audioId": "snd-en-w-hello",
+      "category": "word",
+      "refId": "en-w-hello",
+      "text": "Hello!",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-10%\">Hello!</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-w-hello.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Pozdrav (Starter / Hello!).",
+      "billableChars": 211,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-en-c-red",
+      "audioId": "snd-en-c-red",
+      "category": "word",
+      "refId": "en-c-red",
+      "text": "red",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-10%\">red</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-c-red.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Barva (Unit 2 Fun Colours).",
+      "billableChars": 208,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-en-c-blue",
+      "audioId": "snd-en-c-blue",
+      "category": "word",
+      "refId": "en-c-blue",
+      "text": "blue",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-10%\">blue</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-c-blue.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Barva (Unit 2 Fun Colours).",
+      "billableChars": 209,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-en-c-yellow",
+      "audioId": "snd-en-c-yellow",
+      "category": "word",
+      "refId": "en-c-yellow",
+      "text": "yellow",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-10%\">yellow</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-c-yellow.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Barva (Unit 2 Fun Colours).",
+      "billableChars": 211,
+      "listeningCheck": null
+    },
+    {
+      "id": "c-en-c-green",
+      "audioId": "snd-en-c-green",
+      "category": "word",
+      "refId": "en-c-green",
+      "text": "green",
+      "variant": 1,
+      "variantCount": 1,
+      "method": "text",
+      "ssmlBody": "<prosody rate=\"-10%\">green</prosody>",
+      "fallbackSsmlBody": null,
+      "postprocess": null,
+      "fileName": "snd-en-c-green.mp3",
+      "candidate": false,
+      "needsListening": false,
+      "risk": null,
+      "notes": "Barva (Unit 2 Fun Colours).",
+      "billableChars": 210,
+      "listeningCheck": null
+    }
+  ],
+  "pending": [
     {
       "audioId": "snd-en-w-pencil",
       "text": "pencil",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-book",
       "text": "book",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-bag",
       "text": "bag",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-crayon",
       "text": "crayon",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-ruler",
       "text": "ruler",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-scissors",
       "text": "scissors",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-ball",
       "text": "ball",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     },
     {
       "audioId": "snd-en-w-apple",
       "text": "apple",
       "status": "pending",
-      "note": "Slovo (Unit 1 At School / ME1–ME2). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
-    },
-    {
-      "audioId": "snd-en-w-red",
-      "text": "red",
-      "status": "pending",
-      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
-    },
-    {
-      "audioId": "snd-en-w-blue",
-      "text": "blue",
-      "status": "pending",
-      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
-    },
-    {
-      "audioId": "snd-en-w-yellow",
-      "text": "yellow",
-      "status": "pending",
-      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
-    },
-    {
-      "audioId": "snd-en-w-green",
-      "text": "green",
-      "status": "pending",
-      "note": "Barva (Unit 2 Fun Colours). Slovní zásoba je zatím odhad (čeká na fotku slovíček z Unit 1–2); hlas en-GB zatím není vybraný."
+      "note": "Slovo (Unit 1 At School / ME1–ME2). Čeká na fotku slovíček z Unit 1–2; hlas en-GB-LibbyNeural je vybraný, negenerovat do potvrzení."
     }
   ]
 }

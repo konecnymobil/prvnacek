@@ -48,13 +48,13 @@
       "id": "ratedTasks",
       "label": "Hodnocené úlohy",
       "unit": "count",
-      "definition": "Úlohy procvičování s výsledkem ✓/✗ (A1 se nehodnotí, pexeso se nehodnotí)."
+      "definition": "Jen čtení: úlohy lekcí a Opakování s výsledkem ✓/✗ (A1 a pexeso se nehodnotí, minihry viz gameRatedTasks)."
     },
     {
       "id": "successRatio",
       "label": "Úspěšnost",
       "unit": "ratio",
-      "definition": "Správné / hodnocené úlohy v týdnu."
+      "definition": "Jen čtení: správné / hodnocené úlohy v týdnu (ratedTasks)."
     },
     {
       "id": "currentLessonSuccessRatio",
@@ -121,6 +121,66 @@
       "label": "Nejčastější chyba – počet",
       "unit": "count",
       "definition": "Počet výskytů nejčastější kategorie chyb (errorCategories)."
+    },
+    {
+      "id": "gameRounds",
+      "label": "Kola her",
+      "unit": "count",
+      "definition": "Dokončená kola miniher a kol procvičování mimo čtecí lekce (všechny subjects[].games s countsInSummary). Bez pexesa."
+    },
+    {
+      "id": "gameRatedTasks",
+      "label": "Úlohy ve hrách",
+      "unit": "count",
+      "definition": "Úlohy her s výsledkem; každá úloha jednou (první pokus v kole). Bez pexesa."
+    },
+    {
+      "id": "gameFirstTryRatio",
+      "label": "Napoprvé správně ve hrách",
+      "unit": "ratio",
+      "definition": "Úlohy her splněné napoprvé / gameRatedTasks."
+    },
+    {
+      "id": "subjectsPracticed",
+      "label": "Předměty v týdnu",
+      "unit": "count",
+      "definition": "Počet předmětů (subjects[]) s aspoň 1 dokončeným kolem nebo hodnocenou úlohou."
+    },
+    {
+      "id": "readingRounds",
+      "label": "Čtení – kola",
+      "unit": "count",
+      "definition": "Kola čtecích lekcí, Opakování a čtecích miniher."
+    },
+    {
+      "id": "mathRounds",
+      "label": "Matematika – kola",
+      "unit": "count",
+      "definition": "Kola lekcí matematiky (m1…) a her MM1–MM3."
+    },
+    {
+      "id": "mathFirstTryRatio",
+      "label": "Matematika – napoprvé správně",
+      "unit": "ratio",
+      "definition": "Úlohy matematiky splněné napoprvé / všechny hodnocené úlohy matematiky."
+    },
+    {
+      "id": "worldRounds",
+      "label": "Prvouka – kola",
+      "unit": "count",
+      "definition": "Kola her MP1–MP3."
+    },
+    {
+      "id": "englishRounds",
+      "label": "Angličtina – kola",
+      "unit": "count",
+      "definition": "Kola her ME1–ME2 (jen když je angličtina dítěti nabízená)."
+    },
+    {
+      "id": "rewardLevels",
+      "label": "Odměnová hra – levely",
+      "unit": "count",
+      "definition": "Odehrané levely odměnové hry (reward-game.json). Nejsou procvičování, nepočítají se do gameRounds."
     }
   ],
   "mastery": {
@@ -306,6 +366,42 @@
       "template": "Tento týden bylo procvičování málo. Stačí pár minut denně, třeba hned po svačině."
     },
     {
+      "id": "gamesOnly",
+      "priority": 6,
+      "all": [
+        {
+          "metric": "ratedTasks",
+          "op": "<",
+          "value": 10
+        },
+        {
+          "metric": "gameRounds",
+          "op": ">=",
+          "value": 5
+        }
+      ],
+      "any": [],
+      "template": "{childName} si tento týden užívá hlavně hry, to je v pořádku. Zkuste k nim přidat i krátké čtení v lekci {lessonTitle}, stačí pár minut."
+    },
+    {
+      "id": "tryMath",
+      "priority": 7,
+      "all": [
+        {
+          "metric": "ratedTasks",
+          "op": ">=",
+          "value": 10
+        },
+        {
+          "metric": "mathRounds",
+          "op": "==",
+          "value": 0
+        }
+      ],
+      "any": [],
+      "template": "Kromě čtení je v aplikaci i matematika. Stačí jedno krátké kolo, třeba „Kolik vidíš?“."
+    },
+    {
       "id": "keepGoing",
       "priority": 9,
       "all": [],
@@ -315,9 +411,179 @@
   ],
   "maxRecommendationsShown": 2,
   "recommendationRule": "Projít podle priority, vybrat první vyhovující (all = všechny podmínky, any = aspoň jedna, prázdné any = bez podmínky). keepGoing se ukáže jen, když nic jiného neplatí. Pause s jakoukoli jinou: ukázat pause první.",
+  "subjects": [
+    {
+      "id": "cz-reading",
+      "label": "Čtení",
+      "roundsMetric": "readingRounds",
+      "firstTryMetric": "successRatio",
+      "games": [
+        {
+          "id": "ztratilo",
+          "label": "Co se ztratilo?",
+          "countsInSummary": true
+        },
+        {
+          "id": "detektiv",
+          "label": "Slabikový detektiv",
+          "countsInSummary": true
+        },
+        {
+          "id": "bublinky",
+          "label": "Bublinky",
+          "countsInSummary": true
+        },
+        {
+          "id": "domecky",
+          "label": "Slabikové domečky",
+          "countsInSummary": true
+        },
+        {
+          "id": "obchod",
+          "label": "Slabikový obchod",
+          "countsInSummary": true
+        },
+        {
+          "id": "pexeso",
+          "label": "Pexeso",
+          "countsInSummary": false
+        }
+      ]
+    },
+    {
+      "id": "math",
+      "label": "Matematika",
+      "roundsMetric": "mathRounds",
+      "firstTryMetric": "mathFirstTryRatio",
+      "games": [
+        {
+          "id": "math-lesson",
+          "label": "Lekce matematiky",
+          "countsInSummary": true
+        },
+        {
+          "id": "mm1",
+          "label": "Krmení",
+          "countsInSummary": true
+        },
+        {
+          "id": "mm2",
+          "label": "Kolik vidíš?",
+          "countsInSummary": true
+        },
+        {
+          "id": "mm3",
+          "label": "Číselná cestička",
+          "countsInSummary": true
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "label": "Prvouka",
+      "roundsMetric": "worldRounds",
+      "firstTryMetric": null,
+      "games": [
+        {
+          "id": "mp1",
+          "label": "Uklízíme",
+          "countsInSummary": true
+        },
+        {
+          "id": "mp2",
+          "label": "Co bylo dřív?",
+          "countsInSummary": true
+        },
+        {
+          "id": "mp3",
+          "label": "Bezpečná cesta",
+          "countsInSummary": true
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "label": "Angličtina",
+      "roundsMetric": "englishRounds",
+      "firstTryMetric": null,
+      "games": [
+        {
+          "id": "me1",
+          "label": "Megaboxes",
+          "countsInSummary": true
+        },
+        {
+          "id": "me2",
+          "label": "Colour it!",
+          "countsInSummary": true
+        }
+      ]
+    }
+  ],
+  "gameSummary": {
+    "fields": [
+      "gameId",
+      "rounds",
+      "ratedTasks",
+      "firstTryCorrect",
+      "successRatio",
+      "trend"
+    ],
+    "text": "Za každou hru (gameId = id v aplikaci: GameId, MathGameId, SubjGameId; lekce matematiky = math-lesson): rounds = dokončená kola, ratedTasks = úlohy s výsledkem (každá úloha jednou), firstTryCorrect = splněné napoprvé, successRatio = firstTryCorrect / ratedTasks, trend jen při ≥ 10 úlohách v obou týdnech (jinak null). Jednotlivá ťuknutí se neukládají. Pexeso (countsInSummary false) a A1 se nepočítají.",
+    "roundDone": "Kolo se počítá, když dítě dojde na konec (obrazovka odměny). Předčasný odchod jde jen do frustrationSignals.",
+    "showRule": "V souhrnu jen předměty s aspoň 1 kolem; řádek u hry jen při ≥ 1 kole. Pořadí podle subjects[]. Úspěšnost se u hry ukazuje až od 5 úloh, jinak jen počet kol.",
+    "minTasksForRatio": 5
+  },
+  "plurals": {
+    "rule": "Čeština: 1 → one, 2–4 → few, 0 a 5+ → many. Placeholder {xWord} = tvar slova podle hodnoty {x}.",
+    "forms": {
+      "activeDays": {
+        "one": "den",
+        "few": "dny",
+        "many": "dní"
+      },
+      "lettersMastered": {
+        "one": "písmeno",
+        "few": "písmena",
+        "many": "písmen"
+      },
+      "syllablesMastered": {
+        "one": "slabika",
+        "few": "slabiky",
+        "many": "slabik"
+      },
+      "wordsMastered": {
+        "one": "slovo",
+        "few": "slova",
+        "many": "slov"
+      },
+      "rounds": {
+        "one": "kolo",
+        "few": "kola",
+        "many": "kol"
+      },
+      "gameRounds": {
+        "one": "kolo",
+        "few": "kola",
+        "many": "kol"
+      },
+      "subjectsPracticed": {
+        "one": "předmět",
+        "few": "předměty",
+        "many": "předmětů"
+      }
+    }
+  },
   "templates": {
-    "headline": "Týden {weekStart}–{weekEnd}: {minutesTotal} min, {sessions}× procvičování, {activeDays} dny.",
-    "mastered": "Zvládnuto celkem: {lettersMastered} písmen, {syllablesMastered} slabik, {wordsMastered} slov (tento týden nově {newlyMastered}).",
+    "headline": "Týden {weekStart}–{weekEnd}: {minutesTotal} min, {sessions}× procvičování, {activeDays} {activeDaysWord}.",
+    "mastered": "Zvládnuto celkem: {lettersMastered} {lettersMasteredWord}, {syllablesMastered} {syllablesMasteredWord}, {wordsMastered} {wordsMasteredWord} (tento týden nově {newlyMastered}).",
+    "subjectsHeadline": "Hry a předměty: {gameRounds} {gameRoundsWord} her, {subjectsPracticed} {subjectsPracticedWord}.",
+    "subjectLine": "{subjectLabel}: {rounds} {roundsWord}, napoprvé správně {firstTryPercent} %.",
+    "subjectLineNoRatio": "{subjectLabel}: {rounds} {roundsWord}.",
+    "gameLine": "{gameLabel}: {rounds} {roundsWord}, napoprvé správně {firstTryPercent} %.",
+    "gameLineNoRatio": "{gameLabel}: {rounds} {roundsWord}.",
+    "rewardLine": "Odměnová hra: {rewardLevels}× za týden (vždy až po procvičování).",
+    "subjectsNone": "Tento týden se hrály jen čtecí úlohy. Hry z dalších předmětů jsou v aplikaci, až bude chuť.",
     "tests": "Zkoušky: {testsTaken}, schválené lekce: {lessonsApproved}.",
     "trend": "Čas: {trendMinutes}. Úspěšnost: {trendSuccess}.",
     "errors": "Co ještě dělá potíže: {topErrorLabel} – {topErrorTip}",
@@ -344,7 +610,21 @@
     "topErrorTip",
     "lessonTitle",
     "nextLessonTitle",
-    "pairs"
+    "pairs",
+    "activeDaysWord",
+    "lettersMasteredWord",
+    "syllablesMasteredWord",
+    "wordsMasteredWord",
+    "gameRounds",
+    "gameRoundsWord",
+    "subjectsPracticed",
+    "subjectsPracticedWord",
+    "subjectLabel",
+    "gameLabel",
+    "rounds",
+    "roundsWord",
+    "firstTryPercent",
+    "rewardLevels"
   ],
   "tone": "Laskavě, bez srovnávání s jinými dětmi, bez slov „špatně“ a „neumí“. Čísla jen pro rodiče, ne pro dítě."
 }

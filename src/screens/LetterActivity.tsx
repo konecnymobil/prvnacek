@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -130,7 +131,7 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
   return (
     <main className="screen activity" data-testid="letter-activity" data-target={task.target.id}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
       </header>
       <div className="stage">

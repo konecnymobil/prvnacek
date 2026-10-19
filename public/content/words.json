@@ -51,7 +51,11 @@
       "firstSyllableId": "s-maa",
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": "oblicej",
+      "confusableWith": [
+        "w-pusa"
+      ]
     },
     {
       "id": "w-maa",
@@ -99,7 +103,9 @@
       "firstSyllableId": "s-maa",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-lama",
@@ -150,7 +156,14 @@
       "firstSyllableId": "s-la",
       "usableInMemoryGame": true,
       "usableInComposeTask": true,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": "ctyrnohe-zvire",
+      "confusableWith": [
+        "w-los",
+        "w-mula",
+        "w-osel",
+        "w-puma"
+      ]
     },
     {
       "id": "w-malaa",
@@ -202,7 +215,9 @@
       "firstSyllableId": "s-ma",
       "usableInMemoryGame": false,
       "usableInComposeTask": true,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-ale",
@@ -257,7 +272,9 @@
         "s-la",
         "s-laa",
         "s-ma"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-mele",
@@ -312,7 +329,9 @@
         "s-la",
         "s-maa",
         "s-ma"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-sele",
@@ -367,7 +386,9 @@
         "s-sa",
         "s-saa",
         "s-la"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-sama",
@@ -422,7 +443,9 @@
         "s-se",
         "s-me",
         "s-laa"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-se",
@@ -470,7 +493,9 @@
       "firstSyllableId": "s-se",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-maso",
@@ -526,6 +551,10 @@
         "s-lo",
         "s-mo",
         "s-la"
+      ],
+      "similarImageGroup": "maso",
+      "confusableWith": [
+        "w-salaam"
       ]
     },
     {
@@ -581,7 +610,9 @@
         "s-so",
         "s-laa",
         "s-me"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-maalo",
@@ -637,7 +668,9 @@
         "s-so",
         "s-le",
         "s-la"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-mapa",
@@ -692,7 +725,9 @@
         "s-po",
         "s-pe",
         "s-la"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-pole",
@@ -748,6 +783,10 @@
         "s-pe",
         "s-paa",
         "s-pa"
+      ],
+      "similarImageGroup": "krajina",
+      "confusableWith": [
+        "w-les"
       ]
     },
     {
@@ -804,7 +843,9 @@
         "s-pe",
         "s-po",
         "s-la"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-po",
@@ -852,7 +893,9 @@
       "firstSyllableId": "s-po",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-pomalaa",
@@ -912,7 +955,9 @@
         "s-paa",
         "s-pa",
         "s-pe"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-lupa",
@@ -968,7 +1013,9 @@
         "s-su",
         "s-pu",
         "s-mu"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-mula",
@@ -1024,6 +1071,13 @@
         "s-su",
         "s-lu",
         "s-pu"
+      ],
+      "similarImageGroup": "ctyrnohe-zvire",
+      "confusableWith": [
+        "w-lama",
+        "w-los",
+        "w-osel",
+        "w-puma"
       ]
     },
     {
@@ -1080,6 +1134,13 @@
         "s-lu",
         "s-su",
         "s-mu"
+      ],
+      "similarImageGroup": "ctyrnohe-zvire",
+      "confusableWith": [
+        "w-lama",
+        "w-los",
+        "w-mula",
+        "w-osel"
       ]
     },
     {
@@ -1136,6 +1197,10 @@
         "s-lu",
         "s-su",
         "s-mu"
+      ],
+      "similarImageGroup": "oblicej",
+      "confusableWith": [
+        "w-maama"
       ]
     },
     {
@@ -1196,7 +1261,9 @@
         "s-mu",
         "s-pu",
         "s-su"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-lilie",
@@ -1253,7 +1320,9 @@
         "s-si",
         "s-mi",
         "s-pi"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-pila",
@@ -1309,7 +1378,9 @@
         "s-si",
         "s-li",
         "s-mi"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-pilule",
@@ -1368,7 +1439,9 @@
         "s-li",
         "s-si",
         "s-mi"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-silo",
@@ -1424,7 +1497,9 @@
         "s-pi",
         "s-li",
         "s-mi"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-mile",
@@ -1480,7 +1555,9 @@
         "s-li",
         "s-pi",
         "s-si"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-milaa",
@@ -1536,7 +1613,9 @@
         "s-pi",
         "s-si",
         "s-li"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-mimo",
@@ -1591,7 +1670,9 @@
         "s-pi",
         "s-si",
         "s-li"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-si",
@@ -1639,7 +1720,9 @@
       "firstSyllableId": "s-si",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-maam",
@@ -1687,7 +1770,9 @@
       "firstSyllableId": "s-maam",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-les",
@@ -1736,7 +1821,11 @@
       "firstSyllableId": "s-les",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": "krajina",
+      "confusableWith": [
+        "w-pole"
+      ]
     },
     {
       "id": "w-salaam",
@@ -1793,6 +1882,10 @@
         "s-se",
         "s-le",
         "s-la"
+      ],
+      "similarImageGroup": "maso",
+      "confusableWith": [
+        "w-maso"
       ]
     },
     {
@@ -1842,7 +1935,9 @@
       "firstSyllableId": "s-sem",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-saam",
@@ -1891,7 +1986,9 @@
       "firstSyllableId": "s-saam",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-los",
@@ -1940,7 +2037,14 @@
       "firstSyllableId": "s-los",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": "ctyrnohe-zvire",
+      "confusableWith": [
+        "w-lama",
+        "w-mula",
+        "w-osel",
+        "w-puma"
+      ]
     },
     {
       "id": "w-losos",
@@ -1995,7 +2099,9 @@
         "s-mo",
         "s-so",
         "s-sa"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-osel",
@@ -2051,6 +2157,13 @@
         "s-mo",
         "s-so",
         "s-lo"
+      ],
+      "similarImageGroup": "ctyrnohe-zvire",
+      "confusableWith": [
+        "w-lama",
+        "w-los",
+        "w-mula",
+        "w-puma"
       ]
     },
     {
@@ -2100,7 +2213,9 @@
       "firstSyllableId": "s-pes",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-popel",
@@ -2156,7 +2271,9 @@
         "s-pe",
         "s-paa",
         "s-pa"
-      ]
+      ],
+      "similarImageGroup": null,
+      "confusableWith": []
     },
     {
       "id": "w-sup",
@@ -2205,7 +2322,9 @@
       "firstSyllableId": "s-sup",
       "usableInMemoryGame": false,
       "usableInComposeTask": false,
-      "distractorSyllableIds": []
+      "distractorSyllableIds": [],
+      "similarImageGroup": null,
+      "confusableWith": []
     }
   ],
   "rejected": [
@@ -2317,5 +2436,48 @@
       "text": "MÁMU, MAPU, PUSU, LUPU, PILU",
       "reason": "tvary 4. pádu – odloženo na čtení vět (v2)"
     }
-  ]
+  ],
+  "similarImageGroups": [
+    {
+      "id": "ctyrnohe-zvire",
+      "label": "hnědé čtyřnohé zvíře s dlouhýma ušima nebo krkem",
+      "wordIds": [
+        "w-lama",
+        "w-mula",
+        "w-puma",
+        "w-los",
+        "w-osel"
+      ]
+    },
+    {
+      "id": "krajina",
+      "label": "krajina se zelení",
+      "wordIds": [
+        "w-les",
+        "w-pole"
+      ]
+    },
+    {
+      "id": "oblicej",
+      "label": "obličej / část obličeje",
+      "wordIds": [
+        "w-maama",
+        "w-pusa"
+      ]
+    },
+    {
+      "id": "maso",
+      "label": "kus masa nebo uzeniny",
+      "wordIds": [
+        "w-maso",
+        "w-salaam"
+      ]
+    }
+  ],
+  "memoryGameRules": {
+    "sameSimilarImageGroup": "never",
+    "sameFirstSyllable": "never",
+    "firstSyllableConfusable": "avoid",
+    "text": "V jedné hře pexesa: (1) nikdy dvě slova se stejnou similarImageGroup (= navzájem v confusableWith); (2) nikdy dvě slova se stejnou firstSyllableId; (3) pokud to pool dovolí, ne dvě slova, jejichž první slabiky jsou v Syllable.confusableWith (MA × MÁ). Když pro zvolenou úroveň není dost slov, povolí se nejdřív (3); (1) a (2) se nepovolují nikdy – raději menší úroveň."
+  }
 }

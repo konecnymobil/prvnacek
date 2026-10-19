@@ -1,4 +1,6 @@
 /** Hry (HANDOFF 10): seznam 5 miniher a společný běh kola (engine podle design/js/minihry.js). */
+import HomeButton from '../components/HomeButton';
+import { useTileTap } from '../games/tileTap';
 import { useEffect, useMemo, useState } from 'react';
 import Mascot from '../activities/Mascot';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -16,6 +18,7 @@ export interface RoundResult { gameId: GameId; startedAt: string; finishedAt: st
 export default function Games({ content, back }: { content: Content; back: () => void }) {
   const [states, setStates] = useState<Record<string, LessonState | undefined> | null>(null);
   const [game, setGame] = useState<GameId | null>(null);
+  const tiles = useTileTap();
   const [hint, setHint] = useState('');
   useEffect(() => { getLessonStatesMap().then(setStates, () => setStates({})); return () => stopSay(); }, []);
   if (!states) return <main className="screen activity"><p className="muted">Načítám…</p></main>;
@@ -24,15 +27,15 @@ export default function Games({ content, back }: { content: Content; back: () =>
   const lessons = content.orders[content.defaultOrderId].lessons;
   return (
     <main className="screen activity games" data-testid="games">
-      <header className="topbar row"><button className="kbtn" onClick={back}>Zpět</button><h1>Hry</h1></header>
+      <header className="topbar row"><HomeButton onClick={back} /><h1>Hry</h1></header>
       <div className="game-tiles">
         {GAMES.map((g) => {
           const min = g.minLesson(content);
           const open = min !== null && min <= idx;
           const letter = min !== null ? lessons.find((l) => l.index === min)?.title.split(' ')[0] : null;
           return (
-            <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}`} data-game={g.id} data-locked={open ? 'false' : 'true'}
-              onClick={() => { if (open) { setGame(g.id); return; } setHint(letter ? `Tahle hra přijde s písmenkem ${letter}.` : 'Tahle hra přijde později.'); const L = min !== null ? lessons.find((l) => l.index === min) : undefined; const la = L ? content.letterById.get(L.primaryLetterId)?.audioId : undefined; void say(['snd-p-mh-locked', ...(la ? [la] : [])]); }}>
+            <button key={g.id} className={`game-tile${open ? '' : ' is-locked'}${tiles.selected === g.id ? ' is-selected' : ''}`} data-game={g.id} data-locked={open ? 'false' : 'true'}
+              onClick={() => { if (open) { tiles.tap(g.id, () => setGame(g.id)); return; } setHint(letter ? `Tahle hra přijde s písmenkem ${letter}.` : 'Tahle hra přijde později.'); const L = min !== null ? lessons.find((l) => l.index === min) : undefined; const la = L ? content.letterById.get(L.primaryLetterId)?.audioId : undefined; void say(['snd-p-mh-locked', ...(la ? [la] : [])]); }}>
               <span className="game-icon">{g.icon}</span><span>{g.name}</span>{!open && <span aria-hidden>🔒</span>}
             </button>
           );
@@ -92,7 +95,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
     }
   };
 
-  if (!tasks.length) return <main className="screen activity"><button className="kbtn" onClick={back}>Zpět</button><p className="notice">Na tuhle hru zatím není dost slov.</p></main>;
+  if (!tasks.length) return <main className="screen activity"><HomeButton onClick={back} /><p className="notice">Na tuhle hru zatím není dost slov.</p></main>;
   if (done) return (
     <main className="screen activity game-end" data-testid="game-end">
       <Mascot mood="radost" /><h1>Nálepka do alba!</h1><p>Máš novou nálepku do sady!</p>
@@ -105,7 +108,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
   return (
     <main className={`screen activity game game-${game}`} data-testid="game-round" data-game={game} data-index={i} data-answer-hint={undefined}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <div className="progress" data-testid="game-dots">{tasks.map((_, k) => <i key={k} className={k < i ? 'done' : k === i ? 'now' : ''} />)}</div>
         {tries > 0 && <button className="kbtn game-hint" data-testid="game-hint" aria-label="Nápověda" onClick={() => { setHintOn(true); void say(t.hint); }}>🔍</button>}
         {<button className="kbtn" aria-label="Zopakuj zadání" onClick={() => void say(t.prompt)}>🔊</button>}

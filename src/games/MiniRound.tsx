@@ -1,5 +1,6 @@
 /** Sdílený běh kola miniher předmětů (v0.8, jako js/minihry.js): chyba = klidně + otřes, nápověda až po 1. pokusu,
  *  3 chyby po sobě → „zastavíme se“, konec = nálepka do sady předmětu a odkaz na jeho záložku v albu. */
+import HomeButton from '../components/HomeButton';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Mascot from '../activities/Mascot';
 import { say, stopSay } from '../activities/common';
@@ -72,7 +73,7 @@ export function MiniShell({ nameAudio = [], title, subjCls, round, count, prompt
   return (
     <main className={`screen activity game xg ${subjCls}`} data-testid="game-round" data-index={api.i}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <span className="small">{title}</span>
         <div className="progress" data-testid="game-dots">{Array.from({ length: count }, (_, k) => <i key={k} className={k < api.i ? 'done' : k === api.i ? 'now' : ''} />)}</div>
         {api.tries > 0 && onHint && <button className="kbtn game-hint" data-testid="game-hint" aria-label="Nápověda" onClick={() => { round.showHint(); onHint(); }}>🔍</button>}

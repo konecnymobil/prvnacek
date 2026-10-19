@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { awardSticker } from '../album/album';
 import { useEffect, useRef, useState } from 'react';
 import Mascot from '../activities/Mascot';
@@ -23,7 +24,7 @@ export default function Pexeso({ content, back }: { content: Content; back: () =
   if (level === null || !levels.includes(level)) {
     return (
       <main className="screen activity" data-testid="pex-levels">
-        <header className="topbar row"><button className="kbtn" onClick={back}>Zpět</button></header>
+        <header className="topbar row"><HomeButton onClick={back} /></header>
         <Mascot mood="premysli" />
         <h1>Pexeso</h1>
         <p className="muted">Najdi obrázek a jeho první slabiku.</p>
@@ -122,7 +123,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
   return (
     <main className="screen activity pex" data-testid="pex-game" data-pairs={pairs} key={round}>
       <header className="topbar row">
-        <button className="kbtn" onClick={() => { cancelEnd(); stopSay(); back(); }}>Zpět</button>
+        <HomeButton onClick={() => { cancelEnd(); stopSay(); back(); }} />
         {done && <button className="kbtn kbtn-primary" data-testid="pex-wait-restart" onClick={restart}>Hrát znovu</button>}
         <p className="muted" data-testid="pex-progress">Páry {found.length} z {pairs}</p>
       </header>
