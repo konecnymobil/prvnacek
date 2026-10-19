@@ -46,9 +46,10 @@ test('MP2 Co bylo dřív?: špatné pořadí se vrátí, správné projde', asyn
   for (let k = 0; k < 5; k++) {
     const i = await idx(page); const order = (await page.getByTestId('mp2').getAttribute('data-order'))!.split(' ');
     if (k === 0) {
-      for (const e of [order[1], order[0], ...order.slice(2)]) await page.locator(`.xg-pic[data-pic="${e}"]`).click();
+      await page.locator(`.xg-pic[data-pic="${order[1]}"]`).click(); // špatný vagon se hned vrátí
       await wrongMsg(page);
       await expect(page.locator('.xg-pic:disabled')).toHaveCount(0);
+      await expect(page.locator('.xg-wagon').first()).toHaveText('');
       await page.locator(`.xg-pic[data-pic="${order[0]}"]`).click(); await page.locator('.xg-wagon[data-k="0"]').click(); // vrátit vagon
       await expect(page.locator('.xg-pic:disabled')).toHaveCount(0);
     }

@@ -43,13 +43,13 @@ export function distractorCount(word: Word, taskIndex: number): number {
 
 /** Kolo Slož slovo: běžná fronta + aspoň jedno nové slovo lekce (composeNewWordIds), je-li dostupné. */
 export function composeQueue(all: Word[], lesson: Lesson, priority: Set<string>): Word[] {
-  const q = buildWordQueue(all, lesson, priority);
+  const q = buildWordQueue(all, lesson, priority, 'A7');
   const news = new Set(lesson.composeNewWordIds ?? []);
   if (q.some((w) => news.has(w.id))) return q;
   const add = shuffle(all.filter((w) => news.has(w.id)))[0];
   if (!add) return q;
   const out = q.slice();
   if (out.length >= MAX_WORD_ROUND) out.splice(Math.floor(Math.random() * out.length), 1);
-  out.splice(Math.floor(Math.random() * (out.length + 1)), 0, add);
+  out.splice(1 + Math.floor(Math.random() * out.length), 0, add); // ne na začátek: hranice kol hlídá freshOrder
   return out;
 }

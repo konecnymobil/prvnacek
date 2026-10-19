@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
 import Mascot from '../activities/Mascot';
+import { drawFresh } from '../activities/fresh';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, pickPriority, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
 
@@ -58,7 +59,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const consonants = useMemo(() => letters.filter((l) => l.kind === 'consonant'), [letters]);
   const vowels = useMemo(() => letters.filter((l) => l.kind === 'vowel'), [letters]);
   const [n, setN] = useState(0);
-  const [target, setTarget] = useState<Syllable>(() => pickPriority(candidates, priority, true));
+  const [target, setTarget] = useState<Syllable>(() => drawFresh(`A4:${lesson.id}`, candidates, (s) => s.id, ROUND_SIZE, (a) => pickPriority(a, priority, true)));
   const [slots, setSlots] = useState<(Letter | null)[]>([null, null]);
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [solved, setSolved] = useState(false);
@@ -124,7 +125,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     }
     const others = candidates.filter((s) => s.id !== target.id);
     setN(n + 1);
-    setTarget(pickPriority(others.length ? others : candidates, priority, false));
+    setTarget(drawFresh(`A4:${lesson.id}`, others.length ? others : candidates, (s) => s.id, ROUND_SIZE, (a) => pickPriority(a, priority, false)));
     setSlots([null, null]);
     setSolved(false);
     setFailed(false);

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { MiniShell, useMiniRound } from './MiniRound';
 import { say } from '../activities/common';
+import { drawGenerated, drawRound, freshOrder, shuffle } from '../activities/fresh';
 
 export type SubjGameId = 'mp1' | 'mp2' | 'mp3' | 'me1' | 'me2';
 export const SUBJ_GAMES: { id: SubjGameId; subject: 'world' | 'english'; name: string; icon: string }[] = [
@@ -17,7 +18,6 @@ const ROUND = 5;
  *  (žádný požadavek na chybějící soubor); po dodání stačí přepnout na true. */
 const EN_AUDIO_READY = false;
 const en = (...ids: string[]): string[] => (EN_AUDIO_READY ? ids : []);
-const shuffle = <T,>(a: readonly T[]) => [...a].sort(() => Math.random() - 0.5);
 interface P { back: () => void; openAlbum: () => void }
 export default function SubjGame({ id, ...p }: P & { id: SubjGameId }) {
   return id === 'mp1' ? <Sort {...p} /> : id === 'mp2' ? <Order {...p} /> : id === 'mp3' ? <Road {...p} /> : id === 'me1' ? <Boxes {...p} /> : <Colour {...p} />;
@@ -30,7 +30,7 @@ const SORT_ITEMS: { e: string; name: string; box: 'school' | 'toys'; a: string }
   { e: '🧸', a: 'snd-pv-w-medvidek', name: 'medvídek', box: 'toys' }, { e: '⚽', a: 'snd-pv-w-mic', name: 'míč', box: 'toys' }, { e: '🪀', a: 'snd-pv-w-jojo', name: 'jojo', box: 'toys' }, { e: '🚂', a: 'snd-pv-w-vlacek', name: 'vláček', box: 'toys' }, { e: '🪁', a: 'snd-pv-w-drak', name: 'drak', box: 'toys' },
 ];
 function Sort({ back, openAlbum }: P) {
-  const tasks = useMemo(() => shuffle(SORT_ITEMS).slice(0, ROUND), []);
+  const tasks = useMemo(() => mp1Tasks(), []);
   const r = useMiniRound(ROUND, 'mp1', 'world');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   const box = (b: 'school' | 'toys', icon: string, label: string) => (
@@ -49,14 +49,16 @@ function Sort({ back, openAlbum }: P) {
 /** MP2: klepání v pořadí → obrázky do vagonů zleva; klepnutí na vagon vrátí od něj dál. */
 const SEQS: string[][] = [['🌱', '🌿', '🌻'], ['🥚', '🐣', '🐔'], ['🌅', '☀️', '🌙'], ['🍂', '⛄', '🌷', '🏖️'], ['🛏️', '🪥', '🎒', '🏫']];
 function Order({ back, openAlbum }: P) {
-  const tasks = useMemo(() => SEQS.map((s) => ({ s, shown: shuffle(s) })), []);
+  const tasks = useMemo(() => mp2Tasks(), []);
   const r = useMiniRound(ROUND, 'mp2', 'world');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   const [train, setTrain] = useState<string[]>([]);
   useEffect(() => setTrain([]), [r.api.i]);
   const add = (e: string) => {
+    // špatný vagon se hned vrátí (klidně), vláček se nevyprazdňuje
+    if (e !== t.s[train.length]) { r.api.no(); return; }
     const next = [...train, e]; setTrain(next);
-    if (next.length === t.s.length) { if (next.join() === t.s.join()) r.api.ok(); else { r.api.no(); window.setTimeout(() => setTrain([]), 600); } }
+    if (next.length === t.s.length) r.api.ok();
   };
   return (
     <MiniShell title="Co bylo dřív?" subjCls={W.cls} round={r} count={ROUND} nameAudio={['snd-pv-p-game-drive']} prompt={['snd-pv-p-order']} intro="Ťukej na obrázky tak, jak jdou po sobě." back={back} openAlbum={openAlbum}>
@@ -70,7 +72,7 @@ function Order({ back, openAlbum }: P) {
 
 /** MP3: ulice s přechodem; ťukni na místo, kde přejdeš (3 kandidáti, jen jeden na zebře). Semafor nepovinný. */
 function Road({ back, openAlbum }: P) {
-  const tasks = useMemo(() => Array.from({ length: ROUND }, () => { const pos = shuffle([20, 50, 80]); return { zebra: pos[0], spots: [20, 50, 80] }; }), []);
+  const tasks = useMemo(() => mp3Tasks(), []);
   const r = useMiniRound(ROUND, 'mp3', 'world');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   return (
@@ -93,7 +95,7 @@ function Road({ back, openAlbum }: P) {
 /** ME1: „Find the pencil!“ – 3–4 krabice; klepnutí otevře, špatná se po 1,2 s zavře. */
 const VOCAB = [{ w: 'pencil', e: '✏️' }, { w: 'book', e: '📕' }, { w: 'bag', e: '🎒' }, { w: 'crayon', e: '🖍️' }, { w: 'ruler', e: '📏' }, { w: 'scissors', e: '✂️' }];
 function Boxes({ back, openAlbum }: P) {
-  const tasks = useMemo(() => shuffle(VOCAB).slice(0, ROUND).map((v) => ({ v, boxes: shuffle([v, ...shuffle(VOCAB.filter((x) => x !== v)).slice(0, 3)]) })), []);
+  const tasks = useMemo(() => me1Tasks(), []);
   const r = useMiniRound(ROUND, 'me1', 'english');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   const [open, setOpen] = useState<string[]>([]);
@@ -126,7 +128,7 @@ const SHAPES: { w: string; d: string }[] = [
 ];
 export const COLOUR_THRESHOLD = 0.5;
 function Colour({ back, openAlbum }: P) {
-  const tasks = useMemo(() => Array.from({ length: ROUND }, (_, k) => ({ s: SHAPES[k % SHAPES.length], c: shuffle(COLOURS)[0] })), []);
+  const tasks = useMemo(() => me2Tasks(), []);
   const r = useMiniRound(ROUND, 'me2', 'english');
   const t = tasks[Math.min(r.api.i, ROUND - 1)];
   const cv = useRef<HTMLCanvasElement>(null);
@@ -174,3 +176,11 @@ function Colour({ back, openAlbum }: P) {
     </MiniShell>
   );
 }
+
+/** Generátory kol (exportované kvůli testu opakování). Stejná otázka se v kole ani na hranici kol neopakuje. */
+export const mp1Tasks = () => drawRound('mp1', SORT_ITEMS, ROUND, (x) => x.a);
+/** Pořadí sad se míchá (naposledy hrané na konec) a obrázky nikdy nejsou rovnou ve správném pořadí. */
+export const mp2Tasks = () => freshOrder('mp2', shuffle(SEQS), (s) => s.join('')).map((s) => { let shown = shuffle(s); while (shown.join() === s.join()) shown = shuffle(s); return { s, shown }; });
+export const mp3Tasks = () => drawGenerated('mp3', ROUND, () => ({ zebra: shuffle([20, 50, 80])[0], spots: [20, 50, 80] }), (t) => String(t.zebra), 3);
+export const me1Tasks = () => drawRound('me1', VOCAB, ROUND, (v) => v.w).map((v) => ({ v, boxes: shuffle([v, ...shuffle(VOCAB.filter((x) => x !== v)).slice(0, 3)]) }));
+export const me2Tasks = () => drawGenerated('me2', ROUND, () => ({ s: shuffle(SHAPES)[0], c: shuffle(COLOURS)[0] }), (t) => t.s.w, SHAPES.length);
