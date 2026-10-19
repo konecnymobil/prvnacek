@@ -11,7 +11,7 @@ export const MATH_LESSONS: MathLesson[] = [
   { id: 'm6', title: '0–5', nums: [0, 1, 2, 3, 4, 5], newDigit: 0 },
 ];
 export const MATH_PROGRESS_KEY = 'math:progress';
-export type MathErr = 'count-off-by-one' | 'digit-confusion';
+export type MathErr = 'count-off-by-one' | 'digit-confusion' | 'compare-wrong';
 export interface MathLessonProgress { rounds: number; correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }
 export type MathProgress = Record<string, MathLessonProgress>;
 
@@ -47,7 +47,7 @@ export function buildRound(l: MathLesson): MathTask[] {
   const kinds: MathTask['kind'][] = l.nums.length > 1 ? ['count', 'find', 'compare', 'count', 'find'] : ['count', 'find', 'count', 'find', 'count'];
   const tasks: MathTask[] = kinds.map((k) => {
     const n = rnd(l.nums.filter((x) => k !== 'count' || x > 0));
-    if (k === 'compare') { const a = rnd(l.nums); const b = Math.random() < 0.25 ? a : rnd(l.nums); return { kind: 'compare', a, b, item: rnd(ITEMS) }; }
+    if (k === 'compare') { const a = rnd(l.nums); let b = rnd(l.nums); while (b === a) b = rnd(l.nums); /* A-03: „Kde je jich víc?“ jen při různých počtech */ return { kind: 'compare', a, b, item: rnd(ITEMS) }; }
     return k === 'count' ? { kind: 'count', n, item: rnd(ITEMS), options: options(l.nums, n) } : { kind: 'find', n, options: options(l.nums, n) };
   });
   return [...tasks, { kind: 'trace', digit: l.newDigit }];

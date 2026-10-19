@@ -33,7 +33,7 @@ test('offline: service worker uloží aplikaci, obsah, písmo a všechny zvuky',
   ]) {
     expect(result, path).toContain(path);
   }
-  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(222);
+  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(240);
   expect(result.filter((p) => /\/assets\/Andika-.*\.woff2$/.test(p)).length).toBe(3);
   expect(result.filter((p) => /\/assets\/PlaywriteCZ-.*\.woff2$/.test(p)).length).toBe(1);
   expect(result).toContain('/prvnacek/licenses/OFL-PlaywriteCZ.txt');

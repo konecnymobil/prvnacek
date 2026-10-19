@@ -44,10 +44,13 @@ export const GAMES: GameDef[] = [
     id: 'ztratilo', name: 'Co se ztratilo?', icon: '🔎', text: 'Najdi chybějící písmenko.', minLesson: () => 3,
     build: (c, idx) => {
       const known = knownLetters(c, idx).filter((l) => !l.isLong || l.upper === 'Á');
+      const texts = new Set(c.words.map((x) => x.text));
       return shuffle(picWords(c, idx).filter((w) => w.text.length >= 2)).slice(0, GAME_ROUND).map((w) => {
         const gap = Math.floor(Math.random() * w.text.length);
         const ans = known.find((l) => l.upper === w.text[gap]) ?? c.letters.find((l) => l.upper === w.text[gap])!;
-        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap]), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: ['snd-p-mh-ztratilo'], hint: [w.audioId], ok: [w.audioId] };
+        // A-02: rozptylovač nesmí dát jiné skutečné slovo (LES/PES, PUSA/PUMA…)
+        const realWord = (l: { upper: string }) => texts.has(w.text.slice(0, gap) + l.upper + w.text.slice(gap + 1));
+        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap] && !realWord(l)), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: ['snd-p-mh-ztratilo'], hint: [w.audioId], ok: [w.audioId] };
       });
     },
   },

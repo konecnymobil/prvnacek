@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "manifest",
-  "contentVersion": "2026-10-17.3",
+  "contentVersion": "2026-10-19.5",
   "defaultOrderId": "duha",
   "scripts": {
     "defaultMode": "upperPrint",
@@ -97,6 +97,11 @@
       "path": "weekly-summary.json",
       "kind": "weeklySummary",
       "schema": "schema/weekly-summary.schema.json"
+    },
+    {
+      "path": "lesson-steps.json",
+      "kind": "lessonSteps",
+      "schema": "schema/lesson-steps.schema.json"
     },
     {
       "path": "math/audio-script.json",

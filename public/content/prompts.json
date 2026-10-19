@@ -94,6 +94,62 @@
       "audioId": "snd-p-a7"
     },
     {
+      "id": "p-a1-tap-picture-mid",
+      "category": "instruction",
+      "activity": "A1",
+      "text": "Klepni na obrázek. Slyšíš tu hlásku uprostřed slova?",
+      "audioId": "snd-p-a1-tap-picture-mid"
+    },
+    {
+      "id": "p-a3-starts-with",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Začíná slovo na hlásku",
+      "audioId": "snd-p-a3-starts-with"
+    },
+    {
+      "id": "p-a3-contains",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Slyšíš ve slově hlásku",
+      "audioId": "snd-p-a3-contains"
+    },
+    {
+      "id": "p-a3-which-first",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Na jakou hlásku slovo začíná?",
+      "audioId": "snd-p-a3-which-first"
+    },
+    {
+      "id": "p-yes",
+      "category": "general",
+      "activity": null,
+      "text": "Ano.",
+      "audioId": "snd-p-yes"
+    },
+    {
+      "id": "p-no",
+      "category": "general",
+      "activity": null,
+      "text": "Ne.",
+      "audioId": "snd-p-no"
+    },
+    {
+      "id": "p-a6-pick",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.",
+      "audioId": "snd-p-a6-pick"
+    },
+    {
+      "id": "p-review-word",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si slovo a najdi ho.",
+      "audioId": "snd-p-review-word"
+    },
+    {
       "id": "p-find-letter",
       "category": "instruction",
       "activity": null,

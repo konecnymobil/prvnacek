@@ -64,7 +64,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
   useEffect(() => { void say(promptAudio(content, 'p-read-syllable')); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const done = () => { setStep('pick'); setMood('premysli'); setMessage('Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.'); };
+  const done = () => { setStep('pick'); setMood('premysli'); setMessage('Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.'); void say(promptAudio(content, 'p-a6-pick')); }; // A-11
 
   const choose = async (o: Syllable) => {
     if (solved || busy.current) return;
@@ -120,7 +120,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
       <p className={`feedback ${mood}`} role="status" data-testid="feedback">{message}</p>
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       {step === 'read' && (
-        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={done}>Přečetl(a) jsem</button></div>
+        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={done}>✓ Hotovo</button></div>
       )}
       {step === 'pick' && (
         <div className="choices" data-testid="read-options">
