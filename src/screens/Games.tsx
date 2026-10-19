@@ -115,7 +115,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
         {game === 'ztratilo' && t.show && <div className="game-word" data-testid="game-target">{hintOn && t.img && <img className="game-pale" src={t.img} alt="" />}<Glyphs forms={solved ? t.show : gapForms(t.show, t.gapIndex!)} form={form} /></div>}
         {game === 'detektiv' && t.show && <div className="game-lupa" data-testid="game-target">🔍 <Glyphs forms={t.show} form={form} /></div>}
         {game === 'obchod' && t.show && <div className="game-list" data-testid="game-target"><small>Nákupní lístek</small><Glyphs forms={t.show} form={form} /></div>}
-        {game === 'domecky' && t.img && <button className={`game-card${picked ? ' is-picked' : ''}`} data-testid="game-card" onClick={() => setPicked(true)}><img src={t.img} alt="obrázek" /></button>}
+        {game === 'domecky' && t.img && <button className={`game-card${picked ? ' is-picked' : ''}`} data-testid="game-card" data-word={t.word} onClick={() => { setPicked(true); if (t.word) void say([t.word]); }}><img src={t.img} alt="obrázek" /></button>}
         <div className={`game-opts${game === 'bublinky' ? ` sky${hintOn ? ' is-paused' : ''}` : ''}`}>
           {t.options.map((o, k) => (
             <button key={o.id} className={optCls(o.id) + (game === 'domecky' ? ' house' : game === 'bublinky' ? ' bubble-opt' : '')} data-opt={o.id} style={game === 'bublinky' ? { animationDelay: `${k * -1.1}s` } : undefined}
