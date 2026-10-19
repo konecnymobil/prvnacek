@@ -72,7 +72,8 @@ async function playRound(page: Page, where: string): Promise<string[]> {
     if (i !== last) { last = i; still = 0; await page.waitForTimeout(200); sigs.push(await signature(page)); }
     if (++still > 60) { findings.push({ cat: 'zaseknutí', where, detail: `úloha ${i}: 60 klepnutí bez posunu` }); return sigs; }
     const hint = round.locator('.is-hint:not(:disabled)');
-    const opts = round.locator('button:not(:disabled):not(.game-hint):not([data-testid="game-quit"]):not([data-testid="back"])').filter({ hasNot: page.locator('.topbar') });
+    // jen herní plocha: ne tlačítka v horní liště (Zpět by hru opustil)
+    const opts = round.locator('button:not(:disabled):not(.game-hint):not(.topbar *)');
     const target = (await hint.count()) ? hint.first() : opts.nth(Math.floor(Math.random() * Math.max(1, await opts.count())));
     if (!(await opts.count()) && !(await hint.count())) { await page.waitForTimeout(250); continue; }
     const box = await target.boundingBox();
