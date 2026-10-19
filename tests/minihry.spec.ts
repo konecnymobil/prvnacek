@@ -93,3 +93,55 @@ test('Domečky: po pokynu zazní slovo k obrázku a znovu po ťuknutí na obráz
     await expect(page.getByTestId('game-end').or(page.locator(`[data-testid="game-round"]:not([data-index="${idx}"])`))).toBeVisible({ timeout: 10000 });
   }
 });
+
+test('Detektiv: nejdřív jen zvuk slabiky, text v lupě až po chybě jiným písmem; rozptylovače se liší jednou hláskou', async ({ page }) => {
+  test.setTimeout(120_000); // zvuky jdou za sebou (název hry, pokyn, slabika)
+  const index = new Set((JSON.parse(fs.readFileSync('public/audio/tts/index.json', 'utf8')).sounds as { audioId: string }[]).map((s) => s.audioId));
+  type Syl = { id: string; text: string; kind: string; usableInSyllableTasks: boolean; consonantLetterId: string | null; vowelLetterId: string; audioId: string };
+  const syls = (JSON.parse(fs.readFileSync('public/content/syllables.json', 'utf8')).syllables as Syl[]).filter((s) => s.kind === 'CV' && s.usableInSyllableTasks);
+  const byId = new Map(syls.map((s) => [s.id, s]));
+  expect(syls.length).toBeGreaterThan(0);
+  for (const s of syls) expect(index.has(s.audioId), `klip ${s.audioId} (${s.text}) chybí v index.json`).toBe(true);
+  const oneSound = (a: Syl, b: Syl) => (a.consonantLetterId === b.consonantLetterId) !== (a.vowelLetterId === b.vowelLetterId);
+  const cursive = (k: string | null) => k === 'cursive' || k === 'cursiveUpper';
+
+  const requested: string[] = [];
+  page.on('request', (r) => { const m = r.url().match(/audio\/tts\/(snd-[a-z0-9-]+)\.mp3/); if (m) requested.push(m[1]); });
+  await unlockAll(page);
+  await page.getByTestId('open-games').click();
+  await page.locator('.game-tile[data-game="detektiv"]').click();
+  const round = page.getByTestId('game-round');
+  await expect(round).toHaveAttribute('data-game', 'detektiv');
+  for (let k = 0; k < 3; k++) {
+    const idx = await round.getAttribute('data-index');
+    const lupa = page.getByTestId('game-target');
+    const word = (await lupa.getAttribute('data-word'))!;
+    const answer = syls.find((s) => s.audioId === word)!;
+    expect(answer, `cílová slabika ${word}`).toBeTruthy();
+    // na začátku jen zvuk: v lupě žádný text
+    await expect(lupa).toHaveAttribute('data-revealed', 'false');
+    await expect(lupa.locator('.lupa-text')).toHaveCount(0);
+    // po pokynu hned zazní slabika
+    await expect.poll(() => requested.includes('snd-p-mh-detektiv') && requested.lastIndexOf(word) > requested.lastIndexOf('snd-p-mh-detektiv'), { timeout: 30000 }).toBe(true);
+    // rozptylovače: každý se od cíle liší právě jednou hláskou
+    const ids = await round.locator('.game-opt').evaluateAll((els) => els.map((e) => e.getAttribute('data-opt')!));
+    expect(ids).toContain(answer.id);
+    expect(ids.length).toBeGreaterThanOrEqual(3);
+    for (const id of ids.filter((x) => x !== answer.id)) expect(oneSound(answer, byId.get(id)!), `${byId.get(id)?.text} vs ${answer.text}`).toBe(true);
+    // Zopakuj 🔊 přehraje pokyn i slabiku
+    const before = requested.length;
+    await page.getByRole('button', { name: 'Zopakuj zadání' }).click();
+    await expect.poll(() => requested.slice(before).includes(word), { timeout: 15000 }).toBe(true);
+    // chybná volba → text v lupě jako nápověda, jiným písmem než karty
+    const wrongId = ids.find((x) => x !== answer.id)!;
+    await round.locator(`.game-opt[data-opt="${wrongId}"]`).click();
+    await expect(page.getByTestId('game-msg')).toContainText(/Skoro|Zastavíme/);
+    await expect(lupa).toHaveAttribute('data-revealed', 'true');
+    const lupaText = lupa.locator('.lupa-text');
+    await expect(lupaText).toHaveText(new RegExp(`^${answer.text}$`, 'i'));
+    const cardScript = await round.locator(`.game-opt[data-opt="${answer.id}"] .glyph`).first().getAttribute('data-script');
+    expect(cursive(await lupaText.getAttribute('data-script'))).not.toBe(cursive(cardScript));
+    await round.locator(`.game-opt[data-opt="${answer.id}"]`).click();
+    await expect(page.getByTestId('game-end').or(page.locator(`[data-testid="game-round"]:not([data-index="${idx}"])`))).toBeVisible({ timeout: 10000 });
+  }
+});
