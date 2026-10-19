@@ -1,5 +1,6 @@
 /** Sdílený běh kola miniher předmětů (v0.8, jako js/minihry.js): chyba = klidně + otřes, nápověda až po 1. pokusu,
  *  3 chyby po sobě → „zastavíme se“, konec = nálepka do sady předmětu a odkaz na jeho záložku v albu. */
+import HomeButton from '../components/HomeButton';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Mascot from '../activities/Mascot';
 import { say, stopSay } from '../activities/common';
@@ -8,7 +9,7 @@ import { getSetting, setSetting } from '../storage/db';
 
 export const SUBJ_GAMES_KEY = 'games:rounds';
 const PRAISE = ['snd-p-praise-1', 'snd-p-praise-2', 'snd-p-praise-3', 'snd-p-praise-4', 'snd-p-praise-5'];
-const PRAISE_TEXT = ['Výborně!', 'Správně!', 'Super!', 'Paráda!', 'To je ono!'];
+const PRAISE_TEXT = ['Výborně!', 'Správně!', 'Super, to se ti povedlo!', 'Paráda!', 'To je ono!']; // = texty klipů (A-24)
 
 export interface MiniApi { msg?: string; i: number; tries: number; hintOn: boolean; calm: boolean; solved: boolean; ok: (sounds?: string[], delay?: number) => void; no: (msg?: string, sounds?: string[]) => void; setMsg: (m: string) => void }
 
@@ -72,7 +73,7 @@ export function MiniShell({ nameAudio = [], title, subjCls, round, count, prompt
   return (
     <main className={`screen activity game xg ${subjCls}`} data-testid="game-round" data-index={api.i}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
         <span className="small">{title}</span>
         <div className="progress" data-testid="game-dots">{Array.from({ length: count }, (_, k) => <i key={k} className={k < api.i ? 'done' : k === api.i ? 'now' : ''} />)}</div>
         {api.tries > 0 && onHint && <button className="kbtn game-hint" data-testid="game-hint" aria-label="Nápověda" onClick={() => { round.showHint(); onHint(); }}>🔍</button>}

@@ -33,9 +33,10 @@ export default function SyncPanel({ onSynced }: { onSynced: () => void }) {
           <p><button className="btn" data-testid="sync-create" disabled={busy} onClick={() => run(async () => { await createFamily(needUrl()); return `Rodina založena. ${await sync()}`; })}>Zapnout a založit rodinu</button></p>
           <p className="small muted">Nebo se připoj kódem z jiného zařízení rodiny:</p>
           <p>
-            <input data-testid="sync-code" value={code} placeholder="KOT-482-LAMA" autoCapitalize="characters" onChange={(e) => setCode(e.target.value)} disabled={busy} />{' '}
+            <input data-testid="sync-code" value={code} placeholder="KOT-482-LAMA" aria-describedby="sync-code-help" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck={false} inputMode="text" onChange={(e) => setCode(e.target.value)} disabled={busy} />{' '}
             <button className="btn" data-testid="sync-join" disabled={busy} onClick={() => run(async () => { await joinWithCode(needUrl(), code); setCode(''); return `Připojeno. ${await sync()}`; })}>Připojit se kódem</button>
           </p>
+          <p className="small muted" id="sync-code-help">Velikost písmen, mezery ani pomlčky nevadí.</p>
         </>
       )}
       {paired && (

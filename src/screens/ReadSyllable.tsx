@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -5,9 +6,10 @@ import type { Content } from '../content/load';
 import type { Lesson, Syllable } from '../content/types';
 import { GlyphText, useTaskForm, type FormKey } from '../components/Glyphs';
 import Mascot from '../activities/Mascot';
+import { drawFresh } from '../activities/fresh';
 import { ROUND_SIZE, randomPrompt, promptAudio, recordAttempt, say, stopSay, pickPriority, usePriorityIds, shuffle } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
-import { allUsableSyllables, lessonSyllables } from './SyllableActivity';
+import { allUsableSyllables, practiceSyllables, syllableRoundSize } from './SyllableActivity';
 
 interface Props { content: Content; lesson: Lesson; back: () => void }
 
@@ -22,9 +24,9 @@ export function SyllableArc({ text, form }: { text: string; form?: FormKey }) {
 }
 
 /** Vybere cíl a 2 rozptylovače (jiné otevřené slabiky; nejraději se stejnou souhláskou nebo samohláskou). */
-function makeTask(pool: Syllable[], candidates: Syllable[], priority: Set<string>, first: boolean, prev?: string) {
+export function makeTask(key: string, pool: Syllable[], candidates: Syllable[], priority: Set<string>, first: boolean, prev?: string) {
   const others = candidates.filter((s) => s.id !== prev);
-  const target = pickPriority(others.length ? others : candidates, priority, first);
+  const target = drawFresh(key, others.length ? others : candidates, (s) => s.id, ROUND_SIZE, (a) => pickPriority(a, priority, first));
   const rest = pool.filter((s) => s.id !== target.id && s.audioId !== target.audioId);
   const near = shuffle(rest.filter((s) => s.consonantLetterId === target.consonantLetterId || s.vowelLetterId === target.vowelLetterId));
   const far = shuffle(rest.filter((s) => !near.includes(s)));
@@ -40,14 +42,15 @@ export default function ReadSyllable(props: Props) {
 }
 
 function Round({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
+  const ROUND = syllableRoundSize(lesson);
   const pool = useMemo(() => allUsableSyllables(content, lesson), [content, lesson]);
   const candidates = useMemo(() => {
-    const base = lessonSyllables(content, lesson);
+    const base = practiceSyllables(content, lesson);
     const extra = pool.filter((s) => priority.has(s.id) && !base.some((b) => b.id === s.id));
     return [...base, ...extra];
   }, [content, lesson, pool, priority]);
   const [n, setN] = useState(0);
-  const [task, setTask] = useState(() => makeTask(pool, candidates, priority, true));
+  const [task, setTask] = useState(() => makeTask(`A6:${lesson.id}`, pool, candidates, priority, true));
   const [step, setStep] = useState<'read' | 'pick'>('read');
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [message, setMessage] = useState('Přečti si slabiku nahlas.');
@@ -64,7 +67,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   // Pokyn na začátku každé úlohy (rodičova nahrávka má přednost – řeší say()).
   useEffect(() => { void say(promptAudio(content, 'p-read-syllable')); }, [n]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const done = () => { setStep('pick'); setMood('premysli'); setMessage('Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.'); };
+  const done = () => { setStep('pick'); setMood('premysli'); setMessage('Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.'); void say(promptAudio(content, 'p-a6-pick')); }; // A-11
 
   const choose = async (o: Syllable) => {
     if (solved || busy.current) return;
@@ -86,24 +89,24 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   auto.target.current = () => next();
   const next = () => {
     stopSay();
-    if (n + 1 >= ROUND_SIZE) { setN(ROUND_SIZE); void say(promptAudio(content, 'p-round-end')); return; }
+    if (n + 1 >= ROUND) { setN(ROUND); void say(promptAudio(content, 'p-round-end')); return; }
     setN(n + 1);
-    setTask(makeTask(pool, candidates, priority, false, task.target.id));
+    setTask(makeTask(`A6:${lesson.id}`, pool, candidates, priority, false, task.target.id));
     setStep('read'); setSolved(false); setFailed(false); setWrongIds([]); setMood('premysli');
     setMessage('Přečti si slabiku nahlas.');
   };
 
   if (pool.length < 3) {
-    return <main className="screen activity"><p className="notice">Slabiky budou k dispozici od lekce A.</p><button className="kbtn" onClick={back}>Zpět</button></main>;
+    return <main className="screen activity"><p className="notice">Slabiky budou k dispozici od lekce A.</p><HomeButton onClick={back} /></main>;
   }
-  useStickerOnDone('cviceni', n >= ROUND_SIZE);
-  useTaskLog('A6', lesson.id, n >= ROUND_SIZE);
-  if (n >= ROUND_SIZE) {
+  useStickerOnDone('cviceni', n >= ROUND);
+  useTaskLog('A6', lesson.id, n >= ROUND);
+  if (n >= ROUND) {
     return (
       <main className="screen activity" data-testid="round-end">
         <Mascot mood="radost" />
         <h1>Hotovo! To bylo skvělé hraní.</h1>
-        <p className="muted">Napoprvé správně: {correctCount} z {ROUND_SIZE}</p>
+        <p className="muted">Napoprvé správně: {correctCount} z {ROUND}</p>
         <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button></div>
       </main>
     );
@@ -112,15 +115,15 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
   return (
     <main className="screen activity" data-testid="read-activity" data-target={task.target.id}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
-        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
+        <HomeButton onClick={back} />
+        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND}</p>
       </header>
       <div className="stage"><Mascot mood={mood} /></div>
       <div className="read-syll" data-testid="read-syllable"><SyllableArc text={task.target.text} form={form} /></div>
       <p className={`feedback ${mood}`} role="status" data-testid="feedback">{message}</p>
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       {step === 'read' && (
-        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={done}>Přečetl(a) jsem</button></div>
+        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={done}>✓ Hotovo</button></div>
       )}
       {step === 'pick' && (
         <div className="choices" data-testid="read-options">

@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "kind": "worldGames",
+  "mp1": {
+    "boxes": [
+      {
+        "id": "school",
+        "icon": "🎒",
+        "label": "do školy",
+        "audioId": "snd-pv-w-do-skoly"
+      },
+      {
+        "id": "toys",
+        "icon": "🧸",
+        "label": "hračky",
+        "audioId": "snd-pv-w-hracky"
+      },
+      {
+        "id": "clothes",
+        "icon": "👕",
+        "label": "oblečení",
+        "audioId": "snd-pv-w-obleceni"
+      }
+    ],
+    "items": [
+      {
+        "id": "tuzka",
+        "emoji": "✏️",
+        "label": "tužka",
+        "box": "school",
+        "audioId": "snd-pv-w-tuzka"
+      },
+      {
+        "id": "pravitko",
+        "emoji": "📏",
+        "label": "pravítko",
+        "box": "school",
+        "audioId": "snd-pv-w-pravitko"
+      },
+      {
+        "id": "kniha",
+        "emoji": "📕",
+        "label": "kniha",
+        "box": "school",
+        "audioId": "snd-pv-w-kniha"
+      },
+      {
+        "id": "nuzky",
+        "emoji": "✂️",
+        "label": "nůžky",
+        "box": "school",
+        "audioId": "snd-pv-w-nuzky"
+      },
+      {
+        "id": "pastelka",
+        "emoji": "🖍️",
+        "label": "pastelka",
+        "box": "school",
+        "audioId": "snd-pv-w-pastelka"
+      },
+      {
+        "id": "medvidek",
+        "emoji": "🧸",
+        "label": "medvídek",
+        "box": "toys",
+        "audioId": "snd-pv-w-medvidek"
+      },
+      {
+        "id": "mic",
+        "emoji": "⚽",
+        "label": "míč",
+        "box": "toys",
+        "audioId": "snd-pv-w-mic"
+      },
+      {
+        "id": "jojo",
+        "emoji": "🪀",
+        "label": "jojo",
+        "box": "toys",
+        "audioId": "snd-pv-w-jojo"
+      },
+      {
+        "id": "vlacek",
+        "emoji": "🚂",
+        "label": "vláček",
+        "box": "toys",
+        "audioId": "snd-pv-w-vlacek"
+      },
+      {
+        "id": "drak",
+        "emoji": "🪁",
+        "label": "drak",
+        "box": "toys",
+        "audioId": "snd-pv-w-drak"
+      },
+      {
+        "id": "cepice",
+        "emoji": "🧢",
+        "label": "čepice",
+        "box": "clothes",
+        "audioId": "snd-pv-w-cepice"
+      },
+      {
+        "id": "bunda",
+        "emoji": "🧥",
+        "label": "bunda",
+        "box": "clothes",
+        "audioId": "snd-pv-w-bunda"
+      },
+      {
+        "id": "ponozky",
+        "emoji": "🧦",
+        "label": "ponožky",
+        "box": "clothes",
+        "audioId": "snd-pv-w-ponozky"
+      },
+      {
+        "id": "rukavice",
+        "emoji": "🧤",
+        "label": "rukavice",
+        "box": "clothes",
+        "audioId": "snd-pv-w-rukavice"
+      },
+      {
+        "id": "sala",
+        "emoji": "🧣",
+        "label": "šála",
+        "box": "clothes",
+        "audioId": "snd-pv-w-sala"
+      }
+    ],
+    "levels": [
+      {
+        "id": "p1",
+        "boxIds": [
+          "school",
+          "toys"
+        ],
+        "unlock": null
+      },
+      {
+        "id": "p2",
+        "boxIds": [
+          "school",
+          "toys",
+          "clothes"
+        ],
+        "unlock": "2 dokončená kola P1 s ≥ 4 z 5 napoprvé (prvouka zatím nemá lekce, A-30)"
+      }
+    ],
+    "roundRule": "5 věcí, každá jednou, jen z krabic úrovně; nejvýš 2× stejná krabice za sebou."
+  },
+  "mp2": {
+    "sequences": [
+      {
+        "id": "rostlinka",
+        "steps": [
+          "🌱",
+          "🌿",
+          "🌻"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-rostlinka"
+      },
+      {
+        "id": "kure",
+        "steps": [
+          "🥚",
+          "🐣",
+          "🐔"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-kure"
+      },
+      {
+        "id": "den",
+        "steps": [
+          "🌅",
+          "☀️",
+          "🌙"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-den"
+      },
+      {
+        "id": "obdobi",
+        "steps": [
+          "🍂",
+          "⛄",
+          "🌷",
+          "🏖️"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-obdobi"
+      },
+      {
+        "id": "skola",
+        "steps": [
+          "🛏️",
+          "🪥",
+          "🎒",
+          "🏫"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-skola"
+      },
+      {
+        "id": "jablko",
+        "steps": [
+          "🌸",
+          "🍏",
+          "🍎"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-jablko"
+      },
+      {
+        "id": "rust",
+        "steps": [
+          "👶",
+          "🧒",
+          "🧑"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-rust"
+      },
+      {
+        "id": "chleba",
+        "steps": [
+          "🌾",
+          "🍞",
+          "🥪"
+        ],
+        "narrationAudioId": "snd-pv-p-seq-chleba"
+      }
+    ],
+    "roundRule": "5 z 8 sekvencí v náhodném pořadí, nikdy dvakrát v kole. Zamíchání nesmí být už správné pořadí. Po správném seřazení zazní vyprávění (narrationAudioId), vagony se rozsvítí postupně."
+  },
+  "mp3": {
+    "taskTypes": [
+      {
+        "id": "crossing",
+        "promptAudioId": "snd-pv-p-where-cross",
+        "okAudioId": "snd-pv-p-crossing",
+        "text": "Kde přejdeš? 3 místa: přechod, místo mezi zaparkovanými auty, zatáčka. Správně je jen přechod."
+      },
+      {
+        "id": "look",
+        "promptAudioId": "snd-pv-p-look",
+        "stepAudioIds": [
+          "snd-pv-w-vlevo",
+          "snd-pv-w-vpravo",
+          "snd-pv-w-vlevo"
+        ],
+        "text": "Dítě stojí u přechodu: ťukne vlevo → vpravo → vlevo (každé ťuknutí řekne směr). Špatné pořadí = ukázat znovu."
+      },
+      {
+        "id": "light",
+        "promptAudioId": "snd-pv-p-light",
+        "buttonAudioIds": {
+          "go": "snd-pv-w-jdu",
+          "wait": "snd-pv-w-cekam"
+        },
+        "feedbackAudioIds": {
+          "red": "snd-pv-p-red-wait",
+          "green": "snd-pv-p-green-go"
+        },
+        "text": "Semafor pro chodce: červený panáček → správně „Čekám“, zelený → „Jdu“ a připomínka rozhlédnutí."
+      }
+    ],
+    "roundRule": "5 úloh: aspoň 1 z každého typu, nikdy stejný typ 2× za sebou (žádné dvě úlohy stejného typu po sobě). Bez scénáře „auto za autobusem“. Volně odemčeno.",
+    "excluded": [
+      "auto za autobusem (rozhodnutí Jiřího)"
+    ]
+  }
+}

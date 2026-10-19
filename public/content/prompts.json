@@ -94,6 +94,62 @@
       "audioId": "snd-p-a7"
     },
     {
+      "id": "p-a1-tap-picture-mid",
+      "category": "instruction",
+      "activity": "A1",
+      "text": "Klepni na obrázek. Slyšíš tu hlásku uprostřed slova?",
+      "audioId": "snd-p-a1-tap-picture-mid"
+    },
+    {
+      "id": "p-a3-starts-with",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Začíná slovo na hlásku",
+      "audioId": "snd-p-a3-starts-with"
+    },
+    {
+      "id": "p-a3-contains",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Slyšíš ve slově hlásku",
+      "audioId": "snd-p-a3-contains"
+    },
+    {
+      "id": "p-a3-which-first",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Na jakou hlásku slovo začíná?",
+      "audioId": "snd-p-a3-which-first"
+    },
+    {
+      "id": "p-yes",
+      "category": "general",
+      "activity": null,
+      "text": "Ano.",
+      "audioId": "snd-p-yes"
+    },
+    {
+      "id": "p-no",
+      "category": "general",
+      "activity": null,
+      "text": "Ne.",
+      "audioId": "snd-p-no"
+    },
+    {
+      "id": "p-a6-pick",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.",
+      "audioId": "snd-p-a6-pick"
+    },
+    {
+      "id": "p-review-word",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si slovo a najdi ho.",
+      "audioId": "snd-p-review-word"
+    },
+    {
       "id": "p-find-letter",
       "category": "instruction",
       "activity": null,
@@ -232,6 +288,104 @@
       "activity": null,
       "text": "Kam půjdeme dnes?",
       "audioId": "snd-p-subject-pick"
+    },
+    {
+      "id": "p-rw-name",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka do ohrádky.",
+      "audioId": "snd-p-rw-name"
+    },
+    {
+      "id": "p-rw-goal",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček.",
+      "audioId": "snd-p-rw-goal"
+    },
+    {
+      "id": "p-rw-pick-gate",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Vyber bránu.",
+      "audioId": "snd-p-rw-pick-gate"
+    },
+    {
+      "id": "p-rw-gate-plus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus jedna",
+      "audioId": "snd-p-rw-gate-plus-1"
+    },
+    {
+      "id": "p-rw-gate-plus-2",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus dvě",
+      "audioId": "snd-p-rw-gate-plus-2"
+    },
+    {
+      "id": "p-rw-gate-minus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "mínus jedna",
+      "audioId": "snd-p-rw-gate-minus-1"
+    },
+    {
+      "id": "p-rw-exact",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Přesně tolik!",
+      "audioId": "snd-p-rw-exact"
+    },
+    {
+      "id": "p-rw-too-many",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich moc. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-many"
+    },
+    {
+      "id": "p-rw-too-few",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich málo. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-few"
+    },
+    {
+      "id": "p-rw-show-path",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Takhle to šlo.",
+      "audioId": "snd-p-rw-show-path"
+    },
+    {
+      "id": "p-rw-unlock",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka na tebe čekají. Můžeš si zahrát.",
+      "audioId": "snd-p-rw-unlock"
+    },
+    {
+      "id": "p-rw-locked",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Ještě kolo procvičování a zvířátka se vrátí.",
+      "audioId": "snd-p-rw-locked"
+    },
+    {
+      "id": "p-rw-done-today",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka už dnes spí. Zítra zase.",
+      "audioId": "snd-p-rw-done-today"
+    },
+    {
+      "id": "p-rw-back",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka jsou doma. Jdeme zase procvičovat.",
+      "audioId": "snd-p-rw-back"
     },
     {
       "id": "p-praise-1",

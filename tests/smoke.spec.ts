@@ -17,8 +17,10 @@ test('obsah se načte z JSON (pořadí Duhová řada)', async ({ page }) => {
   await page.goto('./');
   const row = page.getByTestId('lesson-row');
   await expect(row.getByRole('button').locator('[data-script="upperPrint"]')).toHaveText(['M', 'A', 'L', 'E', 'S', 'O', 'P', 'U', 'I']);
-  await expect(page.getByTestId('content-version')).toContainText(/Obsah \d{4}-\d{2}-\d{2}\.\d+/);
   await expect(page.getByTestId('content-error')).toHaveCount(0);
+  await expect(page.getByTestId('content-version')).toHaveCount(0); // vývojářský řádek není na domově, je v O aplikaci
+  await page.getByTestId('open-about').click();
+  await expect(page.getByTestId('content-version')).toContainText(/Obsah \d{4}-\d{2}-\d{2}\.\d+/);
 });
 
 test('přepínání obrazovek nemění URL ani historii', async ({ page }) => {

@@ -121,6 +121,8 @@ export interface LettersFile extends FileHeader<"letters"> {
 
 // ---------- syllables.json ----------
 export interface Syllable {
+  /** 19.x: slabiky, které se snadno spletou (MA ↔ MÁ). Symetrické; ve starším obsahu chybí. */
+  confusableWith?: SyllableId[];
   id: SyllableId;
   text: string;                // "MA" (velká písmena)
   forms: Forms;                // {upperPrint:"MA", lowerPrint:"ma", cursive:"ma"}
@@ -148,6 +150,9 @@ export interface SyllablesFile extends FileHeader<"syllables"> {
 // ---------- words.json ----------
 export type PartOfSpeech = "noun" | "verb" | "adj" | "adv" | "function";
 export interface Word {
+  /** 19.x: skupina snadno zaměnitelných obrázků (PUMA × LAMA × MULA) a ostatní slova té skupiny. */
+  similarImageGroup?: string | null;
+  confusableWith?: WordId[];
   id: WordId;
   text: string;                // "MÁMA"
   forms: Forms;
@@ -372,9 +377,12 @@ export interface TestRulesFile extends FileHeader<"testRules"> {
 export type WeeklyMetricId =
   | "minutesTotal" | "sessions" | "activeDays" | "avgSessionMinutes" | "ratedTasks" | "successRatio"
   | "currentLessonSuccessRatio" | "lettersMastered" | "syllablesMastered" | "wordsMastered" | "newlyMastered"
-  | "testsTaken" | "lessonsApproved" | "recommendedForTest" | "currentLessonApproved" | "frustrationSignals" | "topErrorCount";
+  | "testsTaken" | "lessonsApproved" | "recommendedForTest" | "currentLessonApproved" | "frustrationSignals" | "topErrorCount"
+  | "gameRounds" | "gameRatedTasks" | "gameFirstTryRatio" | "subjectsPracticed"
+  | "readingRounds" | "mathRounds" | "mathFirstTryRatio" | "worldRounds" | "englishRounds";
 export interface WeeklyCondition { metric: WeeklyMetricId; op: ">" | ">=" | "<" | "<=" | "=="; value: number | boolean }
-export type WeeklyRecommendationId = "pause" | "test" | "nextLesson" | "repeat" | "start" | "keepGoing";
+export type WeeklyRecommendationId = "pause" | "test" | "nextLesson" | "repeat" | "start" | "gamesOnly" | "tryMath" | "keepGoing";
+export type WeeklySubjectId = "cz-reading" | "math" | "world" | "english";
 export interface AttemptMasteryRule { rule: "attempts"; minCorrect: number; minDistinctDays: number; lastN: number; minRatioLastN: number; text: string }
 export interface WeeklySummaryFile extends FileHeader<"weeklySummary"> {
   period: { weekStartsOn: "monday"; timeZone: string; showOn: string; onlyCompletedWeeks: true; note: string };
@@ -400,9 +408,18 @@ export interface WeeklySummaryFile extends FileHeader<"weeklySummary"> {
   recommendations: { id: WeeklyRecommendationId; priority: number; all: WeeklyCondition[]; any: WeeklyCondition[]; template: string }[];
   maxRecommendationsShown: number;
   recommendationRule: string;
+  /** Hry a předměty (A-15). games[].id = GameId | MathGameId | SubjGameId v aplikaci, lekce matematiky = "math-lesson". */
+  subjects?: { id: WeeklySubjectId; label: string; roundsMetric: WeeklyMetricId; firstTryMetric: WeeklyMetricId | null;
+              games: { id: string; label: string; countsInSummary: boolean }[] }[];
+  gameSummary?: { fields: string[]; text: string; roundDone: string; showRule: string; minTasksForRatio: number };
+  plurals?: { rule: string; forms: Record<string, { one: string; few: string; many: string }> };
   templates: Record<string, string>;
   placeholders: string[];
   tone: string;
+}
+/** Český tvar podle čísla: 1 → one, 2–4 → few, 0 a 5+ → many. */
+export function czPlural(n: number, f: { one: string; few: string; many: string }): string {
+  return n === 1 ? f.one : n >= 2 && n <= 4 ? f.few : f.many;
 }
 export type WeeklyMetrics = Record<WeeklyMetricId, number | boolean>;
 /** Vyhodnocení doporučení: seřadit podle priority, vrátit první vyhovující (max maxRecommendationsShown). */
@@ -468,4 +485,15 @@ export function isRecommendedForTest(
   const ratio = last.filter((a) => a.correct).length / last.length;
   const days = new Set(attempts.map((a) => a.day)).size;
   return ratio >= rec.minSuccessRatio && days >= rec.minDistinctDays;
+}
+
+/** Pexeso (A-16, obsah 19.3): smí být slova a, b ve stejné hře? Stejná skupina obrázků ani stejná první slabika nikdy;
+ *  strict = navíc ne MA × MÁ (nejdřív strict, při nedostatku slov strict = false). Převzato z content/types.ts. */
+export function memoryPairCompatible(a: Word, b: Word, syllables: Pick<Syllable, "id" | "confusableWith">[], strict = true): boolean {
+  if (a.id === b.id || (a.confusableWith ?? []).includes(b.id) || (b.confusableWith ?? []).includes(a.id)) return false;
+  if (a.similarImageGroup && a.similarImageGroup === b.similarImageGroup) return false;
+  if (a.firstSyllableId === b.firstSyllableId) return false;
+  if (!strict) return true;
+  const sa = syllables.find((s) => s.id === a.firstSyllableId);
+  return !(sa && (sa.confusableWith ?? []).includes(b.firstSyllableId));
 }

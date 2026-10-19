@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -5,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter, Syllable } from '../content/types';
 import Mascot from '../activities/Mascot';
+import { drawFresh } from '../activities/fresh';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, pickPriority, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
 
@@ -15,6 +17,15 @@ export function lessonSyllables(content: Content, lesson: Lesson): Syllable[] {
   const fresh = all.filter((s) => s.letterIds.some((id) => lesson.letterIds.includes(id)));
   return fresh.length ? fresh : all;
 }
+
+/** A-09: zásoba kola = nové slabiky lekce (2× váha) + starší slabiky z probraných písmen, ať se kolo netočí na 2–4 slabikách. */
+export function practiceSyllables(content: Content, lesson: Lesson): Syllable[] {
+  const fresh = lessonSyllables(content, lesson);
+  const older = allUsableSyllables(content, lesson).filter((s) => !fresh.includes(s));
+  return [...fresh, ...fresh, ...older];
+}
+/** A-09: v lekci 2 (první slabiky) kratší kolo. */
+export const syllableRoundSize = (lesson: Lesson) => (lesson.index === 2 ? 4 : ROUND_SIZE);
 
 /** Všechny otevřené slabiky použitelné ve slabikových úlohách z probraných písmen (pro volbu a distraktory). */
 export function allUsableSyllables(content: Content, lesson: Lesson): Syllable[] {
@@ -36,8 +47,9 @@ export default function SyllableActivity(props: Props) {
 }
 
 function SyllableRound({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
+  const ROUND = syllableRoundSize(lesson);
   const candidates = useMemo(() => {
-    const base = lessonSyllables(content, lesson);
+    const base = practiceSyllables(content, lesson);
     // slabiky, které se ve zkoušce nepovedly, se vrací do procvičování (jen z probraných písmen)
     const known = new Set(learnedLetters(content, lesson).map((l) => l.id));
     const extra = content.taskSyllables.filter((s) => priority.has(s.id) && !base.some((b) => b.id === s.id) && s.letterIds.every((id) => known.has(id)));
@@ -47,7 +59,7 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   const consonants = useMemo(() => letters.filter((l) => l.kind === 'consonant'), [letters]);
   const vowels = useMemo(() => letters.filter((l) => l.kind === 'vowel'), [letters]);
   const [n, setN] = useState(0);
-  const [target, setTarget] = useState<Syllable>(() => pickPriority(candidates, priority, true));
+  const [target, setTarget] = useState<Syllable>(() => drawFresh(`A4:${lesson.id}`, candidates, (s) => s.id, ROUND_SIZE, (a) => pickPriority(a, priority, true)));
   const [slots, setSlots] = useState<(Letter | null)[]>([null, null]);
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
   const [solved, setSolved] = useState(false);
@@ -106,14 +118,14 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
   auto.target.current = () => next();
   const next = () => {
     stopSay();
-    if (n + 1 >= ROUND_SIZE) {
-      setN(ROUND_SIZE);
+    if (n + 1 >= ROUND) {
+      setN(ROUND);
       void say(promptAudio(content, 'p-round-end'));
       return;
     }
     const others = candidates.filter((s) => s.id !== target.id);
     setN(n + 1);
-    setTarget(pickPriority(others.length ? others : candidates, priority, false));
+    setTarget(drawFresh(`A4:${lesson.id}`, others.length ? others : candidates, (s) => s.id, ROUND_SIZE, (a) => pickPriority(a, priority, false)));
     setSlots([null, null]);
     setSolved(false);
     setFailed(false);
@@ -125,19 +137,19 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     return (
       <main className="screen activity">
         <p className="notice">Slabiky budou k dispozici od lekce A.</p>
-        <button className="kbtn" onClick={back}>Zpět</button>
+        <HomeButton onClick={back} />
       </main>
     );
   }
 
-  useStickerOnDone('cviceni', n >= ROUND_SIZE);
-  useTaskLog('A4', lesson.id, n >= ROUND_SIZE);
-  if (n >= ROUND_SIZE) {
+  useStickerOnDone('cviceni', n >= ROUND);
+  useTaskLog('A4', lesson.id, n >= ROUND);
+  if (n >= ROUND) {
     return (
       <main className="screen activity" data-testid="round-end">
         <Mascot mood="radost" />
         <h1>Hotovo! To bylo skvělé hraní.</h1>
-        <p className="muted">Napoprvé správně: {correctCount} z {ROUND_SIZE}</p>
+        <p className="muted">Napoprvé správně: {correctCount} z {ROUND}</p>
         <div className="actions">
           <button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button>
         </div>
@@ -153,10 +165,10 @@ function SyllableRound({ content, lesson, back, priority }: Props & { priority: 
     ));
 
   return (
-    <main className="screen activity" data-testid="syllable-activity" data-target={target.id}>
+    <main className="screen activity" data-testid="syllable-activity" data-target={target.id} data-index={n}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
-        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
+        <HomeButton onClick={back} />
+        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND}</p>
       </header>
       <div className="stage">
         <Mascot mood={mood} />

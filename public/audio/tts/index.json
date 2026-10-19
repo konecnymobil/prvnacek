@@ -1,10 +1,165 @@
 {
- "contentVersion": "2026-10-17.3",
+ "contentVersion": "2026-10-19.8",
  "voice": "cs-CZ-VlastaNeural",
+ "voices": [
+  "cs-CZ-VlastaNeural",
+  "en-GB-LibbyNeural"
+ ],
+ "voiceNote": "voice nahoře = výchozí (čtení); každý zvuk má vlastní voice podle svého audio skriptu, efekty null.",
  "format": "mp3 mono 24 kHz 64 kbps",
  "processing": "silence trimmed at -55dB, +40 ms lead / +150 ms tail, gain to RMS -20.0 dBFS capped at peak -1.0 dBFS",
- "count": 222,
+ "count": 283,
  "sounds": [
+  {
+   "audioId": "snd-en-c-blue",
+   "file": "snd-en-c-blue.mp3",
+   "clipId": "c-en-c-blue",
+   "source": "c-en-c-blue.mp3",
+   "category": "word",
+   "refId": "en-c-blue",
+   "text": "blue",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.5,
+   "rmsDb": -21.8,
+   "peakDb": -7.4,
+   "durationMs": 792,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-c-green",
+   "file": "snd-en-c-green.mp3",
+   "clipId": "c-en-c-green",
+   "source": "c-en-c-green.mp3",
+   "category": "word",
+   "refId": "en-c-green",
+   "text": "green",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.5,
+   "rmsDb": -21.6,
+   "peakDb": -7.5,
+   "durationMs": 840,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-c-red",
+   "file": "snd-en-c-red.mp3",
+   "clipId": "c-en-c-red",
+   "source": "c-en-c-red.mp3",
+   "category": "word",
+   "refId": "en-c-red",
+   "text": "red",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.3,
+   "rmsDb": -21.9,
+   "peakDb": -6.2,
+   "durationMs": 720,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-c-yellow",
+   "file": "snd-en-c-yellow.mp3",
+   "clipId": "c-en-c-yellow",
+   "source": "c-en-c-yellow.mp3",
+   "category": "word",
+   "refId": "en-c-yellow",
+   "text": "yellow",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -2.0,
+   "rmsDb": -21.5,
+   "peakDb": -5.8,
+   "durationMs": 912,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-p-colour-x-y",
+   "file": "snd-en-p-colour-x-y.mp3",
+   "clipId": "c-en-p-colour-x-y",
+   "source": "c-en-p-colour-x-y.mp3",
+   "category": "prompt",
+   "refId": "en-p-colour-x-y",
+   "text": "Colour the",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.1,
+   "rmsDb": -21.5,
+   "peakDb": -6.1,
+   "durationMs": 912,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-p-find-x",
+   "file": "snd-en-p-find-x.mp3",
+   "clipId": "c-en-p-find-x",
+   "source": "c-en-p-find-x.mp3",
+   "category": "prompt",
+   "refId": "en-p-find-x",
+   "text": "Find the",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -3.2,
+   "rmsDb": -21.4,
+   "peakDb": -7.5,
+   "durationMs": 1032,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-p-game-colour",
+   "file": "snd-en-p-game-colour.mp3",
+   "clipId": "c-en-p-game-colour",
+   "source": "c-en-p-game-colour.mp3",
+   "category": "prompt",
+   "refId": "en-p-game-colour",
+   "text": "Colour it!",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.3,
+   "rmsDb": -21.6,
+   "peakDb": -6.1,
+   "durationMs": 888,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-p-game-megaboxy",
+   "file": "snd-en-p-game-megaboxy.mp3",
+   "clipId": "c-en-p-game-megaboxy",
+   "source": "c-en-p-game-megaboxy.mp3",
+   "category": "prompt",
+   "refId": "en-p-game-megaboxy",
+   "text": "Megaboxes!",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.5,
+   "rmsDb": -21.2,
+   "peakDb": -5.0,
+   "durationMs": 1296,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-p-say-it",
+   "file": "snd-en-p-say-it.mp3",
+   "clipId": "c-en-p-say-it",
+   "source": "c-en-p-say-it.mp3",
+   "category": "prompt",
+   "refId": "en-p-say-it",
+   "text": "Say it!",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": 0.4,
+   "rmsDb": -21.6,
+   "peakDb": -5.2,
+   "durationMs": 864,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-en-w-hello",
+   "file": "snd-en-w-hello.mp3",
+   "clipId": "c-en-w-hello",
+   "source": "c-en-w-hello.mp3",
+   "category": "word",
+   "refId": "en-w-hello",
+   "text": "Hello!",
+   "voice": "en-GB-LibbyNeural",
+   "gainDb": -1.2,
+   "rmsDb": -21.7,
+   "peakDb": -6.4,
+   "durationMs": 840,
+   "skipped": true
+  },
   {
    "audioId": "snd-fx-ok",
    "file": "snd-fx-ok.mp3",
@@ -13,6 +168,7 @@
    "category": "effect",
    "refId": "snd-fx-ok",
    "text": "krátký jemný stoupající dvojtón (správně)",
+   "voice": null,
    "durationMs": 480,
    "skipped": true
   },
@@ -24,6 +180,7 @@
    "category": "effect",
    "refId": "snd-fx-tada",
    "text": "trojzvuk dur nahoru (konec kola / nálepka)",
+   "voice": null,
    "durationMs": 1008,
    "skipped": true
   },
@@ -35,6 +192,7 @@
    "category": "effect",
    "refId": "snd-fx-try",
    "text": "krátký měkký nízký tón (zkus znovu), bez negativního vyznění",
+   "voice": null,
    "durationMs": 432,
    "skipped": true
   },
@@ -46,6 +204,7 @@
    "category": "letter",
    "refId": "l-a",
    "text": "A",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 456,
    "skipped": true
   },
@@ -57,6 +216,7 @@
    "category": "letter",
    "refId": "l-aa",
    "text": "Á",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 672,
    "skipped": true
   },
@@ -68,6 +228,7 @@
    "category": "letter",
    "refId": "l-e",
    "text": "E",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 456,
    "skipped": true
   },
@@ -79,6 +240,7 @@
    "category": "letter",
    "refId": "l-i",
    "text": "I",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 480,
    "skipped": true
   },
@@ -90,6 +252,7 @@
    "category": "letter",
    "refId": "l-l",
    "text": "L",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -101,6 +264,7 @@
    "category": "letter",
    "refId": "l-m",
    "text": "M",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 576,
    "skipped": true
   },
@@ -112,6 +276,7 @@
    "category": "letter",
    "refId": "l-o",
    "text": "O",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 456,
    "skipped": true
   },
@@ -123,6 +288,7 @@
    "category": "letter",
    "refId": "l-p",
    "text": "P",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 360,
    "skipped": true
   },
@@ -134,6 +300,7 @@
    "category": "letter",
    "refId": "l-s",
    "text": "S",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 552,
    "skipped": true
   },
@@ -145,6 +312,7 @@
    "category": "letter",
    "refId": "l-u",
    "text": "U",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 456,
    "skipped": true
   },
@@ -156,6 +324,7 @@
    "category": "number",
    "refId": "m-n-0",
    "text": "nula",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -167,6 +336,7 @@
    "category": "number",
    "refId": "m-n-1",
    "text": "jedna",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -178,6 +348,7 @@
    "category": "number",
    "refId": "m-n-2",
    "text": "dva",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 648,
    "skipped": true
   },
@@ -189,6 +360,7 @@
    "category": "number",
    "refId": "m-n-3",
    "text": "tři",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 624,
    "skipped": true
   },
@@ -200,6 +372,7 @@
    "category": "number",
    "refId": "m-n-4",
    "text": "čtyři",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -211,6 +384,7 @@
    "category": "number",
    "refId": "m-n-5",
    "text": "pět",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 768,
    "skipped": true
   },
@@ -222,10 +396,9 @@
    "category": "prompt",
    "refId": "m-p-add-more",
    "text": "Ještě přidej.",
-   "gainDb": -2.7,
-   "rmsDb": -21.1,
-   "peakDb": -7.2,
-   "durationMs": 1344
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1344,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-count",
@@ -235,6 +408,7 @@
    "category": "prompt",
    "refId": "m-p-count",
    "text": "Kolik jich je?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1176,
    "skipped": true
   },
@@ -246,6 +420,7 @@
    "category": "prompt",
    "refId": "m-p-dots",
    "text": "Podívej se pozorně. Kolik je tam teček?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4080,
    "skipped": true
   },
@@ -257,6 +432,7 @@
    "category": "prompt",
    "refId": "m-p-feed-n",
    "text": "Dej do misky tolik jablek:",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2136,
    "skipped": true
   },
@@ -268,6 +444,7 @@
    "category": "prompt",
    "refId": "m-p-find-n",
    "text": "Najdi jich tolik:",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1512,
    "skipped": true
   },
@@ -279,7 +456,23 @@
    "category": "prompt",
    "refId": "m-p-game-cesticka",
    "text": "Číselná cestička.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1872,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-game-kde",
+   "file": "snd-m-p-game-kde.mp3",
+   "clipId": "c-m-p-game-kde",
+   "source": "c-m-p-game-kde.mp3",
+   "category": "prompt",
+   "refId": "m-p-game-kde",
+   "text": "Kde to je?",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.2,
+   "rmsDb": -21.5,
+   "peakDb": -8.1,
+   "durationMs": 984,
    "skipped": true
   },
   {
@@ -290,6 +483,7 @@
    "category": "prompt",
    "refId": "m-p-game-kolik",
    "text": "Kolik vidíš?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1320,
    "skipped": true
   },
@@ -301,6 +495,7 @@
    "category": "prompt",
    "refId": "m-p-game-krmeni",
    "text": "Krmení zvířátek.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1752,
    "skipped": true
   },
@@ -312,6 +507,7 @@
    "category": "prompt",
    "refId": "m-p-missing-n",
    "text": "Které číslo chybí na cestičce?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2472,
    "skipped": true
   },
@@ -323,6 +519,7 @@
    "category": "prompt",
    "refId": "m-p-more",
    "text": "Kde je jich víc?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1416,
    "skipped": true
   },
@@ -334,6 +531,7 @@
    "category": "prompt",
    "refId": "m-p-pick-digit",
    "text": "Vyber, které číslo to je.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2256,
    "skipped": true
   },
@@ -345,6 +543,7 @@
    "category": "prompt",
    "refId": "m-p-same",
    "text": "Kde je jich stejně?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1392,
    "skipped": true
   },
@@ -356,6 +555,7 @@
    "category": "prompt",
    "refId": "m-p-too-many",
    "text": "To je moc, jedno vrať.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2136,
    "skipped": true
   },
@@ -367,6 +567,7 @@
    "category": "prompt",
    "refId": "m-p-trace",
    "text": "Obtáhni číslici.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1752,
    "skipped": true
   },
@@ -378,7 +579,83 @@
    "category": "prompt",
    "refId": "m-p-trace-start",
    "text": "Začni nahoře u tečky.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1944,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-where-bottom",
+   "file": "snd-m-p-where-bottom.mp3",
+   "clipId": "c-m-p-where-bottom",
+   "source": "c-m-p-where-bottom.mp3",
+   "category": "prompt",
+   "refId": "m-p-where-bottom",
+   "text": "Ťukni na obrázek dole.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.4,
+   "rmsDb": -20.9,
+   "peakDb": -8.0,
+   "durationMs": 1992,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-where-left",
+   "file": "snd-m-p-where-left.mp3",
+   "clipId": "c-m-p-where-left",
+   "source": "c-m-p-where-left.mp3",
+   "category": "prompt",
+   "refId": "m-p-where-left",
+   "text": "Ťukni na obrázek vlevo.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.2,
+   "rmsDb": -20.9,
+   "peakDb": -7.9,
+   "durationMs": 2064,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-where-middle",
+   "file": "snd-m-p-where-middle.mp3",
+   "clipId": "c-m-p-where-middle",
+   "source": "c-m-p-where-middle.mp3",
+   "category": "prompt",
+   "refId": "m-p-where-middle",
+   "text": "Ťukni na obrázek uprostřed.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.7,
+   "rmsDb": -20.8,
+   "peakDb": -7.4,
+   "durationMs": 2424,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-where-right",
+   "file": "snd-m-p-where-right.mp3",
+   "clipId": "c-m-p-where-right",
+   "source": "c-m-p-where-right.mp3",
+   "category": "prompt",
+   "refId": "m-p-where-right",
+   "text": "Ťukni na obrázek vpravo.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.1,
+   "rmsDb": -20.9,
+   "peakDb": -7.1,
+   "durationMs": 2136,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-m-p-where-top",
+   "file": "snd-m-p-where-top.mp3",
+   "clipId": "c-m-p-where-top",
+   "source": "c-m-p-where-top.mp3",
+   "category": "prompt",
+   "refId": "m-p-where-top",
+   "text": "Ťukni na obrázek nahoře.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.6,
+   "rmsDb": -20.9,
+   "peakDb": -8.2,
+   "durationMs": 2208,
    "skipped": true
   },
   {
@@ -389,6 +666,7 @@
    "category": "prompt",
    "refId": "m-p-write-digit",
    "text": "Napiš číslici.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1512,
    "skipped": true
   },
@@ -400,6 +678,7 @@
    "category": "prompt",
    "refId": "p-a1-intro",
    "text": "Tohle je nové písmenko. Klepni na něj a poslouchej, jak zní.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 5808,
    "skipped": true
   },
@@ -411,7 +690,23 @@
    "category": "prompt",
    "refId": "p-a1-tap-picture",
    "text": "Klepni na obrázek. Slyšíš, jak slovo začíná?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 5040,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-a1-tap-picture-mid",
+   "file": "snd-p-a1-tap-picture-mid.mp3",
+   "clipId": "c-p-a1-tap-picture-mid",
+   "source": "c-p-a1-tap-picture-mid.mp3",
+   "category": "prompt",
+   "refId": "p-a1-tap-picture-mid",
+   "text": "Klepni na obrázek. Slyšíš tu hlásku uprostřed slova?",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.5,
+   "rmsDb": -20.6,
+   "peakDb": -6.8,
+   "durationMs": 5232,
    "skipped": true
   },
   {
@@ -422,6 +717,7 @@
    "category": "prompt",
    "refId": "p-a2",
    "text": "Poslechni si hlásku a najdi její písmenko.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3360,
    "skipped": true
   },
@@ -433,7 +729,53 @@
    "category": "prompt",
    "refId": "p-a3",
    "text": "Co je na obrázku? Na jaké písmenko to slovo začíná?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 5088,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-a3-contains",
+   "file": "snd-p-a3-contains.mp3",
+   "clipId": "c-p-a3-contains",
+   "source": "c-p-a3-contains.mp3",
+   "category": "prompt",
+   "refId": "p-a3-contains",
+   "text": "Slyšíš ve slově hlásku",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.9,
+   "rmsDb": -20.8,
+   "peakDb": -8.7,
+   "durationMs": 2208,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-a3-starts-with",
+   "file": "snd-p-a3-starts-with.mp3",
+   "clipId": "c-p-a3-starts-with",
+   "source": "c-p-a3-starts-with.mp3",
+   "category": "prompt",
+   "refId": "p-a3-starts-with",
+   "text": "Začíná slovo na hlásku",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -4.5,
+   "rmsDb": -20.8,
+   "peakDb": -8.4,
+   "durationMs": 2208,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-a3-which-first",
+   "file": "snd-p-a3-which-first.mp3",
+   "clipId": "c-p-a3-which-first",
+   "source": "c-p-a3-which-first.mp3",
+   "category": "prompt",
+   "refId": "p-a3-which-first",
+   "text": "Na jakou hlásku slovo začíná?",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.6,
+   "rmsDb": -20.8,
+   "peakDb": -7.7,
+   "durationMs": 2496,
    "skipped": true
   },
   {
@@ -444,6 +786,7 @@
    "category": "prompt",
    "refId": "p-a4",
    "text": "Přisuň písmenka k sobě. Uslyšíš slabiku.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4488,
    "skipped": true
   },
@@ -455,6 +798,7 @@
    "category": "prompt",
    "refId": "p-a4-make",
    "text": "Slož slabiku, kterou uslyšíš.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2712,
    "skipped": true
   },
@@ -466,6 +810,7 @@
    "category": "prompt",
    "refId": "p-a5a",
    "text": "Přečti si slabiku. Který obrázek tak začíná?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4704,
    "skipped": true
   },
@@ -477,6 +822,7 @@
    "category": "prompt",
    "refId": "p-a5b",
    "text": "Poslechni si slabiku a najdi ji.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2424,
    "skipped": true
   },
@@ -488,7 +834,23 @@
    "category": "prompt",
    "refId": "p-a6",
    "text": "Přečti si slovo a vyber správný obrázek.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3504,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-a6-pick",
+   "file": "snd-p-a6-pick.mp3",
+   "clipId": "c-p-a6-pick",
+   "source": "c-p-a6-pick.mp3",
+   "category": "prompt",
+   "refId": "p-a6-pick",
+   "text": "Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -4.2,
+   "rmsDb": -20.6,
+   "peakDb": -8.1,
+   "durationMs": 4704,
    "skipped": true
   },
   {
@@ -499,6 +861,7 @@
    "category": "prompt",
    "refId": "p-a7",
    "text": "Co je na obrázku? Seřaď slabiky, ať vznikne slovo.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 5208,
    "skipped": true
   },
@@ -510,6 +873,7 @@
    "category": "prompt",
    "refId": "p-again-button",
    "text": "Když klepneš na reproduktor, uslyšíš to znovu.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3816,
    "skipped": true
   },
@@ -521,6 +885,7 @@
    "category": "prompt",
    "refId": "p-break",
    "text": "Dáme si chvilku pauzu?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1920,
    "skipped": true
   },
@@ -532,6 +897,7 @@
    "category": "prompt",
    "refId": "p-compose-word",
    "text": "Slož slovo.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1200,
    "skipped": true
   },
@@ -543,6 +909,7 @@
    "category": "prompt",
    "refId": "p-find-letter",
    "text": "Najdi písmenko.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1680,
    "skipped": true
   },
@@ -554,6 +921,7 @@
    "category": "prompt",
    "refId": "p-find-picture",
    "text": "Najdi obrázek.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1680,
    "skipped": true
   },
@@ -565,6 +933,7 @@
    "category": "prompt",
    "refId": "p-find-syllable",
    "text": "Najdi slabiku.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1536,
    "skipped": true
   },
@@ -576,6 +945,7 @@
    "category": "prompt",
    "refId": "p-game-bublinky",
    "text": "Bublinky.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1104,
    "skipped": true
   },
@@ -587,6 +957,7 @@
    "category": "prompt",
    "refId": "p-game-detektiv",
    "text": "Slabikový detektiv.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1896,
    "skipped": true
   },
@@ -598,6 +969,7 @@
    "category": "prompt",
    "refId": "p-game-domecky",
    "text": "Slabikové domečky.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1752,
    "skipped": true
   },
@@ -609,6 +981,7 @@
    "category": "prompt",
    "refId": "p-game-obchod",
    "text": "Slabikový obchod.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1752,
    "skipped": true
   },
@@ -620,6 +993,7 @@
    "category": "prompt",
    "refId": "p-game-ztratilo",
    "text": "Co se ztratilo?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1296,
    "skipped": true
   },
@@ -631,6 +1005,7 @@
    "category": "prompt",
    "refId": "p-listen",
    "text": "Poslouchej.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1128,
    "skipped": true
   },
@@ -642,6 +1017,7 @@
    "category": "prompt",
    "refId": "p-mh-bublinky",
    "text": "Poslouchej a ťukni na správnou bublinu.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3024,
    "skipped": true
   },
@@ -653,6 +1029,7 @@
    "category": "prompt",
    "refId": "p-mh-calm",
    "text": "Zastavíme se a zkusíme to spolu.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2592,
    "skipped": true
   },
@@ -664,6 +1041,7 @@
    "category": "prompt",
    "refId": "p-mh-detektiv",
    "text": "Podívej se do lupy. Najdi stejnou slabiku.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4296,
    "skipped": true
   },
@@ -675,6 +1053,7 @@
    "category": "prompt",
    "refId": "p-mh-domecky",
    "text": "Do kterého domečku obrázek patří? Poslouchej, jak slovo začíná.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 6264,
    "skipped": true
   },
@@ -686,6 +1065,7 @@
    "category": "prompt",
    "refId": "p-mh-locked",
    "text": "Tahle hra přijde s písmenkem",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2376,
    "skipped": true
   },
@@ -697,6 +1077,7 @@
    "category": "prompt",
    "refId": "p-mh-obchod",
    "text": "Přečti si nákupní lístek a dej do košíku, co je na něm.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4536,
    "skipped": true
   },
@@ -708,6 +1089,7 @@
    "category": "prompt",
    "refId": "p-mh-sticker-set",
    "text": "Máš novou nálepku do sady!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2304,
    "skipped": true
   },
@@ -719,6 +1101,7 @@
    "category": "prompt",
    "refId": "p-mh-ztratilo",
    "text": "Které písmenko chybí? Ťukni na něj.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3864,
    "skipped": true
   },
@@ -730,6 +1113,7 @@
    "category": "prompt",
    "refId": "p-new-letter",
    "text": "Máš nové písmenko!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1920,
    "skipped": true
   },
@@ -741,7 +1125,23 @@
    "category": "prompt",
    "refId": "p-next-letter",
    "text": "Pojď se podívat na další písmenko!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2784,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-no",
+   "file": "snd-p-no.mp3",
+   "clipId": "c-p-no",
+   "source": "c-p-no.mp3",
+   "category": "prompt",
+   "refId": "p-no",
+   "text": "Ne.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.4,
+   "rmsDb": -22.2,
+   "peakDb": -11.2,
+   "durationMs": 624,
    "skipped": true
   },
   {
@@ -752,6 +1152,7 @@
    "category": "prompt",
    "refId": "p-praise-1",
    "text": "Výborně!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1104,
    "skipped": true
   },
@@ -763,6 +1164,7 @@
    "category": "prompt",
    "refId": "p-praise-2",
    "text": "Správně!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1032,
    "skipped": true
   },
@@ -774,6 +1176,7 @@
    "category": "prompt",
    "refId": "p-praise-3",
    "text": "Super, to se ti povedlo!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2280,
    "skipped": true
   },
@@ -785,6 +1188,7 @@
    "category": "prompt",
    "refId": "p-praise-4",
    "text": "Paráda!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 888,
    "skipped": true
   },
@@ -796,6 +1200,7 @@
    "category": "prompt",
    "refId": "p-praise-5",
    "text": "To je ono!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1008,
    "skipped": true
   },
@@ -807,6 +1212,7 @@
    "category": "prompt",
    "refId": "p-praise-6",
    "text": "Šikula!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 960,
    "skipped": true
   },
@@ -818,6 +1224,7 @@
    "category": "prompt",
    "refId": "p-read-syllable",
    "text": "Přečti si slabiku nahlas.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2088,
    "skipped": true
   },
@@ -829,6 +1236,7 @@
    "category": "prompt",
    "refId": "p-read-word",
    "text": "Přečti si slovo nahlas.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1920,
    "skipped": true
   },
@@ -840,6 +1248,7 @@
    "category": "prompt",
    "refId": "p-retry-1",
    "text": "Zkus to ještě jednou.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1824,
    "skipped": true
   },
@@ -851,6 +1260,7 @@
    "category": "prompt",
    "refId": "p-retry-2",
    "text": "Skoro! Zkus to znovu.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2808,
    "skipped": true
   },
@@ -862,7 +1272,23 @@
    "category": "prompt",
    "refId": "p-retry-3",
    "text": "Nevadí. Podívej se ještě jednou.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3792,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-review-word",
+   "file": "snd-p-review-word.mp3",
+   "clipId": "c-p-review-word",
+   "source": "c-p-review-word.mp3",
+   "category": "prompt",
+   "refId": "p-review-word",
+   "text": "Poslechni si slovo a najdi ho.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -4.5,
+   "rmsDb": -20.8,
+   "peakDb": -7.5,
+   "durationMs": 2280,
    "skipped": true
   },
   {
@@ -873,8 +1299,205 @@
    "category": "prompt",
    "refId": "p-round-end",
    "text": "Hotovo! To bylo skvělé hraní.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3480,
    "skipped": true
+  },
+  {
+   "audioId": "snd-p-rw-back",
+   "file": "snd-p-rw-back.mp3",
+   "clipId": "c-p-rw-back",
+   "source": "c-p-rw-back.mp3",
+   "category": "prompt",
+   "refId": "p-rw-back",
+   "text": "Zvířátka jsou doma. Jdeme zase procvičovat.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.6,
+   "rmsDb": -20.6,
+   "peakDb": -6.5,
+   "durationMs": 4536
+  },
+  {
+   "audioId": "snd-p-rw-done-today",
+   "file": "snd-p-rw-done-today.mp3",
+   "clipId": "c-p-rw-done-today",
+   "source": "c-p-rw-done-today.mp3",
+   "category": "prompt",
+   "refId": "p-rw-done-today",
+   "text": "Zvířátka už dnes spí. Zítra zase.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.9,
+   "rmsDb": -20.6,
+   "peakDb": -6.3,
+   "durationMs": 4224
+  },
+  {
+   "audioId": "snd-p-rw-exact",
+   "file": "snd-p-rw-exact.mp3",
+   "clipId": "c-p-rw-exact",
+   "source": "c-p-rw-exact.mp3",
+   "category": "prompt",
+   "refId": "p-rw-exact",
+   "text": "Přesně tolik!",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.1,
+   "rmsDb": -21.0,
+   "peakDb": -7.7,
+   "durationMs": 1392
+  },
+  {
+   "audioId": "snd-p-rw-gate-minus-1",
+   "file": "snd-p-rw-gate-minus-1.mp3",
+   "clipId": "c-p-rw-gate-minus-1",
+   "source": "c-p-rw-gate-minus-1.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-minus-1",
+   "text": "mínus jedna",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -5.1,
+   "rmsDb": -21.1,
+   "peakDb": -10.3,
+   "durationMs": 1344
+  },
+  {
+   "audioId": "snd-p-rw-gate-plus-1",
+   "file": "snd-p-rw-gate-plus-1.mp3",
+   "clipId": "c-p-rw-gate-plus-1",
+   "source": "c-p-rw-gate-plus-1.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-plus-1",
+   "text": "plus jedna",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.5,
+   "rmsDb": -21.2,
+   "peakDb": -6.8,
+   "durationMs": 1104
+  },
+  {
+   "audioId": "snd-p-rw-gate-plus-2",
+   "file": "snd-p-rw-gate-plus-2.mp3",
+   "clipId": "c-p-rw-gate-plus-2",
+   "source": "c-p-rw-gate-plus-2.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-plus-2",
+   "text": "plus dvě",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.8,
+   "rmsDb": -21.4,
+   "peakDb": -7.8,
+   "durationMs": 984
+  },
+  {
+   "audioId": "snd-p-rw-goal",
+   "file": "snd-p-rw-goal.mp3",
+   "clipId": "c-p-rw-goal",
+   "source": "c-p-rw-goal.mp3",
+   "category": "prompt",
+   "refId": "p-rw-goal",
+   "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.3,
+   "rmsDb": -20.6,
+   "peakDb": -7.3,
+   "durationMs": 4560
+  },
+  {
+   "audioId": "snd-p-rw-locked",
+   "file": "snd-p-rw-locked.mp3",
+   "clipId": "c-p-rw-locked",
+   "source": "c-p-rw-locked.mp3",
+   "category": "prompt",
+   "refId": "p-rw-locked",
+   "text": "Ještě kolo procvičování a zvířátka se vrátí.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.3,
+   "rmsDb": -20.6,
+   "peakDb": -8.1,
+   "durationMs": 3936
+  },
+  {
+   "audioId": "snd-p-rw-name",
+   "file": "snd-p-rw-name.mp3",
+   "clipId": "c-p-rw-name",
+   "source": "c-p-rw-name.mp3",
+   "category": "prompt",
+   "refId": "p-rw-name",
+   "text": "Zvířátka do ohrádky.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.0,
+   "rmsDb": -20.9,
+   "peakDb": -7.6,
+   "durationMs": 2112
+  },
+  {
+   "audioId": "snd-p-rw-pick-gate",
+   "file": "snd-p-rw-pick-gate.mp3",
+   "clipId": "c-p-rw-pick-gate",
+   "source": "c-p-rw-pick-gate.mp3",
+   "category": "prompt",
+   "refId": "p-rw-pick-gate",
+   "text": "Vyber bránu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.8,
+   "rmsDb": -21.2,
+   "peakDb": -7.7,
+   "durationMs": 1320
+  },
+  {
+   "audioId": "snd-p-rw-show-path",
+   "file": "snd-p-rw-show-path.mp3",
+   "clipId": "c-p-rw-show-path",
+   "source": "c-p-rw-show-path.mp3",
+   "category": "prompt",
+   "refId": "p-rw-show-path",
+   "text": "Takhle to šlo.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.9,
+   "rmsDb": -21.2,
+   "peakDb": -7.0,
+   "durationMs": 1272
+  },
+  {
+   "audioId": "snd-p-rw-too-few",
+   "file": "snd-p-rw-too-few.mp3",
+   "clipId": "c-p-rw-too-few",
+   "source": "c-p-rw-too-few.mp3",
+   "category": "prompt",
+   "refId": "p-rw-too-few",
+   "text": "Je jich málo. Zkus jinou cestu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.1,
+   "rmsDb": -20.7,
+   "peakDb": -7.4,
+   "durationMs": 3576
+  },
+  {
+   "audioId": "snd-p-rw-too-many",
+   "file": "snd-p-rw-too-many.mp3",
+   "clipId": "c-p-rw-too-many",
+   "source": "c-p-rw-too-many.mp3",
+   "category": "prompt",
+   "refId": "p-rw-too-many",
+   "text": "Je jich moc. Zkus jinou cestu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.0,
+   "rmsDb": -20.7,
+   "peakDb": -6.2,
+   "durationMs": 3504
+  },
+  {
+   "audioId": "snd-p-rw-unlock",
+   "file": "snd-p-rw-unlock.mp3",
+   "clipId": "c-p-rw-unlock",
+   "source": "c-p-rw-unlock.mp3",
+   "category": "prompt",
+   "refId": "p-rw-unlock",
+   "text": "Zvířátka na tebe čekají. Můžeš si zahrát.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.5,
+   "rmsDb": -20.6,
+   "peakDb": -6.7,
+   "durationMs": 4680
   },
   {
    "audioId": "snd-p-show-answer",
@@ -884,6 +1507,7 @@
    "category": "prompt",
    "refId": "p-show-answer",
    "text": "Podívej, tady je to správně.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 2640,
    "skipped": true
   },
@@ -895,6 +1519,7 @@
    "category": "prompt",
    "refId": "p-sticker",
    "text": "Máš novou nálepku!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1824,
    "skipped": true
   },
@@ -906,10 +1531,9 @@
    "category": "prompt",
    "refId": "p-subject-pick",
    "text": "Kam půjdeme dnes?",
-   "gainDb": -3.3,
-   "rmsDb": -21.0,
-   "peakDb": -8.9,
-   "durationMs": 1584
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1584,
+   "skipped": true
   },
   {
    "audioId": "snd-p-test-end",
@@ -919,6 +1543,7 @@
    "category": "prompt",
    "refId": "p-test-end",
    "text": "Výzva je hotová. Tady je nálepka za snahu!",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4488,
    "skipped": true
   },
@@ -930,6 +1555,7 @@
    "category": "prompt",
    "refId": "p-test-intro",
    "text": "Teď je výzva s rodičem. Čti nahlas, co uvidíš.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 5064,
    "skipped": true
   },
@@ -941,6 +1567,7 @@
    "category": "prompt",
    "refId": "p-test-show-letter",
    "text": "Ukaž písmenko a řekni, jak zní.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3144,
    "skipped": true
   },
@@ -952,7 +1579,23 @@
    "category": "prompt",
    "refId": "p-welcome",
    "text": "Ahoj! Pojď si se mnou hrát s písmenky.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4056,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-p-yes",
+   "file": "snd-p-yes.mp3",
+   "clipId": "c-p-yes",
+   "source": "c-p-yes.mp3",
+   "category": "prompt",
+   "refId": "p-yes",
+   "text": "Ano.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.0,
+   "rmsDb": -21.8,
+   "peakDb": -6.4,
+   "durationMs": 768,
    "skipped": true
   },
   {
@@ -963,6 +1606,7 @@
    "category": "prompt",
    "refId": "pv-p-crossing",
    "text": "Tady přecházíme po přechodu, když svítí zelená.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3768,
    "skipped": true
   },
@@ -974,6 +1618,7 @@
    "category": "prompt",
    "refId": "pv-p-game-cesta",
    "text": "Bezpečná cesta.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1632,
    "skipped": true
   },
@@ -985,6 +1630,7 @@
    "category": "prompt",
    "refId": "pv-p-game-drive",
    "text": "Co bylo dřív?",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1296,
    "skipped": true
   },
@@ -996,7 +1642,53 @@
    "category": "prompt",
    "refId": "pv-p-game-uklizime",
    "text": "Uklízíme.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1224,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-green-go",
+   "file": "snd-pv-p-green-go.mp3",
+   "clipId": "c-pv-p-green-go",
+   "source": "c-pv-p-green-go.mp3",
+   "category": "prompt",
+   "refId": "pv-p-green-go",
+   "text": "Zelená. Ještě se rozhlédni a můžeš jít.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.7,
+   "rmsDb": -20.6,
+   "peakDb": -7.9,
+   "durationMs": 4440,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-light",
+   "file": "snd-pv-p-light.mp3",
+   "clipId": "c-pv-p-light",
+   "source": "c-pv-p-light.mp3",
+   "category": "prompt",
+   "refId": "pv-p-light",
+   "text": "Podívej se na semafor. Jdeš, nebo čekáš?",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.5,
+   "rmsDb": -20.6,
+   "peakDb": -7.0,
+   "durationMs": 4632,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-look",
+   "file": "snd-pv-p-look.mp3",
+   "clipId": "c-pv-p-look",
+   "source": "c-pv-p-look.mp3",
+   "category": "prompt",
+   "refId": "pv-p-look",
+   "text": "Než přejdeš, rozhlédni se. Ťukni vlevo, vpravo a zase vlevo.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.1,
+   "rmsDb": -20.6,
+   "peakDb": -6.8,
+   "durationMs": 6360,
    "skipped": true
   },
   {
@@ -1007,7 +1699,23 @@
    "category": "prompt",
    "refId": "pv-p-order",
    "text": "Ťukej na obrázky tak, jak jdou po sobě.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 3480,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-red-wait",
+   "file": "snd-pv-p-red-wait.mp3",
+   "clipId": "c-pv-p-red-wait",
+   "source": "c-pv-p-red-wait.mp3",
+   "category": "prompt",
+   "refId": "pv-p-red-wait",
+   "text": "Na červenou čekáme.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -4.1,
+   "rmsDb": -20.9,
+   "peakDb": -9.5,
+   "durationMs": 1776,
    "skipped": true
   },
   {
@@ -1018,7 +1726,128 @@
    "category": "prompt",
    "refId": "pv-p-route",
    "text": "Nakresli cestu z domu do školy. Nebo ťukni na místo, kde přejdeš silnici.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 6432,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-chleba",
+   "file": "snd-pv-p-seq-chleba.mp3",
+   "clipId": "c-pv-p-seq-chleba",
+   "source": "c-pv-p-seq-chleba.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-chleba",
+   "text": "Nejdřív obilí, potom chleba a nakonec svačina.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.5,
+   "rmsDb": -20.7,
+   "peakDb": -7.9,
+   "durationMs": 4008,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-den",
+   "file": "snd-pv-p-seq-den.mp3",
+   "clipId": "c-pv-p-seq-den",
+   "source": "c-pv-p-seq-den.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-den",
+   "text": "Nejdřív ráno, potom den a nakonec noc.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.2,
+   "rmsDb": -20.7,
+   "peakDb": -8.0,
+   "durationMs": 3864,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-jablko",
+   "file": "snd-pv-p-seq-jablko.mp3",
+   "clipId": "c-pv-p-seq-jablko",
+   "source": "c-pv-p-seq-jablko.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-jablko",
+   "text": "Nejdřív květ, potom malé zelené jablíčko a nakonec červené jablko.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.6,
+   "rmsDb": -20.6,
+   "peakDb": -7.9,
+   "durationMs": 5496,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-kure",
+   "file": "snd-pv-p-seq-kure.mp3",
+   "clipId": "c-pv-p-seq-kure",
+   "source": "c-pv-p-seq-kure.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-kure",
+   "text": "Nejdřív vajíčko, potom kuřátko a nakonec slepice.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.2,
+   "rmsDb": -20.6,
+   "peakDb": -7.7,
+   "durationMs": 4464,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-obdobi",
+   "file": "snd-pv-p-seq-obdobi.mp3",
+   "clipId": "c-pv-p-seq-obdobi",
+   "source": "c-pv-p-seq-obdobi.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-obdobi",
+   "text": "Nejdřív podzim, potom zima, jaro a nakonec léto.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.9,
+   "rmsDb": -20.6,
+   "peakDb": -7.2,
+   "durationMs": 4656,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-rostlinka",
+   "file": "snd-pv-p-seq-rostlinka.mp3",
+   "clipId": "c-pv-p-seq-rostlinka",
+   "source": "c-pv-p-seq-rostlinka.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-rostlinka",
+   "text": "Nejdřív klíček, potom rostlinka a nakonec květina.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.4,
+   "rmsDb": -20.6,
+   "peakDb": -7.0,
+   "durationMs": 4248,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-rust",
+   "file": "snd-pv-p-seq-rust.mp3",
+   "clipId": "c-pv-p-seq-rust",
+   "source": "c-pv-p-seq-rust.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-rust",
+   "text": "Nejdřív miminko, potom dítě a nakonec dospělý člověk.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.6,
+   "rmsDb": -20.6,
+   "peakDb": -7.9,
+   "durationMs": 4776,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-seq-skola",
+   "file": "snd-pv-p-seq-skola.mp3",
+   "clipId": "c-pv-p-seq-skola",
+   "source": "c-pv-p-seq-skola.mp3",
+   "category": "prompt",
+   "refId": "pv-p-seq-skola",
+   "text": "Nejdřív vstanu, vyčistím si zuby, vezmu si aktovku a jdu do školy.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.0,
+   "rmsDb": -20.6,
+   "peakDb": -7.4,
+   "durationMs": 5616,
    "skipped": true
   },
   {
@@ -1029,7 +1858,68 @@
    "category": "prompt",
    "refId": "pv-p-sort",
    "text": "Kam to patří? Ťukni na správnou krabici.",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 4152,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-p-where-cross",
+   "file": "snd-pv-p-where-cross.mp3",
+   "clipId": "c-pv-p-where-cross",
+   "source": "c-pv-p-where-cross.mp3",
+   "category": "prompt",
+   "refId": "pv-p-where-cross",
+   "text": "Kde přejdeš silnici?",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -4.4,
+   "rmsDb": -21.0,
+   "peakDb": -9.2,
+   "durationMs": 1680,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-bunda",
+   "file": "snd-pv-w-bunda.mp3",
+   "clipId": "c-pv-w-bunda",
+   "source": "c-pv-w-bunda.mp3",
+   "category": "word",
+   "refId": "pv-w-bunda",
+   "text": "bunda",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.7,
+   "rmsDb": -21.5,
+   "peakDb": -10.2,
+   "durationMs": 912,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-cekam",
+   "file": "snd-pv-w-cekam.mp3",
+   "clipId": "c-pv-w-cekam",
+   "source": "c-pv-w-cekam.mp3",
+   "category": "word",
+   "refId": "pv-w-cekam",
+   "text": "Čekám.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.0,
+   "rmsDb": -21.4,
+   "peakDb": -8.1,
+   "durationMs": 1008,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-cepice",
+   "file": "snd-pv-w-cepice.mp3",
+   "clipId": "c-pv-w-cepice",
+   "source": "c-pv-w-cepice.mp3",
+   "category": "word",
+   "refId": "pv-w-cepice",
+   "text": "čepice",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.4,
+   "rmsDb": -21.4,
+   "peakDb": -6.2,
+   "durationMs": 984,
    "skipped": true
   },
   {
@@ -1040,10 +1930,9 @@
    "category": "word",
    "refId": "pv-w-do-skoly",
    "text": "do školy",
-   "gainDb": -1.9,
-   "rmsDb": -21.4,
-   "peakDb": -7.7,
-   "durationMs": 1008
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1008,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-drak",
@@ -1053,10 +1942,9 @@
    "category": "word",
    "refId": "pv-w-drak",
    "text": "drak",
-   "gainDb": -0.1,
-   "rmsDb": -21.8,
-   "peakDb": -5.9,
-   "durationMs": 768
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 768,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-hracky",
@@ -1066,10 +1954,24 @@
    "category": "word",
    "refId": "pv-w-hracky",
    "text": "hračky",
-   "gainDb": -1.3,
-   "rmsDb": -21.5,
-   "peakDb": -6.2,
-   "durationMs": 960
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 960,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-jdu",
+   "file": "snd-pv-w-jdu.mp3",
+   "clipId": "c-pv-w-jdu",
+   "source": "c-pv-w-jdu.mp3",
+   "category": "word",
+   "refId": "pv-w-jdu",
+   "text": "Jdu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -0.5,
+   "rmsDb": -21.9,
+   "peakDb": -8.1,
+   "durationMs": 744,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-jojo",
@@ -1079,10 +1981,9 @@
    "category": "word",
    "refId": "pv-w-jojo",
    "text": "jojo",
-   "gainDb": -2.2,
-   "rmsDb": -21.8,
-   "peakDb": -10.1,
-   "durationMs": 768
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 768,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-kniha",
@@ -1092,10 +1993,9 @@
    "category": "word",
    "refId": "pv-w-kniha",
    "text": "kniha",
-   "gainDb": -4.3,
-   "rmsDb": -21.7,
-   "peakDb": -10.2,
-   "durationMs": 840
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 840,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-medvidek",
@@ -1105,10 +2005,9 @@
    "category": "word",
    "refId": "pv-w-medvidek",
    "text": "medvídek",
-   "gainDb": -3.0,
-   "rmsDb": -21.2,
-   "peakDb": -8.7,
-   "durationMs": 1296
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1296,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-mic",
@@ -1118,10 +2017,9 @@
    "category": "word",
    "refId": "pv-w-mic",
    "text": "míč",
-   "gainDb": -3.2,
-   "rmsDb": -21.6,
-   "peakDb": -10.1,
-   "durationMs": 888
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 888,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-nuzky",
@@ -1131,10 +2029,24 @@
    "category": "word",
    "refId": "pv-w-nuzky",
    "text": "nůžky",
-   "gainDb": -4.1,
-   "rmsDb": -21.4,
-   "peakDb": -9.9,
-   "durationMs": 1008
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1008,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-obleceni",
+   "file": "snd-pv-w-obleceni.mp3",
+   "clipId": "c-pv-w-obleceni",
+   "source": "c-pv-w-obleceni.mp3",
+   "category": "word",
+   "refId": "pv-w-obleceni",
+   "text": "oblečení",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.9,
+   "rmsDb": -21.2,
+   "peakDb": -7.6,
+   "durationMs": 1176,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-pastelka",
@@ -1144,10 +2056,24 @@
    "category": "word",
    "refId": "pv-w-pastelka",
    "text": "pastelka",
-   "gainDb": -1.3,
-   "rmsDb": -21.4,
-   "peakDb": -6.3,
-   "durationMs": 1056
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1056,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-ponozky",
+   "file": "snd-pv-w-ponozky.mp3",
+   "clipId": "c-pv-w-ponozky",
+   "source": "c-pv-w-ponozky.mp3",
+   "category": "word",
+   "refId": "pv-w-ponozky",
+   "text": "ponožky",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.2,
+   "rmsDb": -21.5,
+   "peakDb": -8.2,
+   "durationMs": 960,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-pravitko",
@@ -1157,10 +2083,39 @@
    "category": "word",
    "refId": "pv-w-pravitko",
    "text": "pravítko",
-   "gainDb": -2.1,
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1128,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-rukavice",
+   "file": "snd-pv-w-rukavice.mp3",
+   "clipId": "c-pv-w-rukavice",
+   "source": "c-pv-w-rukavice.mp3",
+   "category": "word",
+   "refId": "pv-w-rukavice",
+   "text": "rukavice",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.6,
    "rmsDb": -21.3,
-   "peakDb": -6.4,
-   "durationMs": 1128
+   "peakDb": -7.5,
+   "durationMs": 1080,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-sala",
+   "file": "snd-pv-w-sala.mp3",
+   "clipId": "c-pv-w-sala",
+   "source": "c-pv-w-sala.mp3",
+   "category": "word",
+   "refId": "pv-w-sala",
+   "text": "šála",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.5,
+   "rmsDb": -21.6,
+   "peakDb": -8.4,
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-tuzka",
@@ -1170,10 +2125,9 @@
    "category": "word",
    "refId": "pv-w-tuzka",
    "text": "tužka",
-   "gainDb": -0.1,
-   "rmsDb": -21.6,
-   "peakDb": -7.1,
-   "durationMs": 864
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-vlacek",
@@ -1183,10 +2137,39 @@
    "category": "word",
    "refId": "pv-w-vlacek",
    "text": "vláček",
-   "gainDb": -1.7,
-   "rmsDb": -21.2,
-   "peakDb": -7.0,
-   "durationMs": 1176
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1176,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-vlevo",
+   "file": "snd-pv-w-vlevo.mp3",
+   "clipId": "c-pv-w-vlevo",
+   "source": "c-pv-w-vlevo.mp3",
+   "category": "word",
+   "refId": "pv-w-vlevo",
+   "text": "vlevo",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.8,
+   "rmsDb": -21.6,
+   "peakDb": -8.9,
+   "durationMs": 840,
+   "skipped": true
+  },
+  {
+   "audioId": "snd-pv-w-vpravo",
+   "file": "snd-pv-w-vpravo.mp3",
+   "clipId": "c-pv-w-vpravo",
+   "source": "c-pv-w-vpravo.mp3",
+   "category": "word",
+   "refId": "pv-w-vpravo",
+   "text": "vpravo",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.5,
+   "rmsDb": -21.5,
+   "peakDb": -6.7,
+   "durationMs": 912,
+   "skipped": true
   },
   {
    "audioId": "snd-pw-akvaarium",
@@ -1196,6 +2179,7 @@
    "category": "pictureWord",
    "refId": "pw-akvaarium",
    "text": "AKVÁRIUM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1368,
    "skipped": true
   },
@@ -1207,6 +2191,7 @@
    "category": "pictureWord",
    "refId": "pw-ananas",
    "text": "ANANAS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1056,
    "skipped": true
   },
@@ -1218,6 +2203,7 @@
    "category": "pictureWord",
    "refId": "pw-andel",
    "text": "ANDĚL",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1008,
    "skipped": true
   },
@@ -1229,6 +2215,7 @@
    "category": "pictureWord",
    "refId": "pw-anteena",
    "text": "ANTÉNA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1056,
    "skipped": true
   },
@@ -1240,6 +2227,7 @@
    "category": "pictureWord",
    "refId": "pw-elf",
    "text": "ELF",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1251,6 +2239,7 @@
    "category": "pictureWord",
    "refId": "pw-emu",
    "text": "EMU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   },
@@ -1262,6 +2251,7 @@
    "category": "pictureWord",
    "refId": "pw-eskalaator",
    "text": "ESKALÁTOR",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1272,
    "skipped": true
   },
@@ -1273,6 +2263,7 @@
    "category": "pictureWord",
    "refId": "pw-igluu",
    "text": "IGLÚ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1200,
    "skipped": true
   },
@@ -1284,6 +2275,7 @@
    "category": "pictureWord",
    "refId": "pw-inkoust",
    "text": "INKOUST",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1152,
    "skipped": true
   },
@@ -1295,6 +2287,7 @@
    "category": "pictureWord",
    "refId": "pw-izolepa",
    "text": "IZOLEPA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1008,
    "skipped": true
   },
@@ -1306,6 +2299,7 @@
    "category": "pictureWord",
    "refId": "pw-kraava",
    "text": "KRÁVA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -1317,6 +2311,7 @@
    "category": "pictureWord",
    "refId": "pw-lavicka",
    "text": "LAVIČKA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1056,
    "skipped": true
   },
@@ -1328,6 +2323,7 @@
    "category": "pictureWord",
    "refId": "pw-lev",
    "text": "LEV",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1339,6 +2335,7 @@
    "category": "pictureWord",
    "refId": "pw-lod",
    "text": "LOĎ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 768,
    "skipped": true
   },
@@ -1350,6 +2347,7 @@
    "category": "pictureWord",
    "refId": "pw-lziice",
    "text": "LŽÍCE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1008,
    "skipped": true
   },
@@ -1361,6 +2359,7 @@
    "category": "pictureWord",
    "refId": "pw-medved",
    "text": "MEDVĚD",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1056,
    "skipped": true
   },
@@ -1372,6 +2371,7 @@
    "category": "pictureWord",
    "refId": "pw-miic",
    "text": "MÍČ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 888,
    "skipped": true
   },
@@ -1383,6 +2383,7 @@
    "category": "pictureWord",
    "refId": "pw-mrkev",
    "text": "MRKEV",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 960,
    "skipped": true
   },
@@ -1394,6 +2395,7 @@
    "category": "pictureWord",
    "refId": "pw-mys",
    "text": "MYŠ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -1405,6 +2407,7 @@
    "category": "pictureWord",
    "refId": "pw-okno",
    "text": "OKNO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1416,6 +2419,7 @@
    "category": "pictureWord",
    "refId": "pw-oko",
    "text": "OKO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -1427,6 +2431,7 @@
    "category": "pictureWord",
    "refId": "pw-opice",
    "text": "OPICE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 912,
    "skipped": true
   },
@@ -1438,6 +2443,7 @@
    "category": "pictureWord",
    "refId": "pw-ovce",
    "text": "OVCE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -1449,6 +2455,7 @@
    "category": "pictureWord",
    "refId": "pw-paprika",
    "text": "PAPRIKA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 984,
    "skipped": true
   },
@@ -1460,6 +2467,7 @@
    "category": "pictureWord",
    "refId": "pw-pavouk",
    "text": "PAVOUK",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 936,
    "skipped": true
   },
@@ -1471,6 +2479,7 @@
    "category": "pictureWord",
    "refId": "pw-pomeranc",
    "text": "POMERANČ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1104,
    "skipped": true
   },
@@ -1482,6 +2491,7 @@
    "category": "pictureWord",
    "refId": "pw-ptaak",
    "text": "PTÁK",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1493,6 +2503,7 @@
    "category": "pictureWord",
    "refId": "pw-slon",
    "text": "SLON",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 936,
    "skipped": true
   },
@@ -1504,6 +2515,7 @@
    "category": "pictureWord",
    "refId": "pw-slunce",
    "text": "SLUNCE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1032,
    "skipped": true
   },
@@ -1515,6 +2527,7 @@
    "category": "pictureWord",
    "refId": "pw-sova",
    "text": "SOVA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1526,6 +2539,7 @@
    "category": "pictureWord",
    "refId": "pw-syyr",
    "text": "SÝR",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 768,
    "skipped": true
   },
@@ -1537,6 +2551,7 @@
    "category": "pictureWord",
    "refId": "pw-ubrus",
    "text": "UBRUS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 912,
    "skipped": true
   },
@@ -1548,6 +2563,7 @@
    "category": "pictureWord",
    "refId": "pw-ucho",
    "text": "UCHO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   },
@@ -1559,6 +2575,7 @@
    "category": "pictureWord",
    "refId": "pw-ulita",
    "text": "ULITA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1570,6 +2587,7 @@
    "category": "pictureWord",
    "refId": "pw-umyvadlo",
    "text": "UMYVADLO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 960,
    "skipped": true
   },
@@ -1581,6 +2599,7 @@
    "category": "pictureWord",
    "refId": "pw-vlaacek",
    "text": "VLÁČEK",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1176,
    "skipped": true
   },
@@ -1592,6 +2611,7 @@
    "category": "pictureWord",
    "refId": "pw-zaaba",
    "text": "ŽÁBA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 888,
    "skipped": true
   },
@@ -1603,6 +2623,7 @@
    "category": "syllable",
    "refId": "s-la",
    "text": "LA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 576,
    "skipped": true
   },
@@ -1614,6 +2635,7 @@
    "category": "syllable",
    "refId": "s-laa",
    "text": "LÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 744,
    "skipped": true
   },
@@ -1625,6 +2647,7 @@
    "category": "syllable",
    "refId": "s-laam",
    "text": "LÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -1636,6 +2659,7 @@
    "category": "syllable",
    "refId": "s-le",
    "text": "LE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 624,
    "skipped": true
   },
@@ -1647,6 +2671,7 @@
    "category": "syllable",
    "refId": "s-les",
    "text": "LES",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -1658,6 +2683,7 @@
    "category": "syllable",
    "refId": "s-li",
    "text": "LI",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 648,
    "skipped": true
   },
@@ -1669,6 +2695,7 @@
    "category": "syllable",
    "refId": "s-lo",
    "text": "LO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -1680,6 +2707,7 @@
    "category": "syllable",
    "refId": "s-los",
    "text": "LOS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1691,6 +2719,7 @@
    "category": "syllable",
    "refId": "s-lu",
    "text": "LU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -1702,6 +2731,7 @@
    "category": "syllable",
    "refId": "s-ma",
    "text": "MA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 552,
    "skipped": true
   },
@@ -1713,6 +2743,7 @@
    "category": "syllable",
    "refId": "s-maa",
    "text": "MÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   },
@@ -1724,6 +2755,7 @@
    "category": "syllable",
    "refId": "s-maam",
    "text": "MÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -1735,6 +2767,7 @@
    "category": "syllable",
    "refId": "s-me",
    "text": "ME",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -1746,6 +2779,7 @@
    "category": "syllable",
    "refId": "s-mi",
    "text": "MI",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -1757,6 +2791,7 @@
    "category": "syllable",
    "refId": "s-mo",
    "text": "MO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 624,
    "skipped": true
   },
@@ -1768,6 +2803,7 @@
    "category": "syllable",
    "refId": "s-mu",
    "text": "MU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 624,
    "skipped": true
   },
@@ -1779,6 +2815,7 @@
    "category": "syllable",
    "refId": "s-pa",
    "text": "PA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 480,
    "skipped": true
   },
@@ -1790,6 +2827,7 @@
    "category": "syllable",
    "refId": "s-paa",
    "text": "PÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 600,
    "skipped": true
   },
@@ -1801,6 +2839,7 @@
    "category": "syllable",
    "refId": "s-pe",
    "text": "PE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 480,
    "skipped": true
   },
@@ -1812,6 +2851,7 @@
    "category": "syllable",
    "refId": "s-pel",
    "text": "PEL",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -1823,6 +2863,7 @@
    "category": "syllable",
    "refId": "s-pes",
    "text": "PES",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 744,
    "skipped": true
   },
@@ -1834,6 +2875,7 @@
    "category": "syllable",
    "refId": "s-pi",
    "text": "PI",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 456,
    "skipped": true
   },
@@ -1845,6 +2887,7 @@
    "category": "syllable",
    "refId": "s-po",
    "text": "PO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 504,
    "skipped": true
   },
@@ -1856,6 +2899,7 @@
    "category": "syllable",
    "refId": "s-pu",
    "text": "PU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 480,
    "skipped": true
   },
@@ -1867,6 +2911,7 @@
    "category": "syllable",
    "refId": "s-sa",
    "text": "SA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 624,
    "skipped": true
   },
@@ -1878,6 +2923,7 @@
    "category": "syllable",
    "refId": "s-saa",
    "text": "SÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -1889,6 +2935,7 @@
    "category": "syllable",
    "refId": "s-saam",
    "text": "SÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 936,
    "skipped": true
   },
@@ -1900,6 +2947,7 @@
    "category": "syllable",
    "refId": "s-se",
    "text": "SE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   },
@@ -1911,6 +2959,7 @@
    "category": "syllable",
    "refId": "s-sel",
    "text": "SEL",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -1922,6 +2971,7 @@
    "category": "syllable",
    "refId": "s-sem",
    "text": "SEM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 888,
    "skipped": true
   },
@@ -1933,6 +2983,7 @@
    "category": "syllable",
    "refId": "s-si",
    "text": "SI",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 672,
    "skipped": true
   },
@@ -1944,6 +2995,7 @@
    "category": "syllable",
    "refId": "s-so",
    "text": "SO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 672,
    "skipped": true
   },
@@ -1955,6 +3007,7 @@
    "category": "syllable",
    "refId": "s-sos",
    "text": "SOS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -1966,6 +3019,7 @@
    "category": "syllable",
    "refId": "s-su",
    "text": "SU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 672,
    "skipped": true
   },
@@ -1977,6 +3031,7 @@
    "category": "syllable",
    "refId": "s-sup",
    "text": "SUP",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 744,
    "skipped": true
   },
@@ -1988,10 +3043,9 @@
    "category": "prompt",
    "refId": "subject-aj",
    "text": "Angličtina.",
-   "gainDb": -2.7,
-   "rmsDb": -21.3,
-   "peakDb": -7.4,
-   "durationMs": 1200
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1200,
+   "skipped": true
   },
   {
    "audioId": "snd-subject-cti",
@@ -2001,10 +3055,9 @@
    "category": "prompt",
    "refId": "subject-cti",
    "text": "Čtení.",
-   "gainDb": -2.0,
-   "rmsDb": -21.4,
-   "peakDb": -7.1,
-   "durationMs": 1008
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1008,
+   "skipped": true
   },
   {
    "audioId": "snd-subject-mat",
@@ -2014,10 +3067,9 @@
    "category": "prompt",
    "refId": "subject-mat",
    "text": "Matematika.",
-   "gainDb": -3.7,
-   "rmsDb": -21.2,
-   "peakDb": -9.0,
-   "durationMs": 1248
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 1248,
+   "skipped": true
   },
   {
    "audioId": "snd-subject-prv",
@@ -2027,10 +3079,9 @@
    "category": "prompt",
    "refId": "subject-prv",
    "text": "Prvouka.",
-   "gainDb": -3.8,
-   "rmsDb": -21.5,
-   "peakDb": -9.5,
-   "durationMs": 936
+   "voice": "cs-CZ-VlastaNeural",
+   "durationMs": 936,
+   "skipped": true
   },
   {
    "audioId": "snd-w-ale",
@@ -2040,6 +3091,7 @@
    "category": "word",
    "refId": "w-ale",
    "text": "ALE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2051,6 +3103,7 @@
    "category": "word",
    "refId": "w-lama",
    "text": "LAMA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2062,6 +3115,7 @@
    "category": "word",
    "refId": "w-les",
    "text": "LES",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2073,6 +3127,7 @@
    "category": "word",
    "refId": "w-lilie",
    "text": "LILIE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 936,
    "skipped": true
   },
@@ -2084,6 +3139,7 @@
    "category": "word",
    "refId": "w-los",
    "text": "LOS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -2095,6 +3151,7 @@
    "category": "word",
    "refId": "w-losos",
    "text": "LOSOS",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1032,
    "skipped": true
   },
@@ -2106,6 +3163,7 @@
    "category": "word",
    "refId": "w-lupa",
    "text": "LUPA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2117,6 +3175,7 @@
    "category": "word",
    "refId": "w-maa",
    "text": "MÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2128,6 +3187,7 @@
    "category": "word",
    "refId": "w-maalo",
    "text": "MÁLO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -2139,6 +3199,7 @@
    "category": "word",
    "refId": "w-maam",
    "text": "MÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2150,6 +3211,7 @@
    "category": "word",
    "refId": "w-maama",
    "text": "MÁMA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2161,6 +3223,7 @@
    "category": "word",
    "refId": "w-malaa",
    "text": "MALÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -2172,6 +3235,7 @@
    "category": "word",
    "refId": "w-mapa",
    "text": "MAPA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -2183,6 +3247,7 @@
    "category": "word",
    "refId": "w-maso",
    "text": "MASO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2194,6 +3259,7 @@
    "category": "word",
    "refId": "w-mele",
    "text": "MELE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2205,6 +3271,7 @@
    "category": "word",
    "refId": "w-milaa",
    "text": "MILÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 936,
    "skipped": true
   },
@@ -2216,6 +3283,7 @@
    "category": "word",
    "refId": "w-mile",
    "text": "MILE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2227,6 +3295,7 @@
    "category": "word",
    "refId": "w-mimo",
    "text": "MIMO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2238,6 +3307,7 @@
    "category": "word",
    "refId": "w-molo",
    "text": "MOLO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 768,
    "skipped": true
   },
@@ -2249,6 +3319,7 @@
    "category": "word",
    "refId": "w-mula",
    "text": "MULA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 768,
    "skipped": true
   },
@@ -2260,6 +3331,7 @@
    "category": "word",
    "refId": "w-osel",
    "text": "OSEL",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 912,
    "skipped": true
   },
@@ -2271,6 +3343,7 @@
    "category": "word",
    "refId": "w-pase",
    "text": "PASE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2282,6 +3355,7 @@
    "category": "word",
    "refId": "w-pes",
    "text": "PES",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   },
@@ -2293,6 +3367,7 @@
    "category": "word",
    "refId": "w-pila",
    "text": "PILA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2304,6 +3379,7 @@
    "category": "word",
    "refId": "w-pilule",
    "text": "PILULE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2315,6 +3391,7 @@
    "category": "word",
    "refId": "w-po",
    "text": "PO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 480,
    "skipped": true
   },
@@ -2326,6 +3403,7 @@
    "category": "word",
    "refId": "w-pole",
    "text": "POLE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2337,6 +3415,7 @@
    "category": "word",
    "refId": "w-pomalaa",
    "text": "POMALÁ",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 960,
    "skipped": true
   },
@@ -2348,6 +3427,7 @@
    "category": "word",
    "refId": "w-pomalu",
    "text": "POMALU",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2359,6 +3439,7 @@
    "category": "word",
    "refId": "w-popel",
    "text": "POPEL",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 864,
    "skipped": true
   },
@@ -2370,6 +3451,7 @@
    "category": "word",
    "refId": "w-puma",
    "text": "PUMA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 672,
    "skipped": true
   },
@@ -2381,6 +3463,7 @@
    "category": "word",
    "refId": "w-pusa",
    "text": "PUSA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 792,
    "skipped": true
   },
@@ -2392,6 +3475,7 @@
    "category": "word",
    "refId": "w-saam",
    "text": "SÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 912,
    "skipped": true
   },
@@ -2403,6 +3487,7 @@
    "category": "word",
    "refId": "w-salaam",
    "text": "SALÁM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 1080,
    "skipped": true
   },
@@ -2414,6 +3499,7 @@
    "category": "word",
    "refId": "w-sama",
    "text": "SAMA",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2425,6 +3511,7 @@
    "category": "word",
    "refId": "w-se",
    "text": "SE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 696,
    "skipped": true
   },
@@ -2436,6 +3523,7 @@
    "category": "word",
    "refId": "w-sele",
    "text": "SELE",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 816,
    "skipped": true
   },
@@ -2447,6 +3535,7 @@
    "category": "word",
    "refId": "w-sem",
    "text": "SEM",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2458,6 +3547,7 @@
    "category": "word",
    "refId": "w-si",
    "text": "SI",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 648,
    "skipped": true
   },
@@ -2469,6 +3559,7 @@
    "category": "word",
    "refId": "w-silo",
    "text": "SILO",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 840,
    "skipped": true
   },
@@ -2480,6 +3571,7 @@
    "category": "word",
    "refId": "w-sup",
    "text": "SUP",
+   "voice": "cs-CZ-VlastaNeural",
    "durationMs": 720,
    "skipped": true
   }

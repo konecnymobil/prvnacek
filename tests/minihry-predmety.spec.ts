@@ -3,13 +3,24 @@ import { waitForChildDb } from './helpers';
 
 test.use({ reducedMotion: 'reduce' });
 
+/** Simuluje dodání anglických slovíček: index.json je obsahuje, soubory nahradí existující klip. */
+async function fakeEnglishNouns(page: Page) {
+  await page.route('**/audio/tts/index.json', async (route) => {
+    const r = await route.fetch(); const d = await r.json();
+    for (const w of ['pencil', 'book', 'bag', 'crayon', 'ruler', 'scissors', 'ball', 'apple', 'star', 'house', 'fish', 'tree']) d.sounds.push({ audioId: `snd-en-w-${w}` });
+    await route.fulfill({ response: r, json: d });
+  });
+  await page.route(/snd-en-w-(?!hello)[a-z]+\.mp3$/, (route) => route.fulfill({ path: 'public/audio/tts/snd-en-w-hello.mp3', contentType: 'audio/mpeg' }));
+}
 async function open(page: Page, subject: string, game: string) {
+  test.setTimeout(60_000); // 5 kol × 1,5 s + zvuky; v CI je WebKit pomalejší
+  if (subject === 'english') await fakeEnglishNouns(page);
   await page.goto('./');
   await expect(page.getByTestId('lesson-row')).toBeVisible();
   await waitForChildDb(page);
   const card = page.locator(`.subj-card[data-subject="${subject}"]`);
   await card.click(); await card.click();
-  await page.locator(`.game-tile[data-game="${game}"]`).click();
+  { const tile = page.locator(`.game-tile[data-game="${game}"]`); await tile.click(); await tile.click(); }
   await expect(page.getByTestId('game-round')).toBeVisible();
 }
 const idx = (page: Page) => page.getByTestId('game-round').getAttribute('data-index');
@@ -46,9 +57,10 @@ test('MP2 Co bylo dřív?: špatné pořadí se vrátí, správné projde', asyn
   for (let k = 0; k < 5; k++) {
     const i = await idx(page); const order = (await page.getByTestId('mp2').getAttribute('data-order'))!.split(' ');
     if (k === 0) {
-      for (const e of [order[1], order[0], ...order.slice(2)]) await page.locator(`.xg-pic[data-pic="${e}"]`).click();
+      await page.locator(`.xg-pic[data-pic="${order[1]}"]`).click(); // špatný vagon se hned vrátí
       await wrongMsg(page);
       await expect(page.locator('.xg-pic:disabled')).toHaveCount(0);
+      await expect(page.locator('.xg-wagon').first()).toHaveText('');
       await page.locator(`.xg-pic[data-pic="${order[0]}"]`).click(); await page.locator('.xg-wagon[data-k="0"]').click(); // vrátit vagon
       await expect(page.locator('.xg-pic:disabled')).toHaveCount(0);
     }
@@ -58,13 +70,27 @@ test('MP2 Co bylo dřív?: špatné pořadí se vrátí, správné projde', asyn
   await album(page, 'world');
 });
 
-test('MP3 Bezpečná cesta: přechod mimo zebru = oprava, na zebře projde', async ({ page }) => {
+test('MP3 Bezpečná cesta: přechod, rozhlédnutí, semafor; chyba = oprava', async ({ page }) => {
   await open(page, 'world', 'mp3');
+  const seen = new Set<string>();
   for (let k = 0; k < 5; k++) {
-    const i = await idx(page); const z = await page.getByTestId('mp3').getAttribute('data-zebra');
-    if (k === 0) { await page.locator(`.xg-spot:not([data-x="${z}"])`).first().click(); await wrongMsg(page); }
-    await page.locator(`.xg-spot[data-x="${z}"]`).click(); await next(page, i);
+    const i = await idx(page); const m = page.getByTestId('mp3');
+    const type = (await m.getAttribute('data-task'))!; seen.add(type);
+    if (type === 'crossing') {
+      const z = await m.getAttribute('data-zebra');
+      if (k === 0) { await page.locator(`.xg-spot:not([data-x="${z}"])`).first().click(); await wrongMsg(page); }
+      await page.locator(`.xg-spot[data-x="${z}"]`).click();
+    } else if (type === 'look') {
+      if (k === 0) { await page.locator('[data-dir="vpravo"]').click(); await wrongMsg(page); }
+      for (const d of ['vlevo', 'vpravo', 'vlevo']) await page.locator(`[data-dir="${d}"]`).click();
+    } else {
+      const v = await m.getAttribute('data-variant');
+      if (k === 0) { await page.locator(`[data-go="${v === 'green' ? 'wait' : 'go'}"]`).click(); await wrongMsg(page); }
+      await page.locator(`[data-go="${v === 'green' ? 'go' : 'wait'}"]`).click();
+    }
+    await next(page, i);
   }
+  expect([...seen].sort()).toEqual(['crossing', 'light', 'look']);
   await album(page, 'world');
 });
 
@@ -104,4 +130,17 @@ test('ME2 Colour it: málo barvy neprojde, ≥ 50 % správnou barvou projde', as
     await page.getByTestId('me2-done').click(); await next(page, i);
   }
   await album(page, 'english');
+});
+
+test('Angličtina bez nahraných slovíček: hry jsou „Brzy“ a nespustí se (A-01)', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.getByTestId('lesson-row')).toBeVisible();
+  await waitForChildDb(page);
+  const card = page.locator('.subj-card[data-subject="english"]');
+  await card.click(); await card.click();
+  for (const g of ['me1', 'me2']) await expect(page.locator(`.game-tile[data-game="${g}"]`)).toHaveAttribute('data-locked', 'true');
+  await expect(page.getByTestId('game-soon')).toHaveCount(2);
+  await page.locator('.game-tile[data-game="me1"]').click();
+  await expect(page.getByTestId('game-lock-hint')).toContainText('brzy');
+  await expect(page.getByTestId('game-round')).toHaveCount(0);
 });

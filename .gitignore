@@ -6,3 +6,4 @@ playwright-report/
 .env*
 .sync-test-data/
 server/data/
+audit-out/

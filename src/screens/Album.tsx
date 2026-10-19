@@ -1,4 +1,5 @@
 /** M4 Album nálepek (dítě). Bez počtů „4/12“, bez „chybí“, nic nejde ztratit. */
+import HomeButton from '../components/HomeButton';
 import { useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import { say, stopSay } from '../activities/common';
@@ -61,7 +62,7 @@ export default function Album({ content, back, subject: initialSubject }: { cont
   return (
     <main className="screen album" data-testid="album">
       <header className="topbar">
-        <button className="back" onClick={back}>‹ Zpět</button>
+        <HomeButton onClick={back} />
         <div className="alb-subjects" role="tablist" aria-label="Předměty">
           {SUBJECT_TABS.filter((t) => SETS.some((x) => setSubject(x) === t.id)).map((t) => (
             <button key={t.id} role="tab" aria-selected={t.id === subject} aria-label={t.name} className={`kbtn alb-subj subj--${t.id === 'cz-reading' ? 'cti' : t.id === 'math' ? 'mat' : t.id === 'world' ? 'prv' : 'aj'}`} data-testid={`alb-subj-${t.id}`}
@@ -101,7 +102,7 @@ export default function Album({ content, back, subject: initialSubject }: { cont
             <Sticker id={detail.id} special={detail.special} big />
             <h2>{detail.word}</h2>
             {da && <button className="kbtn" onClick={() => void say([da])} aria-label="Přečti">🔊</button>}
-            {od && <p>Dostal(a) jsi ji {SOURCE_TEXT[od.source]} · {new Date(od.earnedAt).toLocaleDateString('cs-CZ')}</p>}
+            {od && <p>Získáno {SOURCE_TEXT[od.source]} · {new Date(od.earnedAt).toLocaleDateString('cs-CZ')}</p>}
             <button ref={closeRef} className="kbtn" onClick={() => setDetail(null)} aria-label="Zavřít" data-testid="alb-close">✕</button>
           </div>
         </div>

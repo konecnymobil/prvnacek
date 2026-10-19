@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><!-- Pejsek – ikona Angličtiny, vlastní kresba Pastelka, v0.7.1 -->
+<ellipse cx="60" cy="108" rx="34" ry="6" fill="#000" opacity=".08"/>
+<path d="M22 34c-10 4-14 26-6 42 5 9 14 6 16-4l4-30c1-7-7-11-14-8z" fill="#8A5A3B"/>
+<path d="M98 34c10 4 14 26 6 42-5 9-14 6-16-4l-4-30c-1-7 7-11 14-8z" fill="#8A5A3B"/>
+<ellipse cx="60" cy="62" rx="36" ry="38" fill="#F4D8B0"/>
+<path d="M70 26c14 2 22 14 22 26-6 4-16 2-20-6z" fill="#C98A5A"/>
+<circle cx="46" cy="58" r="6" fill="#2B2B33"/><circle cx="74" cy="58" r="6" fill="#2B2B33"/>
+<circle cx="48" cy="56" r="2" fill="#fff"/><circle cx="76" cy="56" r="2" fill="#fff"/>
+<ellipse cx="60" cy="76" rx="9" ry="6.5" fill="#2B2B33"/>
+<path d="M60 82v6M50 88c4 5 16 5 20 0" stroke="#2B2B33" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M56 90c0 9 8 9 8 0z" fill="#E8607A"/>
+</svg>

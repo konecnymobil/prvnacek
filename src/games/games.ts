@@ -3,7 +3,7 @@ import type { Content } from '../content/load';
 import type { Forms, Word } from '../content/types';
 import { wordImageUrl } from '../content/images';
 import { isLessonUnlocked, type LessonState } from '../storage/db';
-import { shuffle } from '../activities/common';
+import { drawFresh, drawRound, freshOrder, shuffle } from '../activities/fresh';
 
 export type GameId = 'ztratilo' | 'detektiv' | 'bublinky' | 'domecky' | 'obchod';
 export interface Opt { id: string; forms?: Forms; img?: string }
@@ -44,10 +44,13 @@ export const GAMES: GameDef[] = [
     id: 'ztratilo', name: 'Co se ztratilo?', icon: '🔎', text: 'Najdi chybějící písmenko.', minLesson: () => 3,
     build: (c, idx) => {
       const known = knownLetters(c, idx).filter((l) => !l.isLong || l.upper === 'Á');
-      return shuffle(picWords(c, idx).filter((w) => w.text.length >= 2)).slice(0, GAME_ROUND).map((w) => {
+      const texts = new Set(c.words.map((x) => x.text));
+      return drawRound('mh-ztratilo', picWords(c, idx).filter((w) => w.text.length >= 2), GAME_ROUND, (w) => w.id).map((w) => {
         const gap = Math.floor(Math.random() * w.text.length);
         const ans = known.find((l) => l.upper === w.text[gap]) ?? c.letters.find((l) => l.upper === w.text[gap])!;
-        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap]), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: ['snd-p-mh-ztratilo'], hint: [w.audioId], ok: [w.audioId] };
+        // A-02: rozptylovač nesmí dát jiné skutečné slovo (LES/PES, PUSA/PUMA…)
+        const realWord = (l: { upper: string }) => texts.has(w.text.slice(0, gap) + l.upper + w.text.slice(gap + 1));
+        return { id: w.id, answer: ans.id, options: opt4(ans, known.filter((l) => l.upper !== w.text[gap] && !realWord(l)), 3).map(letterOpt), show: w.forms, gapIndex: gap, img: wordImageUrl(w)!, prompt: ['snd-p-mh-ztratilo'], hint: [w.audioId], ok: [w.audioId] };
       });
     },
   },
@@ -55,7 +58,7 @@ export const GAMES: GameDef[] = [
     id: 'detektiv', name: 'Slabikový detektiv', icon: '🕵️', text: 'Najdi slabiku z lupy.', minLesson: () => 3,
     build: (c, idx) => {
       const pool = sylls(c, idx);
-      return shuffle(pool).slice(0, GAME_ROUND).map((s) => {
+      return drawRound('mh-detektiv', pool, GAME_ROUND, (s) => s.id).map((s) => {
         const similar = pool.filter((x) => x.id !== s.id && (x.consonantLetterId === s.consonantLetterId || x.vowelLetterId === s.vowelLetterId));
         const rest = pool.filter((x) => x.id !== s.id && !similar.includes(x));
         const opts = shuffle([s, ...shuffle(similar).slice(0, 3), ...shuffle(rest)].slice(0, 4));
@@ -68,19 +71,20 @@ export const GAMES: GameDef[] = [
     build: (c, idx) => {
       if (idx < 3) { // kolo písmen (nikdy nemíchá)
         const ls = knownLetters(c, idx);
-        return Array.from({ length: GAME_ROUND }, (_, i) => { const l = ls[i % ls.length]; return { id: `${l.id}-${i}`, answer: l.id, options: opt4(l, ls).map(letterOpt), prompt: ['snd-p-mh-bublinky', l.audioId], hint: [l.audioId], ok: [l.audioId] }; });
+        return Array.from({ length: GAME_ROUND }, (_, i) => { const l = drawFresh('mh-bublinky-l', ls, (x) => x.id, GAME_ROUND); return { id: `${l.id}-${i}`, answer: l.id, options: opt4(l, ls).map(letterOpt), prompt: ['snd-p-mh-bublinky', l.audioId], hint: [l.audioId], ok: [l.audioId] }; });
       }
       const pool = sylls(c, idx);
-      return shuffle(pool).slice(0, GAME_ROUND).map((s) => ({ id: s.id, answer: s.id, options: opt4(s, pool).map((x) => ({ id: x.id, forms: x.forms })), prompt: ['snd-p-mh-bublinky', s.audioId], hint: [s.audioId], ok: [s.audioId] }));
+      return drawRound('mh-bublinky', pool, GAME_ROUND, (s) => s.id).map((s) => ({ id: s.id, answer: s.id, options: opt4(s, pool).map((x) => ({ id: x.id, forms: x.forms })), prompt: ['snd-p-mh-bublinky', s.audioId], hint: [s.audioId], ok: [s.audioId] }));
     },
   },
   {
     id: 'domecky', name: 'Slabikové domečky', icon: '🏠', text: 'Dej obrázek do domečku jeho první slabiky.',
     minLesson: (c) => c.orders[oid(c)].lessons.find((l) => houseGroups(c, l.index).size >= 2)?.index ?? null,
     build: (c, idx) => {
-      const groups = [...houseGroups(c, idx)].sort(() => Math.random() - 0.5).slice(0, housesFor(idx));
+      const groups = shuffle([...houseGroups(c, idx)]).slice(0, housesFor(idx));
       const houses: Opt[] = groups.map(([sid]) => ({ id: sid, forms: c.syllableById.get(sid)!.forms }));
-      const cards = shuffle(groups.flatMap(([sid, ws]) => shuffle(ws).slice(0, Math.max(2, Math.ceil(6 / groups.length))).map((w) => ({ w, sid })))).slice(0, 6);
+      const per = Math.max(2, Math.ceil(6 / groups.length));
+      const cards = freshOrder('mh-domecky', shuffle(groups.flatMap(([sid, ws]) => drawRound(`mh-domecky:${sid}`, ws, per, (w) => w.id).map((w) => ({ w, sid })))).slice(0, 6), (x) => x.w.id);
       return cards.map(({ w, sid }) => ({ id: w.id, answer: sid, options: houses, img: wordImageUrl(w)!, prompt: ['snd-p-mh-domecky'], hint: houses.map((h) => c.syllableById.get(h.id)!.audioId), ok: [w.audioId] }));
     },
   },
@@ -88,7 +92,7 @@ export const GAMES: GameDef[] = [
     id: 'obchod', name: 'Slabikový obchod', icon: '🧺', text: 'Přečti lístek a dej zboží do košíku.', minLesson: () => 6,
     build: (c, idx) => {
       const ws = picWords(c, idx).filter((w) => w.usableInPictureTasks);
-      return shuffle(ws).slice(0, GAME_ROUND).map((w) => ({ id: w.id, answer: w.id, options: opt4(w, ws).map((x) => ({ id: x.id, img: wordImageUrl(x)! })), show: w.forms, prompt: ['snd-p-mh-obchod'], hint: [w.audioId], ok: [w.audioId] }));
+      return drawRound('mh-obchod', ws, GAME_ROUND, (w) => w.id).map((w) => ({ id: w.id, answer: w.id, options: opt4(w, ws).map((x) => ({ id: x.id, img: wordImageUrl(x)! })), show: w.forms, prompt: ['snd-p-mh-obchod'], hint: [w.audioId], ok: [w.audioId] }));
     },
   },
 ];

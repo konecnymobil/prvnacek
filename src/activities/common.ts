@@ -11,18 +11,8 @@ import premysli from '../assets/mascot/kulisek-premysli.svg';
 export const MASCOT = { radost, povzbuzeni, premysli };
 export const ROUND_SIZE = 6;
 
-export function shuffle<T>(a: readonly T[]): T[] {
-  const r = [...a];
-  for (let i = r.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [r[i], r[j]] = [r[j], r[i]];
-  }
-  return r;
-}
-
-export function pick<T>(a: readonly T[]): T {
-  return a[Math.floor(Math.random() * a.length)];
-}
+export { shuffle, pick } from './fresh';
+import { pick } from './fresh';
 
 /** Písmena probraná do dané lekce včetně (dle pořadí aplikace). */
 export function learnedLetters(content: Content, lesson: Lesson): Letter[] {

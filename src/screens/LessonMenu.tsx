@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import Glyphs from '../components/Glyphs';
 import { useEffect, useState } from 'react';
 import type { Content } from '../content/load';
@@ -37,7 +38,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
   return (
     <main className="screen activity lesson-menu" data-testid="lesson-menu">
       <header className="topbar row">
-        <button className="kbtn" onClick={() => go('home')}>Zpět</button>
+        <HomeButton onClick={() => go('home')} />
         <h1>Lekce {lesson.index}: {lesson.title}</h1>
       </header>
       <button className="tile tile-hero" onClick={() => void say([letter.audioId])} aria-label={`Poslechnout hlásku ${letter.upper}`}>
@@ -58,7 +59,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('readWord')} disabled={!hasReadWords} data-testid="open-readword">
           📚 Čti slovo
         </button>
-        {!hasWords && <p className="small muted">Obrázky ke slovům přijdou s dalšími lekcemi.</p>}
+        {!hasWords && <p className="small muted">Slova přijdou s dalšími písmenky.</p>}
         {!hasSyllables && <p className="small muted">Slabiky se odemknou s další lekcí.</p>}
       </nav>
     </main>

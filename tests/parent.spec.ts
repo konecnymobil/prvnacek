@@ -99,7 +99,7 @@ test('zkouška: ✓/✗, zpět, pauza, důvod; schválení odemkne další lekci
   // 5/6, 1 chyba u nového písmene → doporučeno
   await expect(page.getByTestId('test-score')).toHaveText('5 / 6');
   await expect(page.getByTestId('test-result')).toHaveAttribute('data-recommend', 'true');
-  await expect(page.getByTestId('test-errors')).toContainText('zaměnil');
+  await expect(page.getByTestId('test-errors')).toContainText('záměna');
   await page.getByTestId('approve').click();
   await expect(page.getByTestId('approved-msg')).toContainText('Odemčena lekce 2');
   const st = await dbGet(page, 'lessonStates');
@@ -117,6 +117,15 @@ test('zkouška: 2 chyby = nedoporučeno', async ({ page }) => {
   }
   for (let i = 0; i < 4; i++) await page.getByTestId('rate-ok').click();
   await expect(page.getByTestId('test-result')).toHaveAttribute('data-recommend', 'false');
+  // A-28: bez doporučení jeden potvrzovací krok; výchozí volba je „Ještě počkáme“
+  await page.getByTestId('approve').click();
+  await expect(page.getByTestId('approve-confirm')).toContainText('Opravdu odemknout?');
+  await expect(page.getByTestId('approve-confirm-no')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('approve-confirm')).toHaveCount(0);
+  await page.getByTestId('approve').click();
+  await page.getByTestId('approve-confirm-yes').click();
+  await expect(page.getByTestId('approved-msg')).toContainText('Odemčena lekce 2');
 });
 
 test('Zvuky: nahrát vlastní hlásku L, uložit a vrátit původní hlas', async ({ page }) => {

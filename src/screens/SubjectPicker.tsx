@@ -4,6 +4,8 @@ import { say } from '../activities/common';
 
 export type SubjectKey = 'cz-reading' | 'math' | 'world' | 'english';
 const SUBJECT_AUDIO: Record<SubjectKey, string> = { 'cz-reading': 'snd-subject-cti', math: 'snd-subject-mat', world: 'snd-subject-prv', english: 'snd-subject-aj' };
+import pejsek from '../assets/subject/pejsek.svg';
+
 const SUBJECTS: { id: SubjectKey; name: string; icon: string; cls: string }[] = [
   { id: 'cz-reading', name: 'Čtení', icon: '📖', cls: 'subj--cti' },
   { id: 'math', name: 'Matematika', icon: '🔢', cls: 'subj--mat' },
@@ -20,7 +22,7 @@ export default function SubjectPicker({ current, onEnter }: { current: SubjectKe
         <button key={s.id} className={`subj-card ${s.cls}${sel === s.id ? ' is-selected' : ''}${current === s.id ? ' is-current' : ''}`} data-subject={s.id}
           aria-pressed={sel === s.id} aria-label={sel === s.id ? `${s.name} – klepni znovu a jdeme` : s.name}
           onClick={() => { if (sel === s.id) { setSel(null); onEnter(s.id); } else { setSel(s.id); void say([SUBJECT_AUDIO[s.id]]); } }}>
-          <span className="subj-icon">{s.icon}</span><span className="subj-name">{s.name}</span>
+          <span className="subj-icon">{s.id === 'english' ? <img className="subj-dog" src={pejsek} alt="" /> : s.icon}</span><span className="subj-name">{s.name}</span>
           {sel === s.id && <span className="subj-go" aria-hidden>➜</span>}
         </button>
       ))}

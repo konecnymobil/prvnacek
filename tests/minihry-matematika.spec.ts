@@ -19,7 +19,7 @@ async function openGame(page: Page, id: string) {
   await page.reload();
   const card = page.locator('.subj-card[data-subject="math"]');
   await card.click(); await card.click();
-  await page.locator(`.game-tile[data-game="${id}"]`).click();
+  { const tile = page.locator(`.game-tile[data-game="${id}"]`); await tile.click(); await tile.click(); }
   await expect(page.getByTestId('game-round')).toBeVisible();
 }
 async function nextTask(page: Page, idx: string | null) {
@@ -96,7 +96,7 @@ test('rodič nastaví tečky na 3 s; bez pokroku jsou hry zamčené', async ({ p
   const card = page.locator('.subj-card[data-subject="math"]');
   await card.click(); await card.click();
   await expect(page.locator('.game-tile[data-game="mm1"]')).toHaveAttribute('data-locked', 'true');
-  await page.getByRole('button', { name: '‹ Zpět' }).click();
+  await page.getByTestId('home-btn').click();
   await page.getByTestId('open-parent').click();
   await page.getByTestId('gate-hold').hover();
   await page.mouse.down(); await page.waitForTimeout(3300); await page.mouse.up();

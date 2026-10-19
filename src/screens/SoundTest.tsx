@@ -147,14 +147,14 @@ export default function SoundTest({ content, persisted, go }: { content: Content
 
       <section className="card" aria-labelledby="h-sound">
         <h2 id="h-sound">1. Zvuk</h2>
-        <p className="muted">Klepni na velké tlačítko. Měl(a) bys slyšet: „{prompt?.text ?? 'Ahoj!'}“</p>
+        <p className="muted">Klepni na velké tlačítko. Teď by mělo být slyšet: „{prompt?.text ?? 'Ahoj!'}“</p>
         <button className="kbtn kbtn-primary kbtn-xl" onClick={onPlaySample} data-testid="play-sample">
           🔊 Přehrát ukázku
         </button>
         <p className="status" aria-live="polite" data-testid="play-status">
           {play.kind === 'playing' && 'Hraje…'}
           {play.kind === 'done' &&
-            (play.source === 'parent' ? 'Přehrála se tvoje vlastní nahrávka.' : 'Přehrál se syntetický hlas. Slyšel(a) jsi ho?')}
+            (play.source === 'parent' ? 'Přehrála se tvoje vlastní nahrávka.' : 'Přehrál se syntetický hlas. Je ho slyšet?')}
           {play.kind === 'error' && (
             <span className="is-error">Zvuk se nepřehrál: {play.msg} Zkontroluj hlasitost a přepínač ztlumení.</span>
           )}

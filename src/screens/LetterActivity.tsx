@@ -1,3 +1,4 @@
+import HomeButton from '../components/HomeButton';
 import { useStickerOnDone } from '../album/useStickerOnDone';
 import { useTaskLog } from '../activities/taskLog';
 import Glyphs, { useTaskForm } from '../components/Glyphs';
@@ -5,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Content } from '../content/load';
 import type { Lesson, Letter } from '../content/types';
 import Mascot from '../activities/Mascot';
+import { drawFresh } from '../activities/fresh';
 import { ROUND_SIZE, learnedLetters, promptAudio, randomPrompt, recordAttempt, say, stopSay, shuffle, pickPriority, usePriorityIds } from '../activities/common';
 import { useAutoAdvance } from '../activities/autoAdvance';
 
@@ -13,7 +15,11 @@ interface Task {
   choices: Letter[];
 }
 
-function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
+const firstIndex = (content: Content) => Math.min(...content.orders[content.defaultOrderId].lessons.map((l) => l.index));
+/** A-10: v 1. lekci kratší kolo (4 úlohy). */
+export const letterRoundSize = (content: Content, lesson: Lesson) => (lesson.index === firstIndex(content) ? 4 : ROUND_SIZE);
+
+export function makeTask(content: Content, lesson: Lesson, prev: string | null, priority: Set<string>, first: boolean): Task {
   const learned = learnedLetters(content, lesson);
   let targets = lesson.letterIds.map((id) => content.letterById.get(id)!).filter((l) => l.id !== prev);
   // lekce s jediným písmenem: po něm následuje dříve probrané písmeno, ať se stejné nevolá dvakrát za sebou
@@ -22,10 +28,16 @@ function makeTask(content: Content, lesson: Lesson, prev: string | null, priorit
   // k písmenům lekce se přidají písmena, která dítěti ve zkoušce nešla (i z dřívějších lekcí)
   const extra = learned.filter((l) => priority.has(l.id) && !targets.some((t) => t.id === l.id) && l.id !== prev);
   const all = targets.length ? [...targets, ...extra] : learned;
-  const target = pickPriority(all, priority, first);
+  const target = drawFresh(`A2:${lesson.id}`, all, (l) => l.id, ROUND_SIZE, (a) => pickPriority(a, priority, first));
   // Á a A si dítě zatím nespletlo záměrně: krátké a dlouhé nedáváme vedle sebe jako nabídku.
   const confusable = (l: Letter) => l.baseLetterId === target.id || target.baseLetterId === l.id;
   let pool = learned.filter((l) => l.id !== target.id && !confusable(l));
+  if (lesson.index === firstIndex(content)) {
+    // A-10: v 1. lekci rozptylovače jen tvarově vzdálené (shapeDistractors z obsahu), ne písmena dalších lekcí
+    const shapes = (target.shapeDistractors ?? []).map((ch): Letter => ({ ...target, id: `shape-${ch}`, upper: ch, lower: ch.toLowerCase(), baseLetterId: null,
+      forms: { upperPrint: ch, lowerPrint: ch.toLowerCase(), cursive: ch.toLowerCase(), cursiveUpper: ch } }));
+    if (shapes.length >= 2) pool = shapes;
+  }
   if (pool.length < 2) {
     // Na začátku (lekce M) není z čeho vybírat – doplníme písmena z prvních lekcí.
     const order = content.orders[content.defaultOrderId];
@@ -50,6 +62,7 @@ export default function LetterActivity(props: Props) {
 }
 
 function LetterRound({ content, lesson, back, priority }: Props & { priority: Set<string> }) {
+  const ROUND = letterRoundSize(content, lesson);
   const [n, setN] = useState(0);
   const [task, setTask] = useState<Task>(() => makeTask(content, lesson, null, priority, true));
   const [mood, setMood] = useState<'radost' | 'povzbuzeni' | 'premysli'>('premysli');
@@ -99,8 +112,8 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
   auto.target.current = () => next();
   const next = () => {
     stopSay();
-    if (n + 1 >= ROUND_SIZE) {
-      setN(ROUND_SIZE);
+    if (n + 1 >= ROUND) {
+      setN(ROUND);
       void say(promptAudio(content, 'p-round-end'));
       return;
     }
@@ -112,14 +125,14 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
     setMessage('Poslechni si hlásku a najdi její písmenko.');
   };
 
-  useStickerOnDone('cviceni', n >= ROUND_SIZE);
-  useTaskLog('A2', lesson.id, n >= ROUND_SIZE);
-  if (n >= ROUND_SIZE) {
+  useStickerOnDone('cviceni', n >= ROUND);
+  useTaskLog('A2', lesson.id, n >= ROUND);
+  if (n >= ROUND) {
     return (
       <main className="screen activity" data-testid="round-end">
         <Mascot mood="radost" />
         <h1>Hotovo! To bylo skvělé hraní.</h1>
-        <p className="muted">Napoprvé správně: {correctCount} z {ROUND_SIZE}</p>
+        <p className="muted">Napoprvé správně: {correctCount} z {ROUND}</p>
         <div className="actions">
           <button className="kbtn kbtn-primary kbtn-xl" onClick={back}>Zpět na lekci</button>
         </div>
@@ -130,8 +143,8 @@ function LetterRound({ content, lesson, back, priority }: Props & { priority: Se
   return (
     <main className="screen activity" data-testid="letter-activity" data-target={task.target.id}>
       <header className="topbar row">
-        <button className="kbtn" onClick={back}>Zpět</button>
-        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND_SIZE}</p>
+        <HomeButton onClick={back} />
+        <p className="muted" data-testid="progress">Úloha {n + 1} z {ROUND}</p>
       </header>
       <div className="stage">
         <Mascot mood={mood} />
