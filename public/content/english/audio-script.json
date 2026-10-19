@@ -3,7 +3,7 @@
   "kind": "audioScript",
   "subjectId": "english",
   "sharedAudioIds": [],
-  "contentVersion": "2026-10-19.6",
+  "contentVersion": "2026-10-19.8",
   "voice": {
     "name": "en-GB-LibbyNeural",
     "fallback": "en-GB-SoniaNeural",

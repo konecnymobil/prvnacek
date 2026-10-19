@@ -261,7 +261,7 @@
         "text": "Semafor pro chodce: červený panáček → správně „Čekám“, zelený → „Jdu“ a připomínka rozhlédnutí."
       }
     ],
-    "roundRule": "5 úloh: aspoň 1 z každého typu, nikdy stejný typ 3× za sebou. Bez scénáře „auto za autobusem“. Volně odemčeno.",
+    "roundRule": "5 úloh: aspoň 1 z každého typu, nikdy stejný typ 2× za sebou (žádné dvě úlohy stejného typu po sobě). Bez scénáře „auto za autobusem“. Volně odemčeno.",
     "excluded": [
       "auto za autobusem (rozhodnutí Jiřího)"
     ]

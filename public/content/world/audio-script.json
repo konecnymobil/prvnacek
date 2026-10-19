@@ -11,7 +11,7 @@
     "snd-p-mh-sticker-set",
     "snd-p-show-answer"
   ],
-  "contentVersion": "2026-10-19.6",
+  "contentVersion": "2026-10-19.8",
   "voice": {
     "name": "cs-CZ-VlastaNeural",
     "fallback": "cs-CZ-AntoninNeural",

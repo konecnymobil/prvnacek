@@ -290,6 +290,104 @@
       "audioId": "snd-p-subject-pick"
     },
     {
+      "id": "p-rw-name",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka do ohrádky.",
+      "audioId": "snd-p-rw-name"
+    },
+    {
+      "id": "p-rw-goal",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček.",
+      "audioId": "snd-p-rw-goal"
+    },
+    {
+      "id": "p-rw-pick-gate",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Vyber bránu.",
+      "audioId": "snd-p-rw-pick-gate"
+    },
+    {
+      "id": "p-rw-gate-plus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus jedna",
+      "audioId": "snd-p-rw-gate-plus-1"
+    },
+    {
+      "id": "p-rw-gate-plus-2",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus dvě",
+      "audioId": "snd-p-rw-gate-plus-2"
+    },
+    {
+      "id": "p-rw-gate-minus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "mínus jedna",
+      "audioId": "snd-p-rw-gate-minus-1"
+    },
+    {
+      "id": "p-rw-exact",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Přesně tolik!",
+      "audioId": "snd-p-rw-exact"
+    },
+    {
+      "id": "p-rw-too-many",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich moc. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-many"
+    },
+    {
+      "id": "p-rw-too-few",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich málo. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-few"
+    },
+    {
+      "id": "p-rw-show-path",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Takhle to šlo.",
+      "audioId": "snd-p-rw-show-path"
+    },
+    {
+      "id": "p-rw-unlock",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka na tebe čekají. Můžeš si zahrát.",
+      "audioId": "snd-p-rw-unlock"
+    },
+    {
+      "id": "p-rw-locked",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Ještě kolo procvičování a zvířátka se vrátí.",
+      "audioId": "snd-p-rw-locked"
+    },
+    {
+      "id": "p-rw-done-today",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka už dnes spí. Zítra zase.",
+      "audioId": "snd-p-rw-done-today"
+    },
+    {
+      "id": "p-rw-back",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka jsou doma. Jdeme zase procvičovat.",
+      "audioId": "snd-p-rw-back"
+    },
+    {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,

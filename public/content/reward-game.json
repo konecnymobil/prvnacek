@@ -1992,48 +1992,74 @@
     "metricId": "rewardLevels",
     "text": "Rodič vidí počet odehraných levelů vedle kol procvičování."
   },
-  "neededClips": [
+  "clips": [
     {
+      "role": "name",
       "audioId": "snd-p-rw-name",
       "text": "Zvířátka do ohrádky."
     },
     {
+      "role": "game-first-puzzle",
       "audioId": "snd-p-rw-goal",
       "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček."
     },
     {
+      "role": "game-next-puzzle",
       "audioId": "snd-p-rw-pick-gate",
       "text": "Vyber bránu."
     },
     {
+      "role": "gate-+1",
+      "audioId": "snd-p-rw-gate-plus-1",
+      "text": "plus jedna"
+    },
+    {
+      "role": "gate-+2",
+      "audioId": "snd-p-rw-gate-plus-2",
+      "text": "plus dvě"
+    },
+    {
+      "role": "gate--1",
+      "audioId": "snd-p-rw-gate-minus-1",
+      "text": "mínus jedna"
+    },
+    {
+      "role": "exact",
       "audioId": "snd-p-rw-exact",
       "text": "Přesně tolik!"
     },
     {
+      "role": "too-many",
       "audioId": "snd-p-rw-too-many",
       "text": "Je jich moc. Zkus jinou cestu."
     },
     {
+      "role": "too-few",
       "audioId": "snd-p-rw-too-few",
       "text": "Je jich málo. Zkus jinou cestu."
     },
     {
+      "role": "show-path",
       "audioId": "snd-p-rw-show-path",
       "text": "Takhle to šlo."
     },
     {
+      "role": "state-unlocked",
       "audioId": "snd-p-rw-unlock",
       "text": "Zvířátka na tebe čekají. Můžeš si zahrát."
     },
     {
+      "role": "state-waiting",
       "audioId": "snd-p-rw-locked",
       "text": "Ještě kolo procvičování a zvířátka se vrátí."
     },
     {
+      "role": "state-sleeping",
       "audioId": "snd-p-rw-done-today",
       "text": "Zvířátka už dnes spí. Zítra zase."
     },
     {
+      "role": "state-done",
       "audioId": "snd-p-rw-back",
       "text": "Zvířátka jsou doma. Jdeme zase procvičovat."
     }

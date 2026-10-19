@@ -70,13 +70,27 @@ test('MP2 Co bylo dřív?: špatné pořadí se vrátí, správné projde', asyn
   await album(page, 'world');
 });
 
-test('MP3 Bezpečná cesta: přechod mimo zebru = oprava, na zebře projde', async ({ page }) => {
+test('MP3 Bezpečná cesta: přechod, rozhlédnutí, semafor; chyba = oprava', async ({ page }) => {
   await open(page, 'world', 'mp3');
+  const seen = new Set<string>();
   for (let k = 0; k < 5; k++) {
-    const i = await idx(page); const z = await page.getByTestId('mp3').getAttribute('data-zebra');
-    if (k === 0) { await page.locator(`.xg-spot:not([data-x="${z}"])`).first().click(); await wrongMsg(page); }
-    await page.locator(`.xg-spot[data-x="${z}"]`).click(); await next(page, i);
+    const i = await idx(page); const m = page.getByTestId('mp3');
+    const type = (await m.getAttribute('data-task'))!; seen.add(type);
+    if (type === 'crossing') {
+      const z = await m.getAttribute('data-zebra');
+      if (k === 0) { await page.locator(`.xg-spot:not([data-x="${z}"])`).first().click(); await wrongMsg(page); }
+      await page.locator(`.xg-spot[data-x="${z}"]`).click();
+    } else if (type === 'look') {
+      if (k === 0) { await page.locator('[data-dir="vpravo"]').click(); await wrongMsg(page); }
+      for (const d of ['vlevo', 'vpravo', 'vlevo']) await page.locator(`[data-dir="${d}"]`).click();
+    } else {
+      const v = await m.getAttribute('data-variant');
+      if (k === 0) { await page.locator(`[data-go="${v === 'green' ? 'wait' : 'go'}"]`).click(); await wrongMsg(page); }
+      await page.locator(`[data-go="${v === 'green' ? 'go' : 'wait'}"]`).click();
+    }
+    await next(page, i);
   }
+  expect([...seen].sort()).toEqual(['crossing', 'light', 'look']);
   await album(page, 'world');
 });
 

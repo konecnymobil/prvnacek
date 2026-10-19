@@ -82,21 +82,34 @@ test('všechny generátory kol: bez opakování v kole i na hranici kol', async 
     if (level >= 4) expect(new Set(rounds.flat().map((x) => x.split(':')[0])).size, `MM3 v úrovni ${level} má víc řad než 1-2-3`).toBeGreaterThan(1);
   }
   const w = await load('/src/games/WorldEnglishGames.tsx');
-  bad.push(...check('mp1', Array.from({ length: ROUNDS }, () => w.mp1Tasks().map((t: { a: string }) => t.a)), 5));
-  const mp2 = Array.from({ length: ROUNDS }, () => w.mp2Tasks());
-  bad.push(...check('mp2', mp2.map((r) => r.map((t: { s: string[] }) => t.s.join(''))), 5));
-  for (const r of mp2) for (const t of r) expect(t.shown.join(), 'MP2 nikdy rovnou seřazené').not.toBe(t.s.join());
-  expect(new Set(mp2.map((r) => r[0].s.join(''))).size, 'MP2 nezačíná pořád stejně').toBeGreaterThan(1);
-  bad.push(...check('mp3', Array.from({ length: ROUNDS }, () => w.mp3Tasks().map((t: { zebra: number }) => String(t.zebra))), 5));
+  const wg = JSON.parse(fs.readFileSync('public/content/world/games.json', 'utf8'));
+  for (const lv of wg.mp1.levels) {
+    const boxes = wg.mp1.boxes.filter((x: { id: string }) => lv.boxIds.includes(x.id));
+    const r1 = Array.from({ length: ROUNDS }, () => w.mp1Tasks(wg.mp1.items, boxes));
+    bad.push(...check(`mp1:${lv.id}`, r1.map((r) => r.map((t: { id: string }) => t.id)), 5));
+    for (const r of r1) {
+      expect(r.every((t: { box: string }) => lv.boxIds.includes(t.box)), 'MP1 jen krabice úrovně').toBe(true);
+      for (let i = 2; i < r.length; i++) expect(r[i].box === r[i - 1].box && r[i].box === r[i - 2].box, 'MP1 nejvýš 2× stejná krabice').toBe(false);
+    }
+  }
+  const mp2 = Array.from({ length: ROUNDS }, () => w.mp2Tasks(wg.mp2.sequences));
+  bad.push(...check('mp2', mp2.map((r) => r.map((t: { s: { id: string } }) => t.s.id)), 5));
+  for (const r of mp2) { expect(r).toHaveLength(5); for (const t of r) expect(t.shown.join(), 'MP2 nikdy rovnou seřazené').not.toBe(t.s.steps.join()); }
+  expect(new Set(mp2.map((r) => r[0].s.id)).size, 'MP2 nezačíná pořád stejně').toBeGreaterThan(1);
+  for (let k = 0; k < ROUNDS; k++) {
+    const r = w.mp3Tasks(wg.mp3.taskTypes).map((t: { type: { id: string } }) => t.type.id);
+    expect(new Set(r).size, `MP3 aspoň 1 z každého typu: ${r}`).toBe(3);
+    for (let i = 2; i < r.length; i++) expect(r[i] === r[i - 1] && r[i] === r[i - 2], 'MP3 nikdy 3× stejný typ').toBe(false);
+  }
   bad.push(...check('me1', Array.from({ length: ROUNDS }, () => w.me1Tasks().map((t: { v: { w: string } }) => t.v.w)), 5));
   bad.push(...check('me2', Array.from({ length: ROUNDS }, () => w.me2Tasks().map((t: { s: { w: string } }) => t.s.w)), 5));
 
-  const { MATH_LESSONS, buildRound } = await load('/src/math/math.ts');
-  for (const l of MATH_LESSONS) {
+  const { buildRound } = await load('/src/math/math.ts');
+  for (const l of JSON.parse(fs.readFileSync('public/content/math/lessons.json', 'utf8')).lessons) {
     const rounds = Array.from({ length: ROUNDS }, () => buildRound(l));
-    for (const kind of ['count', 'find']) {
-      const seq = rounds.map((r: { kind: string; n?: number }[]) => r.filter((t) => t.kind === kind).map((t) => String(t.n)));
-      bad.push(...check(`math ${l.id} ${kind}`, seq, 3));
+    for (const kind of ['count', 'find', 'find-group', 'same', 'where']) {
+      const seq = rounds.map((r: { kind: string; n?: number; pos?: string }[]) => r.filter((t) => t.kind === kind).map((t) => String(t.n ?? t.pos)));
+      bad.push(...check(`math ${l.id} ${kind}`, seq, kind === 'where' ? 5 : 3)); // m0: 5 úloh z 3–5 pozic
     }
   }
   // čtení: písmena (A2), slabiky (A6), slova (A5/A7)

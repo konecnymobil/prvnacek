@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "audioEffects",
-  "contentVersion": "2026-10-19.6",
+  "contentVersion": "2026-10-19.8",
   "note": "Zvukové efekty bez hlasu, syntetizované lokálně (tools/audio/make_effects.py, ffmpeg), ne Azure. Hlasitost o ~6 dB pod řečí (RMS -26 dBFS), krátké a jemné.",
   "effects": [
     {

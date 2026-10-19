@@ -1,5 +1,5 @@
 {
- "contentVersion": "2026-10-19.6",
+ "contentVersion": "2026-10-19.8",
  "voice": "cs-CZ-VlastaNeural",
  "voices": [
   "cs-CZ-VlastaNeural",
@@ -8,7 +8,7 @@
  "voiceNote": "voice nahoře = výchozí (čtení); každý zvuk má vlastní voice podle svého audio skriptu, efekty null.",
  "format": "mp3 mono 24 kHz 64 kbps",
  "processing": "silence trimmed at -55dB, +40 ms lead / +150 ms tail, gain to RMS -20.0 dBFS capped at peak -1.0 dBFS",
- "count": 269,
+ "count": 283,
  "sounds": [
   {
    "audioId": "snd-en-c-blue",
@@ -472,7 +472,8 @@
    "gainDb": -3.2,
    "rmsDb": -21.5,
    "peakDb": -8.1,
-   "durationMs": 984
+   "durationMs": 984,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-game-kolik",
@@ -594,7 +595,8 @@
    "gainDb": -3.4,
    "rmsDb": -20.9,
    "peakDb": -8.0,
-   "durationMs": 1992
+   "durationMs": 1992,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-where-left",
@@ -608,7 +610,8 @@
    "gainDb": -3.2,
    "rmsDb": -20.9,
    "peakDb": -7.9,
-   "durationMs": 2064
+   "durationMs": 2064,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-where-middle",
@@ -622,7 +625,8 @@
    "gainDb": -2.7,
    "rmsDb": -20.8,
    "peakDb": -7.4,
-   "durationMs": 2424
+   "durationMs": 2424,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-where-right",
@@ -636,7 +640,8 @@
    "gainDb": -3.1,
    "rmsDb": -20.9,
    "peakDb": -7.1,
-   "durationMs": 2136
+   "durationMs": 2136,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-where-top",
@@ -650,7 +655,8 @@
    "gainDb": -3.6,
    "rmsDb": -20.9,
    "peakDb": -8.2,
-   "durationMs": 2208
+   "durationMs": 2208,
+   "skipped": true
   },
   {
    "audioId": "snd-m-p-write-digit",
@@ -1298,6 +1304,202 @@
    "skipped": true
   },
   {
+   "audioId": "snd-p-rw-back",
+   "file": "snd-p-rw-back.mp3",
+   "clipId": "c-p-rw-back",
+   "source": "c-p-rw-back.mp3",
+   "category": "prompt",
+   "refId": "p-rw-back",
+   "text": "Zvířátka jsou doma. Jdeme zase procvičovat.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.6,
+   "rmsDb": -20.6,
+   "peakDb": -6.5,
+   "durationMs": 4536
+  },
+  {
+   "audioId": "snd-p-rw-done-today",
+   "file": "snd-p-rw-done-today.mp3",
+   "clipId": "c-p-rw-done-today",
+   "source": "c-p-rw-done-today.mp3",
+   "category": "prompt",
+   "refId": "p-rw-done-today",
+   "text": "Zvířátka už dnes spí. Zítra zase.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.9,
+   "rmsDb": -20.6,
+   "peakDb": -6.3,
+   "durationMs": 4224
+  },
+  {
+   "audioId": "snd-p-rw-exact",
+   "file": "snd-p-rw-exact.mp3",
+   "clipId": "c-p-rw-exact",
+   "source": "c-p-rw-exact.mp3",
+   "category": "prompt",
+   "refId": "p-rw-exact",
+   "text": "Přesně tolik!",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.1,
+   "rmsDb": -21.0,
+   "peakDb": -7.7,
+   "durationMs": 1392
+  },
+  {
+   "audioId": "snd-p-rw-gate-minus-1",
+   "file": "snd-p-rw-gate-minus-1.mp3",
+   "clipId": "c-p-rw-gate-minus-1",
+   "source": "c-p-rw-gate-minus-1.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-minus-1",
+   "text": "mínus jedna",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -5.1,
+   "rmsDb": -21.1,
+   "peakDb": -10.3,
+   "durationMs": 1344
+  },
+  {
+   "audioId": "snd-p-rw-gate-plus-1",
+   "file": "snd-p-rw-gate-plus-1.mp3",
+   "clipId": "c-p-rw-gate-plus-1",
+   "source": "c-p-rw-gate-plus-1.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-plus-1",
+   "text": "plus jedna",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.5,
+   "rmsDb": -21.2,
+   "peakDb": -6.8,
+   "durationMs": 1104
+  },
+  {
+   "audioId": "snd-p-rw-gate-plus-2",
+   "file": "snd-p-rw-gate-plus-2.mp3",
+   "clipId": "c-p-rw-gate-plus-2",
+   "source": "c-p-rw-gate-plus-2.mp3",
+   "category": "prompt",
+   "refId": "p-rw-gate-plus-2",
+   "text": "plus dvě",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.8,
+   "rmsDb": -21.4,
+   "peakDb": -7.8,
+   "durationMs": 984
+  },
+  {
+   "audioId": "snd-p-rw-goal",
+   "file": "snd-p-rw-goal.mp3",
+   "clipId": "c-p-rw-goal",
+   "source": "c-p-rw-goal.mp3",
+   "category": "prompt",
+   "refId": "p-rw-goal",
+   "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.3,
+   "rmsDb": -20.6,
+   "peakDb": -7.3,
+   "durationMs": 4560
+  },
+  {
+   "audioId": "snd-p-rw-locked",
+   "file": "snd-p-rw-locked.mp3",
+   "clipId": "c-p-rw-locked",
+   "source": "c-p-rw-locked.mp3",
+   "category": "prompt",
+   "refId": "p-rw-locked",
+   "text": "Ještě kolo procvičování a zvířátka se vrátí.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.3,
+   "rmsDb": -20.6,
+   "peakDb": -8.1,
+   "durationMs": 3936
+  },
+  {
+   "audioId": "snd-p-rw-name",
+   "file": "snd-p-rw-name.mp3",
+   "clipId": "c-p-rw-name",
+   "source": "c-p-rw-name.mp3",
+   "category": "prompt",
+   "refId": "p-rw-name",
+   "text": "Zvířátka do ohrádky.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -3.0,
+   "rmsDb": -20.9,
+   "peakDb": -7.6,
+   "durationMs": 2112
+  },
+  {
+   "audioId": "snd-p-rw-pick-gate",
+   "file": "snd-p-rw-pick-gate.mp3",
+   "clipId": "c-p-rw-pick-gate",
+   "source": "c-p-rw-pick-gate.mp3",
+   "category": "prompt",
+   "refId": "p-rw-pick-gate",
+   "text": "Vyber bránu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.8,
+   "rmsDb": -21.2,
+   "peakDb": -7.7,
+   "durationMs": 1320
+  },
+  {
+   "audioId": "snd-p-rw-show-path",
+   "file": "snd-p-rw-show-path.mp3",
+   "clipId": "c-p-rw-show-path",
+   "source": "c-p-rw-show-path.mp3",
+   "category": "prompt",
+   "refId": "p-rw-show-path",
+   "text": "Takhle to šlo.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -1.9,
+   "rmsDb": -21.2,
+   "peakDb": -7.0,
+   "durationMs": 1272
+  },
+  {
+   "audioId": "snd-p-rw-too-few",
+   "file": "snd-p-rw-too-few.mp3",
+   "clipId": "c-p-rw-too-few",
+   "source": "c-p-rw-too-few.mp3",
+   "category": "prompt",
+   "refId": "p-rw-too-few",
+   "text": "Je jich málo. Zkus jinou cestu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.1,
+   "rmsDb": -20.7,
+   "peakDb": -7.4,
+   "durationMs": 3576
+  },
+  {
+   "audioId": "snd-p-rw-too-many",
+   "file": "snd-p-rw-too-many.mp3",
+   "clipId": "c-p-rw-too-many",
+   "source": "c-p-rw-too-many.mp3",
+   "category": "prompt",
+   "refId": "p-rw-too-many",
+   "text": "Je jich moc. Zkus jinou cestu.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.0,
+   "rmsDb": -20.7,
+   "peakDb": -6.2,
+   "durationMs": 3504
+  },
+  {
+   "audioId": "snd-p-rw-unlock",
+   "file": "snd-p-rw-unlock.mp3",
+   "clipId": "c-p-rw-unlock",
+   "source": "c-p-rw-unlock.mp3",
+   "category": "prompt",
+   "refId": "p-rw-unlock",
+   "text": "Zvířátka na tebe čekají. Můžeš si zahrát.",
+   "voice": "cs-CZ-VlastaNeural",
+   "gainDb": -2.5,
+   "rmsDb": -20.6,
+   "peakDb": -6.7,
+   "durationMs": 4680
+  },
+  {
    "audioId": "snd-p-show-answer",
    "file": "snd-p-show-answer.mp3",
    "clipId": "c-p-show-answer",
@@ -1456,7 +1658,8 @@
    "gainDb": -2.7,
    "rmsDb": -20.6,
    "peakDb": -7.9,
-   "durationMs": 4440
+   "durationMs": 4440,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-light",
@@ -1470,7 +1673,8 @@
    "gainDb": -2.5,
    "rmsDb": -20.6,
    "peakDb": -7.0,
-   "durationMs": 4632
+   "durationMs": 4632,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-look",
@@ -1484,7 +1688,8 @@
    "gainDb": -2.1,
    "rmsDb": -20.6,
    "peakDb": -6.8,
-   "durationMs": 6360
+   "durationMs": 6360,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-order",
@@ -1510,7 +1715,8 @@
    "gainDb": -4.1,
    "rmsDb": -20.9,
    "peakDb": -9.5,
-   "durationMs": 1776
+   "durationMs": 1776,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-route",
@@ -1536,7 +1742,8 @@
    "gainDb": -3.5,
    "rmsDb": -20.7,
    "peakDb": -7.9,
-   "durationMs": 4008
+   "durationMs": 4008,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-den",
@@ -1550,7 +1757,8 @@
    "gainDb": -3.2,
    "rmsDb": -20.7,
    "peakDb": -8.0,
-   "durationMs": 3864
+   "durationMs": 3864,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-jablko",
@@ -1564,7 +1772,8 @@
    "gainDb": -3.6,
    "rmsDb": -20.6,
    "peakDb": -7.9,
-   "durationMs": 5496
+   "durationMs": 5496,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-kure",
@@ -1578,7 +1787,8 @@
    "gainDb": -3.2,
    "rmsDb": -20.6,
    "peakDb": -7.7,
-   "durationMs": 4464
+   "durationMs": 4464,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-obdobi",
@@ -1592,7 +1802,8 @@
    "gainDb": -2.9,
    "rmsDb": -20.6,
    "peakDb": -7.2,
-   "durationMs": 4656
+   "durationMs": 4656,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-rostlinka",
@@ -1606,7 +1817,8 @@
    "gainDb": -3.4,
    "rmsDb": -20.6,
    "peakDb": -7.0,
-   "durationMs": 4248
+   "durationMs": 4248,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-rust",
@@ -1620,7 +1832,8 @@
    "gainDb": -3.6,
    "rmsDb": -20.6,
    "peakDb": -7.9,
-   "durationMs": 4776
+   "durationMs": 4776,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-seq-skola",
@@ -1634,7 +1847,8 @@
    "gainDb": -3.0,
    "rmsDb": -20.6,
    "peakDb": -7.4,
-   "durationMs": 5616
+   "durationMs": 5616,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-p-sort",
@@ -1660,7 +1874,8 @@
    "gainDb": -4.4,
    "rmsDb": -21.0,
    "peakDb": -9.2,
-   "durationMs": 1680
+   "durationMs": 1680,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-bunda",
@@ -1674,7 +1889,8 @@
    "gainDb": -3.7,
    "rmsDb": -21.5,
    "peakDb": -10.2,
-   "durationMs": 912
+   "durationMs": 912,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-cekam",
@@ -1688,7 +1904,8 @@
    "gainDb": -2.0,
    "rmsDb": -21.4,
    "peakDb": -8.1,
-   "durationMs": 1008
+   "durationMs": 1008,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-cepice",
@@ -1702,7 +1919,8 @@
    "gainDb": -1.4,
    "rmsDb": -21.4,
    "peakDb": -6.2,
-   "durationMs": 984
+   "durationMs": 984,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-do-skoly",
@@ -1752,7 +1970,8 @@
    "gainDb": -0.5,
    "rmsDb": -21.9,
    "peakDb": -8.1,
-   "durationMs": 744
+   "durationMs": 744,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-jojo",
@@ -1826,7 +2045,8 @@
    "gainDb": -2.9,
    "rmsDb": -21.2,
    "peakDb": -7.6,
-   "durationMs": 1176
+   "durationMs": 1176,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-pastelka",
@@ -1852,7 +2072,8 @@
    "gainDb": -3.2,
    "rmsDb": -21.5,
    "peakDb": -8.2,
-   "durationMs": 960
+   "durationMs": 960,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-pravitko",
@@ -1878,7 +2099,8 @@
    "gainDb": -2.6,
    "rmsDb": -21.3,
    "peakDb": -7.5,
-   "durationMs": 1080
+   "durationMs": 1080,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-sala",
@@ -1892,7 +2114,8 @@
    "gainDb": -2.5,
    "rmsDb": -21.6,
    "peakDb": -8.4,
-   "durationMs": 864
+   "durationMs": 864,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-tuzka",
@@ -1930,7 +2153,8 @@
    "gainDb": -2.8,
    "rmsDb": -21.6,
    "peakDb": -8.9,
-   "durationMs": 840
+   "durationMs": 840,
+   "skipped": true
   },
   {
    "audioId": "snd-pv-w-vpravo",
@@ -1944,7 +2168,8 @@
    "gainDb": -1.5,
    "rmsDb": -21.5,
    "peakDb": -6.7,
-   "durationMs": 912
+   "durationMs": 912,
+   "skipped": true
   },
   {
    "audioId": "snd-pw-akvaarium",

@@ -1,10 +1,13 @@
+import fs from 'node:fs';
 import { test, expect, type Page } from '@playwright/test';
 import { waitForChildDb } from './helpers';
 
-async function openMath(page: Page) {
+async function openMath(page: Page, m0Done = true, extra: Record<string, unknown> = {}) {
   await page.goto('./');
   await expect(page.getByTestId('lesson-row')).toBeVisible();
   await waitForChildDb(page);
+  // A-31: m1 se otevře po 1 kole m0 „Kde to je?“
+  if (m0Done) await page.evaluate((extra) => new Promise<void>((res) => { const r = indexedDB.open('prvnacek'); r.onsuccess = () => { const tx = r.result.transaction('settings', 'readwrite'); tx.objectStore('settings').put({ m0: { rounds: 1, correct: 5, wrong: 0, errors: {}, traced: 0, goodRounds: 1, goodDays: [] }, ...extra }, 'math:progress'); tx.oncomplete = () => { r.result.close(); res(); }; }; }), extra);
   const card = page.locator('.subj-card[data-subject="math"]');
   await card.click();
   await expect(card).toHaveAttribute('aria-pressed', 'true');
@@ -20,7 +23,7 @@ async function solveUntilTrace(page: Page) {
     const kind = await task.getAttribute('data-kind');
     if (kind === 'trace') return;
     const idx = await task.getAttribute('data-index');
-    const n = kind === 'count' ? await page.locator('.m-scene .m-item').count() : Number(await page.getByTestId('math-digit').textContent());
+    const n = kind === 'count' ? await page.locator('.m-scene .m-item').count() : Number(await page.getByTestId('math-digit').getAttribute('data-n'));
     await task.locator(`.m-opt[data-value="${n}"]`).click();
     await expect(page.getByTestId('math-task')).not.toHaveAttribute('data-index', idx!);
   }
@@ -49,16 +52,17 @@ const one = (dx = 0): [number, number][] => {
 };
 
 test('výběr předmětu na dvě klepnutí, matematika má lekce 1 až 0–5, další zamčené', async ({ page }) => {
-  await openMath(page);
-  await expect(page.locator('[data-lesson]')).toHaveCount(6);
-  await expect(page.locator('[data-lesson="m1"]')).toHaveAttribute('data-locked', 'false');
+  await openMath(page, false);
+  await expect(page.locator('[data-lesson]')).toHaveCount(7);
+  await expect(page.locator('[data-lesson="m0"]')).toHaveAttribute('data-locked', 'false');
+  await expect(page.locator('[data-lesson="m1"]')).toHaveAttribute('data-locked', 'true');
   await expect(page.locator('[data-lesson="m2"]')).toHaveAttribute('data-locked', 'true');
 });
 
 test('Kolik jich je?: špatná odpověď = zkus znovu, správná = posun', async ({ page }) => {
-  await openMath(page);
+  await openMath(page, true, { m2: { rounds: 0, correct: 0, wrong: 0, errors: {}, traced: 0, manual: true } });
   const instr = page.waitForRequest(/snd-m-p-count\.mp3/);
-  await page.locator('[data-lesson="m1"]').click();
+  await page.locator('[data-lesson="m2"]').click();
   await instr;
   const task = page.getByTestId('math-task');
   await expect(task).toHaveAttribute('data-kind', 'count');
@@ -197,15 +201,42 @@ test('pískání: začne mimo obrys a utichne po návratu (mock AudioContext)', 
   expect(await sq()).toEqual({ on: 1, off: 1 });
 });
 
-test.describe('A-08: odemykání matematiky po úspěšném kole', () => {
-  test('neúspěšné kolo neodemkne, 2 úspěšná ano; stará data zůstanou odemčená', async () => {
-    const { mathUnlocked, isGoodRound, MATH_LESSONS, MATH_GOOD_ROUNDS } = await import('../src/math/math');
-    const id = MATH_LESSONS[0].id;
-    expect(isGoodRound({ correct: 2, wrong: 6 })).toBe(false);
-    expect(isGoodRound({ correct: 5, wrong: 0 })).toBe(true);
-    const base = { correct: 0, wrong: 0, errors: {}, traced: 0 };
-    expect(mathUnlocked({ [id]: { ...base, rounds: 3, goodRounds: 0 } }, 1)).toBe(false);
-    expect(mathUnlocked({ [id]: { ...base, rounds: 3, goodRounds: MATH_GOOD_ROUNDS } }, 1)).toBe(true);
-    expect(mathUnlocked({ [id]: { ...base, rounds: 1 } }, 1)).toBe(true);
+test.describe('A-06/A-08/A-31: lekce matematiky z math/lessons.json', () => {
+  const f = JSON.parse(fs.readFileSync('public/content/math/lessons.json', 'utf8'));
+  f.lessons.sort((a: { index: number }, b: { index: number }) => a.index - b.index);
+  const base = { correct: 0, wrong: 0, errors: {}, traced: 0 };
+  test('odemykání: m0 po 1 kole, dál 2 dobrá kola ve 2 dnech, zkouška, ručně, stará data', async () => {
+    const { mathUnlocked, isGoodRound } = await import('../src/math/math');
+    const ids = f.lessons.map((l: { id: string }) => l.id);
+    expect(ids[0]).toBe('m0');
+    expect(mathUnlocked(f, {}, 0)).toBe(true);
+    expect(mathUnlocked(f, {}, 1)).toBe(false);
+    expect(mathUnlocked(f, { m0: { ...base, rounds: 1, goodRounds: 0, goodDays: [] } }, 1)).toBe(true);
+    expect(isGoodRound({ correct: 3 }, 5, f.unlockRule)).toBe(false);
+    expect(isGoodRound({ correct: 4 }, 5, f.unlockRule)).toBe(true);
+    expect(mathUnlocked(f, { m1: { ...base, rounds: 3, goodRounds: 1, goodDays: ['2026-10-19'] } }, 2)).toBe(false);
+    expect(mathUnlocked(f, { m1: { ...base, rounds: 3, goodRounds: 2, goodDays: ['2026-10-19'] } }, 2)).toBe(false); // jeden den
+    expect(mathUnlocked(f, { m1: { ...base, rounds: 3, goodRounds: 2, goodDays: ['2026-10-18', '2026-10-19'] } }, 2)).toBe(true);
+    expect(mathUnlocked(f, { m1: { ...base, rounds: 1, goodRounds: 0, goodDays: [], testPassed: true } }, 2)).toBe(true);
+    expect(mathUnlocked(f, { m2: { ...base, rounds: 0, manual: true } }, 2)).toBe(true);
+    expect(mathUnlocked(f, { m1: { ...base, rounds: 1 } }, 2)).toBe(true); // starší data bez goodDays
+    expect(mathUnlocked(f, { m3: { ...base, rounds: 1 } }, 1)).toBe(true); // dítě už hrálo dál
+  });
+  test('možnosti jen z probraných čísel, pozice odpovědi se střídá, m0 bez čísel', async () => {
+    const { buildRound, POS_ZONE } = await import('../src/math/math');
+    for (const l of f.lessons) {
+      const pos = new Map<string, Set<number>>();
+      for (let k = 0; k < 60; k++) {
+        const r = buildRound(l, { firstRound: k === 0 });
+        expect(r.map((t) => t.kind)).toEqual(l.tasks.kinds);
+        for (const t of r) {
+          if (t.kind === 'count') { for (const o of t.options) expect(l.nums).toContain(o); expect(t.options.length).toBeLessThanOrEqual(l.optionRule.maxDigitOptions); const s = pos.get('count') ?? new Set(); s.add(t.options.indexOf(t.n)); pos.set('count', s); }
+          if (t.kind === 'where') { expect(POS_ZONE[t.pos]).toContain(t.target); for (const [c, img] of t.cells.entries()) if (img && c !== t.target) expect(POS_ZONE[t.pos]).not.toContain(c); if (k === 0) expect(['top', 'bottom', 'middle']).toContain(t.pos); }
+          if (t.kind === 'more') expect(t.a).not.toBe(t.b);
+          if (t.kind === 'same') expect(t.options.filter((o) => o === t.n)).toHaveLength(1);
+        }
+      }
+      if (l.optionRule && l.optionRule.maxDigitOptions >= 3) expect(pos.get('count')!.size, `${l.id}: odpověď není pořád na stejném místě`).toBeGreaterThan(1);
+    }
   });
 });
