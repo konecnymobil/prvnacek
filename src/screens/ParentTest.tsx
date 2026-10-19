@@ -23,6 +23,7 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
   const [askReason, setAskReason] = useState(false);
   const [paused, setPaused] = useState(false);
   const [approved, setApproved] = useState<string | null>(null);
+  const [confirming, setConfirming] = useState(false); // A-28: potvrzení schválení bez doporučení
   const [saveErr, setSaveErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const form = useTaskForm(`${seed}:${results.length}`); // jedna forma na položku zkoušky
@@ -115,7 +116,20 @@ export default function ParentTest({ content, lesson, go }: { content: Content; 
           )}
           {saveErr && <p className="notice is-error" role="alert">{saveErr}</p>}
           {approved ? <p className="notice" data-testid="approved-msg">{approved}</p> : (
-            <button className="kbtn kbtn-primary kbtn-xl" data-testid="approve" onClick={() => void approve()}>✓ Schválit lekci a odemknout další</button>
+            confirming ? (
+              <div className="dlg-back" onKeyDown={(e) => e.key === 'Escape' && setConfirming(false)}>
+                <div className="dlg" role="dialog" aria-modal="true" aria-labelledby="approve-confirm-title" data-testid="approve-confirm">
+                  <h2 id="approve-confirm-title">Opravdu odemknout?</h2>
+                  <p>Aplikace by ještě chvíli procvičovala. Rozhodnutí je na vás – když lekci odemknete, procvičování písmene {lesson.title} zůstane v opakování.</p>
+                  <div className="row">
+                    <button className="kbtn" autoFocus data-testid="approve-confirm-no" onClick={() => setConfirming(false)}>Ještě počkáme</button>
+                    <button className="kbtn kbtn-primary" data-testid="approve-confirm-yes" onClick={() => void approve()}>Odemknout</button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <button className="kbtn kbtn-primary kbtn-xl" data-testid="approve" onClick={() => (evalRes.recommendApprove ? void approve() : setConfirming(true))}>✓ Schválit lekci a odemknout další</button>
+            )
           )}
           <div className="row">
             <button className="kbtn" onClick={undo} data-testid="test-undo">↶ Zpět (opravit poslední)</button>

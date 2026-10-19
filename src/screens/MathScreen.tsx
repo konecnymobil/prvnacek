@@ -130,13 +130,12 @@ function Task({ t, answer, onTrace }: { t: MathTask; answer: (ok: boolean, err?:
   );
   if (t.kind === 'compare') {
     const res = t.a === t.b ? 'same' : t.a > t.b ? 'a' : 'b';
-    const pick = (c: string) => answer(c === res, c === res ? undefined : 'count-off-by-one');
+    const pick = (c: string) => answer(c === res, c === res ? undefined : 'compare-wrong'); // A-32: není to „o jedna vedle“
     return (
       <>
         <h2>Kde je jich víc?</h2>
         <div className="m-options m-compare">
           <button className="kbtn m-opt m-opt-dots" data-value="a" onClick={() => pick('a')}><Dots n={t.a} item={t.item} /></button>
-          <button className="kbtn m-opt" data-value="same" onClick={() => pick('same')}>= stejně</button>
           <button className="kbtn m-opt m-opt-dots" data-value="b" onClick={() => pick('b')}><Dots n={t.b} item={t.item} /></button>
         </div>
       </>

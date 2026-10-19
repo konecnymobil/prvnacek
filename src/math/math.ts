@@ -12,7 +12,7 @@ export const MATH_LESSONS: MathLesson[] = [
   { id: 'm6', title: '0–5', nums: [0, 1, 2, 3, 4, 5], newDigit: 0 },
 ];
 export const MATH_PROGRESS_KEY = 'math:progress';
-export type MathErr = 'count-off-by-one' | 'digit-confusion';
+export type MathErr = 'count-off-by-one' | 'digit-confusion' | 'compare-wrong';
 export interface MathLessonProgress { rounds: number; /** A-08: kola s ≥ 80 % napoprvé (nejvýš 1 chyba z 5). Chybí = starší data (odemčeno už dřív). */ goodRounds?: number; correct: number; wrong: number; errors: Partial<Record<MathErr, number>>; traced: number }
 export type MathProgress = Record<string, MathLessonProgress>;
 
@@ -62,7 +62,7 @@ function options(nums: number[], n: number): number[] {
 export function buildRound(l: MathLesson): MathTask[] {
   const kinds: MathTask['kind'][] = l.nums.length > 1 ? ['count', 'find', 'compare', 'count', 'find'] : ['count', 'find', 'count', 'find', 'count'];
   const per = (k: string) => kinds.filter((x) => x === k).length;
-  const pairs = l.nums.flatMap((a) => l.nums.map((b) => [a, b] as const));
+  const pairs = l.nums.flatMap((a) => l.nums.filter((b) => b !== a).map((b) => [a, b] as const)); // A-03: jen různé počty
   const tasks: MathTask[] = kinds.map((k) => {
     // stejná otázka (druh + číslo) se v kole ani hned v dalším kole neopakuje (zásoba je malá, hlídá se podle její velikosti)
     if (k === 'compare') { const [a, b] = drawFresh(`math:${l.id}:compare`, pairs, (p) => p.join('-'), per(k)); return { kind: 'compare', a, b, item: rnd(ITEMS) }; }

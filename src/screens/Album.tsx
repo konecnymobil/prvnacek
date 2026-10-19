@@ -102,7 +102,7 @@ export default function Album({ content, back, subject: initialSubject }: { cont
             <Sticker id={detail.id} special={detail.special} big />
             <h2>{detail.word}</h2>
             {da && <button className="kbtn" onClick={() => void say([da])} aria-label="Přečti">🔊</button>}
-            {od && <p>Dostal(a) jsi ji {SOURCE_TEXT[od.source]} · {new Date(od.earnedAt).toLocaleDateString('cs-CZ')}</p>}
+            {od && <p>Získáno {SOURCE_TEXT[od.source]} · {new Date(od.earnedAt).toLocaleDateString('cs-CZ')}</p>}
             <button ref={closeRef} className="kbtn" onClick={() => setDetail(null)} aria-label="Zavřít" data-testid="alb-close">✕</button>
           </div>
         </div>

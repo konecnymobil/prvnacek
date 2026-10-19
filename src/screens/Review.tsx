@@ -10,8 +10,8 @@ import { buildReview, itemAudio, itemForms, type ReviewItem } from '../activitie
 import { noteAnswer, useTaskLog } from '../activities/taskLog';
 import { addAttempt, getAllAttempts, getLessonStatesMap } from '../storage/db';
 
-const PROMPT = { letter: 'p-find-letter', syllable: 'p-find-syllable', word: 'p-a7' } as const;
-const ASK = { letter: 'Najdi písmenko, které slyšíš.', syllable: 'Najdi slabiku, kterou slyšíš.', word: 'Které slovo slyšíš?' } as const;
+const PROMPT = { letter: 'p-find-letter', syllable: 'p-find-syllable', word: 'p-review-word' } as const; // A-12
+const ASK = { letter: 'Najdi písmenko, které slyšíš.', syllable: 'Najdi slabiku, kterou slyšíš.', word: 'Poslechni si slovo a najdi ho.' } as const;
 
 /** Opakování napříč lekcemi: 5 úloh ze schválených lekcí, bez trestů a bodů. */
 export default function Review({ content, back }: { content: Content; back: () => void }) {

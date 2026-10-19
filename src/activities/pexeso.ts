@@ -1,9 +1,9 @@
 import type { Content } from '../content/load';
-import type { Word } from '../content/types';
+import { memoryPairCompatible, type Syllable, type Word } from '../content/types';
 import { isLessonUnlocked, type LessonState } from '../storage/db';
 import { shuffle } from './common';
 
-export const PEX_LEVELS = [3, 6] as const; // počet dvojic (6 / 12 karet)
+export const PEX_LEVELS = [3, 4, 6] as const; // počet dvojic (6 / 8 / 12 karet; A-27)
 export const PEX_KEY = 'pexeso:games';
 export interface PexGame { at: number; pairs: number; stars: number; flips: number }
 
@@ -21,17 +21,19 @@ export function availablePairs(content: Content, states: Record<string, LessonSt
 }
 export const levelsFor = (n: number): number[] => PEX_LEVELS.filter((l) => n >= l);
 
-/** Vybere `pairs` slov s různými prvními slabikami (z konfliktních vždy jediné, náhodně). */
-export function pickPairs(cands: Word[], pairs: number): Word[] {
-  const seen = new Set<string>();
-  const out: Word[] = [];
-  for (const w of shuffle(cands)) {
-    if (seen.has(w.firstSyllableId)) continue;
-    seen.add(w.firstSyllableId);
-    out.push(w);
-    if (out.length === pairs) break;
-  }
-  return out;
+/** Vybere `pairs` navzájem slučitelných slov (A-16, memoryPairCompatible): nikdy stejná první slabika ani stejná skupina
+ *  podobných obrázků; MA × MÁ jen tehdy, když jinak slova nestačí. */
+export function pickPairs(cands: Word[], pairs: number, syllables: Pick<Syllable, 'id' | 'confusableWith'>[] = []): Word[] {
+  const pass = (strict: boolean, start: Word[]) => {
+    const out = [...start];
+    for (const w of shuffle(cands)) {
+      if (out.length >= pairs) break;
+      if (out.every((o) => memoryPairCompatible(o, w, syllables, strict))) out.push(w);
+    }
+    return out;
+  };
+  const strict = pass(true, []);
+  return strict.length >= pairs ? strict : pass(false, strict);
 }
 
 export interface PexCard { key: string; wordId: string; face: 'picture' | 'syllable' }

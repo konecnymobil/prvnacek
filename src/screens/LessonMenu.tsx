@@ -59,7 +59,7 @@ export default function LessonMenu({ content, lesson, go }: Props) {
         <button className="kbtn kbtn-primary kbtn-xl" onClick={() => go('readWord')} disabled={!hasReadWords} data-testid="open-readword">
           📚 Čti slovo
         </button>
-        {!hasWords && <p className="small muted">Obrázky ke slovům přijdou s dalšími lekcemi.</p>}
+        {!hasWords && <p className="small muted">Slova přijdou s dalšími písmenky.</p>}
         {!hasSyllables && <p className="small muted">Slabiky se odemknou s další lekcí.</p>}
       </nav>
     </main>

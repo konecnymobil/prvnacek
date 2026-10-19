@@ -3,7 +3,18 @@ import { waitForChildDb } from './helpers';
 
 test.use({ reducedMotion: 'reduce' });
 
+/** Simuluje dodání anglických slovíček: index.json je obsahuje, soubory nahradí existující klip. */
+async function fakeEnglishNouns(page: Page) {
+  await page.route('**/audio/tts/index.json', async (route) => {
+    const r = await route.fetch(); const d = await r.json();
+    for (const w of ['pencil', 'book', 'bag', 'crayon', 'ruler', 'scissors', 'ball', 'apple', 'star', 'house', 'fish', 'tree']) d.sounds.push({ audioId: `snd-en-w-${w}` });
+    await route.fulfill({ response: r, json: d });
+  });
+  await page.route(/snd-en-w-(?!hello)[a-z]+\.mp3$/, (route) => route.fulfill({ path: 'public/audio/tts/snd-en-w-hello.mp3', contentType: 'audio/mpeg' }));
+}
 async function open(page: Page, subject: string, game: string) {
+  test.setTimeout(60_000); // 5 kol × 1,5 s + zvuky; v CI je WebKit pomalejší
+  if (subject === 'english') await fakeEnglishNouns(page);
   await page.goto('./');
   await expect(page.getByTestId('lesson-row')).toBeVisible();
   await waitForChildDb(page);
@@ -105,4 +116,17 @@ test('ME2 Colour it: málo barvy neprojde, ≥ 50 % správnou barvou projde', as
     await page.getByTestId('me2-done').click(); await next(page, i);
   }
   await album(page, 'english');
+});
+
+test('Angličtina bez nahraných slovíček: hry jsou „Brzy“ a nespustí se (A-01)', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.getByTestId('lesson-row')).toBeVisible();
+  await waitForChildDb(page);
+  const card = page.locator('.subj-card[data-subject="english"]');
+  await card.click(); await card.click();
+  for (const g of ['me1', 'me2']) await expect(page.locator(`.game-tile[data-game="${g}"]`)).toHaveAttribute('data-locked', 'true');
+  await expect(page.getByTestId('game-soon')).toHaveCount(2);
+  await page.locator('.game-tile[data-game="me1"]').click();
+  await expect(page.getByTestId('game-lock-hint')).toContainText('brzy');
+  await expect(page.getByTestId('game-round')).toHaveCount(0);
 });

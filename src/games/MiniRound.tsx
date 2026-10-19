@@ -9,7 +9,7 @@ import { getSetting, setSetting } from '../storage/db';
 
 export const SUBJ_GAMES_KEY = 'games:rounds';
 const PRAISE = ['snd-p-praise-1', 'snd-p-praise-2', 'snd-p-praise-3', 'snd-p-praise-4', 'snd-p-praise-5'];
-const PRAISE_TEXT = ['Výborně!', 'Správně!', 'Super!', 'Paráda!', 'To je ono!'];
+const PRAISE_TEXT = ['Výborně!', 'Správně!', 'Super, to se ti povedlo!', 'Paráda!', 'To je ono!']; // = texty klipů (A-24)
 
 export interface MiniApi { msg?: string; i: number; tries: number; hintOn: boolean; calm: boolean; solved: boolean; ok: (sounds?: string[], delay?: number) => void; no: (msg?: string, sounds?: string[]) => void; setMsg: (m: string) => void }
 

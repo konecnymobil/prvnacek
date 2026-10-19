@@ -117,7 +117,7 @@ function Round({ content, lesson, back, priority }: Props & { priority: Set<stri
       <p className={`feedback ${mood}`} role="status" data-testid="feedback">{message}</p>
       {saveError && <p className="notice is-error" role="alert">Pokrok se nepodařilo uložit, hra ale pokračuje.</p>}
       {step === 'read' && (
-        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={() => { setStep('pick'); setMessage('Který obrázek patří ke slovu?'); }}>Přečetl(a) jsem</button></div>
+        <div className="actions"><button className="kbtn kbtn-primary kbtn-xl" data-testid="read-done" onClick={() => { setStep('pick'); setMessage('Najdi obrázek.'); void say(promptAudio(content, 'p-find-picture')); }}>✓ Hotovo</button></div>
       )}
       {step === 'pick' && (
         <div className="choices" data-testid="choices">

@@ -10,14 +10,13 @@ export const SUBJ_GAMES: { id: SubjGameId; subject: 'world' | 'english'; name: s
   { id: 'mp1', subject: 'world', name: 'Uklízíme', icon: '🧹' },
   { id: 'mp2', subject: 'world', name: 'Co bylo dřív?', icon: '🚂' },
   { id: 'mp3', subject: 'world', name: 'Bezpečná cesta', icon: '🚸' },
-  { id: 'me1', subject: 'english', name: 'Megaboxes', icon: '📦' },
-  { id: 'me2', subject: 'english', name: 'Colour it!', icon: '🎨' },
+  { id: 'me1', subject: 'english', name: 'Megaboxy', icon: '📦' },
+  { id: 'me2', subject: 'english', name: 'Colour it', icon: '🎨' },
 ];
 const ROUND = 5;
-/** Anglické klipy (en-GB) zatím nejsou nahrané (english/audio-script.json → pending). Dokud nejsou, nic se nepřehrává
- *  (žádný požadavek na chybějící soubor); po dodání stačí přepnout na true. */
-const EN_AUDIO_READY = false;
-const en = (...ids: string[]): string[] => (EN_AUDIO_READY ? ids : []);
+/** Anglické hry se otevřou, až jsou v index.json všechny potřebné klipy (pokyn + slovíčka + barvy) – viz enGameNeeds.
+ *  Do té doby je dlaždice „Brzy“ (didaktický audit A-01), takže se nikdy nežádá chybějící soubor. */
+const en = (...ids: string[]): string[] => ids;
 interface P { back: () => void; openAlbum: () => void }
 export default function SubjGame({ id, ...p }: P & { id: SubjGameId }) {
   return id === 'mp1' ? <Sort {...p} /> : id === 'mp2' ? <Order {...p} /> : id === 'mp3' ? <Road {...p} /> : id === 'me1' ? <Boxes {...p} /> : <Colour {...p} />;
@@ -106,7 +105,7 @@ function Boxes({ back, openAlbum }: P) {
     if (w === t.v.w) r.api.ok(en(`snd-en-w-${w}`)); else { r.api.no(); window.setTimeout(() => setOpen((o) => o.filter((x) => x !== w)), 1200); }
   };
   return (
-    <MiniShell title="Megaboxes" subjCls={E.cls} round={r} count={ROUND} nameAudio={en('snd-en-p-game-megaboxy')} prompt={en('snd-en-p-find-x', `snd-en-w-${t.v.w}`)} intro={`Find the ${t.v.w}!`} back={back} openAlbum={openAlbum}>
+    <MiniShell title="Megaboxy" subjCls={E.cls} round={r} count={ROUND} nameAudio={en('snd-en-p-game-megaboxy')} prompt={en('snd-en-p-find-x', `snd-en-w-${t.v.w}`)} intro={`Find the ${t.v.w}!`} back={back} openAlbum={openAlbum}>
       <div className="xg-col" data-testid="me1" data-word={t.v.w}>
         <p className="xg-en" lang="en-GB">Find the {t.v.w}!</p>
         <div className="xg-row">{t.boxes.map((b) => <button key={b.w} className={`kbtn xg-mbox${r.api.calm && b.w === t.v.w ? ' is-hint' : ''}`} data-w={b.w} aria-label="box" onClick={() => tap(b.w)}>{open.includes(b.w) ? b.e : '📦'}</button>)}</div>
@@ -157,7 +156,7 @@ function Colour({ back, openAlbum }: P) {
     if (s >= COLOUR_THRESHOLD) r.api.ok(); else r.api.no();
   };
   return (
-    <MiniShell title="Colour it!" subjCls={E.cls} round={r} count={ROUND} nameAudio={en('snd-en-p-game-colour')} prompt={en('snd-en-p-colour-x-y', `snd-en-w-${t.s.w}`, `snd-en-c-${t.c.id}`)} intro={`Colour the ${t.s.w} ${t.c.name}.`} back={back} openAlbum={openAlbum}>
+    <MiniShell title="Colour it" subjCls={E.cls} round={r} count={ROUND} nameAudio={en('snd-en-p-game-colour')} prompt={en('snd-en-p-colour-x-y', `snd-en-w-${t.s.w}`, `snd-en-c-${t.c.id}`)} intro={`Colour the ${t.s.w} ${t.c.name}.`} back={back} openAlbum={openAlbum}>
       <div className="xg-row" data-testid="me2" data-shape={t.s.w} data-colour={t.c.id} data-score={score ?? ''}>
         <p className="xg-en" lang="en-GB">Colour the {t.s.w} {t.c.name}.</p>
         <div className="xg-canvas">
@@ -168,7 +167,7 @@ function Colour({ back, openAlbum }: P) {
           <svg viewBox="0 0 300 300" className="xg-outline"><path d={t.s.d} /></svg>
         </div>
         <div className="xg-col">
-          {COLOURS.map((c) => <button key={c.id} className="xg-paint" data-c={c.id} aria-pressed={colour.id === c.id} style={{ background: c.hex }} aria-label={c.name} onClick={() => { setColour(c); if (EN_AUDIO_READY) void say(en(`snd-en-c-${c.id}`)); }} />)}
+          {COLOURS.map((c) => <button key={c.id} className="xg-paint" data-c={c.id} aria-pressed={colour.id === c.id} style={{ background: c.hex }} aria-label={c.name} onClick={() => { setColour(c); void say(en(`snd-en-c-${c.id}`)); }} />)}
           <button className="kbtn" data-testid="me2-clear" aria-label="Smazat" onClick={clear}>🗑</button>
           <button className="kbtn kbtn-primary kbtn-xl" data-testid="me2-done" onClick={check}>✓</button>
         </div>
@@ -184,3 +183,9 @@ export const mp2Tasks = () => freshOrder('mp2', shuffle(SEQS), (s) => s.join('')
 export const mp3Tasks = () => drawGenerated('mp3', ROUND, () => ({ zebra: shuffle([20, 50, 80])[0], spots: [20, 50, 80] }), (t) => String(t.zebra), 3);
 export const me1Tasks = () => drawRound('me1', VOCAB, ROUND, (v) => v.w).map((v) => ({ v, boxes: shuffle([v, ...shuffle(VOCAB.filter((x) => x !== v)).slice(0, 3)]) }));
 export const me2Tasks = () => drawGenerated('me2', ROUND, () => ({ s: shuffle(SHAPES)[0], c: shuffle(COLOURS)[0] }), (t) => t.s.w, SHAPES.length);
+/** Klipy, bez kterých anglická hra nejde hrát poslechem (ME1: Find the + slovo, ME2: Colour the + slovo + barva). */
+export function enGameNeeds(id: SubjGameId): string[] {
+  if (id === 'me1') return ['snd-en-p-find-x', ...VOCAB.map((v) => `snd-en-w-${v.w}`)];
+  if (id === 'me2') return ['snd-en-p-colour-x-y', ...SHAPES.map((s) => `snd-en-w-${s.w}`), ...COLOURS.map((c) => `snd-en-c-${c.id}`)];
+  return [];
+}

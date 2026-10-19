@@ -15,7 +15,8 @@ export const MATH_GAMES: { id: MathGameId; name: string; icon: string; from: num
 const num = (n: number) => `snd-m-n-${n}`;
 const rnd = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
 const ROUND = 5;
-const ANIMALS = [{ a: '🦔', f: '🍎' }, { a: '🐰', f: '🥕' }, { a: '🐿️', f: '🌰' }, { a: '🐭', f: '🧀' }];
+// jídlo vždy jablko: hlas říká „jablek“ (A-04)
+const ANIMALS = [{ a: '🦔', f: '🍎' }, { a: '🐰', f: '🍎' }, { a: '🐿️', f: '🍎' }, { a: '🐭', f: '🍎' }];
 
 /** Generátory kol (exportované kvůli testu opakování). Stejná otázka se v kole ani na hranici kol neopakuje. */
 export const mm1Tasks = (max: number) => drawGenerated(`mm1:${max}`, ROUND, (k) => ({ n: rnd(1, max), ...ANIMALS[k % ANIMALS.length] }), (t) => String(t.n), max);

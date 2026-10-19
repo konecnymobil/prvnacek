@@ -84,9 +84,9 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
     if (!t || solved) return;
     if (game === 'domecky' && !picked) { setPicked(true); }
     if (id === t.answer) {
-      setSolved(true); setMsg(['Výborně!', 'Správně!', 'To je ono!', 'Dobře čteš!'][i % 4]);
-      setLog((l) => [...l, { id: t.id, tries: tries + 1, hintUsed: hintOn }]);
       const praise = content.promptById.get(`p-praise-${(i % 6) + 1}`);
+      setSolved(true); setMsg(praise?.text ?? 'Výborně!'); // A-24: text = přehraný klip
+      setLog((l) => [...l, { id: t.id, tries: tries + 1, hintUsed: hintOn }]);
       auto.schedule(say(['snd-fx-ok', ...(praise ? [praise.audioId] : []), ...t.ok]));
     } else {
       setTries((n) => n + 1); setStreak((n) => n + 1); setWrong(id); setTimeout(() => setWrong(null), 700);
@@ -115,7 +115,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
       </header>
       <div className="game-stage">
         <div className="game-mascot"><Mascot mood={solved ? 'radost' : tries ? 'premysli' : 'povzbuzeni'} /><p className="bubble" data-testid="game-msg">{msg || def.text}</p></div>
-        {game === 'ztratilo' && t.show && <div className="game-word" data-testid="game-target">{hintOn && t.img && <img className="game-pale" src={t.img} alt="" />}<Glyphs forms={solved ? t.show : gapForms(t.show, t.gapIndex!)} form={form} /></div>}
+        {game === 'ztratilo' && t.show && <div className="game-word" data-testid="game-target">{t.img && <img className={hintOn ? 'game-pale is-hint' : 'game-pale'} src={t.img} alt="" data-testid="game-picture" />}<Glyphs forms={solved ? t.show : gapForms(t.show, t.gapIndex!)} form={form} /></div>}
         {game === 'detektiv' && t.show && <div className="game-lupa" data-testid="game-target">🔍 <Glyphs forms={t.show} form={form} /></div>}
         {game === 'obchod' && t.show && <div className="game-list" data-testid="game-target"><small>Nákupní lístek</small><Glyphs forms={t.show} form={form} /></div>}
         {game === 'domecky' && t.img && <button className={`game-card${picked ? ' is-picked' : ''}`} data-testid="game-card" onClick={() => setPicked(true)}><img src={t.img} alt="obrázek" /></button>}
