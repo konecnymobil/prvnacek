@@ -74,17 +74,17 @@
   "errorReasons": [
     {
       "id": "confused",
-      "label": "zaměnil(a)",
+      "label": "záměna",
       "hint": "Přečetlo jiné písmeno/slabiku, např. L místo E, MA místo MÁ."
     },
     {
       "id": "unknown",
-      "label": "nevěděl(a)",
+      "label": "zatím neví",
       "hint": "Nevědělo nebo do zhruba 10 s neodpovědělo."
     },
     {
       "id": "notBlended",
-      "label": "hláskoval(a), nespojil(a)",
+      "label": "hláskuje, nespojí",
       "hint": "Řeklo M–A, ale nespojilo do „ma“."
     }
   ],
@@ -103,7 +103,7 @@
     "Řádek písmen čte dítě celý zleva doprava; ✓ jen když jsou správně všechna písmena v řádku.",
     "U písmene se počítá hláska („mmm“), ne název („em“). Když se samo hned opraví, je to ✓.",
     "Slabiku nebo slovo smí potichu hláskovat, ale musí je samo spojit („m-a… ma“ = ✓, jen „m-a“ = ✗).",
-    "Délka se počítá: MÁ přečtené jako „ma“ je ✗ (zaměnil(a)).",
+    "Délka se počítá: MÁ přečtené jako „ma“ je ✗ (záměna).",
     "Na chybu reagujte klidně: „Dobře, jdeme dál.“ Nikdy „špatně“.",
     "Když si nevíte rady, dejte ✗. Po zkoušce se ✗ položky samy zařadí do procvičování."
   ],

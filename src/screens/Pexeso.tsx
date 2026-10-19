@@ -40,7 +40,7 @@ export default function Pexeso({ content, back }: { content: Content; back: () =
 function Game({ content, cands, pairs, back, again }: { content: Content; cands: ReturnType<typeof pexesoCandidates>; pairs: number; back: () => void; again: () => void }) {
   const [round, setRound] = useState(0);
   const form = useTaskForm(round);
-  const [cards, setCards] = useState<PexCard[]>(() => buildCards(pickPairs(cands, pairs)));
+  const [cards, setCards] = useState<PexCard[]>(() => buildCards(pickPairs(cands, pairs, [...content.syllableById.values()])));
   const [open, setOpen] = useState<string[]>([]);
   const [found, setFound] = useState<string[]>([]);
   const [flips, setFlips] = useState(0);
@@ -101,7 +101,7 @@ function Game({ content, cands, pairs, back, again }: { content: Content; cands:
     }
   };
 
-  const restart = () => { window.clearTimeout(timer.current); cancelEnd(); stopSay(); setShowEnd(false); lock.current = false; setCards(buildCards(pickPairs(cands, pairs))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
+  const restart = () => { window.clearTimeout(timer.current); cancelEnd(); stopSay(); setShowEnd(false); lock.current = false; setCards(buildCards(pickPairs(cands, pairs, [...content.syllableById.values()]))); setOpen([]); setFound([]); setFlips(0); saved.current = false; setRound((r) => r + 1); };
 
   if (done && showEnd) {
     const stars = starsFor(pairs);

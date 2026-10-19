@@ -15,7 +15,8 @@ const num = (n: number) => `snd-m-n-${n}`;
 const rnd = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
 const shuffle = <T,>(a: T[]) => [...a].sort(() => Math.random() - 0.5);
 const ROUND = 5;
-const ANIMALS = [{ a: '🦔', f: '🍎' }, { a: '🐰', f: '🥕' }, { a: '🐿️', f: '🌰' }, { a: '🐭', f: '🧀' }];
+// jídlo vždy jablko: hlas říká „jablek“ (A-04)
+const ANIMALS = [{ a: '🦔', f: '🍎' }, { a: '🐰', f: '🍎' }, { a: '🐿️', f: '🍎' }, { a: '🐭', f: '🍎' }];
 
 interface P { level: number; back: () => void; openAlbum: () => void }
 export default function MathGame({ id, ...p }: P & { id: MathGameId }) {

@@ -121,6 +121,8 @@ export interface LettersFile extends FileHeader<"letters"> {
 
 // ---------- syllables.json ----------
 export interface Syllable {
+  /** 19.x: slabiky, které se snadno spletou (MA ↔ MÁ). Symetrické; ve starším obsahu chybí. */
+  confusableWith?: SyllableId[];
   id: SyllableId;
   text: string;                // "MA" (velká písmena)
   forms: Forms;                // {upperPrint:"MA", lowerPrint:"ma", cursive:"ma"}
@@ -148,6 +150,9 @@ export interface SyllablesFile extends FileHeader<"syllables"> {
 // ---------- words.json ----------
 export type PartOfSpeech = "noun" | "verb" | "adj" | "adv" | "function";
 export interface Word {
+  /** 19.x: skupina snadno zaměnitelných obrázků (PUMA × LAMA × MULA) a ostatní slova té skupiny. */
+  similarImageGroup?: string | null;
+  confusableWith?: WordId[];
   id: WordId;
   text: string;                // "MÁMA"
   forms: Forms;
@@ -468,4 +473,15 @@ export function isRecommendedForTest(
   const ratio = last.filter((a) => a.correct).length / last.length;
   const days = new Set(attempts.map((a) => a.day)).size;
   return ratio >= rec.minSuccessRatio && days >= rec.minDistinctDays;
+}
+
+/** Pexeso (A-16, obsah 19.3): smí být slova a, b ve stejné hře? Stejná skupina obrázků ani stejná první slabika nikdy;
+ *  strict = navíc ne MA × MÁ (nejdřív strict, při nedostatku slov strict = false). Převzato z content/types.ts. */
+export function memoryPairCompatible(a: Word, b: Word, syllables: Pick<Syllable, "id" | "confusableWith">[], strict = true): boolean {
+  if (a.id === b.id || (a.confusableWith ?? []).includes(b.id) || (b.confusableWith ?? []).includes(a.id)) return false;
+  if (a.similarImageGroup && a.similarImageGroup === b.similarImageGroup) return false;
+  if (a.firstSyllableId === b.firstSyllableId) return false;
+  if (!strict) return true;
+  const sa = syllables.find((s) => s.id === a.firstSyllableId);
+  return !(sa && (sa.confusableWith ?? []).includes(b.firstSyllableId));
 }

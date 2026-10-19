@@ -30,7 +30,6 @@ export default function Home({ content, error, go, openLesson }: Props) {
         {profiles.list.length > 1 && profiles.active && (
           <button className="kbtn profile-chip" data-testid="profile-switch" onClick={() => go('profiles')} aria-label={`Kdo si hraje: ${profiles.active.name}. Změnit.`}>{avatarEmoji(profiles.active.avatar)}</button>
         )}
-        <p className="muted">Verze M1 – aktivity a rodičovská část</p>
         {script.modeList.length > 1 && (
           <button className="kbtn" data-testid="script-switch" onClick={() => void script.cycle()} aria-label={`Změnit písmo, teď: ${variantLabel(script.variant)}`}>Aa Písmo</button>
         )}
@@ -78,10 +77,6 @@ export default function Home({ content, error, go, openLesson }: Props) {
           <button className="kbtn kbtn-primary kbtn-xl" data-testid="open-album" onClick={() => go('album')}>⭐ Album</button>
           </div>
           {hint && <p className="notice" role="status" data-testid="lock-hint">🔒 {hint}</p>}
-          <p className="small muted" data-testid="content-version">
-            Obsah {content.version} · {content.letters.length} písmen · {content.taskSyllables.length} slabik do úloh · {content.words.length} slov ·{' '}
-            {content.prompts.length} pokynů
-          </p>
         </section>
       )}
 
@@ -92,7 +87,7 @@ export default function Home({ content, error, go, openLesson }: Props) {
         <button className="kbtn" onClick={() => go('parentGate')} data-testid="open-parent">
           🔒 Pro rodiče
         </button>
-        <button className="kbtn" onClick={() => go('about')}>
+        <button className="kbtn" data-testid="open-about" onClick={() => go('about')}>
           ℹ️ O aplikaci
         </button>
       </nav>

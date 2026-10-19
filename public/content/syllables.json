@@ -31,7 +31,10 @@
         "lowerPrint": "ma",
         "cursive": "ma",
         "cursiveUpper": "Ma"
-      }
+      },
+      "confusableWith": [
+        "s-maa"
+      ]
     },
     {
       "id": "s-maa",
@@ -62,7 +65,10 @@
         "lowerPrint": "má",
         "cursive": "má",
         "cursiveUpper": "Má"
-      }
+      },
+      "confusableWith": [
+        "s-ma"
+      ]
     },
     {
       "id": "s-me",
@@ -93,7 +99,8 @@
         "lowerPrint": "me",
         "cursive": "me",
         "cursiveUpper": "Me"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-mo",
@@ -124,7 +131,8 @@
         "lowerPrint": "mo",
         "cursive": "mo",
         "cursiveUpper": "Mo"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-mu",
@@ -155,7 +163,8 @@
         "lowerPrint": "mu",
         "cursive": "mu",
         "cursiveUpper": "Mu"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-mi",
@@ -186,7 +195,8 @@
         "lowerPrint": "mi",
         "cursive": "mi",
         "cursiveUpper": "Mi"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-la",
@@ -217,7 +227,10 @@
         "lowerPrint": "la",
         "cursive": "la",
         "cursiveUpper": "La"
-      }
+      },
+      "confusableWith": [
+        "s-laa"
+      ]
     },
     {
       "id": "s-laa",
@@ -248,7 +261,10 @@
         "lowerPrint": "lá",
         "cursive": "lá",
         "cursiveUpper": "Lá"
-      }
+      },
+      "confusableWith": [
+        "s-la"
+      ]
     },
     {
       "id": "s-le",
@@ -279,7 +295,8 @@
         "lowerPrint": "le",
         "cursive": "le",
         "cursiveUpper": "Le"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-lo",
@@ -310,7 +327,8 @@
         "lowerPrint": "lo",
         "cursive": "lo",
         "cursiveUpper": "Lo"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-lu",
@@ -341,7 +359,8 @@
         "lowerPrint": "lu",
         "cursive": "lu",
         "cursiveUpper": "Lu"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-li",
@@ -372,7 +391,8 @@
         "lowerPrint": "li",
         "cursive": "li",
         "cursiveUpper": "Li"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-sa",
@@ -403,7 +423,10 @@
         "lowerPrint": "sa",
         "cursive": "sa",
         "cursiveUpper": "Sa"
-      }
+      },
+      "confusableWith": [
+        "s-saa"
+      ]
     },
     {
       "id": "s-saa",
@@ -434,7 +457,10 @@
         "lowerPrint": "sá",
         "cursive": "sá",
         "cursiveUpper": "Sá"
-      }
+      },
+      "confusableWith": [
+        "s-sa"
+      ]
     },
     {
       "id": "s-se",
@@ -465,7 +491,8 @@
         "lowerPrint": "se",
         "cursive": "se",
         "cursiveUpper": "Se"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-so",
@@ -496,7 +523,8 @@
         "lowerPrint": "so",
         "cursive": "so",
         "cursiveUpper": "So"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-su",
@@ -527,7 +555,8 @@
         "lowerPrint": "su",
         "cursive": "su",
         "cursiveUpper": "Su"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-si",
@@ -558,7 +587,8 @@
         "lowerPrint": "si",
         "cursive": "si",
         "cursiveUpper": "Si"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-pa",
@@ -589,7 +619,10 @@
         "lowerPrint": "pa",
         "cursive": "pa",
         "cursiveUpper": "Pa"
-      }
+      },
+      "confusableWith": [
+        "s-paa"
+      ]
     },
     {
       "id": "s-paa",
@@ -620,7 +653,10 @@
         "lowerPrint": "pá",
         "cursive": "pá",
         "cursiveUpper": "Pá"
-      }
+      },
+      "confusableWith": [
+        "s-pa"
+      ]
     },
     {
       "id": "s-pe",
@@ -651,7 +687,8 @@
         "lowerPrint": "pe",
         "cursive": "pe",
         "cursiveUpper": "Pe"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-po",
@@ -682,7 +719,8 @@
         "lowerPrint": "po",
         "cursive": "po",
         "cursiveUpper": "Po"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-pu",
@@ -713,7 +751,8 @@
         "lowerPrint": "pu",
         "cursive": "pu",
         "cursiveUpper": "Pu"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-pi",
@@ -744,7 +783,8 @@
         "lowerPrint": "pi",
         "cursive": "pi",
         "cursiveUpper": "Pi"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-a",
@@ -774,7 +814,8 @@
         "lowerPrint": "a",
         "cursive": "a",
         "cursiveUpper": "A"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-aa",
@@ -804,7 +845,8 @@
         "lowerPrint": "á",
         "cursive": "á",
         "cursiveUpper": "Á"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-e",
@@ -834,7 +876,8 @@
         "lowerPrint": "e",
         "cursive": "e",
         "cursiveUpper": "E"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-o",
@@ -864,7 +907,8 @@
         "lowerPrint": "o",
         "cursive": "o",
         "cursiveUpper": "O"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-u",
@@ -894,7 +938,8 @@
         "lowerPrint": "u",
         "cursive": "u",
         "cursiveUpper": "U"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-i",
@@ -924,7 +969,8 @@
         "lowerPrint": "i",
         "cursive": "i",
         "cursiveUpper": "I"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-les",
@@ -956,7 +1002,8 @@
         "lowerPrint": "les",
         "cursive": "les",
         "cursiveUpper": "Les"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-los",
@@ -988,7 +1035,8 @@
         "lowerPrint": "los",
         "cursive": "los",
         "cursiveUpper": "Los"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-laam",
@@ -1020,7 +1068,8 @@
         "lowerPrint": "lám",
         "cursive": "lám",
         "cursiveUpper": "Lám"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-maam",
@@ -1051,7 +1100,8 @@
         "lowerPrint": "mám",
         "cursive": "mám",
         "cursiveUpper": "Mám"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-pel",
@@ -1083,7 +1133,8 @@
         "lowerPrint": "pel",
         "cursive": "pel",
         "cursiveUpper": "Pel"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-pes",
@@ -1115,7 +1166,8 @@
         "lowerPrint": "pes",
         "cursive": "pes",
         "cursiveUpper": "Pes"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-sel",
@@ -1147,7 +1199,8 @@
         "lowerPrint": "sel",
         "cursive": "sel",
         "cursiveUpper": "Sel"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-sem",
@@ -1179,7 +1232,8 @@
         "lowerPrint": "sem",
         "cursive": "sem",
         "cursiveUpper": "Sem"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-sos",
@@ -1210,7 +1264,8 @@
         "lowerPrint": "sos",
         "cursive": "sos",
         "cursiveUpper": "Sos"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-sup",
@@ -1242,7 +1297,8 @@
         "lowerPrint": "sup",
         "cursive": "sup",
         "cursiveUpper": "Sup"
-      }
+      },
+      "confusableWith": []
     },
     {
       "id": "s-saam",
@@ -1274,7 +1330,8 @@
         "lowerPrint": "sám",
         "cursive": "sám",
         "cursiveUpper": "Sám"
-      }
+      },
+      "confusableWith": []
     }
   ]
 }
