@@ -1,7 +1,7 @@
 /** Hry (HANDOFF 10): seznam 5 miniher a společný běh kola (engine podle design/js/minihry.js). */
 import { useEffect, useMemo, useState } from 'react';
 import Mascot from '../activities/Mascot';
-import Glyphs, { useTaskForm } from '../components/Glyphs';
+import Glyphs, { useScript, useTaskForm, variantById, type FormKey, type VariantId } from '../components/Glyphs';
 import type { Content } from '../content/load';
 import type { Forms } from '../content/types';
 import { say, stopSay } from '../activities/common';
@@ -43,6 +43,15 @@ export default function Games({ content, back }: { content: Content; back: () =>
   );
 }
 
+const isCursive = (k: FormKey) => k === 'cursive' || k === 'cursiveUpper';
+/** Detektiv: lupa ukazuje slabiku jiným písmem než karty (tiskací ↔ psací).
+ *  Přednost má forma z varianty, kterou rodič povolil; když v ní jiné písmo není, vezme se protějšek (tiskací → psací malé, psací → tiskací velké). */
+export function lupaForm(card: FormKey, variant: VariantId): FormKey {
+  const other = variantById(variant).forms.filter((k) => isCursive(k) !== isCursive(card));
+  if (other.length) return other.find((k) => (k === 'upperPrint' || k === 'cursiveUpper') === (card === 'upperPrint' || card === 'cursiveUpper')) ?? other[0];
+  return isCursive(card) ? 'upperPrint' : 'cursive';
+}
+
 const gapForms = (f: Forms, i: number): Forms => Object.fromEntries(Object.entries(f).map(([k, v]) => [k, typeof v === 'string' ? v.slice(0, i) + '_' + v.slice(i + 1) : v])) as Forms;
 
 function Round({ content, game, idx, back }: { content: Content; game: GameId; idx: number; back: () => void }) {
@@ -62,6 +71,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
   const t: GameTask | undefined = tasks[i];
   const done = i >= tasks.length;
   const form = useTaskForm(i);
+  const { variant } = useScript();
   const auto = useAutoAdvance();
   auto.target.current = () => { setI((n) => n + 1); setTries(0); setStreak(0); setHintOn(false); setCalm(false); setSolved(false); setPicked(false); setMsg(''); };
 
@@ -113,7 +123,12 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
       <div className="game-stage">
         <div className="game-mascot"><Mascot mood={solved ? 'radost' : tries ? 'premysli' : 'povzbuzeni'} /><p className="bubble" data-testid="game-msg">{msg || def.text}</p></div>
         {game === 'ztratilo' && t.show && <div className="game-word" data-testid="game-target">{hintOn && t.img && <img className="game-pale" src={t.img} alt="" />}<Glyphs forms={solved ? t.show : gapForms(t.show, t.gapIndex!)} form={form} /></div>}
-        {game === 'detektiv' && t.show && <div className="game-lupa" data-testid="game-target">🔍 <Glyphs forms={t.show} form={form} /></div>}
+        {game === 'detektiv' && t.show && (
+          <button className="game-lupa" data-testid="game-target" data-word={t.word} data-revealed={tries > 0 || solved ? 'true' : 'false'} aria-label="Přehraj slabiku"
+            onClick={() => { if (t.word) void say([t.word]); }}>
+            🔍 {tries > 0 || solved ? <Glyphs forms={t.show} form={lupaForm(form, variant)} className="lupa-text" /> : <span className="lupa-ear" aria-hidden>👂</span>}
+          </button>
+        )}
         {game === 'obchod' && t.show && <div className="game-list" data-testid="game-target"><small>Nákupní lístek</small><Glyphs forms={t.show} form={form} /></div>}
         {game === 'domecky' && t.img && <button className={`game-card${picked ? ' is-picked' : ''}`} data-testid="game-card" data-word={t.word} onClick={() => { setPicked(true); if (t.word) void say([t.word]); }}><img src={t.img} alt="obrázek" /></button>}
         <div className={`game-opts${game === 'bublinky' ? ` sky${hintOn ? ' is-paused' : ''}` : ''}`}>
@@ -121,7 +136,7 @@ function Round({ content, game, idx, back }: { content: Content; game: GameId; i
             <button key={o.id} className={optCls(o.id) + (game === 'domecky' ? ' house' : game === 'bublinky' ? ' bubble-opt' : '')} data-opt={o.id} style={game === 'bublinky' ? { animationDelay: `${k * -1.1}s` } : undefined}
               onClick={(e) => { (e.currentTarget as HTMLElement).blur(); choose(o.id); }} aria-label={o.img ? 'zboží' : undefined}>
               {game === 'domecky' && <span className="roof" aria-hidden>⌂</span>}
-              {o.img ? <img src={o.img} alt="" /> : o.forms ? <Glyphs forms={o.forms} form={game === 'domecky' || game === 'detektiv' ? form : form} /> : o.id}
+              {o.img ? <img src={o.img} alt="" /> : o.forms ? <Glyphs forms={o.forms} form={form} /> : o.id}
             </button>
           ))}
         </div>

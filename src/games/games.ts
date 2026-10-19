@@ -32,6 +32,11 @@ const sylls = (c: Content, idx: number) => c.taskSyllables.filter((s) => s.kind 
 const opt4 = <T,>(answer: T, pool: T[], n = 4): T[] => shuffle([answer, ...shuffle(pool.filter((x) => x !== answer)).slice(0, n - 1)]);
 const letterOpt = (l: { id: string; forms: Forms }): Opt => ({ id: l.id, forms: l.forms });
 
+/** Detektiv: slabiky lišící se od cílové právě jednou hláskou (SI → SA, SO, PI): stejná souhláska a jiná samohláska, nebo naopak. */
+export function oneSoundNeighbours<T extends { id: string; consonantLetterId: string | null; vowelLetterId: string | null }>(s: T, pool: T[]): T[] {
+  return pool.filter((x) => x.id !== s.id && (x.consonantLetterId === s.consonantLetterId) !== (x.vowelLetterId === s.vowelLetterId));
+}
+
 /** Domečky: slabiky s ≥ 2 obrázky (usableInMemoryGame), každé slovo jednou. */
 function houseGroups(c: Content, idx: number): Map<string, Word[]> {
   const g = new Map<string, Word[]>();
@@ -54,14 +59,15 @@ export const GAMES: GameDef[] = [
     },
   },
   {
-    id: 'detektiv', name: 'Slabikový detektiv', icon: '🕵️', text: 'Najdi slabiku z lupy.', minLesson: () => 3,
+    id: 'detektiv', name: 'Slabikový detektiv', icon: '🕵️', text: 'Poslouchej a najdi slabiku.', minLesson: () => 3,
     build: (c, idx) => {
+      // jen slabiky, které mají aspoň 2 sousedy lišící se jednou hláskou (jinak by úloha neměla rozptylovače)
       const pool = sylls(c, idx);
-      return drawRound('mh-detektiv', pool, GAME_ROUND, (s) => s.id).map((s) => {
-        const similar = pool.filter((x) => x.id !== s.id && (x.consonantLetterId === s.consonantLetterId || x.vowelLetterId === s.vowelLetterId));
-        const rest = pool.filter((x) => x.id !== s.id && !similar.includes(x));
-        const opts = shuffle([s, ...shuffle(similar).slice(0, 3), ...shuffle(rest)].slice(0, 4));
-        return { id: s.id, answer: s.id, options: opts.map((x) => ({ id: x.id, forms: x.forms })), show: s.forms, prompt: ['snd-p-mh-detektiv'], hint: [s.audioId], ok: [s.audioId] };
+      const usable = pool.filter((s) => oneSoundNeighbours(s, pool).length >= 2);
+      return drawRound('mh-detektiv', usable, GAME_ROUND, (s) => s.id).map((s) => {
+        const opts = shuffle([s, ...shuffle(oneSoundNeighbours(s, pool)).slice(0, 3)]);
+        // nejdřív jen zvuk: pokyn a hned cílová slabika (i na Zopakuj 🔊); text v lupě až po chybě
+        return { id: s.id, answer: s.id, options: opts.map((x) => ({ id: x.id, forms: x.forms })), show: s.forms, word: s.audioId, prompt: ['snd-p-mh-detektiv', s.audioId], hint: [s.audioId], ok: [s.audioId] };
       });
     },
   },
