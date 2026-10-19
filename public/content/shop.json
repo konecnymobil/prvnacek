@@ -1,0 +1,840 @@
+{
+  "schemaVersion": 1,
+  "kind": "shopGame",
+  "gameId": "obchod",
+  "instructionPromptId": "p-mh-obchod-listek",
+  "instructionAudioId": "snd-p-mh-obchod-listek",
+  "replacesPromptId": "p-mh-obchod",
+  "listSize": 3,
+  "distractorCount": 2,
+  "startsAt": {
+    "duha": "duha-6",
+    "agata": "agata-7"
+  },
+  "startRule": "Obchod začíná, když jsou k dispozici aspoň 5 obrázková slova z otevřených slabik z probraných písmen (Duha: duha-6, Agáta: agata-7). Dřív se v nabídce her ukáže zamčený.",
+  "rules": {
+    "words": "jen obrázková slova z otevřených slabik (difficulty 1) z probraných písmen; slova z lístku se v sadě neopakují, distraktory nejsou na lístku",
+    "distractors": "každý distraktor se psanou podobou podobá aspoň jednomu slovu z lístku (stejná první slabika, první slabika liší jen délkou, stejná poslední slabika, stejné první písmeno, společná slabika); obrázky všech 5 nesmí být ze stejné similarImageGroup",
+    "newLetter": "na lístku je vždy aspoň jedno slovo s novým písmenem lekce",
+    "display": "lístek: 3 slova pod sebou velkým tiskacím písmem; 5 obrázků v náhodném pořadí; slova se nepřehrávají, zazní až po nápovědě nebo po správném vložení do košíku",
+    "feedback": "správný obrázek jde do košíku a slovo na lístku se odškrtne; špatný se vrátí na místo (bez trestu), po 2. chybě u téhož slova nápověda: slovo na lístku se rozsvítí a zazní",
+    "lessonChoice": "hraje se sada aktuální lekce, občas (1 z 3) sada starší lekce"
+  },
+  "similarityReasons": [
+    {
+      "id": "sameFirstSyllable",
+      "weight": 3
+    },
+    {
+      "id": "firstSyllableDiffersOnlyInLength",
+      "weight": 3
+    },
+    {
+      "id": "sameLastSyllable",
+      "weight": 2
+    },
+    {
+      "id": "sameFirstLetter",
+      "weight": 1
+    },
+    {
+      "id": "sharedSyllable",
+      "weight": 1
+    }
+  ],
+  "lessons": [
+    {
+      "lessonByOrder": {
+        "duha": "duha-6",
+        "agata": "agata-7"
+      },
+      "newLetterIds": [
+        "l-o"
+      ],
+      "availableWordIds": [
+        "w-maama",
+        "w-lama",
+        "w-sele",
+        "w-maso",
+        "w-molo"
+      ],
+      "sets": [
+        {
+          "id": "shop-duha-6-1",
+          "listWordIds": [
+            "w-sele",
+            "w-maso",
+            "w-molo"
+          ],
+          "listText": [
+            "SELE",
+            "MASO",
+            "MOLO"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-lama"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "LAMA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-maso",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-lama",
+              "similarTo": "w-maso",
+              "reason": "sharedSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-6",
+            "agata": "agata-7"
+          }
+        },
+        {
+          "id": "shop-duha-6-2",
+          "listWordIds": [
+            "w-maama",
+            "w-sele",
+            "w-molo"
+          ],
+          "listText": [
+            "MÁMA",
+            "SELE",
+            "MOLO"
+          ],
+          "distractorWordIds": [
+            "w-lama",
+            "w-maso"
+          ],
+          "distractorText": [
+            "LAMA",
+            "MASO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-lama",
+              "similarTo": "w-maama",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-maama",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-6",
+            "agata": "agata-7"
+          }
+        },
+        {
+          "id": "shop-duha-6-3",
+          "listWordIds": [
+            "w-lama",
+            "w-sele",
+            "w-maso"
+          ],
+          "listText": [
+            "LAMA",
+            "SELE",
+            "MASO"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-molo"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "MOLO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-maso",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-molo",
+              "similarTo": "w-maso",
+              "reason": "sameFirstLetter"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-6",
+            "agata": "agata-7"
+          }
+        }
+      ]
+    },
+    {
+      "lessonByOrder": {
+        "duha": "duha-7",
+        "agata": "agata-8"
+      },
+      "newLetterIds": [
+        "l-p"
+      ],
+      "availableWordIds": [
+        "w-maama",
+        "w-lama",
+        "w-sele",
+        "w-maso",
+        "w-molo",
+        "w-mapa",
+        "w-pole"
+      ],
+      "sets": [
+        {
+          "id": "shop-duha-7-1",
+          "listWordIds": [
+            "w-lama",
+            "w-mapa",
+            "w-pole"
+          ],
+          "listText": [
+            "LAMA",
+            "MAPA",
+            "POLE"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-maso"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "MASO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-mapa",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-mapa",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-7",
+            "agata": "agata-8"
+          }
+        },
+        {
+          "id": "shop-duha-7-2",
+          "listWordIds": [
+            "w-sele",
+            "w-molo",
+            "w-mapa"
+          ],
+          "listText": [
+            "SELE",
+            "MOLO",
+            "MAPA"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-maso"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "MASO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-mapa",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-mapa",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-7",
+            "agata": "agata-8"
+          }
+        },
+        {
+          "id": "shop-duha-7-3",
+          "listWordIds": [
+            "w-lama",
+            "w-molo",
+            "w-pole"
+          ],
+          "listText": [
+            "LAMA",
+            "MOLO",
+            "POLE"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-sele"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "SELE"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-lama",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pole",
+              "reason": "sameLastSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-7",
+            "agata": "agata-8"
+          }
+        },
+        {
+          "id": "shop-duha-7-4",
+          "listWordIds": [
+            "w-lama",
+            "w-maso",
+            "w-pole"
+          ],
+          "listText": [
+            "LAMA",
+            "MASO",
+            "POLE"
+          ],
+          "distractorWordIds": [
+            "w-sele",
+            "w-mapa"
+          ],
+          "distractorText": [
+            "SELE",
+            "MAPA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pole",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-mapa",
+              "similarTo": "w-maso",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-7",
+            "agata": "agata-8"
+          }
+        }
+      ]
+    },
+    {
+      "lessonByOrder": {
+        "duha": "duha-8",
+        "agata": "agata-9"
+      },
+      "newLetterIds": [
+        "l-u"
+      ],
+      "availableWordIds": [
+        "w-maama",
+        "w-lama",
+        "w-sele",
+        "w-maso",
+        "w-molo",
+        "w-mapa",
+        "w-pole",
+        "w-lupa",
+        "w-mula",
+        "w-puma",
+        "w-pusa"
+      ],
+      "sets": [
+        {
+          "id": "shop-duha-8-1",
+          "listWordIds": [
+            "w-maama",
+            "w-lupa",
+            "w-mula"
+          ],
+          "listText": [
+            "MÁMA",
+            "LUPA",
+            "MULA"
+          ],
+          "distractorWordIds": [
+            "w-maso",
+            "w-mapa"
+          ],
+          "distractorText": [
+            "MASO",
+            "MAPA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-maama",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-mapa",
+              "similarTo": "w-maama",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        },
+        {
+          "id": "shop-duha-8-2",
+          "listWordIds": [
+            "w-molo",
+            "w-pole",
+            "w-puma"
+          ],
+          "listText": [
+            "MOLO",
+            "POLE",
+            "PUMA"
+          ],
+          "distractorWordIds": [
+            "w-sele",
+            "w-pusa"
+          ],
+          "distractorText": [
+            "SELE",
+            "PUSA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pole",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pusa",
+              "similarTo": "w-puma",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        },
+        {
+          "id": "shop-duha-8-3",
+          "listWordIds": [
+            "w-lama",
+            "w-mapa",
+            "w-pusa"
+          ],
+          "listText": [
+            "LAMA",
+            "MAPA",
+            "PUSA"
+          ],
+          "distractorWordIds": [
+            "w-maso",
+            "w-lupa"
+          ],
+          "distractorText": [
+            "MASO",
+            "LUPA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-mapa",
+              "reason": "sameFirstSyllable"
+            },
+            {
+              "wordId": "w-lupa",
+              "similarTo": "w-mapa",
+              "reason": "sameLastSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        },
+        {
+          "id": "shop-duha-8-4",
+          "listWordIds": [
+            "w-sele",
+            "w-molo",
+            "w-puma"
+          ],
+          "listText": [
+            "SELE",
+            "MOLO",
+            "PUMA"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-pole"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "POLE"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-puma",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pole",
+              "similarTo": "w-sele",
+              "reason": "sameLastSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        },
+        {
+          "id": "shop-duha-8-5",
+          "listWordIds": [
+            "w-lama",
+            "w-mapa",
+            "w-lupa"
+          ],
+          "listText": [
+            "LAMA",
+            "MAPA",
+            "LUPA"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-maso"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "MASO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-mapa",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-mapa",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        },
+        {
+          "id": "shop-duha-8-6",
+          "listWordIds": [
+            "w-molo",
+            "w-pole",
+            "w-pusa"
+          ],
+          "listText": [
+            "MOLO",
+            "POLE",
+            "PUSA"
+          ],
+          "distractorWordIds": [
+            "w-sele",
+            "w-puma"
+          ],
+          "distractorText": [
+            "SELE",
+            "PUMA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pole",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-puma",
+              "similarTo": "w-pusa",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-8",
+            "agata": "agata-9"
+          }
+        }
+      ]
+    },
+    {
+      "lessonByOrder": {
+        "duha": "duha-9",
+        "agata": "agata-10"
+      },
+      "newLetterIds": [
+        "l-i"
+      ],
+      "availableWordIds": [
+        "w-maama",
+        "w-lama",
+        "w-sele",
+        "w-maso",
+        "w-molo",
+        "w-mapa",
+        "w-pole",
+        "w-lupa",
+        "w-mula",
+        "w-puma",
+        "w-pusa",
+        "w-lilie",
+        "w-pila",
+        "w-pilule",
+        "w-silo"
+      ],
+      "sets": [
+        {
+          "id": "shop-duha-9-1",
+          "listWordIds": [
+            "w-lilie",
+            "w-pila",
+            "w-silo"
+          ],
+          "listText": [
+            "LILIE",
+            "PILA",
+            "SILO"
+          ],
+          "distractorWordIds": [
+            "w-molo",
+            "w-pilule"
+          ],
+          "distractorText": [
+            "MOLO",
+            "PILULE"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-molo",
+              "similarTo": "w-silo",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pilule",
+              "similarTo": "w-pila",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        },
+        {
+          "id": "shop-duha-9-2",
+          "listWordIds": [
+            "w-lama",
+            "w-mapa",
+            "w-pilule"
+          ],
+          "listText": [
+            "LAMA",
+            "MAPA",
+            "PILULE"
+          ],
+          "distractorWordIds": [
+            "w-maama",
+            "w-maso"
+          ],
+          "distractorText": [
+            "MÁMA",
+            "MASO"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-maama",
+              "similarTo": "w-mapa",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-maso",
+              "similarTo": "w-mapa",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        },
+        {
+          "id": "shop-duha-9-3",
+          "listWordIds": [
+            "w-pole",
+            "w-puma",
+            "w-lilie"
+          ],
+          "listText": [
+            "POLE",
+            "PUMA",
+            "LILIE"
+          ],
+          "distractorWordIds": [
+            "w-sele",
+            "w-pusa"
+          ],
+          "distractorText": [
+            "SELE",
+            "PUSA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pole",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pusa",
+              "similarTo": "w-puma",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        },
+        {
+          "id": "shop-duha-9-4",
+          "listWordIds": [
+            "w-maama",
+            "w-lupa",
+            "w-pila"
+          ],
+          "listText": [
+            "MÁMA",
+            "LUPA",
+            "PILA"
+          ],
+          "distractorWordIds": [
+            "w-mapa",
+            "w-mula"
+          ],
+          "distractorText": [
+            "MAPA",
+            "MULA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-mapa",
+              "similarTo": "w-maama",
+              "reason": "firstSyllableDiffersOnlyInLength"
+            },
+            {
+              "wordId": "w-mula",
+              "similarTo": "w-pila",
+              "reason": "sameLastSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        },
+        {
+          "id": "shop-duha-9-5",
+          "listWordIds": [
+            "w-lupa",
+            "w-puma",
+            "w-silo"
+          ],
+          "listText": [
+            "LUPA",
+            "PUMA",
+            "SILO"
+          ],
+          "distractorWordIds": [
+            "w-molo",
+            "w-pusa"
+          ],
+          "distractorText": [
+            "MOLO",
+            "PUSA"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-molo",
+              "similarTo": "w-silo",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pusa",
+              "similarTo": "w-puma",
+              "reason": "sameFirstSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        },
+        {
+          "id": "shop-duha-9-6",
+          "listWordIds": [
+            "w-lama",
+            "w-maso",
+            "w-pilule"
+          ],
+          "listText": [
+            "LAMA",
+            "MASO",
+            "PILULE"
+          ],
+          "distractorWordIds": [
+            "w-sele",
+            "w-pole"
+          ],
+          "distractorText": [
+            "SELE",
+            "POLE"
+          ],
+          "distractorReasons": [
+            {
+              "wordId": "w-sele",
+              "similarTo": "w-pilule",
+              "reason": "sameLastSyllable"
+            },
+            {
+              "wordId": "w-pole",
+              "similarTo": "w-pilule",
+              "reason": "sameLastSyllable"
+            }
+          ],
+          "minLessonId": {
+            "duha": "duha-9",
+            "agata": "agata-10"
+          }
+        }
+      ]
+    }
+  ]
+}

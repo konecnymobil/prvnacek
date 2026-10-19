@@ -1,6 +1,6 @@
 /** Minihry v0.6 (design/handoff/minihry-ui.md, HANDOFF 10). Generátory kol jen z naučených písmen. */
 import type { Content } from '../content/load';
-import type { Forms, Word } from '../content/types';
+import type { Forms, ShopSet, Word } from '../content/types';
 import { wordImageUrl } from '../content/images';
 import { isLessonUnlocked, type LessonState } from '../storage/db';
 import { drawFresh, drawRound, freshOrder, shuffle } from '../activities/fresh';
@@ -94,11 +94,34 @@ export const GAMES: GameDef[] = [
     },
   },
   {
-    id: 'obchod', name: 'Slabikový obchod', icon: '🧺', text: 'Přečti lístek a dej zboží do košíku.', minLesson: () => 6,
-    build: (c, idx) => {
-      const ws = picWords(c, idx).filter((w) => w.usableInPictureTasks);
-      return drawRound('mh-obchod', ws, GAME_ROUND, (w) => w.id).map((w) => ({ id: w.id, answer: w.id, options: opt4(w, ws).map((x) => ({ id: x.id, img: wordImageUrl(x)! })), show: w.forms, prompt: ['snd-p-mh-obchod'], hint: [w.audioId], ok: [w.audioId] }));
-    },
+    id: 'obchod', name: 'Slabikový obchod', icon: '🧺', text: 'Přečti lístek a dej zboží do košíku.',
+    minLesson: (c) => (c.shop ? lessonIndexOf(c, c.shop.startsAt[oid(c)]) : null),
+    build: () => [], // vlastní průběh (lístek se 3 slovy), viz src/games/Shop.tsx a pickShopSet
   },
 ];
+
+const lessonIndexOf = (c: Content, lessonId: string | undefined) => c.orders[oid(c)].lessons.find((l) => l.id === lessonId)?.index ?? null;
+
+/** Obchod: sady z odemčených lekcí (minLessonId ≤ idx); každá s indexem lekce, ze které pochází. */
+export function shopSetsFor(c: Content, idx: number): { set: ShopSet; lesson: number }[] {
+  if (!c.shop) return [];
+  return c.shop.lessons.flatMap((l) => l.sets.map((set) => ({ set, lesson: lessonIndexOf(c, set.minLessonId[oid(c)]) ?? Infinity })))
+    .filter((x) => x.lesson <= idx && [...x.set.listWordIds, ...x.set.distractorWordIds].every((id) => c.wordById.has(id)));
+}
+let shopPlays = 0;
+/** Jen pro testy. */
+export function resetShopPlays() { shopPlays = 0; }
+/** Sada pro další hru obchodu: sada nejnovější odemčené lekce, každá 3. hra (1 ze 3) sada starší lekce, pokud nějaká je.
+ *  Výběr jde přes společný drawFresh, takže se stejný lístek hned nezopakuje. */
+export function pickShopSet(c: Content, idx: number): { set: ShopSet; lesson: number; older: boolean } | null {
+  const all = shopSetsFor(c, idx);
+  if (!all.length) return null;
+  const top = Math.max(...all.map((x) => x.lesson));
+  const older = all.filter((x) => x.lesson < top);
+  const useOlder = shopPlays % 3 === 2 && older.length > 0;
+  shopPlays++;
+  const pool = useOlder ? older : all.filter((x) => x.lesson === top);
+  return { ...drawFresh(useOlder ? 'mh-obchod:starsi' : 'mh-obchod', pool, (x) => x.set.id, 3), older: useOlder };
+}
+
 export const gameById = (id: GameId) => GAMES.find((g) => g.id === id)!;

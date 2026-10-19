@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import fs from 'node:fs';
 
 test.use({ serviceWorkers: 'allow' });
 
@@ -26,6 +27,8 @@ test('offline: service worker uloží aplikaci, obsah, písmo a všechny zvuky',
     '/prvnacek/content/manifest.json',
     '/prvnacek/content/letters.json',
     '/prvnacek/content/words.json',
+    '/prvnacek/content/shop.json',
+    '/prvnacek/audio/tts/snd-p-mh-obchod-listek.mp3',
     '/prvnacek/audio/tts/snd-p-welcome.mp3',
     '/prvnacek/audio/tts/snd-p-read-word.mp3',
     '/prvnacek/audio/tts/snd-p-read-syllable.mp3',
@@ -33,7 +36,7 @@ test('offline: service worker uloží aplikaci, obsah, písmo a všechny zvuky',
   ]) {
     expect(result, path).toContain(path);
   }
-  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(222);
+  expect(result.filter((p) => p.startsWith('/prvnacek/audio/tts/') && p.endsWith('.mp3')).length).toBe(fs.readdirSync('public/audio/tts').filter((f) => f.endsWith('.mp3')).length); // všechny klipy (obsah 2026-10-19.9: 284)
   expect(result.filter((p) => /\/assets\/Andika-.*\.woff2$/.test(p)).length).toBe(3);
   expect(result.filter((p) => /\/assets\/PlaywriteCZ-.*\.woff2$/.test(p)).length).toBe(1);
   expect(result).toContain('/prvnacek/licenses/OFL-PlaywriteCZ.txt');

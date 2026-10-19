@@ -70,6 +70,21 @@ test('všechny generátory kol: bez opakování v kole i na hranici kol', async 
       bad.push(...check(`${g.id}@${idx}`, rounds, GAME_ROUND));
     }
   }
+  // Obchod: sady jen z odemčených lekcí, lístek se hned nezopakuje, každá 3. hra ze starší lekce
+  const gm = await load('/src/games/games.ts');
+  gm.resetShopPlays();
+  const lessonIdx = (id: string) => c.orders[c.defaultOrderId].lessons.find((l: { id: string }) => l.id === id).index;
+  for (let idx = 6; idx <= maxIdx; idx++) {
+    let prev = '';
+    for (let k = 0; k < 30; k++) {
+      const p = gm.pickShopSet(c, idx);
+      expect(lessonIdx(p.set.minLessonId[c.defaultOrderId]), `obchod@${idx}: sada ${p.set.id} z neodemčené lekce`).toBeLessThanOrEqual(idx);
+      if (p.set.id === prev) bad.push(`obchod@${idx}: lístek ${p.set.id} dvakrát za sebou`);
+      expect(p.older, `obchod@${idx} hra ${k}`).toBe(idx > 6 && k % 3 === 2);
+      prev = p.set.id;
+    }
+    gm.resetShopPlays();
+  }
   const m = await load('/src/games/MathGames.tsx');
   for (const max of [2, 3, 4, 5]) {
     bad.push(...check(`mm1:${max}`, Array.from({ length: ROUNDS }, () => m.mm1Tasks(max).map((t: { n: number }) => String(t.n))), 5));

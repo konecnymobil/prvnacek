@@ -7,357 +7,600 @@
       "category": "general",
       "activity": null,
       "text": "Ahoj! Pojď si se mnou hrát s písmenky.",
-      "audioId": "snd-p-welcome"
+      "audioId": "snd-p-welcome",
+      "replacedBy": null
     },
     {
       "id": "p-listen",
       "category": "general",
       "activity": null,
       "text": "Poslouchej.",
-      "audioId": "snd-p-listen"
+      "audioId": "snd-p-listen",
+      "replacedBy": null
     },
     {
       "id": "p-again-button",
       "category": "general",
       "activity": null,
       "text": "Když klepneš na reproduktor, uslyšíš to znovu.",
-      "audioId": "snd-p-again-button"
+      "audioId": "snd-p-again-button",
+      "replacedBy": null
     },
     {
       "id": "p-a1-intro",
       "category": "instruction",
       "activity": "A1",
       "text": "Tohle je nové písmenko. Klepni na něj a poslouchej, jak zní.",
-      "audioId": "snd-p-a1-intro"
+      "audioId": "snd-p-a1-intro",
+      "replacedBy": null
     },
     {
       "id": "p-a1-tap-picture",
       "category": "instruction",
       "activity": "A1",
       "text": "Klepni na obrázek. Slyšíš, jak slovo začíná?",
-      "audioId": "snd-p-a1-tap-picture"
+      "audioId": "snd-p-a1-tap-picture",
+      "replacedBy": null
     },
     {
       "id": "p-a2",
       "category": "instruction",
       "activity": "A2",
       "text": "Poslechni si hlásku a najdi její písmenko.",
-      "audioId": "snd-p-a2"
+      "audioId": "snd-p-a2",
+      "replacedBy": null
     },
     {
       "id": "p-a3",
       "category": "instruction",
       "activity": "A3",
       "text": "Co je na obrázku? Na jaké písmenko to slovo začíná?",
-      "audioId": "snd-p-a3"
+      "audioId": "snd-p-a3",
+      "replacedBy": null
     },
     {
       "id": "p-a4",
       "category": "instruction",
       "activity": "A4",
       "text": "Přisuň písmenka k sobě. Uslyšíš slabiku.",
-      "audioId": "snd-p-a4"
+      "audioId": "snd-p-a4",
+      "replacedBy": null
     },
     {
       "id": "p-a4-make",
       "category": "instruction",
       "activity": "A4",
       "text": "Slož slabiku, kterou uslyšíš.",
-      "audioId": "snd-p-a4-make"
+      "audioId": "snd-p-a4-make",
+      "replacedBy": null
     },
     {
       "id": "p-a5a",
       "category": "instruction",
       "activity": "A5",
       "text": "Přečti si slabiku. Který obrázek tak začíná?",
-      "audioId": "snd-p-a5a"
+      "audioId": "snd-p-a5a",
+      "replacedBy": null
     },
     {
       "id": "p-a5b",
       "category": "instruction",
       "activity": "A5",
       "text": "Poslechni si slabiku a najdi ji.",
-      "audioId": "snd-p-a5b"
+      "audioId": "snd-p-a5b",
+      "replacedBy": null
     },
     {
       "id": "p-a6",
       "category": "instruction",
       "activity": "A6",
       "text": "Přečti si slovo a vyber správný obrázek.",
-      "audioId": "snd-p-a6"
+      "audioId": "snd-p-a6",
+      "replacedBy": null
     },
     {
       "id": "p-a7",
       "category": "instruction",
       "activity": "A7",
       "text": "Co je na obrázku? Seřaď slabiky, ať vznikne slovo.",
-      "audioId": "snd-p-a7"
+      "audioId": "snd-p-a7",
+      "replacedBy": null
+    },
+    {
+      "id": "p-a1-tap-picture-mid",
+      "category": "instruction",
+      "activity": "A1",
+      "text": "Klepni na obrázek. Slyšíš tu hlásku uprostřed slova?",
+      "audioId": "snd-p-a1-tap-picture-mid",
+      "replacedBy": null
+    },
+    {
+      "id": "p-a3-starts-with",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Začíná slovo na hlásku",
+      "audioId": "snd-p-a3-starts-with",
+      "replacedBy": null
+    },
+    {
+      "id": "p-a3-contains",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Slyšíš ve slově hlásku",
+      "audioId": "snd-p-a3-contains",
+      "replacedBy": null
+    },
+    {
+      "id": "p-a3-which-first",
+      "category": "instruction",
+      "activity": "A3",
+      "text": "Na jakou hlásku slovo začíná?",
+      "audioId": "snd-p-a3-which-first",
+      "replacedBy": null
+    },
+    {
+      "id": "p-yes",
+      "category": "general",
+      "activity": null,
+      "text": "Ano.",
+      "audioId": "snd-p-yes",
+      "replacedBy": null
+    },
+    {
+      "id": "p-no",
+      "category": "general",
+      "activity": null,
+      "text": "Ne.",
+      "audioId": "snd-p-no",
+      "replacedBy": null
+    },
+    {
+      "id": "p-a6-pick",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si zvuky a vyber ten, který zní jako tvoje slabika.",
+      "audioId": "snd-p-a6-pick",
+      "replacedBy": null
+    },
+    {
+      "id": "p-review-word",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslechni si slovo a najdi ho.",
+      "audioId": "snd-p-review-word",
+      "replacedBy": null
     },
     {
       "id": "p-find-letter",
       "category": "instruction",
       "activity": null,
       "text": "Najdi písmenko.",
-      "audioId": "snd-p-find-letter"
+      "audioId": "snd-p-find-letter",
+      "replacedBy": null
     },
     {
       "id": "p-find-syllable",
       "category": "instruction",
       "activity": null,
       "text": "Najdi slabiku.",
-      "audioId": "snd-p-find-syllable"
+      "audioId": "snd-p-find-syllable",
+      "replacedBy": null
     },
     {
       "id": "p-find-picture",
       "category": "instruction",
       "activity": null,
       "text": "Najdi obrázek.",
-      "audioId": "snd-p-find-picture"
+      "audioId": "snd-p-find-picture",
+      "replacedBy": null
     },
     {
       "id": "p-read-syllable",
       "category": "instruction",
       "activity": null,
       "text": "Přečti si slabiku nahlas.",
-      "audioId": "snd-p-read-syllable"
+      "audioId": "snd-p-read-syllable",
+      "replacedBy": null
     },
     {
       "id": "p-read-word",
       "category": "instruction",
       "activity": null,
       "text": "Přečti si slovo nahlas.",
-      "audioId": "snd-p-read-word"
+      "audioId": "snd-p-read-word",
+      "replacedBy": null
     },
     {
       "id": "p-compose-word",
       "category": "instruction",
       "activity": "A5c",
       "text": "Slož slovo.",
-      "audioId": "snd-p-compose-word"
+      "audioId": "snd-p-compose-word",
+      "replacedBy": null
     },
     {
       "id": "p-game-ztratilo",
       "category": "instruction",
       "activity": null,
       "text": "Co se ztratilo?",
-      "audioId": "snd-p-game-ztratilo"
+      "audioId": "snd-p-game-ztratilo",
+      "replacedBy": null
     },
     {
       "id": "p-game-detektiv",
       "category": "instruction",
       "activity": null,
       "text": "Slabikový detektiv.",
-      "audioId": "snd-p-game-detektiv"
+      "audioId": "snd-p-game-detektiv",
+      "replacedBy": null
     },
     {
       "id": "p-game-bublinky",
       "category": "instruction",
       "activity": null,
       "text": "Bublinky.",
-      "audioId": "snd-p-game-bublinky"
+      "audioId": "snd-p-game-bublinky",
+      "replacedBy": null
     },
     {
       "id": "p-game-domecky",
       "category": "instruction",
       "activity": null,
       "text": "Slabikové domečky.",
-      "audioId": "snd-p-game-domecky"
+      "audioId": "snd-p-game-domecky",
+      "replacedBy": null
     },
     {
       "id": "p-game-obchod",
       "category": "instruction",
       "activity": null,
       "text": "Slabikový obchod.",
-      "audioId": "snd-p-game-obchod"
+      "audioId": "snd-p-game-obchod",
+      "replacedBy": null
     },
     {
       "id": "p-mh-ztratilo",
       "category": "instruction",
       "activity": null,
       "text": "Které písmenko chybí? Ťukni na něj.",
-      "audioId": "snd-p-mh-ztratilo"
+      "audioId": "snd-p-mh-ztratilo",
+      "replacedBy": null
     },
     {
       "id": "p-mh-detektiv",
       "category": "instruction",
       "activity": null,
       "text": "Podívej se do lupy. Najdi stejnou slabiku.",
-      "audioId": "snd-p-mh-detektiv"
+      "audioId": "snd-p-mh-detektiv",
+      "replacedBy": "p-mh-detektiv-slabika"
+    },
+    {
+      "id": "p-mh-detektiv-slabika",
+      "category": "instruction",
+      "activity": null,
+      "text": "Poslouchej, jakou slabiku řeknu, a najdi ji.",
+      "audioId": "snd-p-mh-detektiv-slabika",
+      "replacedBy": null
     },
     {
       "id": "p-mh-bublinky",
       "category": "instruction",
       "activity": null,
       "text": "Poslouchej a ťukni na správnou bublinu.",
-      "audioId": "snd-p-mh-bublinky"
+      "audioId": "snd-p-mh-bublinky",
+      "replacedBy": null
     },
     {
       "id": "p-mh-domecky",
       "category": "instruction",
       "activity": null,
       "text": "Do kterého domečku obrázek patří? Poslouchej, jak slovo začíná.",
-      "audioId": "snd-p-mh-domecky"
+      "audioId": "snd-p-mh-domecky",
+      "replacedBy": null
     },
     {
       "id": "p-mh-obchod",
       "category": "instruction",
       "activity": null,
       "text": "Přečti si nákupní lístek a dej do košíku, co je na něm.",
-      "audioId": "snd-p-mh-obchod"
+      "audioId": "snd-p-mh-obchod",
+      "replacedBy": "p-mh-obchod-listek"
+    },
+    {
+      "id": "p-mh-obchod-listek",
+      "category": "instruction",
+      "activity": null,
+      "text": "Pročti lístek. Najdi obrázky věcí, které jsou na něm napsané, a dej je do košíku.",
+      "audioId": "snd-p-mh-obchod-listek",
+      "replacedBy": null
     },
     {
       "id": "p-mh-locked",
       "category": "general",
       "activity": null,
       "text": "Tahle hra přijde s písmenkem",
-      "audioId": "snd-p-mh-locked"
+      "audioId": "snd-p-mh-locked",
+      "replacedBy": null
     },
     {
       "id": "p-mh-calm",
       "category": "retry",
       "activity": null,
       "text": "Zastavíme se a zkusíme to spolu.",
-      "audioId": "snd-p-mh-calm"
+      "audioId": "snd-p-mh-calm",
+      "replacedBy": null
     },
     {
       "id": "p-mh-sticker-set",
       "category": "reward",
       "activity": null,
       "text": "Máš novou nálepku do sady!",
-      "audioId": "snd-p-mh-sticker-set"
+      "audioId": "snd-p-mh-sticker-set",
+      "replacedBy": null
     },
     {
       "id": "p-subject-pick",
       "category": "general",
       "activity": null,
       "text": "Kam půjdeme dnes?",
-      "audioId": "snd-p-subject-pick"
+      "audioId": "snd-p-subject-pick",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-name",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka do ohrádky.",
+      "audioId": "snd-p-rw-name",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-goal",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Doveď do ohrádky přesně tolik zvířátek, kolik je teček.",
+      "audioId": "snd-p-rw-goal",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-pick-gate",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Vyber bránu.",
+      "audioId": "snd-p-rw-pick-gate",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-gate-plus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus jedna",
+      "audioId": "snd-p-rw-gate-plus-1",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-gate-plus-2",
+      "category": "reward",
+      "activity": "RW",
+      "text": "plus dvě",
+      "audioId": "snd-p-rw-gate-plus-2",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-gate-minus-1",
+      "category": "reward",
+      "activity": "RW",
+      "text": "mínus jedna",
+      "audioId": "snd-p-rw-gate-minus-1",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-exact",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Přesně tolik!",
+      "audioId": "snd-p-rw-exact",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-too-many",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich moc. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-many",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-too-few",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Je jich málo. Zkus jinou cestu.",
+      "audioId": "snd-p-rw-too-few",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-show-path",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Takhle to šlo.",
+      "audioId": "snd-p-rw-show-path",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-unlock",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka na tebe čekají. Můžeš si zahrát.",
+      "audioId": "snd-p-rw-unlock",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-locked",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Ještě kolo procvičování a zvířátka se vrátí.",
+      "audioId": "snd-p-rw-locked",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-done-today",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka už dnes spí. Zítra zase.",
+      "audioId": "snd-p-rw-done-today",
+      "replacedBy": null
+    },
+    {
+      "id": "p-rw-back",
+      "category": "reward",
+      "activity": "RW",
+      "text": "Zvířátka jsou doma. Jdeme zase procvičovat.",
+      "audioId": "snd-p-rw-back",
+      "replacedBy": null
     },
     {
       "id": "p-praise-1",
       "category": "praise",
       "activity": null,
       "text": "Výborně!",
-      "audioId": "snd-p-praise-1"
+      "audioId": "snd-p-praise-1",
+      "replacedBy": null
     },
     {
       "id": "p-praise-2",
       "category": "praise",
       "activity": null,
       "text": "Správně!",
-      "audioId": "snd-p-praise-2"
+      "audioId": "snd-p-praise-2",
+      "replacedBy": null
     },
     {
       "id": "p-praise-3",
       "category": "praise",
       "activity": null,
       "text": "Super, to se ti povedlo!",
-      "audioId": "snd-p-praise-3"
+      "audioId": "snd-p-praise-3",
+      "replacedBy": null
     },
     {
       "id": "p-praise-4",
       "category": "praise",
       "activity": null,
       "text": "Paráda!",
-      "audioId": "snd-p-praise-4"
+      "audioId": "snd-p-praise-4",
+      "replacedBy": null
     },
     {
       "id": "p-praise-5",
       "category": "praise",
       "activity": null,
       "text": "To je ono!",
-      "audioId": "snd-p-praise-5"
+      "audioId": "snd-p-praise-5",
+      "replacedBy": null
     },
     {
       "id": "p-praise-6",
       "category": "praise",
       "activity": null,
       "text": "Šikula!",
-      "audioId": "snd-p-praise-6"
+      "audioId": "snd-p-praise-6",
+      "replacedBy": null
     },
     {
       "id": "p-retry-1",
       "category": "retry",
       "activity": null,
       "text": "Zkus to ještě jednou.",
-      "audioId": "snd-p-retry-1"
+      "audioId": "snd-p-retry-1",
+      "replacedBy": null
     },
     {
       "id": "p-retry-2",
       "category": "retry",
       "activity": null,
       "text": "Skoro! Zkus to znovu.",
-      "audioId": "snd-p-retry-2"
+      "audioId": "snd-p-retry-2",
+      "replacedBy": null
     },
     {
       "id": "p-retry-3",
       "category": "retry",
       "activity": null,
       "text": "Nevadí. Podívej se ještě jednou.",
-      "audioId": "snd-p-retry-3"
+      "audioId": "snd-p-retry-3",
+      "replacedBy": null
     },
     {
       "id": "p-show-answer",
       "category": "retry",
       "activity": null,
       "text": "Podívej, tady je to správně.",
-      "audioId": "snd-p-show-answer"
+      "audioId": "snd-p-show-answer",
+      "replacedBy": null
     },
     {
       "id": "p-round-end",
       "category": "reward",
       "activity": null,
       "text": "Hotovo! To bylo skvělé hraní.",
-      "audioId": "snd-p-round-end"
+      "audioId": "snd-p-round-end",
+      "replacedBy": null
     },
     {
       "id": "p-sticker",
       "category": "reward",
       "activity": null,
       "text": "Máš novou nálepku!",
-      "audioId": "snd-p-sticker"
+      "audioId": "snd-p-sticker",
+      "replacedBy": null
     },
     {
       "id": "p-break",
       "category": "general",
       "activity": null,
       "text": "Dáme si chvilku pauzu?",
-      "audioId": "snd-p-break"
+      "audioId": "snd-p-break",
+      "replacedBy": null
     },
     {
       "id": "p-test-intro",
       "category": "test",
       "activity": null,
       "text": "Teď je výzva s rodičem. Čti nahlas, co uvidíš.",
-      "audioId": "snd-p-test-intro"
+      "audioId": "snd-p-test-intro",
+      "replacedBy": null
     },
     {
       "id": "p-test-show-letter",
       "category": "test",
       "activity": null,
       "text": "Ukaž písmenko a řekni, jak zní.",
-      "audioId": "snd-p-test-show-letter"
+      "audioId": "snd-p-test-show-letter",
+      "replacedBy": null
     },
     {
       "id": "p-test-end",
       "category": "test",
       "activity": null,
       "text": "Výzva je hotová. Tady je nálepka za snahu!",
-      "audioId": "snd-p-test-end"
+      "audioId": "snd-p-test-end",
+      "replacedBy": null
     },
     {
       "id": "p-new-letter",
       "category": "reward",
       "activity": null,
       "text": "Máš nové písmenko!",
-      "audioId": "snd-p-new-letter"
+      "audioId": "snd-p-new-letter",
+      "replacedBy": null
     },
     {
       "id": "p-next-letter",
       "category": "reward",
       "activity": null,
       "text": "Pojď se podívat na další písmenko!",
-      "audioId": "snd-p-next-letter"
+      "audioId": "snd-p-next-letter",
+      "replacedBy": null
     }
   ]
 }

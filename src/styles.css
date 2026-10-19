@@ -493,6 +493,17 @@ html, body { overflow-x: hidden; }
 .game-word, .game-lupa, .game-list { font-size: clamp(40px, 9vh, 80px); position: relative; padding: 8px 24px; background: #fff; border-radius: 16px; }
 .game-lupa { border: 3px solid var(--c-primary, #E8590C); font-family: inherit; color: inherit; min-width: 3.2em; } .lupa-ear { opacity: .6; }
 .game-list small { display: block; font-size: 1rem; color: #666; }
+.shop-top { display: flex; gap: 24px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.shop-list { text-align: left; border: 3px dashed #C1694F; } .shop-list ol { list-style: none; margin: 0; padding: 0; }
+.shop-list li { line-height: 1.15; border-radius: 10px; padding: 0 8px; transition: background .3s; }
+.shop-list li.is-done { text-decoration: line-through; text-decoration-thickness: .08em; color: #2F9E44; }
+.shop-list li.is-hint { background: #FFE8A3; outline: 4px solid #F59F00; }
+.shop-basket { position: relative; width: clamp(140px, 22vh, 220px); }
+.shop-kosik { width: 100%; display: block; }
+.shop-in { position: absolute; left: 12%; right: 12%; top: 34%; display: flex; justify-content: center; gap: 2px; }
+.shop-in img { height: clamp(36px, 7vh, 64px); animation: drop .4s ease-out; }
+@keyframes drop { from { transform: translateY(-60px); opacity: .3; } to { transform: none; opacity: 1; } }
+.game-obchod .game-end { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .game-pale { position: absolute; inset: 0; margin: auto; height: 100%; opacity: .25; pointer-events: none; }
 .game-opts { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .game-opt { min-width: 110px; min-height: 96px; font-size: clamp(28px, 6vh, 48px); }
